@@ -1,7 +1,6 @@
 <script>
-	import { getActivityById } from '$lib/data/activities';
 	let { post } = $props();
-	const activity = $derived(getActivityById(post.activityId));
+	const activity = $derived(post.activity);
 </script>
 
 <article class="post-card">
@@ -9,10 +8,10 @@
 		<div class="avatar">{post.avatar}</div>
 		<div>
 			<strong>{post.userName}</strong>
-			<p class="muted" style="margin: 0;">{post.userLocation} · {post.createdAt}</p>
+			<p class="muted" style="margin: 0;">{post.userLocation} · {post.displayDate ?? post.createdAt}</p>
 		</div>
 	</header>
-	<img src={post.images[0]} alt={activity?.title ?? 'Community Beitrag'} />
+	<img src={post.images[0]} alt={activity?.imageAlt ?? activity?.title ?? 'Community Beitrag'} />
 	<div class="post-body">
 		<h3>{activity?.title}</h3>
 		<p>{post.text}</p>
@@ -21,7 +20,7 @@
 			<span>•</span>
 			<span>{post.comments} Kommentare</span>
 			<span>•</span>
-			<a href={`/activity/${post.activityId}`}>Aktivitaet ansehen</a>
+			<a href={`/activity/${post.activityId}`}>Aktivität ansehen</a>
 		</div>
 	</div>
 </article>

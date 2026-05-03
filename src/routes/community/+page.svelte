@@ -1,12 +1,11 @@
 <script>
-	import { activities } from '$lib/data/activities';
-	import { communityPosts } from '$lib/data/communityPosts';
 	import CommunityPostCard from '$lib/components/community/CommunityPostCard.svelte';
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
 
+	let { data } = $props();
 	let tab = $state('Entdecken');
 	let showShare = $state(false);
-	const tabs = ['Entdecken', 'Folge ich', 'Meine Beitraege'];
+	const tabs = ['Entdecken', 'Folge ich', 'Meine Beiträge'];
 </script>
 
 <section class="page">
@@ -14,7 +13,7 @@
 		<div>
 			<p class="eyebrow">Community</p>
 			<h1>Ideen teilen und entdecken</h1>
-			<p class="muted">Beitraege anderer Personen mit Inspiration, Likes und Kommentaren.</p>
+			<p class="muted">Beiträge anderer Personen mit Inspiration, Likes und Kommentaren.</p>
 		</div>
 		<button class="button" type="button" onclick={() => (showShare = true)}>Idee teilen</button>
 	</div>
@@ -26,10 +25,10 @@
 	</div>
 
 	<div class="activity-grid">
-		{#each communityPosts as post}
+		{#each data.communityPosts as post}
 			<CommunityPostCard {post} />
 		{/each}
 	</div>
 </section>
 
-<ShareModal activity={activities[0]} open={showShare} onClose={() => (showShare = false)} />
+<ShareModal activity={data.activities[0]} open={showShare} onClose={() => (showShare = false)} />

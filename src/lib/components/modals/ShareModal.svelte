@@ -1,16 +1,32 @@
 <script>
+	import { invalidateAll } from '$app/navigation';
 	import { showToast } from '$lib/state/appState.svelte.js';
 
 	let { activity, open = false, onClose = () => {} } = $props();
 	let visibility = $state('Privat');
 	let message = $state('');
 
-	function share(event) {
+	async function share(event) {
 		event.preventDefault();
-		showToast('Teilen simuliert');
-		message = '';
-		visibility = 'Privat';
-		onClose();
+		const response = await fetch('/api/community', {
+			method: 'POST',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({
+				activityId: activity.id,
+				text: message,
+				visibility
+			})
+		});
+
+		if (response.ok) {
+			showToast('Beitrag in der Community gespeichert');
+			message = '';
+			visibility = 'Privat';
+			await invalidateAll();
+			onClose();
+		} else {
+			showToast('Teilen konnte nicht gespeichert werden');
+		}
 	}
 </script>
 
@@ -21,10 +37,10 @@
 				<div>
 					<p class="eyebrow">Idee teilen</p>
 					<h2>{activity.title}</h2>
-					<p class="muted">Erstelle einen simulierten Share-Beitrag fuer den Prototyp.</p>
+					<p class="muted">Erstelle einen Community-Beitrag und speichere ihn in MongoDB.</p>
 				</div>
 				<label>
-					Nachricht
+				Nachricht
 					<textarea rows="4" bind:value={message} placeholder="Warum passt diese Idee?"></textarea>
 				</label>
 				<label>
@@ -32,7 +48,7 @@
 					<select class="select" bind:value={visibility}>
 						<option>Privat</option>
 						<option>Nur mit Link</option>
-						<option>Oeffentlich</option>
+						<option>Öffentlich</option>
 					</select>
 				</label>
 				<div class="action-row">

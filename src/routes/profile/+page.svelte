@@ -1,6 +1,7 @@
 <script>
-	import { profile } from '$lib/data/profile';
 	import StatCard from '$lib/components/profile/StatCard.svelte';
+	let { data } = $props();
+	const profile = $derived(data.profile);
 </script>
 
 <section class="page">
@@ -17,9 +18,7 @@
 		<aside class="panel">
 			<div class="avatar" style="width: 86px; height: 86px; font-size: 1.4rem;">{profile.avatar}</div>
 			<h2 style="margin-top: 18px;">{profile.name}</h2>
-			<p class="muted">
-				Sammelt Aktivitaeten fuer spontane Wochenenden, ruhige Abende und gemeinsame Erinnerungen.
-			</p>
+			<p class="muted">{profile.bio}</p>
 			<a class="button ghost" href="/community">Freunde einladen</a>
 		</aside>
 

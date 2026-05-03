@@ -11,7 +11,7 @@
 	<title>VibeMatch</title>
 	<meta
 		name="description"
-		content="VibeMatch ist ein klickbarer Frontend-Prototyp fuer Aktivitaeten, Date-Ideen und gemeinsame Erlebnisse."
+		content="VibeMatch ist ein klickbarer Frontend-Prototyp für Aktivitäten, Date-Ideen und gemeinsame Erlebnisse."
 	/>
 </svelte:head>
 

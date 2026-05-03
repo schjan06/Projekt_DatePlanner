@@ -13,11 +13,11 @@ export const defaultFilters = {
 export const filterOptions = {
 	price: ['Alle', 'Kostenlos', 'CHF', 'CHF CHF', 'CHF CHF CHF'],
 	duration: ['Alle', 'Unter 1h', '1-3h', 'Halber Tag', 'Ganzer Tag'],
-	city: ['Alle', 'Zuerich', 'St. Gallen', 'Winterthur', 'Luzern', 'Rapperswil', 'Appenzell'],
+	city: ['Alle', 'Zürich', 'St. Gallen', 'Winterthur', 'Luzern', 'Rapperswil', 'Appenzell'],
 	mood: ['Alle', 'Entspannt', 'Abenteuerlustig', 'Romantisch', 'Gesellig', 'Kreativ', 'Aktiv'],
 	people: ['Alle', '2 Personen', '2-4 Personen', '3-4 Personen', 'Gruppe'],
 	rating: ['Alle', 'ab 3 Sterne', 'ab 4 Sterne', 'ab 4.5 Sterne'],
-	bestTime: ['Alle', 'Fruehling', 'Sommer', 'Herbst', 'Winter', 'Abend', 'Wochenende']
+	bestTime: ['Alle', 'Frühling', 'Sommer', 'Herbst', 'Winter', 'Abend', 'Wochenende']
 };
 
 export function priceSymbol(priceLevel) {

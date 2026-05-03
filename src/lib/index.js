@@ -1,1 +1,1 @@
-export { activities, categories, getActivityById } from './data/activities.js';
+// Shared public exports can be added here when needed. App data is loaded through server routes.

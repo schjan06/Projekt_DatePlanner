@@ -35,7 +35,7 @@
 
 	<div class="sidebar-card">
 		<p class="eyebrow">Heute passend</p>
-		<h3>3 neue Ideen in deiner Naehe</h3>
+		<h3>3 neue Ideen in deiner Nähe</h3>
 		<p class="muted">Filtere nach Stimmung, Zeit und Budget, um schneller etwas Gutes zu finden.</p>
 	</div>
 </aside>

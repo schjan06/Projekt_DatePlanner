@@ -7,7 +7,7 @@
 
 <article class="activity-list-item card">
 	<a href={`/activity/${activity.id}`}>
-		<img src={activity.image} alt={activity.title} />
+		<img src={activity.image} alt={activity.imageAlt ?? activity.title} />
 	</a>
 	<div>
 		<div class="badge-row">

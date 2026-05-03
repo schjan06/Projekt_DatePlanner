@@ -1,32 +1,47 @@
 <script>
-	import { activities } from '$lib/data/activities';
+	import { goto } from '$app/navigation';
 	import ActivityListItem from '$lib/components/activities/ActivityListItem.svelte';
-	import MapPreview from '$lib/components/map/MapPreview.svelte';
+	import GoogleActivityMap from '$lib/components/map/GoogleActivityMap.svelte';
 
+	let { data } = $props();
 	let search = $state('');
-	let selected = $state(activities[0]);
-	const visibleActivities = $derived(
-		activities
-			.filter((activity) => {
-				const query = search.trim().toLowerCase();
-				return !query || activity.city.toLowerCase().includes(query) || activity.title.toLowerCase().includes(query);
-			})
-			.slice(0, 8)
-	);
+	let selected = $state(null);
+	const visibleActivities = $derived(data.activities.slice(0, 12));
+
+	$effect(() => {
+		search = data.search;
+		selected = data.activities[0];
+	});
+
+	function submitSearch(event) {
+		event.preventDefault();
+		const params = new URLSearchParams();
+		if (search.trim()) params.set('search', search.trim());
+		goto(`/map?${params.toString()}`, { keepFocus: true, noScroll: true });
+	}
 </script>
 
 <section class="page">
 	<div class="page-header">
 		<div>
 			<p class="eyebrow">Karte</p>
-			<h1>Aktivitaeten in deiner Naehe</h1>
-			<p class="muted">Simulierte Kartenansicht mit Pins, Vorschau und Detailnavigation.</p>
+			<h1>Aktivitäten in deiner Nähe</h1>
+			<p class="muted">Google-Maps-Ansicht mit Markern, Vorschau und Detailnavigation.</p>
 		</div>
-		<input class="search-input" style="max-width: 360px;" bind:value={search} placeholder="Ort oder Aktivitaet suchen" />
+		<form class="action-row" onsubmit={submitSearch}>
+			<input class="search-input" style="max-width: 360px;" bind:value={search} placeholder="Ort oder Aktivität suchen" />
+			<button class="button" type="submit">Suchen</button>
+		</form>
 	</div>
 
 	<div class="map-layout">
-		<MapPreview activities={visibleActivities} {selected} onSelect={(activity) => (selected = activity)} />
+		<GoogleActivityMap
+			activities={visibleActivities}
+			{selected}
+			onSelect={(activity) => (selected = activity)}
+			apiKey={data.mapsApiKey}
+			mapId={data.mapsMapId}
+		/>
 		<aside class="activity-list">
 			{#each visibleActivities.slice(0, 5) as activity}
 				<ActivityListItem {activity} />

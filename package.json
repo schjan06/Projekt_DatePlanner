@@ -7,6 +7,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
+		"seed": "node scripts/seed-db.js",
 		"prepare": "svelte-kit sync || echo ''"
 	},
 	"devDependencies": {
@@ -15,5 +16,8 @@
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"svelte": "^5.55.2",
 		"vite": "^8.0.7"
+	},
+	"dependencies": {
+		"mongodb": "^7.2.0"
 	}
 }

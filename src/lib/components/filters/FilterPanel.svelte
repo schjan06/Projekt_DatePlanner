@@ -1,8 +1,7 @@
 <script>
-	import { categories } from '$lib/data/activities';
 	import { filterOptions } from '$lib/utils/activityFilters';
 
-	let { filters, onChange = () => {}, onReset = () => {}, resultCount = 0 } = $props();
+	let { filters, onChange = () => {}, onReset = () => {}, resultCount = 0, categoryOptions = [] } = $props();
 </script>
 
 <aside class="filter-panel panel">
@@ -25,7 +24,7 @@
 		<span>Kategorie</span>
 		<select class="select" value={filters.category} onchange={(event) => onChange('category', event.currentTarget.value)}>
 			<option>Alle</option>
-			{#each categories as category}
+			{#each categoryOptions as category}
 				<option>{category}</option>
 			{/each}
 		</select>
@@ -42,5 +41,5 @@
 		</label>
 	{/each}
 
-	<button class="button secondary" type="button" onclick={onReset}>Filter zuruecksetzen</button>
+	<button class="button secondary" type="button" onclick={onReset}>Filter zurücksetzen</button>
 </aside>

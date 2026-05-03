@@ -1,13 +1,9 @@
 export const profile = {
+	userId: 'demo-user',
 	name: 'Nina Keller',
-	location: 'Zuerich',
+	location: 'Zürich',
 	memberSince: 'Januar 2026',
 	avatar: 'NK',
-	stats: [
-		{ label: 'Geplante Dates', value: '3' },
-		{ label: 'Gespeicherte Ideen', value: '4' },
-		{ label: 'Vergangene Aktivitaeten', value: '12' },
-		{ label: 'Durchschnittsbewertung', value: '4.6' }
-	],
+	bio: 'Sammelt Aktivitäten für spontane Wochenenden, ruhige Abende und gemeinsame Erinnerungen.',
 	settings: ['Einstellungen', 'Benachrichtigungen', 'Hilfe & Support', 'Ausloggen']
 };

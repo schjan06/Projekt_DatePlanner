@@ -1,28 +1,27 @@
 <script>
-	import { historyItems } from '$lib/data/history';
-	import { getActivityById } from '$lib/data/activities';
 	import RatingStars from '$lib/components/ui/RatingStars.svelte';
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
 
+	let { data } = $props();
 	let selectedActivity = $state(null);
 </script>
 
 <section class="page">
 	<div class="page-header">
 		<div>
-			<p class="eyebrow">Vergangene Aktivitaeten</p>
+			<p class="eyebrow">Vergangene Aktivitäten</p>
 			<h1>Erinnerungen</h1>
-			<p class="muted">Bewertungen, Favoriten und kleine Rueckblicke auf bereits gemachte Erlebnisse.</p>
+			<p class="muted">Bewertungen, Favoriten und kleine Rückblicke auf bereits gemachte Erlebnisse.</p>
 		</div>
 	</div>
 
 	<div class="memory-grid activity-grid">
-		{#each historyItems as item}
-			{@const activity = getActivityById(item.activityId)}
+		{#each data.historyItems as item}
+			{@const activity = item.activity}
 			{#if activity}
 				<article class="card activity-card">
 					<a class="activity-image-wrap" href={`/activity/${activity.id}`}>
-						<img src={activity.image} alt={activity.title} />
+						<img src={activity.image} alt={activity.imageAlt ?? activity.title} />
 					</a>
 					<div class="activity-body">
 						<p class="eyebrow">{item.date} {item.favorite ? '· Favorit' : ''}</p>

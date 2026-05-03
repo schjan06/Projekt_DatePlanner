@@ -1,19 +1,31 @@
 <script>
-	import { page } from '$app/state';
-	import { activities } from '$lib/data/activities';
+	import { goto } from '$app/navigation';
 	import ActivityListItem from '$lib/components/activities/ActivityListItem.svelte';
 	import FilterPanel from '$lib/components/filters/FilterPanel.svelte';
-	import { defaultFilters, filterActivities } from '$lib/utils/activityFilters';
+	import { defaultFilters } from '$lib/utils/activityFilters';
 
-	let filters = $state({ ...defaultFilters, category: page.url.searchParams.get('category') ?? 'Alle' });
-	const results = $derived(filterActivities(activities, filters));
+	let { data } = $props();
+	let filters = $state({ ...defaultFilters });
+	const results = $derived(data.activities);
+
+	$effect(() => {
+		Object.assign(filters, data.filters);
+	});
+
+	function syncUrl(nextFilters) {
+		const params = new URLSearchParams();
+		for (const [key, value] of Object.entries(nextFilters)) {
+			if (value && value !== defaultFilters[key]) params.set(key, value);
+		}
+		goto(`/categories?${params.toString()}`, { keepFocus: true, noScroll: true });
+	}
 
 	function setFilter(key, value) {
-		filters[key] = value;
+		syncUrl({ ...filters, [key]: value });
 	}
 
 	function resetFilters() {
-		Object.assign(filters, defaultFilters);
+		syncUrl(defaultFilters);
 	}
 </script>
 
@@ -27,7 +39,7 @@
 	</div>
 
 	<div class="two-column">
-		<FilterPanel {filters} onChange={setFilter} onReset={resetFilters} resultCount={results.length} />
+		<FilterPanel {filters} onChange={setFilter} onReset={resetFilters} resultCount={results.length} categoryOptions={data.categories} />
 		<div class="activity-list">
 			{#each results as activity}
 				<ActivityListItem {activity} />
@@ -35,7 +47,7 @@
 			{#if !results.length}
 				<div class="empty-state panel">
 					<h2>Keine passenden Ideen</h2>
-					<p class="muted">Setze einzelne Filter zurueck, um wieder mehr Vorschlaege zu sehen.</p>
+					<p class="muted">Setze einzelne Filter zurück, um wieder mehr Vorschläge zu sehen.</p>
 				</div>
 			{/if}
 		</div>

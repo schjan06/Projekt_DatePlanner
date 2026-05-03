@@ -608,6 +608,27 @@ textarea {
 		linear-gradient(135deg, #dfece7, #f3eaf9 52%, #e8eefc);
 }
 
+.google-map-shell {
+	position: relative;
+	min-height: 620px;
+	overflow: hidden;
+	border-radius: 28px;
+	background: var(--surface-soft);
+	box-shadow: var(--shadow);
+}
+
+.google-map {
+	width: 100%;
+	min-height: 620px;
+}
+
+.map-fallback {
+	display: grid;
+	place-content: center;
+	min-height: 620px;
+	text-align: center;
+}
+
 .map-pin {
 	position: absolute;
 	transform: translate(-50%, -50%);
@@ -634,6 +655,14 @@ textarea {
 	bottom: 24px;
 	width: min(360px, calc(100% - 48px));
 	padding: 14px;
+}
+
+.map-popup img {
+	width: 100%;
+	height: 150px;
+	border-radius: 16px;
+	object-fit: cover;
+	margin-bottom: 12px;
 }
 
 .post-card {
