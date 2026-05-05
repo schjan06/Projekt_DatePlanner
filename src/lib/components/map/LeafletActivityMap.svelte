@@ -4,13 +4,22 @@
 	import CategoryBadge from '$lib/components/ui/CategoryBadge.svelte';
 	import RatingStars from '$lib/components/ui/RatingStars.svelte';
 
-	let { activities = [], selected = null, emptyText = '', onSelect = () => {} } = $props();
+	let {
+		activities = [],
+		selected = null,
+		emptyText = '',
+		focusTarget = null,
+		onSelect = () => {},
+		onBoundsChange = () => {}
+	} = $props();
 
 	let mapElement = $state();
 	let loadError = $state('');
+	let mapReady = $state(false);
 	let leaflet;
 	let map;
 	let markerLayer;
+	let lastFocusId = '';
 
 	function validActivities() {
 		return activities.filter((activity) => Number.isFinite(activity.latitude) && Number.isFinite(activity.longitude));
@@ -42,6 +51,29 @@
 		map.fitBounds(bounds, { padding: [48, 48], maxZoom: 13 });
 	}
 
+	function reportBounds() {
+		if (!map) return;
+		const bounds = map.getBounds();
+		onBoundsChange({
+			north: bounds.getNorth(),
+			south: bounds.getSouth(),
+			east: bounds.getEast(),
+			west: bounds.getWest()
+		});
+	}
+
+	function applyFocusTarget(target) {
+		if (!map || !target) return;
+		if (target.type === 'overview') {
+			fitToMarkers(validActivities());
+			return;
+		}
+
+		if (Number.isFinite(target.latitude) && Number.isFinite(target.longitude)) {
+			map.setView([target.latitude, target.longitude], target.zoom ?? 13, { animate: true });
+		}
+	}
+
 	function renderMarkers() {
 		if (!map || !leaflet || !markerLayer) return;
 		const items = validActivities();
@@ -57,8 +89,6 @@
 
 			markerLayer.addLayer(marker);
 		}
-
-		fitToMarkers(items);
 	}
 
 	async function initialiseMap() {
@@ -77,7 +107,11 @@
 				.addTo(map);
 
 			markerLayer = leaflet.layerGroup().addTo(map);
+			map.on('moveend zoomend', reportBounds);
 			renderMarkers();
+			fitToMarkers(validActivities());
+			mapReady = true;
+			setTimeout(reportBounds, 0);
 		} catch (error) {
 			loadError = error.message || 'Leaflet konnte nicht geladen werden.';
 		}
@@ -91,6 +125,12 @@
 
 	$effect(() => {
 		if (map && markerLayer) renderMarkers();
+	});
+
+	$effect(() => {
+		if (!mapReady || !map || !focusTarget?.id || focusTarget.id === lastFocusId) return;
+		lastFocusId = focusTarget.id;
+		applyFocusTarget(focusTarget);
 	});
 </script>
 
