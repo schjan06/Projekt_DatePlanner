@@ -4,7 +4,7 @@
 	import CategoryBadge from '$lib/components/ui/CategoryBadge.svelte';
 	import RatingStars from '$lib/components/ui/RatingStars.svelte';
 
-	let { activities = [], selected = null, onSelect = () => {} } = $props();
+	let { activities = [], selected = null, emptyText = '', onSelect = () => {} } = $props();
 
 	let mapElement = $state();
 	let loadError = $state('');
@@ -104,6 +104,13 @@
 		<div class="leaflet-map" bind:this={mapElement} aria-label="OpenStreetMap Aktivitätenkarte"></div>
 	{/if}
 
+	{#if !loadError && activities.length === 0}
+		<div class="map-empty-overlay panel">
+			<h2>Keine Marker gefunden</h2>
+			<p class="muted">{emptyText}</p>
+		</div>
+	{/if}
+
 	{#if selected}
 		<aside class="map-detail-card card" aria-label="Ausgewählte Aktivität">
 			<img src={selected.image} alt={selected.imageAlt ?? selected.title} />
@@ -123,7 +130,7 @@
 					<span>•</span>
 					<span>{selected.duration}</span>
 				</div>
-				<a class="button" href={`/activity/${selected.id}`}>Details ansehen</a>
+				<a class="button map-detail-action" href={`/activity/${selected.id}`}>Details ansehen</a>
 			</div>
 		</aside>
 	{/if}

@@ -1,9 +1,7 @@
-import { getActivities } from '$lib/server/repositories.js';
+import { getMapActivitiesByPlace } from '$lib/server/repositories.js';
 
-export async function load({ url }) {
-	const search = url.searchParams.get('search') || '';
+export async function load() {
 	return {
-		activities: await getActivities({ search }),
-		search
+		activities: await getMapActivitiesByPlace('')
 	};
 }

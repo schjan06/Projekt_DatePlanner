@@ -69,6 +69,21 @@ export async function getActivities(filters = {}) {
 	return stripMany(await activities.find(query).sort({ rating: -1, title: 1 }).toArray());
 }
 
+export async function getMapActivitiesByPlace(place = '') {
+	const activities = await collection('activities');
+	const trimmed = place.trim();
+	const query = trimmed
+		? {
+				$or: [
+					{ city: new RegExp(escapeRegex(trimmed), 'i') },
+					{ location: new RegExp(escapeRegex(trimmed), 'i') }
+				]
+			}
+		: {};
+
+	return stripMany(await activities.find(query).sort({ city: 1, rating: -1, title: 1 }).toArray());
+}
+
 export async function getFeaturedActivities(limit = 6) {
 	const activities = await collection('activities');
 	return stripMany(await activities.find({}).sort({ rating: -1, reviewCount: -1 }).limit(limit).toArray());
