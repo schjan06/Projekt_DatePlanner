@@ -581,6 +581,14 @@ textarea {
 	font-size: 1.25rem;
 }
 
+.section-header {
+	display: flex;
+	align-items: start;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 18px;
+}
+
 .modal-backdrop {
 	position: fixed;
 	z-index: 40;
@@ -597,6 +605,82 @@ textarea {
 	border-radius: 24px;
 	background: white;
 	box-shadow: var(--shadow);
+}
+
+.review-modal {
+	position: relative;
+	width: min(640px, 100%);
+	max-height: calc(100vh - 40px);
+	overflow: auto;
+}
+
+.review-modal-header {
+	display: flex;
+	align-items: start;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.modal-close {
+	display: grid;
+	place-items: center;
+	width: 36px;
+	height: 36px;
+	border: 0;
+	border-radius: 50%;
+	background: var(--surface-soft);
+	color: var(--ink);
+	font-size: 1.3rem;
+	font-weight: 850;
+	cursor: pointer;
+}
+
+.modal-close:hover {
+	background: var(--purple-soft);
+	color: var(--purple-dark);
+}
+
+.review-stars {
+	display: inline-flex;
+	gap: 6px;
+	margin-top: 8px;
+	padding: 8px 10px;
+	border: 1px solid var(--line);
+	border-radius: 18px;
+	background: var(--surface-soft);
+}
+
+.review-stars button {
+	border: 0;
+	background: transparent;
+	color: #d7cfe3;
+	font-size: 2rem;
+	line-height: 1;
+	cursor: pointer;
+	transition:
+		color 0.16s ease,
+		transform 0.16s ease;
+}
+
+.review-stars button:hover,
+.review-stars button:focus-visible,
+.review-stars button.active {
+	color: #f1a800;
+	transform: translateY(-1px);
+}
+
+.review-form-row {
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.form-error {
+	margin: 0;
+	padding: 10px 12px;
+	border-radius: 14px;
+	background: #fff5fb;
+	color: #9d2f67;
+	font-size: 0.9rem;
+	font-weight: 750;
 }
 
 .form-grid {
@@ -1032,6 +1116,10 @@ textarea {
 		flex-direction: column;
 	}
 
+	.section-header {
+		flex-direction: column;
+	}
+
 	.hero {
 		min-height: 560px;
 		padding: 24px;
@@ -1065,7 +1153,8 @@ textarea {
 
 	.map-search-panel .action-row,
 	.map-result-list,
-	.map-result-card {
+	.map-result-card,
+	.review-form-row {
 		grid-template-columns: 1fr;
 	}
 

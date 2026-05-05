@@ -141,7 +141,7 @@ export async function getReviews(activityId) {
 	return stripMany(await reviews.find({ activityId }).sort({ createdAt: -1 }).toArray());
 }
 
-export async function addReview({ activityId, userName, rating, comment }) {
+export async function addReview({ activityId, userName, rating, comment, visitWith, visitDate }) {
 	await requireActivity(activityId);
 	const reviews = await collection('reviews');
 	const review = {
@@ -150,6 +150,8 @@ export async function addReview({ activityId, userName, rating, comment }) {
 		userName: userName?.trim() || 'Gast',
 		rating: Number(rating),
 		comment: comment?.trim() || '',
+		visitWith: visitWith?.trim() || '',
+		visitDate: visitDate || '',
 		date: new Intl.DateTimeFormat('de-CH').format(new Date()),
 		createdAt: new Date().toISOString()
 	};

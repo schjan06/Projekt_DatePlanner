@@ -4,6 +4,7 @@
 	import ActivityGrid from '$lib/components/activities/ActivityGrid.svelte';
 	import PlanActivityModal from '$lib/components/modals/PlanActivityModal.svelte';
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
+	import ReviewModal from '$lib/components/modals/ReviewModal.svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { showToast } from '$lib/state/appState.svelte.js';
 
@@ -15,9 +16,7 @@
 
 	let showPlan = $state(false);
 	let showShare = $state(false);
-	let reviewName = $state('');
-	let reviewRating = $state('5');
-	let reviewComment = $state('');
+	let showReviewModal = $state(false);
 
 	async function toggleWishlist() {
 		const response = await fetch('/api/wishlist', {
@@ -34,29 +33,6 @@
 		}
 	}
 
-	async function submitReview(event) {
-		event.preventDefault();
-		const response = await fetch('/api/reviews', {
-			method: 'POST',
-			headers: { 'content-type': 'application/json' },
-			body: JSON.stringify({
-				activityId: activity.id,
-				userName: reviewName,
-				rating: Number(reviewRating),
-				comment: reviewComment
-			})
-		});
-
-		if (response.ok) {
-			reviewName = '';
-			reviewRating = '5';
-			reviewComment = '';
-			showToast('Bewertung gespeichert');
-			await invalidateAll();
-		} else {
-			showToast('Bewertung konnte nicht gespeichert werden');
-		}
-	}
 </script>
 
 {#if activity}
@@ -105,30 +81,13 @@
 				</div>
 
 				<div class="section panel">
-					<h2>Rezensionen</h2>
-					<form class="form-grid" onsubmit={submitReview} style="margin-bottom: 20px;">
-						<div class="two-column" style="grid-template-columns: 1fr 140px;">
-							<label>
-								Name
-								<input class="field" bind:value={reviewName} placeholder="Dein Name" />
-							</label>
-							<label>
-								Bewertung
-								<select class="select" bind:value={reviewRating}>
-									<option value="5">5</option>
-									<option value="4.5">4.5</option>
-									<option value="4">4</option>
-									<option value="3.5">3.5</option>
-									<option value="3">3</option>
-								</select>
-							</label>
+					<div class="section-header">
+						<div>
+							<h2>Rezensionen</h2>
+							<p class="muted">Teile deine Erfahrung direkt im Kontext dieser Aktivität.</p>
 						</div>
-						<label>
-							Kommentar
-							<textarea rows="3" bind:value={reviewComment} placeholder="Wie war eure Erfahrung?"></textarea>
-						</label>
-						<button class="button" type="submit">Bewertung speichern</button>
-					</form>
+						<button class="button" type="button" onclick={() => (showReviewModal = true)}>Bewertung schreiben</button>
+					</div>
 					{#if activityReviews.length}
 						<div class="activity-list">
 							{#each activityReviews as review}
@@ -136,6 +95,16 @@
 									<strong>{review.userName}</strong>
 									<RatingStars rating={review.rating} />
 									<p>{review.comment}</p>
+									{#if review.visitWith || review.visitDate}
+										<div class="meta-row">
+											{#if review.visitWith}
+												<span>{review.visitWith}</span>
+											{/if}
+											{#if review.visitDate}
+												<span>{review.visitDate}</span>
+											{/if}
+										</div>
+									{/if}
 									<span class="muted">{review.date}</span>
 								</article>
 							{/each}
@@ -162,7 +131,7 @@
 		<div class="section">
 			<div class="page-header">
 				<div>
-					<p class="eyebrow">Aehnliche Ideen</p>
+					<p class="eyebrow">Ähnliche Ideen</p>
 					<h2>Passt vielleicht auch</h2>
 				</div>
 			</div>
@@ -172,6 +141,7 @@
 
 	<PlanActivityModal activity={activity} open={showPlan} onClose={() => (showPlan = false)} />
 	<ShareModal activity={activity} open={showShare} onClose={() => (showShare = false)} />
+	<ReviewModal activity={activity} open={showReviewModal} onClose={() => (showReviewModal = false)} />
 {:else}
 	<section class="page">
 		<div class="empty-state panel">
