@@ -1,7 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import ActivityListItem from '$lib/components/activities/ActivityListItem.svelte';
-	import GoogleActivityMap from '$lib/components/map/GoogleActivityMap.svelte';
+	import LeafletActivityMap from '$lib/components/map/LeafletActivityMap.svelte';
 
 	let { data } = $props();
 	let search = $state('');
@@ -10,7 +10,7 @@
 
 	$effect(() => {
 		search = data.search;
-		selected = data.activities[0];
+		selected = null;
 	});
 
 	function submitSearch(event) {
@@ -26,7 +26,7 @@
 		<div>
 			<p class="eyebrow">Karte</p>
 			<h1>Aktivitäten in deiner Nähe</h1>
-			<p class="muted">Google-Maps-Ansicht mit Markern, Vorschau und Detailnavigation.</p>
+			<p class="muted">OpenStreetMap-Karte mit VibeMatch-Markern, Suche und Detailvorschau.</p>
 		</div>
 		<form class="action-row" onsubmit={submitSearch}>
 			<input class="search-input" style="max-width: 360px;" bind:value={search} placeholder="Ort oder Aktivität suchen" />
@@ -35,13 +35,7 @@
 	</div>
 
 	<div class="map-layout">
-		<GoogleActivityMap
-			activities={visibleActivities}
-			{selected}
-			onSelect={(activity) => (selected = activity)}
-			apiKey={data.mapsApiKey}
-			mapId={data.mapsMapId}
-		/>
+		<LeafletActivityMap activities={visibleActivities} {selected} onSelect={(activity) => (selected = activity)} />
 		<aside class="activity-list">
 			{#each visibleActivities.slice(0, 5) as activity}
 				<ActivityListItem {activity} />
