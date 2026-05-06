@@ -1,0 +1,15 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent;" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="121px" height="231px" viewBox="-0.5 -0.5 121 231" content="&lt;mxfile&gt;&lt;diagram id=&quot;YPDNPSF-YXMJg8WmEpQR&quot; name=&quot;Page-1&quot;&gt;zVRNT8MwDP01vaK2WceusA24ICHtADtGjWkjpc2UpWvLrydZnH5PcEJcKr8X27Gf4wZkWzTPip7yV8lABHHImoDsgjgmydp8LdE6IlkhkSnOHBX1xIF/AZIhshVncB45aimF5qcxmcqyhFSPOKqUrMdun1KMbz3RDGbEIaVizr5zpnPHbpKw51+AZ7m/OQrxpKDeGYlzTpmsBxTZB2SrpNTOKpotCKud18XFPd047QpTUOrfBMQu4EJFhb1hXbr1zSpZlQysfxiQxzrnGg4nmtrT2kzXcLkuhEGRMTEdKA3NzZKirlHzQEAWoFVrXDBgjdK0fuaI617pyMuXD1T2cRSHm3WZ+/6NgRIsy0H+vRzx/R/KsfpZDijZg90og1JBz2eejhWAhusPK9ZdguiI0ll71wxB60Fp6hwEWXj0+Szow67Ix7nigM2Wd6K1aUBWKoXRzDVVGejBVswnMpA8WVDccwoE1fwyLmJpDHjDm+SmvG7g0WTiJJpM0hWPUcPdniaKJ5u0mSRyLc8SXV9F1/bSQzGw/0U59/4/T/bf&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <g>
+            <rect x="0" y="0" width="120" height="60" fill="#ffffff" stroke="#000000" pointer-events="all" style="fill: light-dark(#ffffff, var(--ge-dark-color, #121212)); stroke: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));"/>
+        </g>
+        <g>
+            <rect x="0" y="170" width="120" height="60" fill="#ffffff" stroke="#000000" pointer-events="all" style="fill: light-dark(#ffffff, var(--ge-dark-color, #121212)); stroke: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));"/>
+        </g>
+        <g>
+            <path d="M 60 170 L 60 66.37" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));"/>
+            <path d="M 60 61.12 L 63.5 68.12 L 60 66.37 L 56.5 68.12 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); stroke: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));"/>
+        </g>
+    </g>
+</svg>
