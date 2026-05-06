@@ -63,10 +63,29 @@ function buildActivityQuery(filters = {}) {
 	return and.length ? { $and: and } : {};
 }
 
+function activitySort(sort = 'Empfohlen') {
+	if (sort === 'Bewertung') return { rating: -1, reviewCount: -1, title: 1 };
+	if (sort === 'Preis') return { priceLevel: 1, rating: -1, title: 1 };
+	if (sort === 'Titel A-Z') return { title: 1 };
+	return { rating: -1, title: 1 };
+}
+
+function durationRank(activity) {
+	const durationOrder = { 'Unter 1h': 1, '1-3h': 2, 'Halber Tag': 3, 'Ganzer Tag': 4 };
+	return durationOrder[activity.durationGroup] ?? 99;
+}
+
+function sortByDuration(activities) {
+	return activities.sort((a, b) => durationRank(a) - durationRank(b) || a.title.localeCompare(b.title, 'de-CH'));
+}
+
 export async function getActivities(filters = {}) {
 	const activities = await collection('activities');
 	const query = buildActivityQuery(filters);
-	return stripMany(await activities.find(query).sort({ rating: -1, title: 1 }).toArray());
+	if (filters.sort === 'Dauer') {
+		return stripMany(sortByDuration(await activities.find(query).toArray()));
+	}
+	return stripMany(await activities.find(query).sort(activitySort(filters.sort)).toArray());
 }
 
 export async function getMapActivitiesByPlace(place = '') {

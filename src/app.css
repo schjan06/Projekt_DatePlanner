@@ -582,6 +582,76 @@ textarea {
 	gap: 14px;
 }
 
+.results-panel {
+	display: grid;
+	gap: 14px;
+	margin-bottom: 14px;
+	padding: 16px;
+}
+
+.results-toolbar {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 18px;
+}
+
+.results-toolbar h2 {
+	margin: 0;
+}
+
+.sort-control {
+	display: grid;
+	gap: 7px;
+	width: min(240px, 100%);
+	color: var(--muted);
+	font-size: 0.85rem;
+	font-weight: 800;
+}
+
+.active-filter-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.active-filter-chip,
+.active-filter-reset {
+	display: inline-flex;
+	align-items: center;
+	min-height: 34px;
+	border: 1px solid rgba(118, 87, 255, 0.2);
+	border-radius: 999px;
+	font-size: 0.82rem;
+	font-weight: 850;
+}
+
+.active-filter-chip {
+	gap: 8px;
+	padding: 0 10px 0 12px;
+	background: var(--purple-soft);
+	color: var(--purple-dark);
+}
+
+.active-filter-chip strong {
+	font-size: 1rem;
+	line-height: 1;
+}
+
+.active-filter-reset {
+	padding: 0 12px;
+	background: white;
+	color: var(--muted);
+}
+
+.active-filter-chip:hover,
+.active-filter-chip:focus-visible,
+.active-filter-reset:hover,
+.active-filter-reset:focus-visible {
+	border-color: rgba(118, 87, 255, 0.42);
+	box-shadow: 0 10px 20px rgba(118, 87, 255, 0.1);
+}
+
 .filter-group label {
 	display: block;
 	margin-bottom: 7px;
@@ -1408,6 +1478,15 @@ textarea {
 
 	.quick-filter-panel {
 		padding: 18px;
+	}
+
+	.results-toolbar {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.sort-control {
+		width: 100%;
 	}
 
 	.quick-filter-intro {

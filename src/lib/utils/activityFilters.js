@@ -7,8 +7,11 @@ export const defaultFilters = {
 	mood: 'Alle',
 	people: 'Alle',
 	rating: 'Alle',
-	bestTime: 'Alle'
+	bestTime: 'Alle',
+	sort: 'Empfohlen'
 };
+
+export const sortOptions = ['Empfohlen', 'Bewertung', 'Preis', 'Dauer', 'Titel A-Z'];
 
 export const filterOptions = {
 	price: ['Alle', 'Kostenlos', 'CHF'],
