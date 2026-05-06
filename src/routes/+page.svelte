@@ -1,6 +1,7 @@
 <script>
 	import ActivityGrid from '$lib/components/activities/ActivityGrid.svelte';
 	import ActivityCard from '$lib/components/activities/ActivityCard.svelte';
+	import { priceGroup } from '$lib/utils/activityFilters';
 
 	let { data } = $props();
 	let search = $state('');
@@ -10,7 +11,7 @@
 	const quickFilterGroups = [
 		{ label: 'Stimmung', key: 'mood', items: ['Entspannt', 'Aktiv', 'Kreativ', 'Gesellig'] },
 		{ label: 'Ort', key: 'city', items: ['Zürich', 'St. Gallen', 'Winterthur', 'Luzern'] },
-		{ label: 'Budget', key: 'price', items: ['Kostenlos', 'CHF'] }
+		{ label: 'Budget', key: 'price', items: ['Kostenlos', 'bis CHF 20', 'CHF 21-50', 'ab CHF 51'] }
 	];
 	const recommended = $derived(
 		activities
@@ -35,8 +36,7 @@
 		return activities.filter((activity) => {
 			if (key === 'mood') return activity.mood.includes(value);
 			if (key === 'city') return activity.city === value;
-			if (key === 'price' && value === 'Kostenlos') return activity.priceLevel === 0;
-			if (key === 'price' && value === 'CHF') return activity.priceLevel > 0;
+			if (key === 'price') return priceGroup(activity.priceText) === value;
 			return false;
 		}).length;
 	}

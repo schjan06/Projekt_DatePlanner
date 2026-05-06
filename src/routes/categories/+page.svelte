@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import ActivityListItem from '$lib/components/activities/ActivityListItem.svelte';
 	import FilterPanel from '$lib/components/filters/FilterPanel.svelte';
-	import { defaultFilters, sortOptions } from '$lib/utils/activityFilters';
+	import { defaultFilters } from '$lib/utils/activityFilters';
 
 	let { data } = $props();
 	let filters = $state({ ...defaultFilters });
@@ -10,9 +10,9 @@
 	const filterLabels = {
 		search: 'Suche',
 		category: 'Kategorie',
-		price: 'Budget',
+		price: 'Preis',
 		duration: 'Dauer',
-		city: 'Ort',
+		city: 'Stadt',
 		mood: 'Stimmung',
 		people: 'Personen',
 		rating: 'Bewertung',
@@ -56,54 +56,30 @@
 		<div>
 			<p class="eyebrow">Kategorien & Filter</p>
 			<h1>Finde Ideen, die wirklich passen.</h1>
-			<p class="muted">Filtere nach Preis, Dauer, Ort, Stimmung, Personenanzahl, Bewertung und bester Zeit.</p>
+			<p class="muted">Suche direkt nach passenden Ideen und verfeinere die Ergebnisse bei Bedarf mit weiteren Filtern.</p>
 		</div>
 	</div>
 
-	<div class="two-column">
-		<FilterPanel {filters} onChange={setFilter} onReset={resetFilters} resultCount={results.length} categoryOptions={data.categories} />
-		<div>
-			<div class="results-panel panel">
-				<div class="results-toolbar">
-					<div>
-						<p class="eyebrow">Ergebnisse</p>
-						<h2>{results.length} Ideen</h2>
-					</div>
+	<FilterPanel
+		{filters}
+		onChange={setFilter}
+		onReset={resetFilters}
+		onRemoveFilter={removeFilter}
+		resultCount={results.length}
+		categoryOptions={data.categories}
+		activeFilterChips={activeFilterChips}
+		hasActiveFilters={activeFilterChips.length > 0}
+	/>
 
-					<label class="sort-control">
-						<span>Sortieren nach</span>
-						<select class="select" value={filters.sort} onchange={(event) => setFilter('sort', event.currentTarget.value)}>
-							{#each sortOptions as option}
-								<option>{option}</option>
-							{/each}
-						</select>
-					</label>
-				</div>
-
-				{#if activeFilterChips.length}
-					<div class="active-filter-row" role="group" aria-label="Aktive Filter">
-						{#each activeFilterChips as chip (chip.key)}
-							<button class="active-filter-chip" type="button" onclick={() => removeFilter(chip.key)}>
-								<span>{chip.label}: {chip.value}</span>
-								<strong aria-hidden="true">&times;</strong>
-							</button>
-						{/each}
-						<button class="active-filter-reset" type="button" onclick={resetFilters}>Alle zurücksetzen</button>
-					</div>
-				{/if}
+	<div class="activity-list categories-results">
+		{#each results as activity}
+			<ActivityListItem {activity} />
+		{/each}
+		{#if !results.length}
+			<div class="empty-state panel">
+				<h2>Keine passenden Ideen</h2>
+				<p class="muted">Setze einzelne Filter zurück, um wieder mehr Vorschläge zu sehen.</p>
 			</div>
-
-			<div class="activity-list">
-				{#each results as activity}
-					<ActivityListItem {activity} />
-				{/each}
-				{#if !results.length}
-					<div class="empty-state panel">
-						<h2>Keine passenden Ideen</h2>
-						<p class="muted">Setze einzelne Filter zurück, um wieder mehr Vorschläge zu sehen.</p>
-					</div>
-				{/if}
-			</div>
-		</div>
+		{/if}
 	</div>
 </section>

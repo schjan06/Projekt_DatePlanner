@@ -22,6 +22,16 @@ function priceLabel(priceLevel) {
 	return 'CHF';
 }
 
+function priceGroup(priceText = '') {
+	if (priceText === 'Kostenlos') return 'Kostenlos';
+	const match = priceText.match(/\d+/);
+	const amount = match ? Number(match[0]) : null;
+	if (amount === null) return 'CHF 21-50';
+	if (amount <= 20) return 'bis CHF 20';
+	if (amount <= 50) return 'CHF 21-50';
+	return 'ab CHF 51';
+}
+
 function buildActivityQuery(filters = {}) {
 	const and = [];
 	const search = filters.search?.trim();
@@ -45,11 +55,6 @@ function buildActivityQuery(filters = {}) {
 	if (filters.mood && filters.mood !== 'Alle') and.push({ mood: filters.mood });
 	if (filters.people && filters.people !== 'Alle') and.push({ people: filters.people });
 	if (filters.bestTime && filters.bestTime !== 'Alle') and.push({ bestTime: filters.bestTime });
-
-	if (filters.price && filters.price !== 'Alle') {
-		if (filters.price === 'Kostenlos') and.push({ priceLevel: 0 });
-		if (filters.price === 'CHF') and.push({ priceLevel: { $gt: 0 } });
-	}
 
 	if (filters.duration && filters.duration !== 'Alle') {
 		and.push({ durationGroup: filters.duration });
@@ -79,13 +84,18 @@ function sortByDuration(activities) {
 	return activities.sort((a, b) => durationRank(a) - durationRank(b) || a.title.localeCompare(b.title, 'de-CH'));
 }
 
+function filterByPriceGroup(activities, price = 'Alle') {
+	if (!price || price === 'Alle') return activities;
+	return activities.filter((activity) => priceGroup(activity.priceText) === price);
+}
+
 export async function getActivities(filters = {}) {
 	const activities = await collection('activities');
 	const query = buildActivityQuery(filters);
 	if (filters.sort === 'Dauer') {
-		return stripMany(sortByDuration(await activities.find(query).toArray()));
+		return stripMany(sortByDuration(filterByPriceGroup(await activities.find(query).toArray(), filters.price)));
 	}
-	return stripMany(await activities.find(query).sort(activitySort(filters.sort)).toArray());
+	return stripMany(filterByPriceGroup(await activities.find(query).sort(activitySort(filters.sort)).toArray(), filters.price));
 }
 
 export async function getMapActivitiesByPlace(place = '') {

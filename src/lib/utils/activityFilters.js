@@ -14,7 +14,7 @@ export const defaultFilters = {
 export const sortOptions = ['Empfohlen', 'Bewertung', 'Preis', 'Dauer', 'Titel A-Z'];
 
 export const filterOptions = {
-	price: ['Alle', 'Kostenlos', 'CHF'],
+	price: ['Alle', 'Kostenlos', 'bis CHF 20', 'CHF 21-50', 'ab CHF 51'],
 	duration: ['Alle', 'Unter 1h', '1-3h', 'Halber Tag', 'Ganzer Tag'],
 	city: ['Alle', 'Zürich', 'St. Gallen', 'Winterthur', 'Luzern', 'Rapperswil', 'Appenzell'],
 	mood: ['Alle', 'Entspannt', 'Abenteuerlustig', 'Romantisch', 'Gesellig', 'Kreativ', 'Aktiv'],
@@ -26,6 +26,16 @@ export const filterOptions = {
 export function priceSymbol(priceLevel) {
 	if (priceLevel === 0) return 'Kostenlos';
 	return 'CHF';
+}
+
+export function priceGroup(priceText = '') {
+	if (priceText === 'Kostenlos') return 'Kostenlos';
+	const match = priceText.match(/\d+/);
+	const amount = match ? Number(match[0]) : null;
+	if (amount === null) return 'CHF 21-50';
+	if (amount <= 20) return 'bis CHF 20';
+	if (amount <= 50) return 'CHF 21-50';
+	return 'ab CHF 51';
 }
 
 export function filterActivities(activities, filters) {
@@ -40,7 +50,7 @@ export function filterActivities(activities, filters) {
 			activity.mood.some((mood) => mood.toLowerCase().includes(query));
 
 		const matchesCategory = filters.category === 'Alle' || activity.categories.includes(filters.category);
-		const matchesPrice = filters.price === 'Alle' || priceSymbol(activity.priceLevel) === filters.price;
+		const matchesPrice = filters.price === 'Alle' || priceGroup(activity.priceText) === filters.price;
 		const matchesDuration =
 			filters.duration === 'Alle' ||
 			(filters.duration === 'Unter 1h' && activity.durationGroup === 'Unter 1h') ||
