@@ -2,6 +2,7 @@
 	import CategoryBadge from '$lib/components/ui/CategoryBadge.svelte';
 	import RatingStars from '$lib/components/ui/RatingStars.svelte';
 	import ActivityGrid from '$lib/components/activities/ActivityGrid.svelte';
+	import ActivityGallery from '$lib/components/activities/ActivityGallery.svelte';
 	import PlanActivityModal from '$lib/components/modals/PlanActivityModal.svelte';
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
 	import ReviewModal from '$lib/components/modals/ReviewModal.svelte';
@@ -79,6 +80,18 @@
 						{/each}
 					</div>
 				</div>
+
+				{#if activity.gallery?.length}
+					<div class="section panel">
+						<div class="section-header">
+							<div>
+								<h2>Fotos</h2>
+								<p class="muted">Swipe oder nutze die Pfeile, um Eindrücke zur Aktivität anzusehen.</p>
+							</div>
+						</div>
+						<ActivityGallery gallery={activity.gallery} title={activity.title} />
+					</div>
+				{/if}
 
 				<div class="section panel">
 					<div class="section-header">

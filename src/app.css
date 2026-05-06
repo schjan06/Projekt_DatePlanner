@@ -581,6 +581,106 @@ textarea {
 	font-size: 1.25rem;
 }
 
+.activity-gallery {
+	display: grid;
+	gap: 14px;
+}
+
+.gallery-frame {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 16 / 10;
+	border-radius: 22px;
+	background: var(--purple-soft);
+	touch-action: pan-y;
+}
+
+.gallery-frame img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.gallery-counter {
+	position: absolute;
+	right: 14px;
+	bottom: 14px;
+	min-width: 54px;
+	padding: 7px 10px;
+	border-radius: 999px;
+	background: rgba(32, 32, 50, 0.72);
+	color: white;
+	font-size: 0.82rem;
+	font-weight: 850;
+	text-align: center;
+	backdrop-filter: blur(12px);
+}
+
+.gallery-nav {
+	position: absolute;
+	top: 50%;
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--purple-dark);
+	font-size: 2rem;
+	font-weight: 800;
+	line-height: 1;
+	box-shadow: 0 12px 24px rgba(32, 32, 50, 0.18);
+	transform: translateY(-50%);
+}
+
+.gallery-nav:hover {
+	background: white;
+	color: var(--ink);
+}
+
+.gallery-nav.previous {
+	left: 14px;
+}
+
+.gallery-nav.next {
+	right: 14px;
+}
+
+.gallery-dots {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+	gap: 10px;
+}
+
+.gallery-dots button {
+	overflow: hidden;
+	aspect-ratio: 1.25;
+	padding: 0;
+	border: 2px solid transparent;
+	border-radius: 16px;
+	background: var(--surface-soft);
+	box-shadow: none;
+	opacity: 0.68;
+	transition:
+		border-color 0.18s ease,
+		opacity 0.18s ease,
+		transform 0.18s ease;
+}
+
+.gallery-dots button:hover,
+.gallery-dots button.active {
+	border-color: rgba(118, 87, 255, 0.72);
+	opacity: 1;
+	transform: translateY(-1px);
+}
+
+.gallery-dots img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
 .section-header {
 	display: flex;
 	align-items: start;
@@ -1149,6 +1249,27 @@ textarea {
 	.detail-hero {
 		min-height: 520px;
 		padding: 22px;
+	}
+
+	.gallery-frame {
+		aspect-ratio: 4 / 3;
+		border-radius: 18px;
+	}
+
+	.gallery-nav {
+		width: 38px;
+		height: 38px;
+		font-size: 1.65rem;
+	}
+
+	.gallery-dots {
+		display: flex;
+		overflow-x: auto;
+		padding-bottom: 2px;
+	}
+
+	.gallery-dots button {
+		flex: 0 0 78px;
 	}
 
 	.map-search-panel .action-row,
