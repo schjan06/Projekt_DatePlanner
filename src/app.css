@@ -1089,8 +1089,10 @@ textarea {
 	position: sticky;
 	top: 18px;
 	display: grid;
+	grid-template-rows: auto auto minmax(0, 1fr);
 	gap: 18px;
-	max-height: 680px;
+	box-sizing: border-box;
+	height: 680px;
 	padding: 18px;
 	overflow: hidden;
 }
@@ -1139,9 +1141,11 @@ textarea {
 	display: grid;
 	align-content: start;
 	gap: 10px;
-	max-height: 520px;
-	overflow: auto;
+	min-height: 0;
+	overflow-y: auto;
 	padding-right: 4px;
+	padding-bottom: 18px;
+	scroll-padding-bottom: 18px;
 }
 
 .map-result-card {
@@ -1470,7 +1474,9 @@ textarea {
 	.map-search-panel {
 		position: static;
 		order: -1;
+		height: auto;
 		max-height: none;
+		overflow: visible;
 	}
 
 	.map-result-list {
