@@ -1,5 +1,5 @@
 <script>
-	let { gallery = [], title = '' } = $props();
+	let { gallery = [], title = '', variant = 'panel', children } = $props();
 
 	let currentIndex = $state(0);
 	let touchStartX = 0;
@@ -37,7 +37,49 @@
 	}
 </script>
 
-{#if slides.length}
+{#if slides.length && variant === 'hero'}
+	<div
+		class="detail-hero gallery-hero"
+		role="region"
+		aria-label={`Bildergalerie zu ${title}`}
+		ontouchstart={handleTouchStart}
+		ontouchend={handleTouchEnd}
+	>
+		<img src={currentSlide.src} alt={currentSlide.alt ?? title} />
+
+		{#if slides.length > 1}
+			<button class="gallery-nav previous" type="button" aria-label="Vorheriges Bild" onclick={previous}
+				>&lsaquo;</button
+			>
+			<button class="gallery-nav next" type="button" aria-label="Nächstes Bild" onclick={next}
+				>&rsaquo;</button
+			>
+		{/if}
+
+		<div class="gallery-hero-overlay">
+			{@render children?.()}
+		</div>
+
+		<div class="gallery-hero-controls" aria-label="Galeriebilder auswählen">
+			<div class="gallery-counter">{currentIndex + 1} / {slides.length}</div>
+			{#if slides.length > 1}
+				<div class="gallery-dots compact">
+					{#each slides as slide, index}
+						<button
+							class:active={index === currentIndex}
+							type="button"
+							aria-label={`Bild ${index + 1} anzeigen`}
+							aria-current={index === currentIndex ? 'true' : undefined}
+							onclick={() => showSlide(index)}
+						>
+							<span></span>
+						</button>
+					{/each}
+				</div>
+			{/if}
+		</div>
+	</div>
+{:else if slides.length}
 	<div
 		class="activity-gallery"
 		role="region"
@@ -50,8 +92,12 @@
 			<div class="gallery-counter">{currentIndex + 1} / {slides.length}</div>
 
 			{#if slides.length > 1}
-				<button class="gallery-nav previous" type="button" aria-label="Vorheriges Bild" onclick={previous}>‹</button>
-				<button class="gallery-nav next" type="button" aria-label="Nächstes Bild" onclick={next}>›</button>
+				<button class="gallery-nav previous" type="button" aria-label="Vorheriges Bild" onclick={previous}
+					>&lsaquo;</button
+				>
+				<button class="gallery-nav next" type="button" aria-label="Nächstes Bild" onclick={next}
+					>&rsaquo;</button
+				>
 			{/if}
 		</div>
 

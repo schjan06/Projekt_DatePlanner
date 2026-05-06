@@ -544,16 +544,19 @@ textarea {
 	object-fit: cover;
 }
 
-.detail-hero::after {
+.detail-hero::after,
+.gallery-hero::after {
 	position: absolute;
 	inset: 0;
 	content: "";
-	background: linear-gradient(180deg, rgba(18, 15, 31, 0.18), rgba(18, 15, 31, 0.82));
+	background:
+		linear-gradient(180deg, rgba(18, 15, 31, 0.14), rgba(18, 15, 31, 0.82)),
+		linear-gradient(90deg, rgba(18, 15, 31, 0.84), rgba(18, 15, 31, 0.18));
 }
 
 .detail-hero-content {
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 	max-width: 760px;
 }
 
@@ -584,6 +587,30 @@ textarea {
 .activity-gallery {
 	display: grid;
 	gap: 14px;
+}
+
+.gallery-hero {
+	isolation: isolate;
+}
+
+.gallery-hero > img {
+	transition: opacity 0.18s ease;
+}
+
+.gallery-hero-overlay {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+}
+
+.gallery-hero-controls {
+	position: absolute;
+	right: 24px;
+	bottom: 22px;
+	z-index: 3;
+	display: flex;
+	align-items: center;
+	gap: 12px;
 }
 
 .gallery-frame {
@@ -618,6 +645,7 @@ textarea {
 
 .gallery-nav {
 	position: absolute;
+	z-index: 4;
 	top: 50%;
 	display: grid;
 	place-items: center;
@@ -647,10 +675,41 @@ textarea {
 	right: 14px;
 }
 
+.gallery-hero .gallery-nav {
+	top: auto;
+	bottom: 68px;
+	opacity: 0;
+	background: rgba(255, 255, 255, 0.82);
+	transform: none;
+	transition:
+		opacity 0.18s ease,
+		background 0.18s ease,
+		transform 0.18s ease;
+}
+
+.gallery-hero .gallery-nav.previous {
+	right: 82px;
+	left: auto;
+}
+
+.gallery-hero .gallery-nav.next {
+	right: 24px;
+}
+
+.gallery-hero:hover .gallery-nav,
+.gallery-hero .gallery-nav:focus-visible {
+	opacity: 1;
+}
+
 .gallery-dots {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
 	gap: 10px;
+}
+
+.gallery-dots.compact {
+	display: flex;
+	gap: 7px;
 }
 
 .gallery-dots button {
@@ -666,6 +725,28 @@ textarea {
 		border-color 0.18s ease,
 		opacity 0.18s ease,
 		transform 0.18s ease;
+}
+
+.gallery-dots.compact button {
+	width: 11px;
+	height: 11px;
+	aspect-ratio: auto;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
+	opacity: 1;
+}
+
+.gallery-dots.compact button:hover,
+.gallery-dots.compact button.active {
+	background: white;
+	transform: scale(1.14);
+}
+
+.gallery-dots.compact span {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 .gallery-dots button:hover,
@@ -1249,6 +1330,24 @@ textarea {
 	.detail-hero {
 		min-height: 520px;
 		padding: 22px;
+	}
+
+	.gallery-hero-controls {
+		right: 18px;
+		bottom: 18px;
+	}
+
+	.gallery-hero .gallery-nav {
+		bottom: 64px;
+		opacity: 1;
+	}
+
+	.gallery-hero .gallery-nav.previous {
+		right: 76px;
+	}
+
+	.gallery-hero .gallery-nav.next {
+		right: 18px;
 	}
 
 	.gallery-frame {

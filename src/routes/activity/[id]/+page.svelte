@@ -14,6 +14,7 @@
 	const activityReviews = $derived(data.reviews);
 	const similarActivities = $derived(data.similarActivities);
 	const wishlisted = $derived(data.wishlistIds.includes(activity.id));
+	const heroGallery = $derived(activity.gallery?.length ? activity.gallery : [{ src: activity.image, alt: activity.imageAlt ?? activity.title }]);
 
 	let showPlan = $state(false);
 	let showShare = $state(false);
@@ -38,8 +39,7 @@
 
 {#if activity}
 	<section class="page">
-		<div class="detail-hero">
-			<img src={activity.image} alt={activity.imageAlt ?? activity.title} />
+		<ActivityGallery gallery={heroGallery} title={activity.title} variant="hero">
 			<div class="detail-hero-content">
 				<div class="badge-row">
 					{#each activity.categories as category}
@@ -57,7 +57,7 @@
 					<button class="button ghost" type="button" onclick={() => (showShare = true)}>Teilen</button>
 				</div>
 			</div>
-		</div>
+		</ActivityGallery>
 
 		<div class="detail-grid">
 			<div>
@@ -80,18 +80,6 @@
 						{/each}
 					</div>
 				</div>
-
-				{#if activity.gallery?.length}
-					<div class="section panel">
-						<div class="section-header">
-							<div>
-								<h2>Fotos</h2>
-								<p class="muted">Swipe oder nutze die Pfeile, um Eindrücke zur Aktivität anzusehen.</p>
-							</div>
-						</div>
-						<ActivityGallery gallery={activity.gallery} title={activity.title} />
-					</div>
-				{/if}
 
 				<div class="section panel">
 					<div class="section-header">
