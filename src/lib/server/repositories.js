@@ -19,7 +19,7 @@ function escapeRegex(value) {
 
 function priceLabel(priceLevel) {
 	if (priceLevel === 0) return 'Kostenlos';
-	return 'CHF '.repeat(priceLevel).trim();
+	return 'CHF';
 }
 
 function buildActivityQuery(filters = {}) {
@@ -47,8 +47,8 @@ function buildActivityQuery(filters = {}) {
 	if (filters.bestTime && filters.bestTime !== 'Alle') and.push({ bestTime: filters.bestTime });
 
 	if (filters.price && filters.price !== 'Alle') {
-		const priceMap = { Kostenlos: 0, CHF: 1, 'CHF CHF': 2, 'CHF CHF CHF': 3 };
-		if (filters.price in priceMap) and.push({ priceLevel: priceMap[filters.price] });
+		if (filters.price === 'Kostenlos') and.push({ priceLevel: 0 });
+		if (filters.price === 'CHF') and.push({ priceLevel: { $gt: 0 } });
 	}
 
 	if (filters.duration && filters.duration !== 'Alle') {

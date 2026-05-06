@@ -11,7 +11,7 @@ export const defaultFilters = {
 };
 
 export const filterOptions = {
-	price: ['Alle', 'Kostenlos', 'CHF', 'CHF CHF', 'CHF CHF CHF'],
+	price: ['Alle', 'Kostenlos', 'CHF'],
 	duration: ['Alle', 'Unter 1h', '1-3h', 'Halber Tag', 'Ganzer Tag'],
 	city: ['Alle', 'Zürich', 'St. Gallen', 'Winterthur', 'Luzern', 'Rapperswil', 'Appenzell'],
 	mood: ['Alle', 'Entspannt', 'Abenteuerlustig', 'Romantisch', 'Gesellig', 'Kreativ', 'Aktiv'],
@@ -22,7 +22,7 @@ export const filterOptions = {
 
 export function priceSymbol(priceLevel) {
 	if (priceLevel === 0) return 'Kostenlos';
-	return 'CHF '.repeat(priceLevel).trim();
+	return 'CHF';
 }
 
 export function filterActivities(activities, filters) {

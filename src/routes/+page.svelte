@@ -7,6 +7,11 @@
 
 	const activities = $derived(data.activities);
 	const featured = $derived(data.featuredActivities[0] ?? data.activities[0]);
+	const quickFilterGroups = [
+		{ label: 'Stimmung', key: 'mood', items: ['Entspannt', 'Aktiv', 'Kreativ', 'Gesellig'] },
+		{ label: 'Ort', key: 'city', items: ['Zürich', 'St. Gallen', 'Winterthur', 'Luzern'] },
+		{ label: 'Budget', key: 'price', items: ['Kostenlos', 'CHF'] }
+	];
 	const recommended = $derived(
 		activities
 			.filter((activity) => {
@@ -21,6 +26,20 @@
 			})
 			.slice(0, 6)
 	);
+
+	function quickFilterHref(key, value) {
+		return `/categories?${key}=${encodeURIComponent(value)}`;
+	}
+
+	function countQuickFilter(key, value) {
+		return activities.filter((activity) => {
+			if (key === 'mood') return activity.mood.includes(value);
+			if (key === 'city') return activity.city === value;
+			if (key === 'price' && value === 'Kostenlos') return activity.priceLevel === 0;
+			if (key === 'price' && value === 'CHF') return activity.priceLevel > 0;
+			return false;
+		}).length;
+	}
 </script>
 
 <section class="page">
@@ -45,14 +64,27 @@
 		</div>
 	</div>
 
-	<div class="quick-grid">
-		{#each data.categories.slice(0, 8) as category}
-			<a class="quick-card" href={`/categories?category=${encodeURIComponent(category)}`}>
-				{category}
-				<span>{activities.filter((activity) => activity.categories.includes(category)).length} Ideen</span>
-			</a>
-		{/each}
-	</div>
+	<section class="quick-filter-panel panel" aria-label="Schnellfilter">
+		<div class="quick-filter-intro">
+			<p class="eyebrow">Schnellfilter</p>
+		</div>
+
+		<div class="quick-filter-groups">
+			{#each quickFilterGroups as group}
+				<div class="quick-filter-group">
+					<h3>{group.label}</h3>
+					<div class="quick-filter-chips">
+						{#each group.items as item}
+							<a class="quick-filter-chip" href={quickFilterHref(group.key, item)}>
+								<span>{item}</span>
+								<small>{countQuickFilter(group.key, item)} Ideen</small>
+							</a>
+						{/each}
+					</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 
 	<div class="page-header">
 		<div>
