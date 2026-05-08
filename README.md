@@ -261,7 +261,7 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
   - **Frontend:** `src/routes/activities/new/+page.svelte`.
   - **Backend:** `POST /api/activities`, `createActivity()` in `src/lib/server/repositories.js`.
   - **Navigation:** Sidebar-Eintrag `Erfassen` und Home-Button `Aktivität erfassen`.
-- **Technische Umsetzung:** Das Formular speichert Titel, Beschreibung, Kategorien, Preis, Dauer, Ort, Stadt, Koordinaten, beste Zeit, Personen, Indoor/Outdoor, Stimmung, Tipps, Anforderungen und Bilder. Serverseitig werden Pflichtfelder, Bildtypen, Bildgrössen und Anzahl Bilder geprüft. Neue Aktivitäten erhalten `createdBy`, `status`, `createdAt`, `updatedAt`, `rating: 0` und `reviewCount: 0`.
+- **Technische Umsetzung:** Das Formular speichert Titel, Beschreibung, Kategorien, Preis, eine frei eingegebene Dauer, Ort, Stadt, Adresse, beste Zeit, Personen, Indoor/Outdoor, Stimmung, Tipps, Anforderungen und Bilder. Die technische Dauergruppe für Filter wird automatisch aus der eingegebenen Dauer abgeleitet. Serverseitig werden Pflichtfelder, Bildtypen, Bildgrössen und Anzahl Bilder geprüft. Neue Aktivitäten erhalten `createdBy`, `status`, `createdAt`, `updatedAt`, `rating: 0` und `reviewCount: 0`.
 - **Abgrenzung/Prototyp-Charakter:** Es gibt keinen Admin-Freigabeprozess, keine Bearbeiten-/Löschen-Funktion für eigene Aktivitäten und kein Cloud-Storage. Bilder werden prototypisch als Data-URLs gespeichert.
 - **Testhinweis:** `/activities/new` öffnen, Pflichtfelder leer absenden, gültige Aktivität mit Bild speichern und Redirect zur Detailseite prüfen.
 - **Aus Evaluation abgeleitet?:** Nein, als Funktionsausbau des Prototyps umgesetzt.

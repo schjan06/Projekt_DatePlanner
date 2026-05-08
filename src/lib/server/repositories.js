@@ -102,6 +102,27 @@ function priceLevelFromText(priceText = '') {
 	return 3;
 }
 
+function durationGroupFromDuration(duration = '', provided = '') {
+	const durationGroups = ['Unter 1h', '1-3h', 'Halber Tag', 'Ganzer Tag'];
+	if (durationGroups.includes(provided)) return provided;
+
+	const value = String(duration || '').trim().toLowerCase().replace(',', '.');
+	if (value.includes('ganzer tag') || value.includes('ganztag')) return 'Ganzer Tag';
+	if (value.includes('halber tag') || value.includes('halbtag')) return 'Halber Tag';
+
+	const match = value.match(/(\d+(?:\.\d+)?)/);
+	if (!match) return '1-3h';
+
+	const amount = Number(match[1]);
+	const isMinutes = value.includes('min');
+	const hours = isMinutes ? amount / 60 : amount;
+
+	if (hours < 1) return 'Unter 1h';
+	if (hours <= 3) return '1-3h';
+	if (hours <= 6) return 'Halber Tag';
+	return 'Ganzer Tag';
+}
+
 function fieldError(fieldErrors, field, message) {
 	fieldErrors[field] = message;
 }
@@ -264,13 +285,14 @@ async function uniqueActivityId(title, city) {
 }
 
 export async function createActivity(formData, userId = DEMO_USER_ID) {
+	const duration = String(formData.get('duration') || '').trim();
 	const input = {
 		title: String(formData.get('title') || '').trim(),
 		description: String(formData.get('description') || '').trim(),
 		categories: String(formData.get('categories') || '').trim(),
 		priceText: String(formData.get('priceText') || '').trim(),
-		duration: String(formData.get('duration') || '').trim(),
-		durationGroup: String(formData.get('durationGroup') || '').trim(),
+		duration,
+		durationGroup: durationGroupFromDuration(duration, String(formData.get('durationGroup') || '').trim()),
 		location: String(formData.get('location') || '').trim(),
 		city: String(formData.get('city') || '').trim(),
 		address: String(formData.get('address') || '').trim(),

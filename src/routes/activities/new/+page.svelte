@@ -3,7 +3,6 @@
 	import { showToast } from '$lib/state/appState.svelte.js';
 
 	const categoryOptions = ['Romantisch', 'Aktiv', 'Kreativ', 'Essen & Trinken', 'Abenteuer', 'Entspannung', 'Draußen', 'Indoor'];
-	const durationGroups = ['Unter 1h', '1-3h', 'Halber Tag', 'Ganzer Tag'];
 	const peopleOptions = ['2 Personen', '2-4 Personen', '3-4 Personen', 'Gruppe'];
 	const indoorOutdoorOptions = ['Indoor', 'Outdoor', 'Beides'];
 	const moodOptions = ['Entspannt', 'Abenteuerlustig', 'Romantisch', 'Gesellig', 'Kreativ', 'Aktiv'];
@@ -14,12 +13,9 @@
 	let categories = $state(['Aktiv']);
 	let priceText = $state('');
 	let duration = $state('');
-	let durationGroup = $state('1-3h');
 	let location = $state('');
 	let city = $state('');
 	let address = $state('');
-	let latitude = $state('');
-	let longitude = $state('');
 	let people = $state('2 Personen');
 	let indoorOutdoor = $state('Outdoor');
 	let mood = $state(['Aktiv']);
@@ -99,12 +95,9 @@
 		formData.set('categories', categories.join(','));
 		formData.set('priceText', priceText);
 		formData.set('duration', duration);
-		formData.set('durationGroup', durationGroup);
 		formData.set('location', location);
 		formData.set('city', city);
 		formData.set('address', address);
-		formData.set('latitude', latitude);
-		formData.set('longitude', longitude);
 		formData.set('bestTime', bestTime.join(','));
 		formData.set('season', season);
 		formData.set('people', people);
@@ -186,31 +179,11 @@
 					Adresse optional
 					<input class="field" bind:value={address} placeholder="Straße, Hausnummer oder Treffpunkt" />
 				</label>
-				<div class="two-column equal">
-					<label>
-						Latitude
-						<input class="field" bind:value={latitude} placeholder="47.4245" />
-						{#if fieldErrors.latitude}<span class="field-error">{fieldErrors.latitude}</span>{/if}
-					</label>
-					<label>
-						Longitude
-						<input class="field" bind:value={longitude} placeholder="9.3767" />
-						{#if fieldErrors.longitude || fieldErrors.coordinates}<span class="field-error">{fieldErrors.longitude || fieldErrors.coordinates}</span>{/if}
-					</label>
-				</div>
-				<div class="two-column equal">
-					<label>
-						Dauer *
-						<input class="field" bind:value={duration} placeholder="z.B. 2h" />
-						{#if fieldErrors.duration}<span class="field-error">{fieldErrors.duration}</span>{/if}
-					</label>
-					<label>
-						Dauergruppe *
-						<select class="select" bind:value={durationGroup}>
-							{#each durationGroups as option}<option>{option}</option>{/each}
-						</select>
-					</label>
-				</div>
+				<label>
+					Dauer *
+					<input class="field" bind:value={duration} placeholder="z.B. 2h oder 45min" />
+					{#if fieldErrors.duration}<span class="field-error">{fieldErrors.duration}</span>{/if}
+				</label>
 			</section>
 
 			<section class="panel form-grid">
