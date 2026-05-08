@@ -6,6 +6,7 @@
 	import PlanActivityModal from '$lib/components/modals/PlanActivityModal.svelte';
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
 	import ReviewModal from '$lib/components/modals/ReviewModal.svelte';
+	import ReviewSummary from '$lib/components/reviews/ReviewSummary.svelte';
 	import { invalidateAll } from '$app/navigation';
 	import { showToast } from '$lib/state/appState.svelte.js';
 
@@ -96,6 +97,7 @@
 						</div>
 						<button class="button" type="button" onclick={() => (showReviewModal = true)}>Bewertung schreiben</button>
 					</div>
+					<ReviewSummary reviews={activityReviews} />
 					{#if activityReviews.length}
 						<div class="activity-list">
 							{#each activityReviews as review}

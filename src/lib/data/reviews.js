@@ -1,47 +1,112 @@
-export const reviews = [
-	{
-		id: 'review-1',
-		activityId: 'sunset-picknick',
-		userName: 'Mara',
-		rating: 5,
-		comment: 'Sehr einfach zu planen und trotzdem besonders. Der Sonnenuntergang war perfekt.',
-		date: '12.04.2026',
-		createdAt: '2026-04-12T18:00:00.000Z'
-	},
-	{
-		id: 'review-2',
-		activityId: 'sunset-picknick',
-		userName: 'Noah',
-		rating: 4.5,
-		comment: 'Gute Idee für einen ruhigen Abend. Eine warme Jacke lohnt sich.',
-		date: '29.03.2026',
-		createdAt: '2026-03-29T18:00:00.000Z'
-	},
-	{
-		id: 'review-3',
-		activityId: 'keramik-workshop',
-		userName: 'Lea',
-		rating: 5,
-		comment: 'Das Atelier war super sympathisch und unsere Tassen sind richtig schön geworden.',
-		date: '07.03.2026',
-		createdAt: '2026-03-07T18:00:00.000Z'
-	},
-	{
-		id: 'review-4',
-		activityId: 'escape-room',
-		userName: 'Tim',
-		rating: 4.5,
-		comment: 'Knifflig, aber nicht frustrierend. Für Gruppen sehr empfehlenswert.',
-		date: '21.02.2026',
-		createdAt: '2026-02-21T18:00:00.000Z'
-	},
-	{
-		id: 'review-5',
-		activityId: 'paint-wine',
-		userName: 'Sina',
-		rating: 5,
-		comment: 'Lockere Stimmung, gutes Tempo und am Ende ein schönes Andenken.',
-		date: '15.02.2026',
-		createdAt: '2026-02-15T18:00:00.000Z'
-	}
+const reviewRows = [
+	['review-1', 'sunset-picknick', 'Mara', 5, 'Sehr einfach zu planen und trotzdem besonders. Der Sonnenuntergang war perfekt.', '12.04.2026', '2026-04-12T18:00:00.000Z'],
+	['review-2', 'sunset-picknick', 'Noah', 4.5, 'Gute Idee für einen ruhigen Abend. Eine warme Jacke lohnt sich.', '29.03.2026', '2026-03-29T18:00:00.000Z'],
+	['review-6', 'sunset-picknick', 'Lina', 5, 'Die Stimmung am See war genau richtig und alles war unkompliziert vorbereitet.', '18.03.2026', '2026-03-18T18:00:00.000Z'],
+	['review-7', 'sunset-picknick', 'Jonas', 4, 'Schöne Idee, aber beim nächsten Mal würde ich früher losgehen.', '02.03.2026', '2026-03-02T18:00:00.000Z'],
+	['review-8', 'sunset-picknick', 'Sofia', 5, 'Perfekt für einen spontanen Abend zu zweit.', '21.02.2026', '2026-02-21T18:00:00.000Z'],
+	['review-9', 'sunset-picknick', 'Nico', 4.5, 'Mit ein paar Snacks und einer Decke fühlt es sich sofort besonders an.', '08.02.2026', '2026-02-08T18:00:00.000Z'],
+	['review-10', 'sunset-picknick', 'Elena', 5, 'Sehr entspannend und gut kombinierbar mit einem Spaziergang.', '22.01.2026', '2026-01-22T18:00:00.000Z'],
+	['review-11', 'sunset-picknick', 'Fabian', 4.5, 'Einfach, günstig und trotzdem eine schöne Erinnerung.', '11.01.2026', '2026-01-11T18:00:00.000Z'],
+	['review-12', 'sunset-picknick', 'Mila', 4.5, 'Besonders schön kurz vor Sonnenuntergang.', '28.12.2025', '2025-12-28T18:00:00.000Z'],
+	['review-13', 'sunset-picknick', 'David', 5, 'War für uns ein sehr ruhiger und persönlicher Abend.', '10.12.2025', '2025-12-10T18:00:00.000Z'],
+	['review-14', 'sunset-picknick', 'Anja', 4, 'Tolle Idee, nur die Platzsuche kann je nach Wetter etwas dauern.', '24.11.2025', '2025-11-24T18:00:00.000Z'],
+	['review-15', 'sunset-picknick', 'Leo', 5, 'Wenig Aufwand, grosse Wirkung.', '02.11.2025', '2025-11-02T18:00:00.000Z'],
+
+	['review-3', 'keramik-workshop', 'Lea', 4.5, 'Das Atelier war sympathisch und unsere Tassen sind richtig schön geworden.', '07.03.2026', '2026-03-07T18:00:00.000Z'],
+	['review-16', 'keramik-workshop', 'Tim', 4, 'Gute Anleitung, nur der Einstieg war etwas langsam.', '26.02.2026', '2026-02-26T18:00:00.000Z'],
+	['review-17', 'keramik-workshop', 'Mara', 4, 'Kreativ und ruhig, aber für meinen Geschmack etwas teuer.', '12.02.2026', '2026-02-12T18:00:00.000Z'],
+	['review-18', 'keramik-workshop', 'Yara', 4.5, 'Wir hatten viel zu lachen und ein schönes Andenken danach.', '30.01.2026', '2026-01-30T18:00:00.000Z'],
+	['review-19', 'keramik-workshop', 'Ben', 4, 'Auch ohne Vorerfahrung machbar, braucht aber Geduld.', '14.01.2026', '2026-01-14T18:00:00.000Z'],
+	['review-20', 'keramik-workshop', 'Nina', 3.5, 'Schöne Idee, organisatorisch aber ein bisschen eng getaktet.', '29.12.2025', '2025-12-29T18:00:00.000Z'],
+	['review-21', 'keramik-workshop', 'Robin', 4, 'Solide kreative Aktivität, würde ich mit mehr Zeit noch besser finden.', '11.12.2025', '2025-12-11T18:00:00.000Z'],
+
+	['review-22', 'minigolf-abend', 'Luca', 4, 'Locker und lustig, ohne dass man gross planen muss.', '05.04.2026', '2026-04-05T18:00:00.000Z'],
+	['review-23', 'minigolf-abend', 'Sara', 3.5, 'Schöner Abend, aber die Anlage wirkt teilweise etwas alt.', '19.03.2026', '2026-03-19T18:00:00.000Z'],
+	['review-24', 'minigolf-abend', 'Joel', 4, 'Ideal für eine kleine Gruppe, wenn man es unkompliziert mag.', '03.03.2026', '2026-03-03T18:00:00.000Z'],
+	['review-25', 'minigolf-abend', 'Amira', 3.5, 'Drei Weieren danach war fast schöner als das Minigolf selbst.', '17.02.2026', '2026-02-17T18:00:00.000Z'],
+	['review-26', 'minigolf-abend', 'Kian', 4, 'Einfach und sympathisch, aber kein riesiges Highlight.', '01.02.2026', '2026-02-01T18:00:00.000Z'],
+
+	['review-4', 'escape-room', 'Tim', 4.5, 'Knifflig, aber nicht frustrierend. Für Gruppen sehr empfehlenswert.', '21.02.2026', '2026-02-21T18:00:00.000Z'],
+	['review-27', 'escape-room', 'Melina', 4, 'Gute Rätsel, aber der Raum war etwas eng.', '08.02.2026', '2026-02-08T18:00:00.000Z'],
+	['review-28', 'escape-room', 'Jan', 4.5, 'Hat als Gruppenaktivität richtig gut funktioniert.', '25.01.2026', '2026-01-25T18:00:00.000Z'],
+	['review-29', 'escape-room', 'Alina', 4, 'Teilweise anspruchsvoll, aber fair.', '09.01.2026', '2026-01-09T18:00:00.000Z'],
+	['review-30', 'escape-room', 'Noemi', 4, 'Die Zeit verging schnell, einzelne Hinweise waren aber unklar.', '18.12.2025', '2025-12-18T18:00:00.000Z'],
+	['review-31', 'escape-room', 'Marc', 4, 'Gut, wenn alle miträtseln wollen.', '01.12.2025', '2025-12-01T18:00:00.000Z'],
+	['review-32', 'escape-room', 'Livio', 3.5, 'Gute Atmosphäre, aber wir hatten uns mehr Überraschungen erwartet.', '12.11.2025', '2025-11-12T18:00:00.000Z'],
+	['review-33', 'escape-room', 'Eva', 4.5, 'War ein gelungener Programmpunkt fürs Wochenende.', '28.10.2025', '2025-10-28T18:00:00.000Z'],
+
+	['review-5', 'paint-wine', 'Sina', 5, 'Lockere Stimmung, gutes Tempo und am Ende ein schönes Andenken.', '15.02.2026', '2026-02-15T18:00:00.000Z'],
+	['review-34', 'paint-wine', 'Laura', 4.5, 'Kreativ, aber überhaupt nicht steif.', '01.02.2026', '2026-02-01T18:00:00.000Z'],
+	['review-35', 'paint-wine', 'Miro', 4.5, 'Hat auch für Leute funktioniert, die sonst nicht malen.', '18.01.2026', '2026-01-18T18:00:00.000Z'],
+	['review-36', 'paint-wine', 'Chiara', 4, 'Angenehme Anleitung, zwischendurch aber etwas laut.', '03.01.2026', '2026-01-03T18:00:00.000Z'],
+	['review-37', 'paint-wine', 'Timo', 5, 'Perfekt für einen kreativen Abend.', '17.12.2025', '2025-12-17T18:00:00.000Z'],
+	['review-38', 'paint-wine', 'Lena', 4.5, 'Die Zeit war fast etwas knapp, aber sehr schön.', '30.11.2025', '2025-11-30T18:00:00.000Z'],
+	['review-39', 'paint-wine', 'Nora', 4.5, 'Wir hatten viel Spass und ein Bild für zu Hause.', '11.11.2025', '2025-11-11T18:00:00.000Z'],
+	['review-40', 'paint-wine', 'Silvan', 4, 'Gute Mischung aus Anleitung und freiem Arbeiten.', '26.10.2025', '2025-10-26T18:00:00.000Z'],
+	['review-41', 'paint-wine', 'Jana', 5, 'Sehr schöner Abend für zwei.', '09.10.2025', '2025-10-09T18:00:00.000Z'],
+
+	['review-42', 'kletterhalle', 'Rafael', 4, 'Aktiv und motivierend, aber für Einsteiger etwas intensiv.', '20.03.2026', '2026-03-20T18:00:00.000Z'],
+	['review-43', 'kletterhalle', 'Selina', 3.5, 'Hat Spass gemacht, die Halle war jedoch sehr voll.', '04.03.2026', '2026-03-04T18:00:00.000Z'],
+	['review-44', 'kletterhalle', 'Dario', 3, 'Gute Aktivität, aber nachher spürt man die Arme ordentlich.', '16.02.2026', '2026-02-16T18:00:00.000Z'],
+	['review-45', 'kletterhalle', 'Mia', 4, 'Schön für kleine Erfolgsmomente, aber nicht ganz entspannt.', '28.01.2026', '2026-01-28T18:00:00.000Z'],
+
+	['review-46', 'street-food-tour', 'Nina', 4.5, 'Viele kleine Stopps und sehr unkompliziert.', '12.04.2026', '2026-04-12T18:00:00.000Z'],
+	['review-47', 'street-food-tour', 'Pablo', 4, 'Gute Auswahl, aber preislich summiert es sich schnell.', '29.03.2026', '2026-03-29T18:00:00.000Z'],
+	['review-48', 'street-food-tour', 'Kim', 4.5, 'War für unsere Gruppe passend und abwechslungsreich.', '15.03.2026', '2026-03-15T18:00:00.000Z'],
+	['review-49', 'street-food-tour', 'Fiona', 3.5, 'Lecker, aber am Wochenende recht voll und hektisch.', '01.03.2026', '2026-03-01T18:00:00.000Z'],
+	['review-50', 'street-food-tour', 'Sam', 4, 'Man entdeckt Orte, an denen man sonst vorbeiläuft.', '13.02.2026', '2026-02-13T18:00:00.000Z'],
+	['review-51', 'street-food-tour', 'Olivia', 4.5, 'Gesellig und abwechslungsreich, aber etwas laut.', '27.01.2026', '2026-01-27T18:00:00.000Z'],
+	['review-52', 'street-food-tour', 'Mats', 4, 'Guter Mix aus Essen und Spaziergang.', '10.01.2026', '2026-01-10T18:00:00.000Z'],
+	['review-53', 'street-food-tour', 'Aline', 3.5, 'Unkompliziert, aber nicht jeder Stopp war gleich überzeugend.', '21.12.2025', '2025-12-21T18:00:00.000Z'],
+	['review-54', 'street-food-tour', 'Noah', 4, 'Preislich okay, wenn man teilt.', '04.12.2025', '2025-12-04T18:00:00.000Z'],
+	['review-55', 'street-food-tour', 'Lia', 4.5, 'Würde ich mit Freunden wieder machen.', '18.11.2025', '2025-11-18T18:00:00.000Z'],
+
+	['review-56', 'sternenhimmel', 'Anna', 5, 'Sehr ruhig und überraschend romantisch.', '08.04.2026', '2026-04-08T18:00:00.000Z'],
+	['review-57', 'sternenhimmel', 'Felix', 4.5, 'Warme Kleidung ist Pflicht, aber die Aussicht lohnt sich.', '21.03.2026', '2026-03-21T18:00:00.000Z'],
+	['review-58', 'sternenhimmel', 'Nele', 4.5, 'Einfach, kostenlos und sehr eindrücklich.', '05.03.2026', '2026-03-05T18:00:00.000Z'],
+
+	['review-59', 'bowling-night', 'Dominik', 4, 'Klassiker, funktioniert aber immer.', '02.04.2026', '2026-04-02T18:00:00.000Z'],
+	['review-60', 'bowling-night', 'Rina', 3.5, 'Gute Gruppenstimmung, aber die Musik war sehr laut.', '18.03.2026', '2026-03-18T18:00:00.000Z'],
+	['review-61', 'bowling-night', 'Theo', 3.5, 'Solide Aktivität für einen Abend, nichts Besonderes.', '01.03.2026', '2026-03-01T18:00:00.000Z'],
+	['review-62', 'bowling-night', 'Jule', 4, 'Mit Teams und kleinen Preisen wird es lustig.', '14.02.2026', '2026-02-14T18:00:00.000Z'],
+	['review-63', 'bowling-night', 'Kevin', 3.5, 'Hat unserer Gruppe gepasst, aber die Wartezeit war lang.', '29.01.2026', '2026-01-29T18:00:00.000Z'],
+	['review-64', 'bowling-night', 'Tamara', 4, 'Guter Plan B bei schlechtem Wetter.', '11.01.2026', '2026-01-11T18:00:00.000Z'],
+
+	['review-65', 'brunch-sonntag', 'Zoé', 4.5, 'Gemütlich und genau richtig für Sonntag.', '06.04.2026', '2026-04-06T18:00:00.000Z'],
+	['review-66', 'brunch-sonntag', 'Malik', 4, 'Gute Auswahl, aber unbedingt reservieren.', '23.03.2026', '2026-03-23T18:00:00.000Z'],
+	['review-67', 'brunch-sonntag', 'Hanna', 4, 'Entspannt und lecker, aber die Auswahl war überschaubar.', '09.03.2026', '2026-03-09T18:00:00.000Z'],
+	['review-68', 'brunch-sonntag', 'Lars', 4.5, 'Sehr schön mit Spaziergang am See danach.', '22.02.2026', '2026-02-22T18:00:00.000Z'],
+	['review-69', 'brunch-sonntag', 'Ema', 4, 'Ein schöner Start in den Tag.', '06.02.2026', '2026-02-06T18:00:00.000Z'],
+	['review-70', 'brunch-sonntag', 'Oskar', 4.5, 'Gute Atmosphäre und genug Zeit zum Reden.', '20.01.2026', '2026-01-20T18:00:00.000Z'],
+	['review-71', 'brunch-sonntag', 'Linda', 3.5, 'Sehr angenehm, aber gegen Mittag ziemlich lebhaft.', '03.01.2026', '2026-01-03T18:00:00.000Z'],
+	['review-72', 'brunch-sonntag', 'Janis', 4.5, 'Würde ich für kleine Gruppen empfehlen.', '17.12.2025', '2025-12-17T18:00:00.000Z'],
+	['review-73', 'brunch-sonntag', 'Carla', 4, 'Leckere Auswahl und freundlicher Service.', '30.11.2025', '2025-11-30T18:00:00.000Z'],
+	['review-74', 'brunch-sonntag', 'Phil', 4, 'Ruhig genug für gute Gespräche, aber nicht ganz günstig.', '12.11.2025', '2025-11-12T18:00:00.000Z'],
+	['review-75', 'brunch-sonntag', 'Tanja', 4.5, 'Sehr guter Sonntagsplan.', '27.10.2025', '2025-10-27T18:00:00.000Z'],
+
+	['review-76', 'kunst-museum', 'Iris', 3.5, 'Ruhige Aktivität, aber die Ausstellung war etwas klein.', '15.03.2026', '2026-03-15T18:00:00.000Z'],
+	['review-77', 'kunst-museum', 'Moritz', 3, 'Interessant, aber nicht alles war unser Stil.', '01.03.2026', '2026-03-01T18:00:00.000Z'],
+
+	['review-78', 'alpaka-spaziergang', 'Livia', 5, 'Sehr speziell und unglaublich beruhigend.', '11.04.2026', '2026-04-11T18:00:00.000Z'],
+	['review-79', 'alpaka-spaziergang', 'Benno', 4.5, 'Tolle Natur und sehr liebe Tiere.', '28.03.2026', '2026-03-28T18:00:00.000Z'],
+	['review-80', 'alpaka-spaziergang', 'Mona', 5, 'Ein Erlebnis, über das man noch lange spricht.', '12.03.2026', '2026-03-12T18:00:00.000Z'],
+	['review-81', 'alpaka-spaziergang', 'Reto', 4.5, 'Gut organisiert und schön entschleunigend.', '26.02.2026', '2026-02-26T18:00:00.000Z'],
+	['review-82', 'alpaka-spaziergang', 'Flurina', 4, 'Wetterfeste Schuhe lohnen sich, der Weg war matschig.', '10.02.2026', '2026-02-10T18:00:00.000Z'],
+	['review-83', 'alpaka-spaziergang', 'Sven', 5, 'War für unsere kleine Gruppe ein Highlight.', '23.01.2026', '2026-01-23T18:00:00.000Z'],
+	['review-84', 'alpaka-spaziergang', 'Ava', 4.5, 'Sehr freundlich geführt und schöne Route.', '06.01.2026', '2026-01-06T18:00:00.000Z'],
+	['review-85', 'alpaka-spaziergang', 'Dina', 4.5, 'Sehr passend, wenn man etwas Besonderes sucht.', '19.12.2025', '2025-12-19T18:00:00.000Z'],
+	['review-86', 'alpaka-spaziergang', 'Tobias', 4, 'Ruhig, lustig und naturverbunden, aber wetterabhängig.', '03.12.2025', '2025-12-03T18:00:00.000Z'],
+	['review-87', 'alpaka-spaziergang', 'Marlon', 5, 'Die Alpakas waren der Star des Tages.', '16.11.2025', '2025-11-16T18:00:00.000Z'],
+	['review-88', 'alpaka-spaziergang', 'Leonie', 4.5, 'Schöne Abwechslung zu klassischen Ausflügen.', '31.10.2025', '2025-10-31T18:00:00.000Z'],
+	['review-89', 'alpaka-spaziergang', 'Yves', 4.5, 'Sehr empfehlenswert für entspannte Wochenenden.', '13.10.2025', '2025-10-13T18:00:00.000Z']
 ];
+
+export const reviews = reviewRows.map(([id, activityId, userName, rating, comment, date, createdAt]) => ({
+	id,
+	activityId,
+	userName,
+	rating,
+	comment,
+	date,
+	createdAt
+}));

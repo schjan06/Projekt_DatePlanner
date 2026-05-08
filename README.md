@@ -69,7 +69,7 @@ Beschreibt die Gestaltung und Interaktion.
 - **Login-Seite:** Die Login-Seite ist als fokussierte Einstiegskarte gestaltet. Sie enthält Branding, einen kurzen Nutzenhinweis, Benutzername-/Passwortfelder und eine klare Login-Aktion. Demo-Zugangsdaten werden nicht mehr prominent angezeigt, damit die Seite sauberer wirkt.
 - **Home / Inspiration:** Die Startseite zeigt Inspiration, Aktivitätscards und Schnellfilter für Stimmung, Ort und Budget. Zusätzlich gibt es den Einstieg zur neuen Page `Aktivität erfassen`.
 - **Kategorien & Filter:** Die Filterseite wurde kompakter gestaltet. Suche, Kategorie und Stadt sind immer sichtbar; weitere Filter wie Preis, Dauer, Stimmung, Personen, Bewertung, beste Zeit und Sortierung werden über `Erweiterte Filter` eingeblendet. Aktive Filter erscheinen als Chips und können einzeln entfernt werden.
-- **Aktivitätsdetailseite:** Die Detailseite nutzt oben eine grosse Hero-Bildergalerie mit Pfeilen, Punkten und Swipe-Unterstützung. Darunter folgen Informationen, Metadaten, Tipps, Anforderungen, Bewertungsbereich und Aktionen zum Speichern, Planen und Teilen.
+- **Aktivitätsdetailseite:** Die Detailseite nutzt oben eine grosse Hero-Bildergalerie mit Pfeilen, Punkten und Swipe-Unterstützung. Darunter folgen Informationen, Metadaten, Tipps, Anforderungen, ein Bewertungsbereich mit Review-Zusammenfassung und Aktionen zum Speichern, Planen und Teilen.
 - **Map:** Die Map-Page kombiniert Leaflet-Karte und Aktivitätenliste. Die Liste bleibt bündig mit der Kartenhöhe und scrollt intern, ohne dass die letzte Aktivität abgeschnitten wird.
 - **Kommende Aktivitäten:** Die Page besitzt eine Listenansicht und eine moderne Kalenderansicht. Der Kalender zeigt geplante Aktivitäten in einer Monatsansicht, markiert den heutigen Tag, bietet Monatsnavigation und zeigt Details zum ausgewählten Tag. Termine können über ein Modal bearbeitet oder aus der Planung entfernt werden; auf Desktop ist zusätzlich ein einfaches Drag-&-Drop-Verschieben auf andere Tage vorgesehen.
 - **Profil:** Die Profilseite zeigt dynamische Userdaten, Statistik-Karten und Einstellungseinträge. Die Aktionen öffnen Modals für Profil bearbeiten, Passwort ändern, Benachrichtigungen, Hilfe & Support, Freunde einladen und Logout.
@@ -140,6 +140,7 @@ Fasst die technische Realisierung zusammen.
 - **Bilder/Galerie:** Bestehende Aktivitäten besitzen Galerie-Daten im Format `gallery: [{ src, alt }]`. Neu hochgeladene Bilder werden im Prototyp als Data-URLs gespeichert. Erlaubt sind JPEG, PNG und WebP, maximal fünf Bilder und maximal 500 KB pro Bild. Das erste Bild wird als Hauptbild und erstes Galerie-Element verwendet.
 - **Filter und Sortierung:** Die Kategorienseite liest Filter und Sortierung aus URL-Parametern. Dadurch bleiben Links aus Home-Schnellfiltern teilbar und reload-sicher. Die serverseitige Filterlogik liegt in `src/lib/server/repositories.js`; UI-Komponenten liegen unter `src/lib/components/filters`.
 - **Map:** Die Karte nutzt Leaflet/OpenStreetMap. Aktivitäten mit Koordinaten werden als Marker dargestellt. Die Listen- und Kartendarstellung sind responsiv abgestimmt.
+- **Reviews:** Reviews werden pro Aktivität über `GET /api/reviews` geladen und über `POST /api/reviews` gespeichert. Die Detailseite berechnet daraus Durchschnitt, Anzahl Bewertungen und eine einfache 5-bis-1-Sterne-Verteilung ohne zusätzliche API. Die Demo-/Seed-Daten enthalten pro Aktivität 1-12 realistische und bewusst unterschiedlich gute Reviews; `reviewCount` und `rating` der Aktivitäten sind darauf abgestimmt.
 - **Deployment:** TODO: Deployment-URL ergänzen, sobald eine getestete Version separat veröffentlicht wurde.
 - **Besondere Entscheidungen:** Im Gegensatz zur ursprünglichen React-Idee wurde die Umsetzung mit SvelteKit realisiert. Leaflet/OpenStreetMap wurde gewählt, um eine kostenlose Kartenlösung für den Prototyp zu nutzen. Bildupload und Benachrichtigungen sind bewusst prototypisch gehalten; es gibt kein Cloud-Storage und keine echten Push-/E-Mail-Benachrichtigungen.
 
@@ -296,9 +297,9 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
   - **Frontend:** `src/routes/community`, `src/lib/components/community/CommunityPostCard.svelte`, `ShareModal.svelte`, `ReviewModal.svelte`.
   - **Backend:** `/api/community`, `/api/reviews`, `/api/history/share`.
   - **Datenbank:** Collections `communityPosts`, `reviews`, `historyItems`.
-- **Technische Umsetzung:** Bewertungen werden mit Rating, Kommentar, Besuchsdatum und Userbezug gespeichert. Teilen erzeugt Community-Posts oder geteilte Erinnerungen. Erfolgsmeldungen laufen über Toasts.
+- **Technische Umsetzung:** Bewertungen werden mit Rating, Kommentar, Besuchsdatum und Userbezug gespeichert. Die Seed-Daten enthalten durchmischte Review-Anzahlen zwischen 1 und 12 pro Aktivität sowie bewusst variierende Durchschnittswerte von mittelmässig bis sehr gut, damit Activity Cards, Listen und Detailseiten konsistente und glaubwürdigere Bewertungszahlen anzeigen. Auf der Detailseite werden Durchschnitt, Anzahl Reviews und eine einfache Bewertungsverteilung als Balken aus den geladenen Review-Daten berechnet. Teilen erzeugt Community-Posts oder geteilte Erinnerungen. Erfolgsmeldungen laufen über Toasts.
 - **Abgrenzung/Prototyp-Charakter:** Likes, Kommentare und echte Follow-Logik sind prototypisch bzw. begrenzt. Es gibt keine Moderation und kein öffentliches Produktivsystem.
-- **Testhinweis:** Detailseite öffnen, Bewertung schreiben, Aktivität teilen und Community-Feed prüfen. History-Eintrag teilen und Community-Feed prüfen.
+- **Testhinweis:** Detailseite öffnen, Review-Zusammenfassung prüfen, Bewertung schreiben, aktualisierte Verteilung prüfen, Aktivität teilen und Community-Feed prüfen. History-Eintrag teilen und Community-Feed prüfen.
 - **Aus Evaluation abgeleitet?:** Nein, aus dem geplanten Funktionsumfang und den Crazy-8-Ansätzen abgeleitet.
 
 ### 4.8 Moderne Kalenderansicht für kommende Aktivitäten
@@ -350,6 +351,8 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
   - Home-Schnellfilter anklicken und URL-/Filterzustand auf `/categories` prüfen.
   - Erweiterte Filter öffnen, aktive Filterchips entfernen und Sortierung testen.
   - Detailseite öffnen, Galerie mit Pfeilen/Punkten/Swipe testen.
+  - Detailseite mit Reviews öffnen und Durchschnitt, Anzahl Reviews sowie Bewertungsverteilung prüfen.
+  - Activity Cards und Kategorienliste prüfen: Review-Anzahl liegt zwischen 1 und 12 und stimmt mit der Detailseite überein.
   - Aktivität zur Wishlist hinzufügen und in `/wishlist` prüfen.
   - Aktivität planen und in `/upcoming` prüfen.
   - `/upcoming` öffnen, zwischen Liste und Kalender wechseln, Monat wechseln und Heute-Button prüfen.
@@ -357,6 +360,7 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
   - Termin im Kalender per Drag & Drop auf einen anderen Tag verschieben und Erfolgsmeldung prüfen.
   - Geplante Aktivität aus dem Bearbeitungsmodal entfernen.
   - Bewertung schreiben und Erfolgsmeldung prüfen.
+  - Nach neuer Bewertung prüfen, ob Review-Zusammenfassung und Balkenverteilung aktualisiert werden.
   - Aktivität oder Erinnerung teilen und Community-Feed prüfen.
   - `/activities/new` öffnen, Pflichtfeldfehler prüfen, gültige Aktivität mit Bild speichern und Detailseite öffnen.
   - Ungültige Bilddatei oder zu grosses Bild testen.
