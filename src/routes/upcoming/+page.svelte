@@ -1,16 +1,55 @@
 <script>
+	import { invalidateAll } from '$app/navigation';
+	import EmptyState from '$lib/components/ui/EmptyState.svelte';
+	import PlannedActivityCard from '$lib/components/upcoming/PlannedActivityCard.svelte';
+	import PlannedActivityModal from '$lib/components/upcoming/PlannedActivityModal.svelte';
+	import UpcomingCalendar from '$lib/components/upcoming/UpcomingCalendar.svelte';
+	import { showToast } from '$lib/state/appState.svelte.js';
+
 	let { data } = $props();
 
 	let view = $state('Liste');
+	let selectedItem = $state(null);
+	let modalOpen = $state(false);
 	const planned = $derived(data.plannedActivities);
+
+	function openEditor(item) {
+		selectedItem = item;
+		modalOpen = true;
+	}
+
+	async function refreshWithToast(message) {
+		showToast(message);
+		await invalidateAll();
+	}
+
+	async function movePlannedActivity(item, date) {
+		const response = await fetch(`/api/planned/${item.id}`, {
+			method: 'PATCH',
+			headers: { 'content-type': 'application/json' },
+			body: JSON.stringify({
+				date,
+				time: item.time,
+				location: item.location || item.activity.location,
+				notes: item.notes || ''
+			})
+		});
+
+		if (response.ok) {
+			await refreshWithToast('Termin verschoben');
+		} else {
+			await invalidateAll();
+			showToast('Termin konnte nicht verschoben werden');
+		}
+	}
 </script>
 
 <section class="page">
 	<div class="page-header">
 		<div>
-			<p class="eyebrow">Kommende Aktivitäten</p>
-			<h1>Was als Nächstes ansteht</h1>
-			<p class="muted">Geplante Ideen mit Datum, Uhrzeit, Ort und Detailzugriff.</p>
+			<p class="eyebrow">Aktivitätenplan</p>
+			<h1>Kommende Aktivitäten</h1>
+			<p class="muted">Plane, verschiebe und verwalte deine nächsten Aktivitäten.</p>
 		</div>
 		<div class="action-row">
 			<button class={`button ${view === 'Liste' ? '' : 'secondary'}`} type="button" onclick={() => (view = 'Liste')}>Liste</button>
@@ -19,31 +58,25 @@
 		</div>
 	</div>
 
-	{#if view === 'Liste'}
-		<div class="activity-list">
-			{#each planned as item}
-				<article class="activity-list-item card">
-					<a href={`/activity/${item.activity.id}`}><img src={item.activity.image} alt={item.activity.imageAlt ?? item.activity.title} /></a>
-					<div>
-						<p class="eyebrow">{item.date} · {item.time}</p>
-						<h3>{item.activity.title}</h3>
-						<p class="muted">{item.location}</p>
-						<p>{item.notes}</p>
-					</div>
-					<a class="button secondary" href={`/activity/${item.activity.id}`}>Details</a>
-				</article>
-			{/each}
-		</div>
+	{#if planned.length}
+		{#if view === 'Liste'}
+			<div class="activity-list">
+				{#each planned as item}
+					<PlannedActivityCard {item} onEdit={openEditor} />
+				{/each}
+			</div>
+		{:else}
+			<UpcomingCalendar {planned} onEdit={openEditor} onMove={movePlannedActivity} />
+		{/if}
 	{:else}
-		<div class="stats-grid">
-			{#each planned as item}
-				<a class="panel" href={`/activity/${item.activity.id}`}>
-					<p class="eyebrow">{item.time}</p>
-					<h2>{item.date}</h2>
-					<h3>{item.activity.title}</h3>
-					<p class="muted">{item.activity.city}</p>
-				</a>
-			{/each}
-		</div>
+		<EmptyState title="Noch keine Aktivitäten geplant." text="Speichere eine Idee als Termin, damit sie hier in deiner Planung erscheint." actionHref="/categories" actionLabel="Aktivitäten entdecken" />
 	{/if}
 </section>
+
+<PlannedActivityModal
+	open={modalOpen}
+	item={selectedItem}
+	onClose={() => (modalOpen = false)}
+	onSaved={refreshWithToast}
+	onDeleted={refreshWithToast}
+/>

@@ -448,16 +448,43 @@ export async function addUserReview({ activityId, rating, comment, visitWith, vi
 
 export async function getPlannedActivities(userId = DEMO_USER_ID) {
 	const planned = await collection('plannedActivities');
-	const items = stripMany(await planned.find({ userId }).sort({ date: 1, time: 1 }).toArray());
+	const items = stripMany(
+		await planned
+			.find({ userId, $or: [{ status: 'planned' }, { status: { $exists: false } }] })
+			.sort({ date: 1, time: 1 })
+			.toArray()
+	);
 	const ids = [...new Set(items.map((item) => item.activityId))];
 	const activities = await collection('activities');
 	const activityMap = new Map((await activities.find({ id: { $in: ids } }).toArray()).map((item) => [item.id, stripMongoId(item)]));
 	return items.map((item) => ({ ...item, activity: activityMap.get(item.activityId) })).filter((item) => item.activity);
 }
 
+function validatePlannedInput(input = {}) {
+	const fieldErrors = {};
+	const date = String(input.date || '').trim();
+	const time = String(input.time || '').trim();
+	const location = String(input.location || '').trim();
+	const notes = String(input.notes || '').trim();
+
+	if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) fieldError(fieldErrors, 'date', 'Datum muss im Format JJJJ-MM-TT sein.');
+	if (!/^\d{2}:\d{2}$/.test(time)) fieldError(fieldErrors, 'time', 'Uhrzeit muss im Format HH:MM sein.');
+	if (location.length > 120) fieldError(fieldErrors, 'location', 'Ort darf maximal 120 Zeichen lang sein.');
+	if (notes.length > 300) fieldError(fieldErrors, 'notes', 'Notiz darf maximal 300 Zeichen lang sein.');
+
+	if (Object.keys(fieldErrors).length) {
+		const issue = validationError('Bitte prüfe die markierten Felder.');
+		issue.fieldErrors = fieldErrors;
+		throw issue;
+	}
+
+	return { date, time, location, notes };
+}
+
 export async function addPlannedActivity(activityId, details, userId = DEMO_USER_ID) {
 	await requireActivity(activityId);
 	const planned = await collection('plannedActivities');
+	const now = new Date().toISOString();
 	const item = {
 		id: `planned-${Date.now()}`,
 		userId,
@@ -466,10 +493,39 @@ export async function addPlannedActivity(activityId, details, userId = DEMO_USER
 		time: details.time,
 		location: details.location,
 		notes: details.notes || '',
-		createdAt: new Date().toISOString()
+		status: 'planned',
+		createdAt: now,
+		updatedAt: now
 	};
 	await planned.insertOne(item);
 	return stripMongoId(item);
+}
+
+export async function updatePlannedActivity(id, input, userId = DEMO_USER_ID) {
+	const values = validatePlannedInput(input);
+	const planned = await collection('plannedActivities');
+	const existing = await planned.findOne({ id, userId });
+	if (!existing) throw error(404, 'Geplante Aktivität nicht gefunden');
+
+	await planned.updateOne(
+		{ id, userId },
+		{
+			$set: {
+				...values,
+				status: existing.status || 'planned',
+				updatedAt: new Date().toISOString()
+			}
+		}
+	);
+
+	return stripMongoId(await planned.findOne({ id, userId }));
+}
+
+export async function deletePlannedActivity(id, userId = DEMO_USER_ID) {
+	const planned = await collection('plannedActivities');
+	const result = await planned.deleteOne({ id, userId });
+	if (!result.deletedCount) throw error(404, 'Geplante Aktivität nicht gefunden');
+	return { success: true };
 }
 
 export async function getHistoryItems(userId = DEMO_USER_ID) {

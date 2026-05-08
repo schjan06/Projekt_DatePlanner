@@ -64,13 +64,14 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 Beschreibt die Gestaltung und Interaktion.
 > **Hinweis:** Hier wird der **Prototyp** beschrieben, nicht das **Mockup**.
 
-- **Informationsarchitektur:** Die App ist um die Hauptbereiche Home/Inspiration, Kategorien & Filter, Karte, Wishlist, Kommende Aktivitäten, Vergangene Aktivitäten, Community, Aktivität erfassen und Profil aufgebaut. Detailseiten sind über Aktivitätscards, Listen, Marker und weitere Teaser erreichbar. Nicht eingeloggte Nutzer werden zuerst zur Login-Seite geführt.
+- **Informationsarchitektur:** Die App ist um die Hauptbereiche Home/Inspiration, Kategorien & Filter, Karte, Wishlist, Kommende Aktivitäten mit Kalender, Vergangene Aktivitäten, Community, Aktivität erfassen und Profil aufgebaut. Detailseiten sind über Aktivitätscards, Listen, Marker und weitere Teaser erreichbar. Nicht eingeloggte Nutzer werden zuerst zur Login-Seite geführt.
 - **User Interface Design:** Der Prototyp nutzt ein modernes, helles Dashboard-Design mit Desktop-Sidebar, mobiler Navigation, Such- und Filterelementen, Aktivitätscards, Detail-Hero, Bewertungsanzeige, Map-Panel und Modals. Die Hauptfarbe ist Violett/Lila, ergänzt durch helle Pastelltöne und weisse Flächen.
 - **Login-Seite:** Die Login-Seite ist als fokussierte Einstiegskarte gestaltet. Sie enthält Branding, einen kurzen Nutzenhinweis, Benutzername-/Passwortfelder und eine klare Login-Aktion. Demo-Zugangsdaten werden nicht mehr prominent angezeigt, damit die Seite sauberer wirkt.
 - **Home / Inspiration:** Die Startseite zeigt Inspiration, Aktivitätscards und Schnellfilter für Stimmung, Ort und Budget. Zusätzlich gibt es den Einstieg zur neuen Page `Aktivität erfassen`.
 - **Kategorien & Filter:** Die Filterseite wurde kompakter gestaltet. Suche, Kategorie und Stadt sind immer sichtbar; weitere Filter wie Preis, Dauer, Stimmung, Personen, Bewertung, beste Zeit und Sortierung werden über `Erweiterte Filter` eingeblendet. Aktive Filter erscheinen als Chips und können einzeln entfernt werden.
 - **Aktivitätsdetailseite:** Die Detailseite nutzt oben eine grosse Hero-Bildergalerie mit Pfeilen, Punkten und Swipe-Unterstützung. Darunter folgen Informationen, Metadaten, Tipps, Anforderungen, Bewertungsbereich und Aktionen zum Speichern, Planen und Teilen.
 - **Map:** Die Map-Page kombiniert Leaflet-Karte und Aktivitätenliste. Die Liste bleibt bündig mit der Kartenhöhe und scrollt intern, ohne dass die letzte Aktivität abgeschnitten wird.
+- **Kommende Aktivitäten:** Die Page besitzt eine Listenansicht und eine moderne Kalenderansicht. Der Kalender zeigt geplante Aktivitäten in einer Monatsansicht, markiert den heutigen Tag, bietet Monatsnavigation und zeigt Details zum ausgewählten Tag. Termine können über ein Modal bearbeitet oder aus der Planung entfernt werden; auf Desktop ist zusätzlich ein einfaches Drag-&-Drop-Verschieben auf andere Tage vorgesehen.
 - **Profil:** Die Profilseite zeigt dynamische Userdaten, Statistik-Karten und Einstellungseinträge. Die Aktionen öffnen Modals für Profil bearbeiten, Passwort ändern, Benachrichtigungen, Hilfe & Support, Freunde einladen und Logout.
 - **Aktivität erfassen:** Die Page `/activities/new` ist als Formular in mehreren Cards aufgebaut. Sie enthält Basisdaten, Ort, Kategorien, Eigenschaften, Bilder/Galerie, Tipps, Anforderungen und eine Live-Vorschau im Stil der bestehenden Activity Cards.
 
@@ -133,7 +134,7 @@ Fasst die technische Realisierung zusammen.
 - **Tooling:** Entwicklung mit Node/npm, SvelteKit, Vite und einem Seed-Skript (`npm run seed`) für MongoDB-Demodaten. Die App kann lokal mit `npm run dev` gestartet und mit `npm run build` gebaut werden. Der Einsatz von KI wird im Kapitel **KI-Deklaration** beschrieben.
 - **Projektstruktur:** Die Pages liegen unter `src/routes`. Wiederverwendbare UI-Elemente liegen unter `src/lib/components`, unter anderem Layout-Komponenten (`AppShell`, `Sidebar`, `Topbar`, `MobileNav`), Activity-Komponenten (`ActivityCard`, `ActivityGrid`, `ActivityListItem`, `ActivityMeta`, `ActivityGallery`), Filter-Komponenten, Map-Komponente (`LeafletActivityMap`), Community-Karte, Profil-Komponenten und Modals. Serverseitige Datenzugriffe sind in `src/lib/server/repositories.js` gebündelt. MongoDB wird über `src/lib/server/db.js` angebunden. Das globale Toast-State-Handling liegt in `src/lib/state/appState.svelte.js`.
 - **Auth/Login:** Das Login-System nutzt `src/hooks.server.js`, `src/lib/server/auth.js`, MongoDB-Collections `users` und `sessions` sowie das Cookie `vm_session`. Passwörter werden mit Node.js `crypto.scrypt` gehasht. Der Demo-Login lautet `demo` / `demo123`; das Passwort wird nicht im Klartext gespeichert. Nicht eingeloggte Nutzer werden von App-Seiten nach `/login` weitergeleitet. `passwordHash` wird nie ans Frontend gesendet.
-- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Community-Erstellung und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Damit werden nutzerbezogene Aktionen nicht mehr nur statisch über Demo-Werte im Frontend simuliert.
+- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Community-Erstellung und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Damit werden nutzerbezogene Aktionen nicht mehr nur statisch über Demo-Werte im Frontend simuliert. Geplante Aktivitäten können über `PATCH /api/planned/[id]` aktualisiert und über `DELETE /api/planned/[id]` entfernt werden.
 - **Profiltechnik:** Die Profilseite lädt Daten über `src/routes/profile/+page.server.js`. Profiländerungen laufen über `GET/PUT /api/profile`, Passwortänderungen über `PUT /api/profile/password`, Benachrichtigungseinstellungen über `PUT /api/profile/notifications` und Support-Feedback über `POST /api/support`. Die Modals liegen unter `src/lib/components/profile`.
 - **Aktivitäten erfassen:** Die Route `/activities/new` enthält ein Formular mit clientseitiger Validierung und Live-Vorschau. Das Speichern erfolgt über `POST /api/activities`. Die Repository-Funktion `createActivity()` erzeugt eine eindeutige ID, validiert Pflichtfelder und Bilder, setzt Defaults wie `rating: 0`, `reviewCount: 0`, `status: 'active'`, `createdBy`, `createdAt` und `updatedAt` und speichert die Aktivität in MongoDB.
 - **Bilder/Galerie:** Bestehende Aktivitäten besitzen Galerie-Daten im Format `gallery: [{ src, alt }]`. Neu hochgeladene Bilder werden im Prototyp als Data-URLs gespeichert. Erlaubt sind JPEG, PNG und WebP, maximal fünf Bilder und maximal 500 KB pro Bild. Das erste Bild wird als Hauptbild und erstes Galerie-Element verwendet.
@@ -165,6 +166,7 @@ flowchart TD
     ApiWishlist["/api/wishlist"]
     ApiReviews["/api/reviews"]
     ApiPlanned["/api/planned"]
+    ApiPlannedId["PATCH/DELETE /api/planned/[id]"]
     ApiHistory["/api/history"]
     ApiHistoryShare["/api/history/share"]
     ApiCommunity["/api/community"]
@@ -198,6 +200,7 @@ flowchart TD
     Activity -- "Wishlist Toggle" --> ApiWishlist
     Activity -- "Bewertung speichern" --> ApiReviews
     Activity -- "Planen" --> ApiPlanned
+    Upcoming -- "Termin bearbeiten/entfernen" --> ApiPlannedId
     Activity -- "Teilen" --> ApiCommunity
     History -- "Historydaten" --> ApiHistory
     History -- "Erinnerung teilen" --> ApiHistoryShare
@@ -298,6 +301,17 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 - **Testhinweis:** Detailseite öffnen, Bewertung schreiben, Aktivität teilen und Community-Feed prüfen. History-Eintrag teilen und Community-Feed prüfen.
 - **Aus Evaluation abgeleitet?:** Nein, aus dem geplanten Funktionsumfang und den Crazy-8-Ansätzen abgeleitet.
 
+### 4.8 Moderne Kalenderansicht für kommende Aktivitäten
+- **Beschreibung & Nutzen:** Die Page `Kommende Aktivitäten` zeigt geplante Aktivitäten nicht nur als Liste, sondern auch als echte Monatskalenderansicht. Dadurch können Nutzerinnen und Nutzer geplante Termine zeitlich besser einordnen, verschieben und verwalten.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/upcoming/+page.svelte`, Kalender- und Planned-Activity-Komponenten unter `src/lib/components/upcoming`.
+  - **Backend:** `PATCH /api/planned/[id]`, `DELETE /api/planned/[id]`, Repository-Funktionen für Aktualisieren und Entfernen geplanter Aktivitäten.
+  - **Datenbank:** Collection `plannedActivities` mit `date`, `time`, `location`, `notes`, `status`, `createdAt`, `updatedAt`.
+- **Technische Umsetzung:** Die Kalenderansicht bietet Monatsnavigation, Heute-Button, Tageszellen, kompakte Kalendereinträge, Agenda-Details für den ausgewählten Tag und ein Bearbeitungsmodal. Änderungen werden userbezogen in MongoDB gespeichert. Auf Desktop können Termine per einfachem Drag & Drop auf einen anderen Tag verschoben werden; auf Mobile erfolgt die Bearbeitung über das Modal.
+- **Abgrenzung/Prototyp-Charakter:** Es gibt keine externe Kalender-Library, keine Synchronisation mit Google/Outlook und kein Reminder-System. Drag & Drop ändert in der ersten Version nur das Datum, nicht die Uhrzeit.
+- **Testhinweis:** `/upcoming` öffnen, Kalender-Reiter wählen, Monat wechseln, Termin bearbeiten, Termin verschieben, Termin entfernen und Reload-Persistenz prüfen.
+- **Aus Evaluation abgeleitet?:** Nein, als UX-Verbesserung für den bestehenden Reiter `Kalender` umgesetzt.
+
 ## 5. Projektorganisation [Optional]
 - **Repository & Struktur:** Dieses Repository enthält den SvelteKit-Prototyp für VibeMatch. Wichtige Bereiche sind `src/routes` für Pages und API-Routen, `src/lib/components` für UI-Komponenten, `src/lib/data` für Demo-/Seed-Daten, `src/lib/server` für MongoDB-Zugriffe und `docs` für Dokumentationsartefakte.
 - **Issue-Management:** Anforderungen wurden in einzelne Feature- und Qualitäts-Issues aufgeteilt, z. B. Bildergalerie, Home-Schnellfilter, Filterchips/Sortierung, Login/User-System, interaktive Profilseite und Aktivität erfassen. TODO: GitHub-Issue-Links ergänzen, falls sie für die Abgabe referenziert werden sollen.
@@ -338,6 +352,10 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
   - Detailseite öffnen, Galerie mit Pfeilen/Punkten/Swipe testen.
   - Aktivität zur Wishlist hinzufügen und in `/wishlist` prüfen.
   - Aktivität planen und in `/upcoming` prüfen.
+  - `/upcoming` öffnen, zwischen Liste und Kalender wechseln, Monat wechseln und Heute-Button prüfen.
+  - Termin im Kalender anklicken, Datum/Uhrzeit/Ort/Notiz bearbeiten und Reload-Persistenz prüfen.
+  - Termin im Kalender per Drag & Drop auf einen anderen Tag verschieben und Erfolgsmeldung prüfen.
+  - Geplante Aktivität aus dem Bearbeitungsmodal entfernen.
   - Bewertung schreiben und Erfolgsmeldung prüfen.
   - Aktivität oder Erinnerung teilen und Community-Feed prüfen.
   - `/activities/new` öffnen, Pflichtfeldfehler prüfen, gültige Aktivität mit Bild speichern und Detailseite öffnen.
