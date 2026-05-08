@@ -3,6 +3,7 @@
 
 	const links = [
 		{ href: '/', label: 'Inspiration', icon: 'IN' },
+		{ href: '/activities/new', label: 'Erfassen', icon: 'NE' },
 		{ href: '/categories', label: 'Kategorien', icon: 'FI' },
 		{ href: '/map', label: 'Karte', icon: 'MA' },
 		{ href: '/wishlist', label: 'Wishlist', icon: 'WI' },

@@ -53,6 +53,7 @@
 			</p>
 			<div class="action-row">
 				<a class="button" href="/categories">Ideen entdecken</a>
+				<a class="button ghost" href="/activities/new">Aktivität erfassen</a>
 				<a class="button secondary" href="/map">Karte ansehen</a>
 			</div>
 		</div>

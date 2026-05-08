@@ -76,6 +76,77 @@ function priceGroup(priceText = '') {
 	return 'ab CHF 51';
 }
 
+function slugify(value = '') {
+	return String(value)
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '')
+		.slice(0, 70);
+}
+
+function arrayFromForm(value = '') {
+	return String(value || '')
+		.split(',')
+		.map((item) => item.trim())
+		.filter(Boolean);
+}
+
+function priceLevelFromText(priceText = '') {
+	if (priceText === 'Kostenlos') return 0;
+	const match = priceText.match(/\d+/);
+	const amount = match ? Number(match[0]) : 30;
+	if (amount <= 20) return 1;
+	if (amount <= 50) return 2;
+	return 3;
+}
+
+function fieldError(fieldErrors, field, message) {
+	fieldErrors[field] = message;
+}
+
+function validateActivityInput(input, imageCount) {
+	const fieldErrors = {};
+	const categories = arrayFromForm(input.categories);
+	const mood = arrayFromForm(input.mood);
+	const bestTime = arrayFromForm(input.bestTime);
+	const durationGroups = ['Unter 1h', '1-3h', 'Halber Tag', 'Ganzer Tag'];
+	const peopleOptions = ['2 Personen', '2-4 Personen', '3-4 Personen', 'Gruppe'];
+	const indoorOutdoorOptions = ['Indoor', 'Outdoor', 'Beides'];
+
+	if (input.title.length < 3 || input.title.length > 80) fieldError(fieldErrors, 'title', 'Titel muss 3 bis 80 Zeichen lang sein.');
+	if (input.description.length < 20 || input.description.length > 600) fieldError(fieldErrors, 'description', 'Beschreibung muss 20 bis 600 Zeichen lang sein.');
+	if (!categories.length) fieldError(fieldErrors, 'categories', 'Wähle mindestens eine Kategorie.');
+	if (input.city.length < 2) fieldError(fieldErrors, 'city', 'Stadt ist ein Pflichtfeld.');
+	if (input.location.length < 2) fieldError(fieldErrors, 'location', 'Ort ist ein Pflichtfeld.');
+	if (!input.priceText) fieldError(fieldErrors, 'priceText', 'Preis ist ein Pflichtfeld.');
+	if (!input.duration) fieldError(fieldErrors, 'duration', 'Dauer ist ein Pflichtfeld.');
+	if (!durationGroups.includes(input.durationGroup)) fieldError(fieldErrors, 'durationGroup', 'Wähle eine gültige Dauergruppe.');
+	if (!peopleOptions.includes(input.people)) fieldError(fieldErrors, 'people', 'Wähle eine gültige Personenanzahl.');
+	if (!indoorOutdoorOptions.includes(input.indoorOutdoor)) fieldError(fieldErrors, 'indoorOutdoor', 'Wähle Indoor, Outdoor oder Beides.');
+	if (input.latitude && !Number.isFinite(Number(input.latitude))) fieldError(fieldErrors, 'latitude', 'Latitude muss eine gültige Zahl sein.');
+	if (input.longitude && !Number.isFinite(Number(input.longitude))) fieldError(fieldErrors, 'longitude', 'Longitude muss eine gültige Zahl sein.');
+	if ((input.latitude && !input.longitude) || (!input.latitude && input.longitude)) {
+		fieldError(fieldErrors, 'coordinates', 'Latitude und Longitude müssen gemeinsam angegeben werden.');
+	}
+	if (imageCount > 5) fieldError(fieldErrors, 'images', 'Maximal 5 Bilder sind erlaubt.');
+
+	return { fieldErrors, categories, mood, bestTime };
+}
+
+async function imageFromFile(file, alt) {
+	if (!file || typeof file.arrayBuffer !== 'function' || file.size === 0) return null;
+	const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+	if (!allowedTypes.includes(file.type)) throw validationError('Nur JPG, PNG oder WebP sind erlaubt.');
+	if (file.size > 500 * 1024) throw validationError('Bilder dürfen maximal 500 KB groß sein.');
+	const buffer = Buffer.from(await file.arrayBuffer());
+	return {
+		src: `data:${file.type};base64,${buffer.toString('base64')}`,
+		alt
+	};
+}
+
 function buildActivityQuery(filters = {}) {
 	const and = [];
 	const search = filters.search?.trim();
@@ -95,6 +166,7 @@ function buildActivityQuery(filters = {}) {
 	}
 
 	if (filters.category && filters.category !== 'Alle') and.push({ categories: filters.category });
+	and.push({ $or: [{ status: 'active' }, { status: { $exists: false } }] });
 	if (filters.city && filters.city !== 'Alle') and.push({ city: filters.city });
 	if (filters.mood && filters.mood !== 'Alle') and.push({ mood: filters.mood });
 	if (filters.people && filters.people !== 'Alle') and.push({ people: filters.people });
@@ -177,6 +249,102 @@ export async function getCategories() {
 	const activities = await collection('activities');
 	const values = await activities.distinct('categories');
 	return values.sort((a, b) => a.localeCompare(b, 'de-CH'));
+}
+
+async function uniqueActivityId(title, city) {
+	const activities = await collection('activities');
+	const base = slugify(`${title}-${city}`) || `activity-${Date.now()}`;
+	let candidate = base;
+	let counter = 2;
+	while (await activities.findOne({ id: candidate })) {
+		candidate = `${base}-${counter}`;
+		counter += 1;
+	}
+	return candidate;
+}
+
+export async function createActivity(formData, userId = DEMO_USER_ID) {
+	const input = {
+		title: String(formData.get('title') || '').trim(),
+		description: String(formData.get('description') || '').trim(),
+		categories: String(formData.get('categories') || '').trim(),
+		priceText: String(formData.get('priceText') || '').trim(),
+		duration: String(formData.get('duration') || '').trim(),
+		durationGroup: String(formData.get('durationGroup') || '').trim(),
+		location: String(formData.get('location') || '').trim(),
+		city: String(formData.get('city') || '').trim(),
+		address: String(formData.get('address') || '').trim(),
+		latitude: String(formData.get('latitude') || '').trim(),
+		longitude: String(formData.get('longitude') || '').trim(),
+		bestTime: String(formData.get('bestTime') || '').trim(),
+		season: String(formData.get('season') || '').trim(),
+		people: String(formData.get('people') || '').trim(),
+		indoorOutdoor: String(formData.get('indoorOutdoor') || '').trim(),
+		mood: String(formData.get('mood') || '').trim(),
+		tips: String(formData.get('tips') || '').trim(),
+		requirements: String(formData.get('requirements') || '').trim(),
+		imageAlt: String(formData.get('imageAlt') || '').trim()
+	};
+	const images = formData.getAll('images').filter((file) => file && typeof file.arrayBuffer === 'function' && file.size > 0);
+	const { fieldErrors, categories, mood, bestTime } = validateActivityInput(input, images.length);
+
+	if (Object.keys(fieldErrors).length) {
+		const issue = validationError('Bitte prüfe die markierten Felder.');
+		issue.fieldErrors = fieldErrors;
+		throw issue;
+	}
+
+	const imageAlt = input.imageAlt || input.title;
+	const gallery = [];
+	for (const image of images) {
+		const galleryImage = await imageFromFile(image, imageAlt);
+		if (galleryImage) gallery.push(galleryImage);
+	}
+
+	const fallbackImage = {
+		src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
+		alt: imageAlt || 'VibeMatch Aktivität'
+	};
+	if (!gallery.length) gallery.push(fallbackImage);
+
+	const now = new Date().toISOString();
+	const id = await uniqueActivityId(input.title, input.city);
+	const activity = {
+		id,
+		title: input.title,
+		description: input.description,
+		image: gallery[0].src,
+		imageAlt: gallery[0].alt,
+		imageCredit: images.length ? 'User upload' : 'Unsplash',
+		gallery,
+		categories,
+		priceLevel: priceLevelFromText(input.priceText),
+		priceText: input.priceText,
+		duration: input.duration,
+		durationGroup: input.durationGroup,
+		location: input.location,
+		city: input.city,
+		address: input.address,
+		rating: 0,
+		reviewCount: 0,
+		bestTime,
+		season: arrayFromForm(input.season),
+		people: input.people,
+		indoorOutdoor: input.indoorOutdoor,
+		mood: mood.length ? mood : categories,
+		latitude: input.latitude ? Number(input.latitude) : null,
+		longitude: input.longitude ? Number(input.longitude) : null,
+		tips: arrayFromForm(input.tips),
+		requirements: arrayFromForm(input.requirements),
+		status: 'active',
+		createdBy: userId,
+		createdAt: now,
+		updatedAt: now
+	};
+
+	const activities = await collection('activities');
+	await activities.insertOne(activity);
+	return stripMongoId(activity);
 }
 
 export async function getWishlistIds(userId = DEMO_USER_ID) {

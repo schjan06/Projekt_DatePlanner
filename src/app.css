@@ -571,8 +571,122 @@ textarea {
 	align-items: start;
 }
 
+.two-column.equal {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .panel {
 	padding: 20px;
+}
+
+.activity-create-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+	align-items: start;
+	gap: 22px;
+}
+
+.activity-create-form {
+	display: grid;
+	gap: 18px;
+}
+
+.activity-preview-panel {
+	position: sticky;
+	top: 18px;
+	display: grid;
+	gap: 14px;
+}
+
+.choice-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.choice-grid button {
+	min-height: 34px;
+	padding: 0 12px;
+	border: 1px solid rgba(118, 87, 255, 0.18);
+	border-radius: 999px;
+	background: var(--surface-soft);
+	color: var(--muted);
+	font-weight: 800;
+	cursor: pointer;
+}
+
+.choice-grid button.active,
+.choice-grid button:hover {
+	border-color: rgba(118, 87, 255, 0.34);
+	background: var(--purple-soft);
+	color: var(--purple-dark);
+}
+
+.field-error {
+	display: block;
+	margin-top: 6px;
+	color: #9d2f67;
+	font-size: 0.84rem;
+	font-weight: 800;
+}
+
+.upload-drop {
+	display: grid;
+	place-items: center;
+	min-height: 120px;
+	border: 1px dashed rgba(118, 87, 255, 0.36);
+	border-radius: 18px;
+	background: var(--surface-soft);
+	color: var(--purple-dark);
+	font-weight: 900;
+	cursor: pointer;
+}
+
+.upload-drop input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.image-preview-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.image-preview-grid article {
+	overflow: hidden;
+	border: 1px solid var(--line);
+	border-radius: 18px;
+	background: white;
+}
+
+.image-preview-grid img {
+	width: 100%;
+	aspect-ratio: 1.45;
+	object-fit: cover;
+}
+
+.image-preview-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 10px;
+}
+
+.activity-create-actions {
+	position: sticky;
+	bottom: 18px;
+	z-index: 5;
+	padding: 14px;
+	border: 1px solid var(--line);
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.92);
+	box-shadow: 0 12px 30px rgba(51, 41, 88, 0.08);
+	backdrop-filter: blur(10px);
 }
 
 .filter-panel {
@@ -1576,8 +1690,14 @@ textarea {
 
 	.hero,
 	.detail-grid,
-	.profile-grid {
+	.profile-grid,
+	.activity-create-layout {
 		grid-template-columns: 1fr;
+	}
+
+	.activity-preview-panel,
+	.activity-create-actions {
+		position: static;
 	}
 
 	.activity-grid,
@@ -1672,7 +1792,9 @@ textarea {
 	.info-grid,
 	.stats-grid,
 	.quick-filter-groups,
-	.two-column {
+	.two-column,
+	.two-column.equal,
+	.image-preview-grid {
 		grid-template-columns: 1fr;
 	}
 

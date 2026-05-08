@@ -15,6 +15,9 @@
 	const similarActivities = $derived(data.similarActivities);
 	const wishlisted = $derived(data.wishlistIds.includes(activity.id));
 	const heroGallery = $derived(activity.gallery?.length ? activity.gallery : [{ src: activity.image, alt: activity.imageAlt ?? activity.title }]);
+	const tips = $derived(activity.tips ?? []);
+	const requirements = $derived(activity.requirements ?? []);
+	const bestTime = $derived(activity.bestTime ?? []);
 
 	let showPlan = $state(false);
 	let showShare = $state(false);
@@ -74,11 +77,15 @@
 
 				<div class="section panel">
 					<h2>Tipps</h2>
-					<div class="activity-list">
-						{#each activity.tips as tip}
-							<div class="info-tile">{tip}</div>
-						{/each}
-					</div>
+					{#if tips.length}
+						<div class="activity-list">
+							{#each tips as tip}
+								<div class="info-tile">{tip}</div>
+							{/each}
+						</div>
+					{:else}
+						<p class="muted">Noch keine Tipps hinterlegt.</p>
+					{/if}
 				</div>
 
 				<div class="section panel">
@@ -119,13 +126,17 @@
 			<aside class="panel">
 				<p class="eyebrow">Planungsinfos</p>
 				<h2>{activity.location}</h2>
-				<p class="muted">Beste Zeit: {activity.bestTime.join(', ')}</p>
+				<p class="muted">Beste Zeit: {bestTime.length ? bestTime.join(', ') : 'Flexibel'}</p>
 				<h3>Was ihr braucht</h3>
-				<div class="badge-row">
-					{#each activity.requirements as requirement}
-						<CategoryBadge label={requirement} />
-					{/each}
-				</div>
+				{#if requirements.length}
+					<div class="badge-row">
+						{#each requirements as requirement}
+							<CategoryBadge label={requirement} />
+						{/each}
+					</div>
+				{:else}
+					<p class="muted">Keine besonderen Anforderungen.</p>
+				{/if}
 			</aside>
 		</div>
 
