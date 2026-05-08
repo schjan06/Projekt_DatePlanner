@@ -25,17 +25,18 @@
 VibeMatch adressiert das alltägliche Problem, dass gemeinsame Aktivitäten oft länger diskutiert als entschieden werden. Besonders bei Paaren, Freundinnen und Freunden oder kleinen Gruppen ist die Ausgangsfrage häufig ähnlich: Was passt heute zu unserer Stimmung, unserem Budget, unserer Zeit und unserem Ort?
 
 - **Problem:** Viele Nutzerinnen und Nutzer möchten spontan etwas unternehmen, verlieren aber Zeit durch zu viele Optionen, unklare Präferenzen oder fehlende lokale Übersicht. Dadurch entsteht Entscheidungsmüdigkeit. VibeMatch soll passende Aktivitätsideen sichtbar machen und den Weg von Inspiration zu Planung vereinfachen.
-- **Ziele:** Ziel des Projekts ist ein klickbarer Web-App-Prototyp, der gemeinsame Aktivitäten übersichtlich vorschlägt, filterbar macht, Detailinformationen zeigt und zentrale Folgehandlungen wie Speichern, Planen, Bewerten, Teilen und Kartenansicht unterstützt.
+- **Relevanz:** Freizeitentscheidungen sind im Alltag häufig emotional und sozial geprägt. Eine klare, visuelle und filterbare Übersicht hilft dabei, Vorschläge schneller zu vergleichen und eine gemeinsame Entscheidung zu treffen.
+- **Ziele:** Ziel des Projekts ist ein klickbarer Web-App-Prototyp, der gemeinsame Aktivitäten übersichtlich vorschlägt, filterbar macht, Detailinformationen zeigt und zentrale Folgehandlungen wie Speichern, Planen, Bewerten, Teilen, Kartenansicht und eigene Aktivitätserfassung unterstützt.
 - **Primäre Zielgruppe:** Paare, Freundesgruppen und kleine Gruppen, die gemeinsame Freizeitaktivitäten in der Schweiz schneller entdecken und planen möchten.
 - **Weitere Stakeholder [Optional]:** Sekundär profitieren Personen mit wenig Zeit, Singles oder First-Date-Situationen sowie mögliche lokale Anbieter von Aktivitäten. Im aktuellen Prototyp werden lokale Anbieter jedoch nicht als eigene Nutzerrolle umgesetzt.
-
 
 ## 2. Lösungsidee
 VibeMatch ist eine Web-App für Inspiration, Auswahl und Planung gemeinsamer Aktivitäten. Die App fokussiert nicht auf Dating-Matching zwischen Personen, sondern auf passende Aktivitätsideen für Paare, Freundinnen und Freunde sowie Gruppen.
 
 - **Kernfunktionalität:** Die Web-App bietet einen Home-/Inspiration-Feed, Aktivitätsdetailseiten, Kategorien und Filter, Wishlist, kommende Aktivitäten, vergangene Aktivitäten/Erinnerungen, eine Kartenansicht mit OpenStreetMap-/Leaflet-Markern, Community-Beiträge, Profil/Einstellungen, eine Page zum Erfassen neuer Aktivitäten sowie Modals zum Planen, Teilen und Bewerten.
-- **Annahmen [Optional]:** Nutzerinnen und Nutzer entscheiden schneller, wenn Aktivitäten nach Stimmung, Ort, Budget, Dauer, Personenanzahl und Bewertung filterbar sind. Es wird angenommen, dass ein visueller Feed, Kartenmarker und gespeicherte Ideen die Entscheidungsmüdigkeit reduzieren. Eine weitere Hypothese ist, dass Bewertungen und Erinnerungen helfen, zukünftige Entscheidungen besser einzuordnen.
-- **Abgrenzung [Optional]:** Der Prototyp enthält neu ein einfaches Login- und User-System für den Demo-User, aber kein produktionsreifes Rollen-, Rechte- oder Account-Management. Es gibt kein Zahlungs- oder Buchungssystem, keine produktive Anbieterintegration, kein OAuth, keinen E-Mail-Versand und keine Passwort-Zurücksetzen-Funktion. Die Kartenlösung nutzt OpenStreetMap/Leaflet statt einer kostenpflichtigen Google-Maps-API. Daten werden im Prototyp über Demo-/Seed-Daten und MongoDB verwaltet; produktive Datenschutz-, Rollen- und Rechtekonzepte sind TODO.
+- **Aktueller Funktionsumfang:** Zusätzlich zum ursprünglichen Klick-Prototyp sind inzwischen ein einfaches Login-/User-System, eine interaktive Profilseite, eine Aktivität-erfassen-Page, eine Hero-Bildergalerie auf Detailseiten, Home-Schnellfilter, aktive Filterchips, Sortierung, userbezogene Daten und eine verbesserte Map-Page umgesetzt.
+- **Annahmen [Optional]:** Nutzerinnen und Nutzer entscheiden schneller, wenn Aktivitäten nach Stimmung, Ort, Budget, Dauer, Personenanzahl und Bewertung filterbar sind. Es wird angenommen, dass ein visueller Feed, Kartenmarker und gespeicherte Ideen die Entscheidungsmüdigkeit reduzieren. Eine weitere Hypothese ist, dass Bewertungen, Erinnerungen und eigene Ideen helfen, zukünftige Entscheidungen besser einzuordnen.
+- **Abgrenzung [Optional]:** Der Prototyp enthält ein einfaches Login- und User-System, aber kein produktionsreifes Rollen-, Rechte- oder Account-Management. Es gibt kein Zahlungs- oder Buchungssystem, keine produktive Anbieterintegration, kein OAuth, keinen echten E-Mail-Versand, keinen Passwort-Reset und kein Cloud-Storage. Die Kartenlösung nutzt OpenStreetMap/Leaflet statt einer kostenpflichtigen Google-Maps-API. Bilduploads für neue Aktivitäten werden prototypisch als kleine Data-URLs in MongoDB gespeichert. Produktive Datenschutz-, Rollen- und Rechtekonzepte sind TODO.
 
 ## 3. Vorgehen & Artefakte
 Die Durchführung erfolgt phasenbasiert; dokumentieren Sie die wichtigsten Ergebnisse je Phase.
@@ -44,15 +45,17 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 
 ### 3.1 Understand & Define
 - **Zielgruppenverständnis:** Ausgangspunkt war die Beobachtung, dass gemeinsame Aktivitätswahl im Alltag oft unklar, langwierig oder frustrierend ist. Als primäre Proto-Personas wurden Paare und kleine Gruppen angenommen, die schnell passende Ideen in ihrer Nähe suchen. Ergänzend wurden Personen mit wenig Zeit und First-Date-Situationen als sekundäre Zielgruppen betrachtet.
-- **Wesentliche Erkenntnisse:** Entscheidungsmüdigkeit ist ein zentrales Problem. Lokale Vorschläge, einfache Filter, visuelle Cards, Bewertungen und eine Wishlist können helfen, Optionen schneller einzugrenzen. Aus der Reflexion des Entscheidungsprozesses ging hervor, dass die Idee wegen Alltagsrelevanz, visueller Umsetzbarkeit und Nutzen für mehrere Zielgruppen gewählt wurde. TODO: Proto-Personas und User Journey mit finalen Screenshots oder separaten Artefakten ergänzen.
+- **Wesentliche Erkenntnisse:** Entscheidungsmüdigkeit ist ein zentrales Problem. Lokale Vorschläge, einfache Filter, visuelle Cards, Bewertungen und eine Wishlist können helfen, Optionen schneller einzugrenzen. Aus der Reflexion des Entscheidungsprozesses ging hervor, dass die Idee wegen Alltagsrelevanz, visueller Umsetzbarkeit und Nutzen für mehrere Zielgruppen gewählt wurde.
+- **Artefakte:** Reflexion des Entscheidungsprozesses, Übung 10 zum Prototyping-Workflow, Methodik-Unterlagen Woche 9. TODO: Proto-Personas und User Journey mit finalen Screenshots oder separaten Artefakten ergänzen.
 
 ### 3.2 Sketch
 - **Variantenüberblick:** In der Sketch-Phase wurden mehrere Ansätze geprüft, darunter Detailansicht, Planen, Bewertungen, Kartenansicht, History/Erinnerungen, Upcoming Events und Community-/Teilen-Funktionen.
-- **Skizzen:** Die Crazy-8-Skizzen dienten dazu, unterschiedliche Screens und Interaktionen schnell zu vergleichen. Besonders relevant waren Varianten für den Einstieg über eine Hauptseite, den Wechsel zur Detailseite, Planungsaktionen, Bewertungsmodal, Karte und Verlauf. TODO: Fotos oder Screenshots der Skizzen im Anhang verlinken.
+- **Skizzen:** Die Crazy-8-Skizzen dienten dazu, unterschiedliche Screens und Interaktionen schnell zu vergleichen. Besonders relevant waren Varianten für den Einstieg über eine Hauptseite, den Wechsel zur Detailseite, Planungsaktionen, Bewertungsmodal, Karte und Verlauf.
+- **Übertrag in den Prototyp:** Mehrere Skizzenideen sind inzwischen umgesetzt, unter anderem Detailseite, Hero-Galerie, Planen-/Teilen-/Bewerten-Modals, Map-Page, Upcoming, History, Wishlist und Community. TODO: Fotos oder Screenshots der Skizzen im Anhang verlinken.
 
 ### 3.3 Decide
 - **Gewählte Variante & Begründung:** Gewählt wurde eine Dashboard-artige Web-App mit Sidebar-Navigation, Aktivitätscards, Detailseiten und klaren Folgeaktionen. Diese Variante unterstützt den zentralen Use Case am besten: Inspiration finden, Aktivität prüfen, speichern, planen, bewerten oder teilen.
-- **End-to-End-Ablauf:** Der bisherige Figma-/Mockup-Workflow startet auf der Hauptseite, zeigt kommende oder vorgeschlagene Aktivitäten, führt über einen `Details`-Klick zur Aktivitätsdetailseite und erlaubt dort das Teilen einer Aktivität. Im aktuellen Prototyp wurde dieser Ablauf erweitert: Home → Detailseite → Wishlist/Planen/Teilen/Bewerten sowie Home → Filter/Karte/Wishlist/Upcoming/History/Community/Profile.
+- **End-to-End-Ablauf:** Der bisherige Figma-/Mockup-Workflow startet auf der Hauptseite, zeigt kommende oder vorgeschlagene Aktivitäten, führt über einen `Details`-Klick zur Aktivitätsdetailseite und erlaubt dort das Teilen einer Aktivität. Im aktuellen Prototyp wurde dieser Ablauf erweitert: Login -> Home -> Detailseite -> Wishlist/Planen/Teilen/Bewerten sowie Home -> Filter/Karte/Wishlist/Upcoming/History/Community/Profile.
 - **Mockup:** Figma-Link aus Übung 10: https://www.figma.com/design/E7gsRcP1iqdcxWtTci8CYT/Prototyping_Mockups-f%C3%BCr-Projekt?node-id=0-1&t=3vTtEWy7cSfTMhxj-1. TODO: Finale Figma-Screenshots und kurze Beschreibungen in die Dokumentation oder den Anhang aufnehmen.
 
 ### 3.4 Prototype
@@ -60,9 +63,16 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 #### 3.4.1. Entwurf (Design)
 Beschreibt die Gestaltung und Interaktion.
 > **Hinweis:** Hier wird der **Prototyp** beschrieben, nicht das **Mockup**.
-- **Informationsarchitektur:** Die App ist um acht Hauptbereiche aufgebaut: Home/Inspiration, Kategorien & Filter, Karte, Wishlist, Kommende Aktivitäten, Vergangene Aktivitäten, Community und Profil. Detailseiten sind über Aktivitätscards, Listen, Marker und weitere Teaser erreichbar.
-- **User Interface Design:** Der Prototyp nutzt ein modernes, helles Dashboard-Design mit Desktop-Sidebar, mobiler Navigation, Such- und Filterelementen, Aktivitätscards, Detail-Hero, Bewertungsanzeige, Map-Panel und Modals. Zentrale Screens sind Home/Inspiration Feed, Aktivitätsdetailseite, Kategorien & Filter, Wishlist, Upcoming, History, Map, Community und Profil.
-- **Designentscheidungen:** Die Hauptfarbe ist Violett/Lila, ergänzt durch helle Pastelltöne und weisse Flächen. Cards strukturieren Aktivitätsvorschläge, Badges zeigen Kategorien und Meta-Informationen, und Modals halten Aktionen wie Planen, Teilen und Bewerten im Kontext der Detailseite. Die Sidebar macht die Navigation auf Desktop schnell erreichbar; auf kleineren Viewports wird eine Mobile-Navigation verwendet.
+
+- **Informationsarchitektur:** Die App ist um die Hauptbereiche Home/Inspiration, Kategorien & Filter, Karte, Wishlist, Kommende Aktivitäten, Vergangene Aktivitäten, Community, Aktivität erfassen und Profil aufgebaut. Detailseiten sind über Aktivitätscards, Listen, Marker und weitere Teaser erreichbar. Nicht eingeloggte Nutzer werden zuerst zur Login-Seite geführt.
+- **User Interface Design:** Der Prototyp nutzt ein modernes, helles Dashboard-Design mit Desktop-Sidebar, mobiler Navigation, Such- und Filterelementen, Aktivitätscards, Detail-Hero, Bewertungsanzeige, Map-Panel und Modals. Die Hauptfarbe ist Violett/Lila, ergänzt durch helle Pastelltöne und weisse Flächen.
+- **Login-Seite:** Die Login-Seite ist als fokussierte Einstiegskarte gestaltet. Sie enthält Branding, einen kurzen Nutzenhinweis, Benutzername-/Passwortfelder und eine klare Login-Aktion. Demo-Zugangsdaten werden nicht mehr prominent angezeigt, damit die Seite sauberer wirkt.
+- **Home / Inspiration:** Die Startseite zeigt Inspiration, Aktivitätscards und Schnellfilter für Stimmung, Ort und Budget. Zusätzlich gibt es den Einstieg zur neuen Page `Aktivität erfassen`.
+- **Kategorien & Filter:** Die Filterseite wurde kompakter gestaltet. Suche, Kategorie und Stadt sind immer sichtbar; weitere Filter wie Preis, Dauer, Stimmung, Personen, Bewertung, beste Zeit und Sortierung werden über `Erweiterte Filter` eingeblendet. Aktive Filter erscheinen als Chips und können einzeln entfernt werden.
+- **Aktivitätsdetailseite:** Die Detailseite nutzt oben eine grosse Hero-Bildergalerie mit Pfeilen, Punkten und Swipe-Unterstützung. Darunter folgen Informationen, Metadaten, Tipps, Anforderungen, Bewertungsbereich und Aktionen zum Speichern, Planen und Teilen.
+- **Map:** Die Map-Page kombiniert Leaflet-Karte und Aktivitätenliste. Die Liste bleibt bündig mit der Kartenhöhe und scrollt intern, ohne dass die letzte Aktivität abgeschnitten wird.
+- **Profil:** Die Profilseite zeigt dynamische Userdaten, Statistik-Karten und Einstellungseinträge. Die Aktionen öffnen Modals für Profil bearbeiten, Passwort ändern, Benachrichtigungen, Hilfe & Support, Freunde einladen und Logout.
+- **Aktivität erfassen:** Die Page `/activities/new` ist als Formular in mehreren Cards aufgebaut. Sie enthält Basisdaten, Ort, Kategorien, Eigenschaften, Bilder/Galerie, Tipps, Anforderungen und eine Live-Vorschau im Stil der bestehenden Activity Cards.
 
 Architekturdiagramm:
 
@@ -74,8 +84,11 @@ Navigation der Webseite:
 
 ```mermaid
 flowchart TD
+    Login["Login"]
     Home["Home / Inspiration Feed"]
+    NewActivity["Aktivität erfassen"]
     Detail["Aktivitäts-Detailseite"]
+    Gallery["Bildergalerie"]
     Review["Bewertung schreiben / Bewertungsmodal"]
     Plan["Aktivität planen"]
     Share["Aktivität teilen"]
@@ -87,8 +100,13 @@ flowchart TD
     History["Vergangene Aktivitäten"]
     Community["Community / Ideen teilen"]
     Profile["Profil & Einstellungen"]
+    ProfileModals["Profil-Modals"]
 
+    Login --> Home
     Home --> Detail
+    Home --> NewActivity
+    NewActivity --> Detail
+    Detail --> Gallery
     Detail --> Review
     Detail --> Plan
     Detail --> Share
@@ -102,24 +120,35 @@ flowchart TD
     Home --> Upcoming
     Upcoming --> Detail
     Home --> History
+    History --> Community
     Home --> Community
     Home --> Profile
+    Profile --> ProfileModals
 ```
 
 #### 3.4.2. Umsetzung (Technik)
 Fasst die technische Realisierung zusammen.
+
 - **Technologie-Stack:** Der Prototyp ist mit SvelteKit, Svelte 5, Vite und JavaScript umgesetzt. Als Datenbank wird MongoDB verwendet. Für die Kartenansicht wird Leaflet mit OpenStreetMap-Tiles eingesetzt.
-- **Tooling:** Entwicklung mit Node/npm, SvelteKit, Vite und einem Seed-Skript (`npm run seed`) für MongoDB-Demodaten. Das Seed-Skript erstellt zusätzlich den Demo-User `demo` mit dem Passwort `demo123`; das Passwort wird gehasht in MongoDB gespeichert. Die App kann lokal mit `npm run dev` gestartet und mit `npm run build` gebaut werden. Der Einsatz von KI wird im Kapitel **KI-Deklaration** beschrieben.
-- **Struktur & Komponenten:** Die technischen Pages liegen unter `src/routes`. Wiederverwendbare UI-Elemente liegen unter `src/lib/components`, unter anderem Layout-Komponenten (`AppShell`, `Sidebar`, `Topbar`, `MobileNav`), Activity-Komponenten (`ActivityCard`, `ActivityGrid`, `ActivityListItem`, `ActivityMeta`), Filter-Komponenten, Map-Komponente (`LeafletActivityMap`), Community-Karte, Profil-Komponenten und Modals (`PlanActivityModal`, `ShareModal`, `ReviewModal`, Profil bearbeiten, Passwort ändern, Benachrichtigungen, Hilfe & Support, Freunde einladen und Logout-Bestätigung). Das globale Toast-State-Handling liegt in `src/lib/state/appState.svelte.js`.
-- **Daten & Schnittstellen:** Seed- und Mockdaten liegen unter `src/lib/data`, u. a. Aktivitäten, Rezensionen, geplante Aktivitäten, History, Community Posts und Profil. Serverseitige Datenzugriffe sind in `src/lib/server/repositories.js` gebündelt. MongoDB wird über `src/lib/server/db.js` angebunden. API-Endpunkte existieren für Aktivitäten, Wishlist, Reviews, Planned Activities, History, Community, Profile, Passwortänderung, Benachrichtigungseinstellungen, Support-Simulation und Authentifizierung. Eingeloggte User können über `/activities/new` neue Aktivitäten erfassen; diese werden mit `createdBy`, Zeitstempeln, Rating-Defaults und optionalen Base64-Galeriebildern in MongoDB gespeichert. Userdaten werden in MongoDB gespeichert; `passwordHash` wird nicht ans Frontend gesendet.
+- **Tooling:** Entwicklung mit Node/npm, SvelteKit, Vite und einem Seed-Skript (`npm run seed`) für MongoDB-Demodaten. Die App kann lokal mit `npm run dev` gestartet und mit `npm run build` gebaut werden. Der Einsatz von KI wird im Kapitel **KI-Deklaration** beschrieben.
+- **Projektstruktur:** Die Pages liegen unter `src/routes`. Wiederverwendbare UI-Elemente liegen unter `src/lib/components`, unter anderem Layout-Komponenten (`AppShell`, `Sidebar`, `Topbar`, `MobileNav`), Activity-Komponenten (`ActivityCard`, `ActivityGrid`, `ActivityListItem`, `ActivityMeta`, `ActivityGallery`), Filter-Komponenten, Map-Komponente (`LeafletActivityMap`), Community-Karte, Profil-Komponenten und Modals. Serverseitige Datenzugriffe sind in `src/lib/server/repositories.js` gebündelt. MongoDB wird über `src/lib/server/db.js` angebunden. Das globale Toast-State-Handling liegt in `src/lib/state/appState.svelte.js`.
+- **Auth/Login:** Das Login-System nutzt `src/hooks.server.js`, `src/lib/server/auth.js`, MongoDB-Collections `users` und `sessions` sowie das Cookie `vm_session`. Passwörter werden mit Node.js `crypto.scrypt` gehasht. Der Demo-Login lautet `demo` / `demo123`; das Passwort wird nicht im Klartext gespeichert. Nicht eingeloggte Nutzer werden von App-Seiten nach `/login` weitergeleitet. `passwordHash` wird nie ans Frontend gesendet.
+- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Community-Erstellung und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Damit werden nutzerbezogene Aktionen nicht mehr nur statisch über Demo-Werte im Frontend simuliert.
+- **Profiltechnik:** Die Profilseite lädt Daten über `src/routes/profile/+page.server.js`. Profiländerungen laufen über `GET/PUT /api/profile`, Passwortänderungen über `PUT /api/profile/password`, Benachrichtigungseinstellungen über `PUT /api/profile/notifications` und Support-Feedback über `POST /api/support`. Die Modals liegen unter `src/lib/components/profile`.
+- **Aktivitäten erfassen:** Die Route `/activities/new` enthält ein Formular mit clientseitiger Validierung und Live-Vorschau. Das Speichern erfolgt über `POST /api/activities`. Die Repository-Funktion `createActivity()` erzeugt eine eindeutige ID, validiert Pflichtfelder und Bilder, setzt Defaults wie `rating: 0`, `reviewCount: 0`, `status: 'active'`, `createdBy`, `createdAt` und `updatedAt` und speichert die Aktivität in MongoDB.
+- **Bilder/Galerie:** Bestehende Aktivitäten besitzen Galerie-Daten im Format `gallery: [{ src, alt }]`. Neu hochgeladene Bilder werden im Prototyp als Data-URLs gespeichert. Erlaubt sind JPEG, PNG und WebP, maximal fünf Bilder und maximal 500 KB pro Bild. Das erste Bild wird als Hauptbild und erstes Galerie-Element verwendet.
+- **Filter und Sortierung:** Die Kategorienseite liest Filter und Sortierung aus URL-Parametern. Dadurch bleiben Links aus Home-Schnellfiltern teilbar und reload-sicher. Die serverseitige Filterlogik liegt in `src/lib/server/repositories.js`; UI-Komponenten liegen unter `src/lib/components/filters`.
+- **Map:** Die Karte nutzt Leaflet/OpenStreetMap. Aktivitäten mit Koordinaten werden als Marker dargestellt. Die Listen- und Kartendarstellung sind responsiv abgestimmt.
 - **Deployment:** TODO: Deployment-URL ergänzen, sobald eine getestete Version separat veröffentlicht wurde.
-- **Besondere Entscheidungen:** Im Gegensatz zur ursprünglichen React-Idee wurde die Umsetzung mit SvelteKit realisiert. Die App arbeitet mit einem Demo-User (`demo-user`) und einem einfachen Cookie-basierten Login. Die Demo-Zugangsdaten sind `demo` / `demo123`. Profil, Wishlist, geplante Aktivitäten, History, Reviews und Community-Beiträge werden userbezogen gespeichert. Die Profilseite ist interaktiv: Profildaten, Passwort und Benachrichtigungseinstellungen können gespeichert werden; Freunde einladen sowie Hilfe & Support sind bewusst als Prototyp-Simulation umgesetzt. Der Bilderupload für neu erfasste Aktivitäten ist bewusst prototypisch gehalten: kleine Bilder werden validiert und als Data-URLs in der bestehenden Activity-Struktur gespeichert. Leaflet/OpenStreetMap wurde gewählt, um eine kostenlose Kartenlösung für den Prototyp zu nutzen.
+- **Besondere Entscheidungen:** Im Gegensatz zur ursprünglichen React-Idee wurde die Umsetzung mit SvelteKit realisiert. Leaflet/OpenStreetMap wurde gewählt, um eine kostenlose Kartenlösung für den Prototyp zu nutzen. Bildupload und Benachrichtigungen sind bewusst prototypisch gehalten; es gibt kein Cloud-Storage und keine echten Push-/E-Mail-Benachrichtigungen.
 
 Technische Routing-Struktur der Pages:
 
 ```mermaid
 flowchart TD
+    Login["/login"]
     Root["/"]
+    ActivityNew["/activities/new"]
     Activity["/activity/[id]"]
     Categories["/categories"]
     Wishlist["/wishlist"]
@@ -129,17 +158,25 @@ flowchart TD
     Community["/community"]
     Profile["/profile"]
 
-    ApiActivities["/api/activities"]
-    ApiActivityId["/api/activities/[id]"]
+    ApiLogin["POST /api/auth/login"]
+    ApiLogout["POST /api/auth/logout"]
+    ApiActivities["GET/POST /api/activities"]
+    ApiActivityId["GET /api/activities/[id]"]
     ApiWishlist["/api/wishlist"]
     ApiReviews["/api/reviews"]
     ApiPlanned["/api/planned"]
     ApiHistory["/api/history"]
     ApiHistoryShare["/api/history/share"]
     ApiCommunity["/api/community"]
-    ApiProfile["/api/profile"]
+    ApiProfile["GET/PUT /api/profile"]
+    ApiPassword["PUT /api/profile/password"]
+    ApiNotifications["PUT /api/profile/notifications"]
+    ApiSupport["POST /api/support"]
 
+    Login --> ApiLogin
+    Login --> Root
     Root --> Activity
+    Root --> ActivityNew
     Root --> Categories
     Root --> Wishlist
     Root --> Upcoming
@@ -148,66 +185,132 @@ flowchart TD
     Root --> Community
     Root --> Profile
 
+    ActivityNew --> ApiActivities
+    ActivityNew --> Activity
     Categories --> Activity
     Wishlist --> Activity
     Upcoming --> Activity
     Map --> Activity
     Community --> Activity
 
+    Root -- "Daten laden" --> ApiActivities
+    Activity -- "Detaildaten" --> ApiActivityId
     Activity -- "Wishlist Toggle" --> ApiWishlist
     Activity -- "Bewertung speichern" --> ApiReviews
     Activity -- "Planen" --> ApiPlanned
     Activity -- "Teilen" --> ApiCommunity
-    Root -- "Daten laden" --> ApiActivities
-    Activity -- "Detaildaten" --> ApiActivityId
+    History -- "Historydaten" --> ApiHistory
     History -- "Erinnerung teilen" --> ApiHistoryShare
     Profile -- "Profildaten" --> ApiProfile
-    History -- "Historydaten" --> ApiHistory
+    Profile -- "Passwort ändern" --> ApiPassword
+    Profile -- "Benachrichtigungen" --> ApiNotifications
+    Profile -- "Support simulieren" --> ApiSupport
+    Profile -- "Logout" --> ApiLogout
 ```
 
 ### 3.5 Validate
 - **URL der getesteten Version** (separat deployt): TODO: Deployment- oder Test-URL ergänzen.
-- **Ziele der Prüfung:** Validiert werden soll, ob Nutzerinnen und Nutzer schnell eine passende Aktivität finden, Filter verstehen, eine Aktivität speichern oder planen können und ob Detailseite, Karte und Bewertungsmodal nachvollziehbar sind.
+- **Ziele der Prüfung:** Validiert werden soll, ob Nutzerinnen und Nutzer schnell eine passende Aktivität finden, Filter verstehen, eine Aktivität speichern oder planen können und ob Detailseite, Karte, Bewertungsmodal, Login, Profil und Aktivitätserfassung nachvollziehbar sind.
 - **Vorgehen:** TODO: Moderierten oder unmoderierten Test festlegen. Sinnvoll wäre ein kurzer Test mit konkreten Aufgaben und anschliessender Befragung.
 - **Stichprobe:** TODO: Testpersonen dokumentieren, z. B. 3-5 Personen aus Zielgruppe Paare/Freunde/Gruppen.
-- **Aufgaben/Szenarien:** Beispielhafte Aufgaben: passende Aktivität für Zürich finden, Filter nach Stimmung/Budget nutzen, Detailseite öffnen, Aktivität zur Wishlist hinzufügen, Aktivität planen, Marker auf Karte auswählen, Bewertung schreiben.
+- **Aufgaben/Szenarien:** Beispielhafte Aufgaben: einloggen, passende Aktivität für Zürich finden, Schnellfilter nutzen, Filter nach Stimmung/Budget setzen, Detailseite öffnen, Aktivität zur Wishlist hinzufügen, Aktivität planen, Marker auf Karte auswählen, Bewertung schreiben, Profil bearbeiten, neue Aktivität mit Bild erfassen.
 - **Kennzahlen & Beobachtungen:** TODO: Erfolgsquote, benötigte Zeit, Verständnisprobleme und qualitative Beobachtungen nach dem Test ergänzen.
 - **Zusammenfassung der Resultate:** TODO: Nach der Validierung in 2-4 Sätzen zusammenfassen.
-- **Abgeleitete Verbesserungen:** TODO: Verbesserungen priorisieren, z. B. Navigation, Filterlabels, mobile Bedienung, Kartenpanel oder Modal-Texte.
+- **Abgeleitete Verbesserungen:** TODO: Verbesserungen priorisieren, z. B. Navigation, Filterlabels, mobile Bedienung, Kartenpanel, Modal-Texte oder Formularverständlichkeit.
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 > **Hinweis:** Jede Erweiterung ist separat nach dem folgenden Schema zu beschreiben.
 
-### _[4.x Kurzbeschreibung / Titel]_
-- **Beschreibung & Nutzen:** TODO: Falls Erweiterungen über den Mindestumfang hinaus abgegeben werden, hier beschreiben.
-- **Wo umgesetzt:** TODO: Frontend, Backend/Datenbank oder Datenmodell nennen.
-- **Referenz:** TODO: Screenshot, Kapitel oder Datei ergänzen.
-- **Aus Evaluation abgeleitet?:** TODO: Nach Validate beantworten.
-
-> Das folgende **Beispiel** wurde bewusst kurz gehalten. Erweiterungen dürfen auch ausführlicher beschrieben werden.
-
-### 4.1 Tabelle nach Kategorien filtern
-- **Beschreibung & Nutzen:** Im VibeMatch-Prototyp gibt es keine klassische Tabelle, sondern eine Aktivitätsliste mit Kategorien- und Filterlogik. Der relevante Projektbezug ist die Filterseite, auf der Aktivitäten nach Kategorie, Preis, Dauer, Ort, Stimmung, Personenanzahl, Bewertung und bester Zeit eingegrenzt werden können.
+### 4.1 Kategorien & Filter
+- **Beschreibung & Nutzen:** Die Filterseite ermöglicht es, Aktivitäten gezielt nach Suche, Kategorie, Stadt, Preis, Dauer, Stimmung, Personenanzahl, Bewertung, bester Zeit und Sortierung einzugrenzen. Dadurch wird der Einstieg aus Home-Schnellfiltern nützlicher, weil Nutzer gesetzte Filter sehen und weiter anpassen können.
 - **Wo umgesetzt:**
-  - **Frontend:** Filterseite und Filter-UI unter `src/routes/categories` sowie `src/lib/components/filters`.
-  - **Backend:** Filterparameter werden serverseitig in `src/lib/server/repositories.js` in MongoDB-Queries übersetzt.
-  - **Datenbank:** Aktivitäten werden in der MongoDB-Collection `activities` gespeichert und über Attribute wie `categories`, `priceLevel`, `durationGroup`, `city`, `mood`, `people`, `rating` und `bestTime` gefiltert.
-- **Referenz:** Siehe Kap. 3.4.1 und 3.4.2.
+  - **Frontend:** `src/routes/categories`, `src/lib/components/filters/FilterPanel.svelte`, `FilterChip.svelte`.
+  - **Backend:** Filterparameter werden in `src/lib/server/repositories.js` in MongoDB-Queries übersetzt.
+  - **Datenbank:** Aktivitäten werden in der Collection `activities` über Attribute wie `categories`, `priceLevel`, `durationGroup`, `city`, `mood`, `people`, `rating` und `bestTime` gefiltert.
+- **Technische Umsetzung:** Suche, Kategorie und Stadt sind immer sichtbar; erweiterte Filter werden ein- und ausgeklappt. Aktive Filter werden als Chips angezeigt und können einzeln entfernt werden. Sortierung und Filter werden über URL-Parameter gespeichert.
+- **Abgrenzung/Prototyp-Charakter:** Es gibt keine KI-Empfehlungslogik und keine personalisierten Filterprofile. Die Filter arbeiten auf den vorhandenen MongoDB-Daten.
+- **Testhinweis:** `/categories?mood=Entspannt` öffnen, aktive Chips prüfen, Sortierung ändern, einzelne Filter entfernen und `Alle zurücksetzen` testen.
 - **Aus Evaluation abgeleitet?:** Nein, bisher aus der Lösungsidee und dem Prototyping-Konzept abgeleitet. TODO: Nach Evaluation prüfen.
 
+### 4.2 Login- und User-System
+- **Beschreibung & Nutzen:** Die App ist nur nach Login nutzbar. Dadurch können Profil, Wishlist, geplante Aktivitäten und weitere nutzerbezogene Aktionen sauber einem User zugeordnet werden.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/login/+page.svelte`.
+  - **Server/Auth:** `src/hooks.server.js`, `src/lib/server/auth.js`, `src/routes/login/+page.server.js`, `src/routes/api/auth/login`, `src/routes/api/auth/logout`.
+  - **Datenbank:** Collections `users` und `sessions`.
+- **Technische Umsetzung:** Nach erfolgreichem Login wird ein zufälliges Session-Token erzeugt, gehasht in MongoDB gespeichert und als `httpOnly` Cookie `vm_session` gesetzt. `hooks.server.js` prüft die Session und schützt App-Routen. Passwörter werden mit `scrypt` gehasht.
+- **Abgrenzung/Prototyp-Charakter:** Es gibt keinen Passwort-Reset, kein OAuth, kein Rollenmodell und keine produktive Account-Verwaltung.
+- **Testhinweis:** Ohne Login `/profile` öffnen -> Redirect nach `/login`. Mit `demo` / `demo123` einloggen, App neu laden und Logout testen.
+- **Aus Evaluation abgeleitet?:** Nein, als technische Erweiterung zur userbezogenen Datentrennung umgesetzt.
+
+### 4.3 Interaktive Profilseite
+- **Beschreibung & Nutzen:** Die Profilseite ist nicht mehr rein statisch. Userdaten können bearbeitet werden, Passwort und Benachrichtigungen sind verwaltbar, und bisher funktionslose Einstellungspunkte zeigen sinnvolle Modals oder Feedback.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/profile/+page.svelte`, `src/lib/components/profile`.
+  - **Backend:** `src/routes/api/profile`, `src/routes/api/profile/password`, `src/routes/api/profile/notifications`, `src/routes/api/support`.
+  - **Datenbank:** Userdaten in `users`, statistische Werte aus Wishlist/Planned/History.
+- **Technische Umsetzung:** Profiländerungen werden über `PUT /api/profile` gespeichert. Passwortänderungen prüfen das alte Passwort und speichern einen neuen Hash. Benachrichtigungseinstellungen werden in MongoDB persistiert. Hilfe & Support sowie Freunde einladen sind als Prototyp-Simulation mit Feedback umgesetzt.
+- **Abgrenzung/Prototyp-Charakter:** Es werden keine echten Einladungs-E-Mails und keine echten Push-Benachrichtigungen versendet.
+- **Testhinweis:** Profil bearbeiten, speichern, neu laden und Persistenz prüfen. Passwort ändern, Logout ausführen und mit neuem Passwort einloggen.
+- **Aus Evaluation abgeleitet?:** Nein, als UX-Erweiterung und Abrundung des Prototyps umgesetzt.
+
+### 4.4 Aktivität erfassen
+- **Beschreibung & Nutzen:** Eingeloggte Nutzer können eigene Aktivitätsideen erfassen. Dadurch wirkt VibeMatch nicht nur wie ein statischer Feed, sondern wie eine erweiterbare Inspirationsplattform.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/activities/new/+page.svelte`.
+  - **Backend:** `POST /api/activities`, `createActivity()` in `src/lib/server/repositories.js`.
+  - **Navigation:** Sidebar-Eintrag `Erfassen` und Home-Button `Aktivität erfassen`.
+- **Technische Umsetzung:** Das Formular speichert Titel, Beschreibung, Kategorien, Preis, Dauer, Ort, Stadt, Koordinaten, beste Zeit, Personen, Indoor/Outdoor, Stimmung, Tipps, Anforderungen und Bilder. Serverseitig werden Pflichtfelder, Bildtypen, Bildgrössen und Anzahl Bilder geprüft. Neue Aktivitäten erhalten `createdBy`, `status`, `createdAt`, `updatedAt`, `rating: 0` und `reviewCount: 0`.
+- **Abgrenzung/Prototyp-Charakter:** Es gibt keinen Admin-Freigabeprozess, keine Bearbeiten-/Löschen-Funktion für eigene Aktivitäten und kein Cloud-Storage. Bilder werden prototypisch als Data-URLs gespeichert.
+- **Testhinweis:** `/activities/new` öffnen, Pflichtfelder leer absenden, gültige Aktivität mit Bild speichern und Redirect zur Detailseite prüfen.
+- **Aus Evaluation abgeleitet?:** Nein, als Funktionsausbau des Prototyps umgesetzt.
+
+### 4.5 Bildergalerie auf Detailseite
+- **Beschreibung & Nutzen:** Aktivitäten können mehrere Bilder besitzen. Die Detailseite zeigt diese als grosse Hero-Galerie, wodurch Aktivitäten visueller und hochwertiger wirken.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/lib/components/activities/ActivityGallery.svelte`, `src/routes/activity/[id]/+page.svelte`.
+  - **Daten:** Galerie-Daten in `src/lib/data/activities.js` und neu erfasste Bilder in MongoDB.
+- **Technische Umsetzung:** Die Galerie unterstützt Vor/Zurück-Buttons, Punkte-Navigation, Bildzähler und Touch-Swipe. Alt-Texte werden über `gallery: [{ src, alt }]` gepflegt; falls keine Galerie vorhanden ist, wird das Hauptbild als Fallback verwendet.
+- **Abgrenzung/Prototyp-Charakter:** Es gibt keine Lightbox und keine produktive Medienverwaltung.
+- **Testhinweis:** Mehrere Aktivitäten öffnen, Galeriepfeile und Swipe testen, Mobile-Ansicht prüfen.
+- **Aus Evaluation abgeleitet?:** Nein, aus Design- und Detailseiten-Verbesserung abgeleitet.
+
+### 4.6 Map-Page mit OpenStreetMap/Leaflet
+- **Beschreibung & Nutzen:** Die Kartenansicht zeigt Aktivitäten räumlich und unterstützt lokale Entscheidungen. Nutzer können eine Stadt wählen, Marker anklicken und von der Vorschau zur Detailseite wechseln.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/map`, `src/lib/components/map/LeafletActivityMap.svelte`.
+  - **Backend:** `getMapActivitiesByPlace()` in `src/lib/server/repositories.js`.
+  - **Daten:** Koordinatenfelder `latitude` und `longitude` in Aktivitäten.
+- **Technische Umsetzung:** Leaflet rendert OpenStreetMap-Kacheln und Marker. Die Ergebnisliste ist auf Desktop bündig mit der Karte, scrollt intern und schneidet die letzte Aktivität nicht ab.
+- **Abgrenzung/Prototyp-Charakter:** Es gibt keine echte Standortfreigabe, keine Routenplanung und keine Geocoding-API.
+- **Testhinweis:** `/map` öffnen, Stadt wählen, Marker anklicken und Detailnavigation prüfen.
+- **Aus Evaluation abgeleitet?:** Teilweise aus UX-Beobachtung im eigenen Test: Die Ergebnisliste durfte die letzte Aktivität nicht abschneiden.
+
+### 4.7 Community, Teilen und Reviews
+- **Beschreibung & Nutzen:** Aktivitäten und Erinnerungen können geteilt und bewertet werden. Dadurch entsteht ein sozialer Prototyp-Charakter, ohne VibeMatch in eine Dating- oder Social-Media-App umzubauen.
+- **Wo umgesetzt:**
+  - **Frontend:** `src/routes/community`, `src/lib/components/community/CommunityPostCard.svelte`, `ShareModal.svelte`, `ReviewModal.svelte`.
+  - **Backend:** `/api/community`, `/api/reviews`, `/api/history/share`.
+  - **Datenbank:** Collections `communityPosts`, `reviews`, `historyItems`.
+- **Technische Umsetzung:** Bewertungen werden mit Rating, Kommentar, Besuchsdatum und Userbezug gespeichert. Teilen erzeugt Community-Posts oder geteilte Erinnerungen. Erfolgsmeldungen laufen über Toasts.
+- **Abgrenzung/Prototyp-Charakter:** Likes, Kommentare und echte Follow-Logik sind prototypisch bzw. begrenzt. Es gibt keine Moderation und kein öffentliches Produktivsystem.
+- **Testhinweis:** Detailseite öffnen, Bewertung schreiben, Aktivität teilen und Community-Feed prüfen. History-Eintrag teilen und Community-Feed prüfen.
+- **Aus Evaluation abgeleitet?:** Nein, aus dem geplanten Funktionsumfang und den Crazy-8-Ansätzen abgeleitet.
+
 ## 5. Projektorganisation [Optional]
-Beispiele:
 - **Repository & Struktur:** Dieses Repository enthält den SvelteKit-Prototyp für VibeMatch. Wichtige Bereiche sind `src/routes` für Pages und API-Routen, `src/lib/components` für UI-Komponenten, `src/lib/data` für Demo-/Seed-Daten, `src/lib/server` für MongoDB-Zugriffe und `docs` für Dokumentationsartefakte.
-- **Issue-Management:** TODO: Vorgehen für Issues, Aufgaben oder Kanban-Board dokumentieren, falls verwendet.
-- **Commit-Praxis:** TODO: Commit-Praxis beschreiben, z. B. sprechende Commits nach Feature oder Dokumentationsschritt.
+- **Issue-Management:** Anforderungen wurden in einzelne Feature- und Qualitäts-Issues aufgeteilt, z. B. Bildergalerie, Home-Schnellfilter, Filterchips/Sortierung, Login/User-System, interaktive Profilseite und Aktivität erfassen. TODO: GitHub-Issue-Links ergänzen, falls sie für die Abgabe referenziert werden sollen.
+- **Commit-Praxis:** Änderungen sollten pro Feature oder Dokumentationsschritt nachvollziehbar committed werden, z. B. `feat: add activity gallery`, `feat: add login system`, `docs: update README for profile features`. TODO: Tatsächliche Commit-Historie prüfen und kurz beschreiben.
+- **Dokumentationsregel:** Bei jeder neuen Funktion wird die README im gleichen Arbeitsschritt aktualisiert. Die Kapitelstruktur darf nicht verändert werden. Neue Features werden in Kapitel 4 beschrieben; Designauswirkungen werden in 3.4.1 ergänzt; technische Details, Routen, APIs und Datenmodelländerungen werden in 3.4.2 ergänzt. Unsichere oder noch nicht getestete Punkte werden als TODO markiert.
+- **Qualitätssicherung:** Vor Abschluss eines Features wird geprüft, ob Routing, API, UI, Datenmodell, Fehlermeldungen, Mobile-Darstellung, README und manuelle Testhinweise konsistent sind.
 
 ## 6. KI-Deklaration
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
 
 ### 6.1 KI-Tools
 - **Eingesetzte Tools**: ChatGPT und Codex wurden bzw. können im Projekt unterstützend eingesetzt werden. TODO: Weitere tatsächlich genutzte KI-Tools ergänzen, falls vorhanden.
-- **Zweck & Umfang**: KI wurde bzw. kann eingesetzt werden für Ideenstrukturierung, Formulierung von Prompts, Dokumentationsentwürfe, Codevorschläge, technische Analyse des bestehenden Projekts, mögliche Verbesserungen und Textüberarbeitung. Diese README wurde mit KI-Unterstützung begonnen und muss fachlich geprüft werden.
+- **Zweck & Umfang**: KI wurde bzw. kann eingesetzt werden für Ideenstrukturierung, Formulierung von Prompts, Dokumentationsentwürfe, Codevorschläge, technische Analyse des bestehenden Projekts, mögliche Verbesserungen und Textüberarbeitung. Diese README wurde mit KI-Unterstützung überarbeitet und muss fachlich geprüft werden.
 - **Eigene Leistung (Abgrenzung):** Projektidee, Entscheidungen, Bewertung der Vorschläge, Auswahl der finalen Inhalte, Validierung, Tests, Designentscheidungen und Abgabeprüfung bleiben Eigenleistung. KI-Ausgaben werden nicht ungeprüft übernommen.
 
 ### 6.2 Prompt-Vorgehen
@@ -217,7 +320,27 @@ Beim Prompting wurden Kontext, Ziel, gewünschte Kapitelstruktur, Projektfunktio
 KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und technische Zusammenhänge aus dem Repository schneller zusammenzufassen. Grenzen bestehen bei fachlicher Korrektheit, Aktualität und Interpretation von noch nicht abgeschlossenen Projektteilen. Qualitätssicherung erfolgt durch manuelle Prüfung, Abgleich mit Code und Unterlagen, Tests des Prototyps sowie kritische Überarbeitung der Texte. Risiken sind falsche Annahmen, zu allgemeine Aussagen oder unklare Quellenlage; deshalb werden TODOs gesetzt, wo Informationen fehlen.
 
 ## 7. Anhang [Optional]
-Beispiele:
 - **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. TODO: Bildlizenzen und externe Assets vollständig prüfen und ergänzen.
+- **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1. TODO: Pfad `doc/architecture.drawio.svg` und vorhandene Datei `docs/architecture.drawio.svg` angleichen.
 - **Testskript & Materialien:** TODO: Testskript für Validate ergänzen.
 - **Rohdaten/Auswertung:** TODO: Ergebnisse der Nutzertests nach Durchführung ablegen und verlinken.
+- **Manuelle Testcheckliste aktueller Prototyp:**
+  - Login ohne gültige Session prüfen: geschützte Route öffnet `/login`.
+  - Login mit `demo` / `demo123` prüfen.
+  - Logout prüfen: Session wird gelöscht und `/login` erscheint.
+  - Profil bearbeiten: Anzeigename, Benutzername, E-Mail, Ort, Avatar/Bio speichern und Reload prüfen.
+  - Passwort ändern: falsches altes Passwort und korrektes altes Passwort testen.
+  - Benachrichtigungseinstellungen ändern und Reload prüfen.
+  - Hilfe & Support öffnen und Feedback-Simulation prüfen.
+  - Freunde einladen öffnen und Link-Kopieren bzw. Simulation prüfen.
+  - Home-Schnellfilter anklicken und URL-/Filterzustand auf `/categories` prüfen.
+  - Erweiterte Filter öffnen, aktive Filterchips entfernen und Sortierung testen.
+  - Detailseite öffnen, Galerie mit Pfeilen/Punkten/Swipe testen.
+  - Aktivität zur Wishlist hinzufügen und in `/wishlist` prüfen.
+  - Aktivität planen und in `/upcoming` prüfen.
+  - Bewertung schreiben und Erfolgsmeldung prüfen.
+  - Aktivität oder Erinnerung teilen und Community-Feed prüfen.
+  - `/activities/new` öffnen, Pflichtfeldfehler prüfen, gültige Aktivität mit Bild speichern und Detailseite öffnen.
+  - Ungültige Bilddatei oder zu grosses Bild testen.
+  - `/map` öffnen, Stadt wählen, Marker anklicken und Detailseite öffnen.
+  - Mobile Darstellung für Login, Filter, Detailseite, Profil-Modals und Aktivitätserfassung prüfen.
