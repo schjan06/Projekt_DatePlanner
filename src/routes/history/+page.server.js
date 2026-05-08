@@ -1,5 +1,5 @@
 import { getHistoryItems } from '$lib/server/repositories.js';
 
-export async function load() {
-	return { historyItems: await getHistoryItems() };
+export async function load({ locals }) {
+	return { historyItems: await getHistoryItems(locals.user.id) };
 }

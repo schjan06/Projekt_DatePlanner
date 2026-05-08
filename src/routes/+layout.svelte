@@ -3,7 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import AppShell from '$lib/components/layout/AppShell.svelte';
 
-	let { children } = $props();
+	let { data, children } = $props();
 </script>
 
 <svelte:head>
@@ -15,6 +15,10 @@
 	/>
 </svelte:head>
 
-<AppShell>
+{#if data.isLogin}
 	{@render children()}
-</AppShell>
+{:else}
+	<AppShell>
+		{@render children()}
+	</AppShell>
+{/if}

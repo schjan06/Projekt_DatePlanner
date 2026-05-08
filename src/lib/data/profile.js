@@ -1,9 +1,9 @@
 export const profile = {
 	userId: 'demo-user',
-	name: 'Nina Keller',
-	location: 'Zürich',
-	memberSince: 'Januar 2026',
-	avatar: 'NK',
-	bio: 'Sammelt Aktivitäten für spontane Wochenenden, ruhige Abende und gemeinsame Erinnerungen.',
+	name: 'Jan',
+	location: 'St. Gallen',
+	memberSince: 'Mai 2026',
+	avatar: 'JA',
+	bio: 'Plant gemeinsame Aktivitäten, sammelt Ideen und testet den VibeMatch-Prototyp.',
 	settings: ['Einstellungen', 'Benachrichtigungen', 'Hilfe & Support', 'Ausloggen']
 };
