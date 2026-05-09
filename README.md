@@ -245,7 +245,7 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
   - **Datenbank:** Collections `users` und `sessions`.
 - **Technische Umsetzung:** Nach erfolgreichem Login wird ein zufälliges Session-Token erzeugt, gehasht in MongoDB gespeichert und als `httpOnly` Cookie `vm_session` gesetzt. `hooks.server.js` prüft die Session und schützt App-Routen. Passwörter werden mit `scrypt` gehasht.
 - **Abgrenzung/Prototyp-Charakter:** Es gibt keinen Passwort-Reset, kein OAuth, kein Rollenmodell und keine produktive Account-Verwaltung.
-- **Testhinweis:** Ohne Login `/profile` öffnen -> Redirect nach `/login`. Mit `demo` / `demo123` einloggen, App neu laden und Logout testen.
+- **Testhinweis:** Ohne Login `/profile` öffnen -> Redirect nach `/login`. Mit `demo` / `demo123` einloggen, App neu laden und Logout testen. Nach dem Logout muss die Login-Seite ohne Sidebar, Topbar und Mobile Navigation erscheinen.
 - **Aus Evaluation abgeleitet?:** Nein, als technische Erweiterung zur userbezogenen Datentrennung umgesetzt.
 
 ### 4.3 Interaktive Profilseite
@@ -342,7 +342,7 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 - **Manuelle Testcheckliste aktueller Prototyp:**
   - Login ohne gültige Session prüfen: geschützte Route öffnet `/login`.
   - Login mit `demo` / `demo123` prüfen.
-  - Logout prüfen: Session wird gelöscht und `/login` erscheint.
+  - Logout prüfen: Session wird gelöscht und `/login` ohne App-Navigation erscheint.
   - Profil bearbeiten: Anzeigename, Benutzername, E-Mail, Ort, Avatar/Bio speichern und Reload prüfen.
   - Passwort ändern: falsches altes Passwort und korrektes altes Passwort testen.
   - Benachrichtigungseinstellungen ändern und Reload prüfen.

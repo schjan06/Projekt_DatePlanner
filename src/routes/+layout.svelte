@@ -15,10 +15,10 @@
 	/>
 </svelte:head>
 
-{#if data.isLogin}
-	{@render children()}
-{:else}
+{#if data.user && !data.isLogin}
 	<AppShell>
 		{@render children()}
 	</AppShell>
+{:else}
+	{@render children()}
 {/if}
