@@ -23,6 +23,9 @@
 	let showPlan = $state(false);
 	let showShare = $state(false);
 	let showReviewModal = $state(false);
+	let showAllReviews = $state(false);
+	const visibleReviews = $derived(showAllReviews ? activityReviews : activityReviews.slice(0, 3));
+	const hiddenReviewCount = $derived(Math.max(activityReviews.length - 3, 0));
 
 	async function toggleWishlist() {
 		const response = await fetch('/api/wishlist', {
@@ -100,7 +103,7 @@
 					<ReviewSummary reviews={activityReviews} />
 					{#if activityReviews.length}
 						<div class="activity-list">
-							{#each activityReviews as review}
+							{#each visibleReviews as review}
 								<article class="info-tile">
 									<strong>{review.userName}</strong>
 									<RatingStars rating={review.rating} />
@@ -119,6 +122,16 @@
 								</article>
 							{/each}
 						</div>
+						{#if activityReviews.length > 3}
+							<div class="review-list-actions">
+								<button class="button ghost" type="button" onclick={() => (showAllReviews = !showAllReviews)}>
+									{showAllReviews ? 'Weniger Rezensionen anzeigen' : 'Weitere Rezensionen ansehen'}
+								</button>
+								{#if !showAllReviews}
+									<span class="muted">+{hiddenReviewCount} weitere</span>
+								{/if}
+							</div>
+						{/if}
 					{:else}
 						<p class="muted">Noch keine Rezensionen. Bewertungen werden nach dem Speichern direkt aus MongoDB geladen.</p>
 					{/if}

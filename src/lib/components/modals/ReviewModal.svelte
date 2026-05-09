@@ -13,6 +13,10 @@
 
 	const companionOptions = ['Partner/in', 'Freunde', 'Familie', 'Gruppe'];
 	const displayedRating = $derived(hoverRating || rating);
+	const ratingLabel = $derived(displayedRating ? `${displayedRating} von 5 Sternen` : 'Noch keine Bewertung gewählt');
+	const ratingHint = $derived(
+		rating ? 'Du kannst deine Auswahl jederzeit ändern.' : 'Wähle aus, wie gut die Aktivität zu euch gepasst hat.'
+	);
 
 	function resetForm() {
 		rating = 0;
@@ -80,20 +84,29 @@
 					<button class="modal-close" type="button" aria-label="Bewertung schließen" onclick={close}>×</button>
 				</div>
 
-				<div>
-					<span class="field-label">Sternebewertung</span>
-					<div class="review-stars" role="group" aria-label="Sternebewertung auswählen" onmouseleave={() => (hoverRating = 0)}>
-						{#each [1, 2, 3, 4, 5] as value}
-							<button
-								class:active={displayedRating >= value}
-								type="button"
-								aria-label={`${value} von 5 Sternen auswählen`}
-								onmouseenter={() => (hoverRating = value)}
-								onclick={() => (rating = value)}
-							>
-								★
-							</button>
-						{/each}
+				<div class="review-rating-panel">
+					<div>
+						<span class="field-label">Sternebewertung</span>
+						<p class="review-rating-hint">{ratingHint}</p>
+					</div>
+					<div class="review-rating-control">
+						<div class="review-stars" role="group" aria-label="Sternebewertung auswählen" onmouseleave={() => (hoverRating = 0)}>
+							{#each [1, 2, 3, 4, 5] as value}
+								<button
+									class:active={displayedRating >= value}
+									type="button"
+									aria-label={`${value} von 5 Sternen auswählen`}
+									aria-pressed={rating === value}
+									onmouseenter={() => (hoverRating = value)}
+									onfocus={() => (hoverRating = value)}
+									onblur={() => (hoverRating = 0)}
+									onclick={() => (rating = value)}
+								>
+									<span aria-hidden="true">★</span>
+								</button>
+							{/each}
+						</div>
+						<strong class:active={rating} class="review-rating-value">{ratingLabel}</strong>
 					</div>
 				</div>
 
