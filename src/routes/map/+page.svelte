@@ -1,6 +1,8 @@
 <script>
 	import CategoryBadge from '$lib/components/ui/CategoryBadge.svelte';
 	import LeafletActivityMap from '$lib/components/map/LeafletActivityMap.svelte';
+	import { categories } from '$lib/data/activities.js';
+	import { filterOptions, priceGroup } from '$lib/utils/activityFilters.js';
 
 	let { data } = $props();
 	let searchLocation = $state('');
@@ -8,6 +10,8 @@
 	let mapBounds = $state(null);
 	let locationMessage = $state('');
 	let focusTarget = $state(null);
+	let selectedCategory = $state('Alle');
+	let selectedPrice = $state('Alle');
 
 	const knownLocations = [
 		{ label: 'Zürich', aliases: ['zuerich', 'zurich'], latitude: 47.3769, longitude: 8.5417, zoom: 12 },
@@ -21,17 +25,28 @@
 	const coordinateActivities = $derived(
 		data.activities.filter((activity) => Number.isFinite(activity.latitude) && Number.isFinite(activity.longitude))
 	);
-	const activitiesInBounds = $derived(coordinateActivities.filter((activity) => isInBounds(activity, mapBounds)));
+	const activeMapFilters = $derived(selectedCategory !== 'Alle' || selectedPrice !== 'Alle');
+	const filteredMapActivities = $derived(
+		coordinateActivities.filter((activity) => {
+			const matchesCategory = selectedCategory === 'Alle' || activity.categories.includes(selectedCategory);
+			const matchesPrice = selectedPrice === 'Alle' || priceGroup(activity.priceText) === selectedPrice;
+			return matchesCategory && matchesPrice;
+		})
+	);
+	const activitiesInBounds = $derived(filteredMapActivities.filter((activity) => isInBounds(activity, mapBounds)));
 	const resultText = $derived.by(() => {
 		const count = activitiesInBounds.length;
-		if (count === 0) return 'Keine Aktivitäten in diesem Kartenausschnitt';
+		if (count === 0) return 'Keine Aktivitäten für diese Auswahl';
 		if (searchLocation.trim()) return `${count} Aktivitäten im sichtbaren Ausschnitt`;
+		if (activeMapFilters) return `${count} gefilterte Aktivitäten auf der Karte`;
 		return `${count} Aktivitäten auf der Karte`;
 	});
 	const emptyText = $derived(
 		searchLocation.trim()
 			? `Keine Aktivitäten für "${searchLocation.trim()}" gefunden. Suche nach einer Ortschaft wie Zürich, Winterthur oder St. Gallen.`
-			: 'Keine Aktivitäten in diesem Kartenausschnitt gefunden.'
+			: activeMapFilters
+				? 'Keine Aktivitäten für diese Kategorie- und Preisauswahl gefunden.'
+				: 'Keine Aktivitäten in diesem Kartenausschnitt gefunden.'
 	);
 
 	function normalizeLocation(value) {
@@ -119,6 +134,18 @@
 	function handleBoundsChange(bounds) {
 		mapBounds = bounds;
 	}
+
+	function resetMapFilters() {
+		selectedCategory = 'Alle';
+		selectedPrice = 'Alle';
+		selectedActivity = null;
+	}
+
+	$effect(() => {
+		if (selectedActivity && !filteredMapActivities.some((activity) => activity.id === selectedActivity.id)) {
+			selectedActivity = null;
+		}
+	});
 </script>
 
 <section class="page map-page">
@@ -132,7 +159,7 @@
 
 	<div class="map-layout">
 		<LeafletActivityMap
-			activities={coordinateActivities}
+			activities={filteredMapActivities}
 			selected={selectedActivity}
 			{focusTarget}
 			{emptyText}
@@ -159,6 +186,29 @@
 				{/if}
 			</form>
 
+			<div class="map-filter-panel" aria-label="Kartenfilter">
+				<label>
+					<span class="field-label">Kategorie</span>
+					<select class="select" bind:value={selectedCategory}>
+						<option>Alle</option>
+						{#each categories as category}
+							<option>{category}</option>
+						{/each}
+					</select>
+				</label>
+				<label>
+					<span class="field-label">Preis</span>
+					<select class="select" bind:value={selectedPrice}>
+						{#each filterOptions.price as price}
+							<option>{price}</option>
+						{/each}
+					</select>
+				</label>
+				{#if activeMapFilters}
+					<button class="button ghost" type="button" onclick={resetMapFilters}>Filter zurücksetzen</button>
+				{/if}
+			</div>
+
 			<div class="map-location-chips" aria-label="Beliebte Orte">
 				{#each knownLocations as location}
 					<button type="button" onclick={() => {
@@ -172,8 +222,17 @@
 				{#if activitiesInBounds.length === 0}
 					<div class="map-panel-empty">
 						<h2>Keine Aktivitäten</h2>
-						<p class="muted">Keine Aktivitäten in diesem Kartenausschnitt gefunden.</p>
-						<button class="button secondary" type="button" onclick={showOverview}>Alle Aktivitäten anzeigen</button>
+						<p class="muted">{emptyText}</p>
+						<button
+							class="button secondary"
+							type="button"
+							onclick={() => {
+								showOverview();
+								resetMapFilters();
+							}}
+						>
+							Alle Aktivitäten anzeigen
+						</button>
 					</div>
 				{:else}
 					{#each activitiesInBounds as activity}

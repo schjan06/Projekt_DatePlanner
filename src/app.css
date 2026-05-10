@@ -1680,7 +1680,7 @@ textarea {
 	position: sticky;
 	top: 18px;
 	display: grid;
-	grid-template-rows: auto auto minmax(0, 1fr);
+	grid-template-rows: auto auto auto minmax(0, 1fr);
 	gap: 18px;
 	box-sizing: border-box;
 	height: 680px;
@@ -1697,6 +1697,33 @@ textarea {
 .map-search-panel .button {
 	min-height: 42px;
 	padding: 0 14px;
+}
+
+.map-filter-panel {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+	padding: 12px;
+	border: 1px solid rgba(118, 87, 255, 0.14);
+	border-radius: 18px;
+	background: var(--surface-soft);
+}
+
+.map-filter-panel label {
+	display: grid;
+	gap: 7px;
+}
+
+.map-filter-panel .select {
+	min-height: 42px;
+	padding: 0 12px;
+	font-size: 0.9rem;
+}
+
+.map-filter-panel .button {
+	grid-column: 1 / -1;
+	justify-content: center;
+	width: 100%;
 }
 
 .field-label {
@@ -2249,6 +2276,7 @@ textarea {
 	}
 
 	.map-search-panel .action-row,
+	.map-filter-panel,
 	.map-result-list,
 	.map-result-card,
 	.review-form-row {
