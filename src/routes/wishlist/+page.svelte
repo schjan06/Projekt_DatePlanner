@@ -1,9 +1,22 @@
 <script>
 	import ActivityCard from '$lib/components/activities/ActivityCard.svelte';
+	import PlanActivityModal from '$lib/components/modals/PlanActivityModal.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 
 	let { data } = $props();
 	const wishlistActivities = $derived(data.activities);
+	let selectedActivity = $state(null);
+	let showPlanModal = $state(false);
+
+	function openPlanModal(activity) {
+		selectedActivity = activity;
+		showPlanModal = true;
+	}
+
+	function closePlanModal() {
+		showPlanModal = false;
+		selectedActivity = null;
+	}
 </script>
 
 <section class="page">
@@ -17,13 +30,15 @@
 	</div>
 
 	{#if wishlistActivities.length}
-		<div class="panel" style="margin-bottom: 20px;">
-			<strong>Tipp:</strong>
-			<span class="muted"> Verschiebe Ideen über die Detailseite in kommende Aktivitäten, sobald ihr sie plant.</span>
-		</div>
 		<div class="activity-grid">
 			{#each wishlistActivities as activity}
-				<ActivityCard {activity} wishlistIds={data.wishlistIds} />
+				<div class="wishlist-card-shell">
+					<ActivityCard {activity} wishlistIds={data.wishlistIds} />
+					<div class="wishlist-card-actions">
+						<button class="button" type="button" onclick={() => openPlanModal(activity)}>Planen</button>
+						<a class="button ghost" href={`/activity/${activity.id}`}>Details ansehen</a>
+					</div>
+				</div>
 			{/each}
 		</div>
 	{:else}
@@ -35,3 +50,5 @@
 		/>
 	{/if}
 </section>
+
+<PlanActivityModal activity={selectedActivity} open={showPlanModal} onClose={closePlanModal} />
