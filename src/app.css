@@ -166,6 +166,13 @@ h3 {
 	box-shadow: none;
 }
 
+.button.success {
+	background: #eafaf1;
+	color: #18784d;
+	border: 1px solid #bdeccf;
+	box-shadow: none;
+}
+
 .button.danger {
 	background: #fff1f4;
 	color: #c3335f;

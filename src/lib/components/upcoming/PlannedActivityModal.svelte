@@ -13,6 +13,7 @@
 	let notes = $state('');
 	let saving = $state(false);
 	let deleting = $state(false);
+	let completing = $state(false);
 	let error = $state('');
 	let fieldErrors = $state({});
 
@@ -24,6 +25,7 @@
 			notes = item.notes || '';
 			error = '';
 			fieldErrors = {};
+			completing = false;
 		}
 	});
 
@@ -65,6 +67,23 @@
 			onClose();
 		} else {
 			error = body.error || 'Termin konnte nicht entfernt werden.';
+		}
+	}
+
+	async function complete() {
+		if (!item) return;
+		completing = true;
+		error = '';
+
+		const response = await fetch(`/api/planned/${item.id}/complete`, { method: 'POST' });
+		const body = await response.json().catch(() => ({}));
+
+		completing = false;
+		if (response.ok) {
+			await onSaved('Aktivität als erledigt gespeichert');
+			onClose();
+		} else {
+			error = body.error || 'Termin konnte nicht abgeschlossen werden.';
 		}
 	}
 </script>
@@ -116,6 +135,9 @@
 					<button class="button" type="submit" disabled={saving}>{saving ? 'Speichern...' : 'Speichern'}</button>
 					<a class="button secondary" href={`/activity/${item.activity.id}`}>Details öffnen</a>
 				</div>
+				<button class="button success" type="button" onclick={complete} disabled={completing}>
+					{completing ? 'Abschliessen...' : 'Als erledigt markieren'}
+				</button>
 				<button class="button danger" type="button" onclick={remove} disabled={deleting}>
 					{deleting ? 'Entfernen...' : 'Aus Planung entfernen'}
 				</button>

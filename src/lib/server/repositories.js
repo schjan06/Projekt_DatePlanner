@@ -528,6 +528,46 @@ export async function deletePlannedActivity(id, userId = DEMO_USER_ID) {
 	return { success: true };
 }
 
+export async function completePlannedActivity(id, userId = DEMO_USER_ID) {
+	const planned = await collection('plannedActivities');
+	const history = await collection('historyItems');
+	const existing = stripMongoId(
+		await planned.findOne({
+			id,
+			userId,
+			$or: [{ status: 'planned' }, { status: { $exists: false } }]
+		})
+	);
+	if (!existing) throw error(404, 'Geplante Aktivität nicht gefunden');
+
+	const now = new Date().toISOString();
+	const historyItem = {
+		id: `history-${Date.now()}`,
+		userId,
+		activityId: existing.activityId,
+		date: existing.date,
+		rating: 0,
+		favorite: false,
+		memory: existing.notes || 'Aus der Planung abgeschlossen.',
+		createdAt: now,
+		updatedAt: now
+	};
+
+	await history.insertOne(historyItem);
+	await planned.updateOne(
+		{ id, userId },
+		{
+			$set: {
+				status: 'completed',
+				completedAt: now,
+				updatedAt: now
+			}
+		}
+	);
+
+	return stripMongoId(historyItem);
+}
+
 export async function getHistoryItems(userId = DEMO_USER_ID) {
 	const history = await collection('historyItems');
 	const items = stripMany(await history.find({ userId }).sort({ date: -1 }).toArray());
