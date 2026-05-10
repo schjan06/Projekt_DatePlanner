@@ -8,9 +8,14 @@
 	let avatar = $state('');
 	let bio = $state('');
 	let preferredCity = $state('');
-	let favoriteCategories = $state('');
+	let favoriteCategories = $state([]);
 	let error = $state('');
 	let saving = $state(false);
+	const categoryOptions = $derived(
+		[...(profile?.availableCategories || []), ...favoriteCategories].filter(
+			(category, index, list) => category && list.findIndex((item) => item.toLowerCase() === category.toLowerCase()) === index
+		)
+	);
 
 	$effect(() => {
 		if (open && profile) {
@@ -21,11 +26,17 @@
 			avatar = profile.avatar || '';
 			bio = profile.bio || '';
 			preferredCity = profile.preferences?.preferredCity || profile.location || '';
-			favoriteCategories = (profile.preferences?.favoriteCategories || []).join(', ');
+			favoriteCategories = profile.preferences?.favoriteCategories || [];
 			error = '';
 			saving = false;
 		}
 	});
+
+	function toggleCategory(category) {
+		favoriteCategories = favoriteCategories.includes(category)
+			? favoriteCategories.filter((item) => item !== category)
+			: [...favoriteCategories, category];
+	}
 
 	async function submit(event) {
 		event.preventDefault();
@@ -109,10 +120,22 @@
 					<textarea rows="3" maxlength="240" bind:value={bio} placeholder="Was beschreibt dein VibeMatch-Profil?"></textarea>
 				</label>
 
-				<label>
-					Lieblingskategorien
-					<input class="field" bind:value={favoriteCategories} placeholder="z.B. Aktiv, Gesellig, Kreativ" />
-				</label>
+				<div class="profile-category-select">
+					<span class="form-label">Lieblingskategorien</span>
+					<p class="muted">Wähle die Kategorien aus, die am besten zu deinem Profil passen.</p>
+					<div class="choice-grid" role="group" aria-label="Lieblingskategorien auswählen">
+						{#each categoryOptions as category}
+							<button
+								class:active={favoriteCategories.includes(category)}
+								type="button"
+								aria-pressed={favoriteCategories.includes(category)}
+								onclick={() => toggleCategory(category)}
+							>
+								{category}
+							</button>
+						{/each}
+					</div>
+				</div>
 
 				{#if error}
 					<p class="form-error">{error}</p>

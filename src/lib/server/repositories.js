@@ -57,6 +57,31 @@ function notificationDefaults(settings = {}) {
 	};
 }
 
+function rankedCategoriesFromActivities(activities = []) {
+	const counts = new Map();
+	for (const activity of activities) {
+		for (const category of activity?.categories || []) {
+			counts.set(category, (counts.get(category) || 0) + 1);
+		}
+	}
+
+	return [...counts.entries()]
+		.sort(([categoryA, countA], [categoryB, countB]) => countB - countA || categoryA.localeCompare(categoryB, 'de-CH'))
+		.map(([category]) => category);
+}
+
+function combineCategoryInsights(favoriteCategories = [], derivedCategories = []) {
+	const seen = new Set();
+	return [...favoriteCategories, ...derivedCategories]
+		.filter((category) => {
+			const key = category.toLowerCase();
+			if (seen.has(key)) return false;
+			seen.add(key);
+			return true;
+		})
+		.slice(0, 6);
+}
+
 function escapeRegex(value) {
 	return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -643,6 +668,12 @@ export async function getProfile(userId = DEMO_USER_ID) {
 	const wishlistIds = await getWishlistIds(userId);
 	const planned = await getPlannedActivities(userId);
 	const history = await getHistoryItems(userId);
+	const favoriteCategories = parseFavoriteCategories(profile?.preferences?.favoriteCategories || []);
+	const activities = await collection('activities');
+	const availableCategories = (await activities.distinct('categories')).sort((a, b) => a.localeCompare(b, 'de-CH'));
+	const wishlistActivities = wishlistIds.length ? stripMany(await activities.find({ id: { $in: wishlistIds } }).toArray()) : [];
+	const derivedCategories = rankedCategoriesFromActivities([...wishlistActivities, ...history.map((item) => item.activity).filter(Boolean)]);
+	const categoryInsights = combineCategoryInsights(favoriteCategories, derivedCategories);
 	const average =
 		history.length > 0
 			? Math.round((history.reduce((sum, item) => sum + Number(item.rating), 0) / history.length) * 10) / 10
@@ -650,6 +681,10 @@ export async function getProfile(userId = DEMO_USER_ID) {
 
 	return {
 		...profile,
+		favoriteCategories,
+		derivedCategories,
+		categoryInsights,
+		availableCategories,
 		stats: [
 			{ label: 'Geplante Dates', value: String(planned.length) },
 			{ label: 'Gespeicherte Ideen', value: String(wishlistIds.length) },

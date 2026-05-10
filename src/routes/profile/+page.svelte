@@ -22,6 +22,10 @@
 		return '/profile';
 	}
 
+	function categoryHref(category) {
+		return `/categories?category=${encodeURIComponent(category)}`;
+	}
+
 	function openSetting(setting) {
 		if (setting === 'Profil bearbeiten') activeModal = 'edit';
 		if (setting === 'Benachrichtigungen') activeModal = 'notifications';
@@ -70,6 +74,34 @@
 						<StatCard label={stat.label} value={stat.value} />
 					</a>
 				{/each}
+			</div>
+
+			<div class="section panel profile-category-panel">
+				<div class="section-header">
+					<div>
+						<p class="eyebrow">Vorlieben</p>
+						<h2>Lieblingskategorien</h2>
+						<p class="muted">Basierend auf deinem Profil, deiner Wishlist und deinen Erinnerungen.</p>
+					</div>
+					<button class="button secondary" type="button" onclick={() => (activeModal = 'edit')}>Bearbeiten</button>
+				</div>
+
+				{#if profile.categoryInsights?.length}
+					<div class="profile-category-list" aria-label="Lieblingskategorien">
+						{#each profile.categoryInsights as category}
+							<a class="badge profile-category-chip" href={categoryHref(category)}>{category}</a>
+						{/each}
+					</div>
+					<p class="muted profile-category-note">
+						Manuelle Kategorien werden zuerst angezeigt, weitere Kategorien werden aus gespeicherten und erledigten Aktivitäten abgeleitet.
+					</p>
+				{:else}
+					<div class="empty-state compact">
+						<h3>Noch keine Lieblingskategorien erkennbar.</h3>
+						<p class="muted">Speichere oder erledige Aktivitäten, damit VibeMatch dein Profil besser einordnen kann.</p>
+						<a class="button secondary" href="/categories">Ideen entdecken</a>
+					</div>
+				{/if}
 			</div>
 
 			<div class="section panel">
