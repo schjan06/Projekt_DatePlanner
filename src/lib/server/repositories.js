@@ -57,6 +57,14 @@ function notificationDefaults(settings = {}) {
 	};
 }
 
+function initialsFromName(value = '') {
+	const parts = String(value || 'VM')
+		.trim()
+		.split(/\s+/)
+		.filter(Boolean);
+	return (parts.length > 1 ? `${parts[0][0]}${parts[1][0]}` : parts[0]?.slice(0, 2) || 'VM').toUpperCase();
+}
+
 function rankedCategoriesFromActivities(activities = []) {
 	const counts = new Map();
 	for (const activity of activities) {
@@ -68,18 +76,6 @@ function rankedCategoriesFromActivities(activities = []) {
 	return [...counts.entries()]
 		.sort(([categoryA, countA], [categoryB, countB]) => countB - countA || categoryA.localeCompare(categoryB, 'de-CH'))
 		.map(([category]) => category);
-}
-
-function combineCategoryInsights(favoriteCategories = [], derivedCategories = []) {
-	const seen = new Set();
-	return [...favoriteCategories, ...derivedCategories]
-		.filter((category) => {
-			const key = category.toLowerCase();
-			if (seen.has(key)) return false;
-			seen.add(key);
-			return true;
-		})
-		.slice(0, 6);
 }
 
 function escapeRegex(value) {
@@ -642,16 +638,17 @@ export async function getProfile(userId = DEMO_USER_ID) {
 	const user = stripMongoId(await users.findOne({ id: userId }));
 	const legacyProfile = stripMongoId(await profiles.findOne({ userId }));
 	const preferences = user?.preferences || {};
+	const displayName = user?.displayName || user?.username || legacyProfile?.name || 'VibeMatch User';
 	const profile = user
 		? {
 				userId: user.id,
 				username: user.username,
 				email: user.email,
-				name: user.displayName,
-				displayName: user.displayName,
-				location: user.location,
-				memberSince: user.memberSince,
-				avatar: user.avatar,
+				name: displayName,
+				displayName,
+				location: user.location || '',
+				memberSince: user.memberSince || 'TODO',
+				avatar: user.avatar || initialsFromName(displayName),
 				bio:
 					user.bio ||
 					preferences.bio ||
@@ -665,6 +662,7 @@ export async function getProfile(userId = DEMO_USER_ID) {
 				settings: ['Profil bearbeiten', 'Benachrichtigungen', 'Hilfe & Support', 'Freunde einladen', 'Ausloggen']
 			}
 		: legacyProfile;
+	if (profile && user && !user.bio && !preferences.bio) profile.bio = 'Noch keine Kurzbeschreibung hinterlegt.';
 	const wishlistIds = await getWishlistIds(userId);
 	const planned = await getPlannedActivities(userId);
 	const history = await getHistoryItems(userId);
@@ -672,21 +670,20 @@ export async function getProfile(userId = DEMO_USER_ID) {
 	const activities = await collection('activities');
 	const availableCategories = (await activities.distinct('categories')).sort((a, b) => a.localeCompare(b, 'de-CH'));
 	const wishlistActivities = wishlistIds.length ? stripMany(await activities.find({ id: { $in: wishlistIds } }).toArray()) : [];
-	const derivedCategories = rankedCategoriesFromActivities([...wishlistActivities, ...history.map((item) => item.activity).filter(Boolean)]);
-	const categoryInsights = combineCategoryInsights(favoriteCategories, derivedCategories);
+	const derivedCategories = rankedCategoriesFromActivities([...wishlistActivities, ...history.map((item) => item.activity).filter(Boolean)]).slice(0, 6);
+	const ratedHistory = history.filter((item) => Number(item.rating) > 0);
 	const average =
-		history.length > 0
-			? Math.round((history.reduce((sum, item) => sum + Number(item.rating), 0) / history.length) * 10) / 10
+		ratedHistory.length > 0
+			? Math.round((ratedHistory.reduce((sum, item) => sum + Number(item.rating), 0) / ratedHistory.length) * 10) / 10
 			: 0;
 
 	return {
 		...profile,
 		favoriteCategories,
 		derivedCategories,
-		categoryInsights,
 		availableCategories,
 		stats: [
-			{ label: 'Geplante Dates', value: String(planned.length) },
+			{ label: 'Geplante Aktivitäten', value: String(planned.length) },
 			{ label: 'Gespeicherte Ideen', value: String(wishlistIds.length) },
 			{ label: 'Vergangene Aktivitäten', value: String(history.length) },
 			{ label: 'Durchschnittsbewertung', value: average ? String(average) : '-' }
@@ -707,13 +704,19 @@ export async function updateProfile(userId = DEMO_USER_ID, input = {}) {
 	const bio = String(input.bio || '').trim();
 	const preferredCity = String(input.preferredCity || location || '').trim();
 	const favoriteCategories = parseFavoriteCategories(input.favoriteCategories);
+	const activities = await collection('activities');
+	const availableCategorySet = new Set((await activities.distinct('categories')).map((category) => category.toLowerCase()));
 
 	if (displayName.length < 2 || displayName.length > 80) throw validationError('Der Anzeigename muss 2 bis 80 Zeichen lang sein.');
 	if (!/^[a-z0-9._-]{3,30}$/.test(username)) throw validationError('Der Benutzername muss 3 bis 30 Zeichen lang sein und darf Buchstaben, Zahlen, Punkt, Unterstrich oder Bindestrich enthalten.');
 	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw validationError('Bitte gib eine gültige E-Mail-Adresse ein.');
-	if (location.length < 2 || location.length > 80) throw validationError('Der Ort muss 2 bis 80 Zeichen lang sein.');
+	if (location && (location.length < 2 || location.length > 80)) throw validationError('Der Ort muss 2 bis 80 Zeichen lang sein.');
 	if (!isValidAvatar(avatar)) throw validationError('Avatar muss ein kurzes Kürzel oder eine gültige http/https-URL sein.');
 	if (bio.length > 240) throw validationError('Die Kurzbeschreibung darf maximal 240 Zeichen lang sein.');
+
+	if (favoriteCategories.some((category) => !availableCategorySet.has(category.toLowerCase()))) {
+		throw validationError('Bitte wÃ¤hle nur vorhandene Kategorien aus.');
+	}
 
 	const usernameOwner = await users.findOne({ username });
 	if (usernameOwner && usernameOwner.id !== userId) throw validationError('Dieser Benutzername ist bereits vergeben.');

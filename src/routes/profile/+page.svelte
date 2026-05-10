@@ -11,6 +11,15 @@
 
 	let { data } = $props();
 	const profile = $derived(data.profile);
+	const settings = $derived(
+		[
+			{ label: 'Profil bearbeiten', description: 'Name, Ort, Bio und Vorlieben ändern', modal: 'edit' },
+			{ label: 'Benachrichtigungen', description: 'Prototyp-Einstellungen verwalten', modal: 'notifications' },
+			{ label: 'Hilfe & Support', description: 'FAQ und Feedback öffnen', modal: 'support' },
+			{ label: 'Freunde einladen', description: 'Demo-Link teilen', modal: 'invite' },
+			{ label: 'Ausloggen', description: 'Session beenden', modal: 'logout', danger: true }
+		].filter((setting) => profile.settings?.includes(setting.label))
+	);
 
 	let activeModal = $state('');
 
@@ -26,12 +35,12 @@
 		return `/categories?category=${encodeURIComponent(category)}`;
 	}
 
+	function avatarIsImage(value) {
+		return /^https?:\/\//i.test(value || '');
+	}
+
 	function openSetting(setting) {
-		if (setting === 'Profil bearbeiten') activeModal = 'edit';
-		if (setting === 'Benachrichtigungen') activeModal = 'notifications';
-		if (setting === 'Hilfe & Support') activeModal = 'support';
-		if (setting === 'Freunde einladen') activeModal = 'invite';
-		if (setting === 'Ausloggen') activeModal = 'logout';
+		activeModal = setting.modal;
 	}
 
 	async function refreshWithToast(message) {
@@ -45,78 +54,99 @@
 	}
 </script>
 
-<section class="page">
-	<div class="page-header">
-		<div>
-			<p class="eyebrow">Profil & Einstellungen</p>
-			<h1>{profile.name}</h1>
-			<p class="muted">{profile.location} · Mitglied seit {profile.memberSince}</p>
+<section class="page profile-page">
+	<header class="profile-hero panel">
+		<div class="profile-identity">
+			{#if avatarIsImage(profile.avatar)}
+				<img class="avatar profile-avatar" src={profile.avatar} alt={`Profilbild von ${profile.name}`} />
+			{:else}
+				<div class="avatar profile-avatar">{profile.avatar}</div>
+			{/if}
+			<div>
+				<p class="eyebrow">Profil & Einstellungen</p>
+				<h1>{profile.name}</h1>
+				<p class="muted">@{profile.username} · {profile.location || 'Ort nicht hinterlegt'} · Mitglied seit {profile.memberSince}</p>
+				<p class="profile-bio">{profile.bio}</p>
+			</div>
 		</div>
 		<div class="action-row">
 			<button class="button secondary" type="button" onclick={() => (activeModal = 'password')}>Passwort ändern</button>
 			<button class="button" type="button" onclick={() => (activeModal = 'edit')}>Profil bearbeiten</button>
 		</div>
+	</header>
+
+	<div class="stats-grid profile-stats">
+		{#each profile.stats as stat}
+			<a class="stat-link" href={statHref(stat.label)}>
+				<StatCard label={stat.label} value={stat.value} />
+			</a>
+		{/each}
 	</div>
 
-	<div class="profile-grid">
-		<aside class="panel">
-			<div class="avatar" style="width: 86px; height: 86px; font-size: 1.4rem;">{profile.avatar}</div>
-			<h2 style="margin-top: 18px;">{profile.name}</h2>
-			<p class="muted">{profile.bio}</p>
-			<p class="muted">{profile.username} · {profile.email}</p>
-			<button class="button ghost" type="button" onclick={() => (activeModal = 'invite')}>Freunde einladen</button>
-		</aside>
-
-		<div>
-			<div class="stats-grid">
-				{#each profile.stats as stat}
-					<a class="stat-link" href={statHref(stat.label)}>
-						<StatCard label={stat.label} value={stat.value} />
-					</a>
-				{/each}
+	<div class="profile-detail-grid">
+		<section class="panel profile-info-panel">
+			<p class="eyebrow">Userprofil</p>
+			<h2>Persönliche Informationen</h2>
+			<div class="profile-info-list">
+				<div><span>Benutzername</span><strong>@{profile.username}</strong></div>
+				<div><span>E-Mail</span><strong>{profile.email}</strong></div>
+				<div><span>Ort</span><strong>{profile.location || 'Nicht hinterlegt'}</strong></div>
+				<div><span>Bevorzugte Stadt</span><strong>{profile.preferences?.preferredCity || 'Nicht hinterlegt'}</strong></div>
+				<div><span>Mitglied seit</span><strong>{profile.memberSince}</strong></div>
 			</div>
+		</section>
 
-			<div class="section panel profile-category-panel">
-				<div class="section-header">
-					<div>
-						<p class="eyebrow">Vorlieben</p>
-						<h2>Lieblingskategorien</h2>
-						<p class="muted">Basierend auf deinem Profil, deiner Wishlist und deinen Erinnerungen.</p>
-					</div>
-					<button class="button secondary" type="button" onclick={() => (activeModal = 'edit')}>Bearbeiten</button>
+		<section class="panel profile-category-panel">
+			<div class="section-header">
+				<div>
+					<p class="eyebrow">Vorlieben</p>
+					<h2>Lieblingskategorien</h2>
+					<p class="muted">Bewusst im Profil ausgewählt und in MongoDB gespeichert.</p>
 				</div>
-
-				{#if profile.categoryInsights?.length}
-					<div class="profile-category-list" aria-label="Lieblingskategorien">
-						{#each profile.categoryInsights as category}
-							<a class="badge profile-category-chip" href={categoryHref(category)}>{category}</a>
-						{/each}
-					</div>
-					<p class="muted profile-category-note">
-						Manuelle Kategorien werden zuerst angezeigt, weitere Kategorien werden aus gespeicherten und erledigten Aktivitäten abgeleitet.
-					</p>
-				{:else}
-					<div class="empty-state compact">
-						<h3>Noch keine Lieblingskategorien erkennbar.</h3>
-						<p class="muted">Speichere oder erledige Aktivitäten, damit VibeMatch dein Profil besser einordnen kann.</p>
-						<a class="button secondary" href="/categories">Ideen entdecken</a>
-					</div>
-				{/if}
+				<button class="button secondary" type="button" onclick={() => (activeModal = 'edit')}>Bearbeiten</button>
 			</div>
 
-			<div class="section panel">
-				<h2>Einstellungen</h2>
-				<div class="settings-list">
-					{#each profile.settings as setting}
-						<button type="button" onclick={() => openSetting(setting)}>
-							<span>{setting}</span>
-							<span>›</span>
-						</button>
+			{#if profile.favoriteCategories?.length}
+				<div class="profile-category-list" aria-label="Lieblingskategorien">
+					{#each profile.favoriteCategories as category}
+						<a class="badge profile-category-chip" href={categoryHref(category)}>{category}</a>
 					{/each}
 				</div>
-			</div>
-		</div>
+			{:else}
+				<div class="empty-state compact">
+					<h3>Noch keine Lieblingskategorien ausgewählt.</h3>
+					<p class="muted">Öffne „Profil bearbeiten“, um deine Vorlieben per Chip-Auswahl zu setzen.</p>
+				</div>
+			{/if}
+
+			{#if profile.derivedCategories?.length}
+				<div class="derived-category-block">
+					<h3>Aus deiner Nutzung erkannt</h3>
+					<p class="muted">Basierend auf gespeicherten und erledigten Aktivitäten.</p>
+					<div class="profile-category-list subtle" aria-label="Aus Nutzung erkannte Kategorien">
+						{#each profile.derivedCategories as category}
+							<a class="badge profile-category-chip subtle" href={categoryHref(category)}>{category}</a>
+						{/each}
+					</div>
+				</div>
+			{/if}
+		</section>
 	</div>
+
+	<section class="section panel profile-settings-panel">
+		<h2>Einstellungen</h2>
+		<div class="settings-list">
+			{#each settings as setting}
+				<button class:danger={setting.danger} type="button" onclick={() => openSetting(setting)}>
+					<span>
+						<strong>{setting.label}</strong>
+						<small>{setting.description}</small>
+					</span>
+					<span>›</span>
+				</button>
+			{/each}
+		</div>
+	</section>
 </section>
 
 <EditProfileModal profile={profile} open={activeModal === 'edit'} onClose={() => (activeModal = '')} onSaved={refreshWithToast} />
