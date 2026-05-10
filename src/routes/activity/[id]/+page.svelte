@@ -10,6 +10,8 @@
 	import { invalidateAll } from '$app/navigation';
 	import { showToast } from '$lib/state/appState.svelte.js';
 
+	const recentStorageKey = 'vibematch.recentActivities';
+
 	let { data } = $props();
 	const activity = $derived(data.activity);
 	const activityReviews = $derived(data.reviews);
@@ -41,6 +43,19 @@
 			showToast('Wishlist konnte nicht aktualisiert werden');
 		}
 	}
+
+	$effect(() => {
+		if (!activity?.id || typeof localStorage === 'undefined') return;
+
+		try {
+			const stored = JSON.parse(localStorage.getItem(recentStorageKey) || '[]');
+			const recentIds = Array.isArray(stored) ? stored : [];
+			const nextIds = [activity.id, ...recentIds.filter((id) => id !== activity.id)].slice(0, 6);
+			localStorage.setItem(recentStorageKey, JSON.stringify(nextIds));
+		} catch {
+			localStorage.setItem(recentStorageKey, JSON.stringify([activity.id]));
+		}
+	});
 
 </script>
 

@@ -1,13 +1,23 @@
 <script>
+	import { onMount } from 'svelte';
 	import ActivityGrid from '$lib/components/activities/ActivityGrid.svelte';
 	import ActivityCard from '$lib/components/activities/ActivityCard.svelte';
 	import { priceGroup } from '$lib/utils/activityFilters';
 
+	const recentStorageKey = 'vibematch.recentActivities';
+
 	let { data } = $props();
 	let search = $state('');
+	let recentActivityIds = $state([]);
 
 	const activities = $derived(data.activities);
 	const featured = $derived(data.featuredActivities[0] ?? data.activities[0]);
+	const recentActivities = $derived(
+		recentActivityIds
+			.map((id) => activities.find((activity) => activity.id === id))
+			.filter(Boolean)
+			.slice(0, 4)
+	);
 	const quickFilterGroups = [
 		{ label: 'Stimmung', key: 'mood', items: ['Entspannt', 'Aktiv', 'Kreativ', 'Gesellig'] },
 		{ label: 'Ort', key: 'city', items: ['Zürich', 'St. Gallen', 'Winterthur', 'Luzern'] },
@@ -40,6 +50,15 @@
 			return false;
 		}).length;
 	}
+
+	onMount(() => {
+		try {
+			const stored = JSON.parse(localStorage.getItem(recentStorageKey) || '[]');
+			recentActivityIds = Array.isArray(stored) ? stored : [];
+		} catch {
+			recentActivityIds = [];
+		}
+	});
 </script>
 
 <section class="page">
@@ -86,6 +105,19 @@
 			{/each}
 		</div>
 	</section>
+
+	{#if recentActivities.length}
+		<div class="section">
+			<div class="page-header">
+				<div>
+					<p class="eyebrow">Zuletzt angesehen</p>
+					<h2>Setze dort fort, wo du zuletzt gestöbert hast.</h2>
+				</div>
+				<a class="button secondary" href="/categories">Alle Ideen entdecken</a>
+			</div>
+			<ActivityGrid activities={recentActivities} wishlistIds={data.wishlistIds} />
+		</div>
+	{/if}
 
 	<div class="page-header">
 		<div>
