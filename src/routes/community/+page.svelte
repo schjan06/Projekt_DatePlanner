@@ -1,11 +1,17 @@
 <script>
 	import CommunityPostCard from '$lib/components/community/CommunityPostCard.svelte';
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
+	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 
 	let { data } = $props();
 	let tab = $state('Entdecken');
 	let showShare = $state(false);
 	const tabs = ['Entdecken', 'Folge ich', 'Meine Beiträge'];
+	const filteredPosts = $derived.by(() => {
+		if (tab === 'Meine Beiträge') return data.communityPosts.filter((post) => post.userId === data.currentUserId);
+		if (tab === 'Folge ich') return [];
+		return data.communityPosts;
+	});
 </script>
 
 <section class="page">
@@ -24,11 +30,27 @@
 		{/each}
 	</div>
 
-	<div class="activity-grid">
-		{#each data.communityPosts as post}
-			<CommunityPostCard {post} />
-		{/each}
-	</div>
+	{#if filteredPosts.length}
+		<div class="activity-grid">
+			{#each filteredPosts as post}
+				<CommunityPostCard {post} />
+			{/each}
+		</div>
+	{:else if tab === 'Folge ich'}
+		<EmptyState
+			title="Noch keine gefolgten Beiträge"
+			text="Ein echtes Folgen-System ist im Prototyp vorbereitet. Entdecke vorerst öffentliche Beiträge oder teile selbst eine Idee."
+			actionHref="/community"
+			actionLabel="Entdecken"
+		/>
+	{:else if tab === 'Meine Beiträge'}
+		<EmptyState
+			title="Noch keine eigenen Beiträge"
+			text="Teile eine Aktivität oder Erinnerung, damit sie hier erscheint."
+			actionHref="/history"
+			actionLabel="Erinnerungen öffnen"
+		/>
+	{/if}
 </section>
 
 <ShareModal activity={data.activities[0]} open={showShare} onClose={() => (showShare = false)} />

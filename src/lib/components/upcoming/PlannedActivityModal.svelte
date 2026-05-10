@@ -80,7 +80,7 @@
 
 		completing = false;
 		if (response.ok) {
-			await onSaved('Aktivität als erledigt gespeichert');
+			await onSaved('Aktivität als erledigt gespeichert. Bewerte sie jetzt in den Erinnerungen.');
 			onClose();
 		} else {
 			error = body.error || 'Termin konnte nicht abgeschlossen werden.';

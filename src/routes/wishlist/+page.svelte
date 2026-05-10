@@ -4,9 +4,22 @@
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 
 	let { data } = $props();
-	const wishlistActivities = $derived(data.activities);
+	let sortBy = $state('Zuletzt gespeichert');
 	let selectedActivity = $state(null);
 	let showPlanModal = $state(false);
+	const wishlistActivities = $derived.by(() => {
+		const order = new Map(data.wishlistIds.map((id, index) => [id, index]));
+		const sorted = [...data.activities];
+		if (sortBy === 'Stadt') return sorted.sort((a, b) => a.city.localeCompare(b.city, 'de-CH') || a.title.localeCompare(b.title, 'de-CH'));
+		if (sortBy === 'Kategorie') {
+			return sorted.sort(
+				(a, b) =>
+					(a.categories[0] || '').localeCompare(b.categories[0] || '', 'de-CH') || a.title.localeCompare(b.title, 'de-CH')
+			);
+		}
+		if (sortBy === 'Preis') return sorted.sort((a, b) => a.priceLevel - b.priceLevel || a.title.localeCompare(b.title, 'de-CH'));
+		return sorted.sort((a, b) => (order.get(a.id) ?? 999) - (order.get(b.id) ?? 999));
+	});
 
 	function openPlanModal(activity) {
 		selectedActivity = activity;
@@ -26,7 +39,18 @@
 			<h1>Gespeicherte Ideen</h1>
 			<p class="muted">Sammle Aktivitäten, die du später planen oder mit anderen teilen möchtest.</p>
 		</div>
-		<a class="button" href="/categories">Weitere Ideen suchen</a>
+		<div class="wishlist-toolbar">
+			<label>
+				<span class="field-label">Sortieren</span>
+				<select class="select" bind:value={sortBy}>
+					<option>Zuletzt gespeichert</option>
+					<option>Stadt</option>
+					<option>Kategorie</option>
+					<option>Preis</option>
+				</select>
+			</label>
+			<a class="button" href="/categories">Weitere Ideen suchen</a>
+		</div>
 	</div>
 
 	{#if wishlistActivities.length}

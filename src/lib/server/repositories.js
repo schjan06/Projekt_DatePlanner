@@ -598,6 +598,40 @@ export async function getHistoryItems(userId = DEMO_USER_ID) {
 	return items.map((item) => ({ ...item, activity: activityMap.get(item.activityId) })).filter((item) => item.activity);
 }
 
+export async function updateHistoryItem(id, input = {}, userId = DEMO_USER_ID) {
+	const history = await collection('historyItems');
+	const existing = await history.findOne({ id, userId });
+	if (!existing) throw error(404, 'Erinnerung nicht gefunden');
+
+	const memory = String(input.memory || '').trim();
+	const rating = Number(input.rating || 0);
+	const favorite = Boolean(input.favorite);
+	const fieldErrors = {};
+
+	if (memory.length > 400) fieldError(fieldErrors, 'memory', 'Die Erinnerung darf maximal 400 Zeichen lang sein.');
+	if (!Number.isFinite(rating) || rating < 0 || rating > 5) fieldError(fieldErrors, 'rating', 'Waehle eine Bewertung zwischen 0 und 5 Sternen.');
+
+	if (Object.keys(fieldErrors).length) {
+		const issue = validationError('Bitte pruefe die markierten Felder.');
+		issue.fieldErrors = fieldErrors;
+		throw issue;
+	}
+
+	await history.updateOne(
+		{ id, userId },
+		{
+			$set: {
+				memory,
+				rating,
+				favorite,
+				updatedAt: new Date().toISOString()
+			}
+		}
+	);
+
+	return stripMongoId(await history.findOne({ id, userId }));
+}
+
 export async function getCommunityPosts() {
 	const posts = await collection('communityPosts');
 	const items = stripMany(await posts.find({}).sort({ createdAt: -1 }).toArray());

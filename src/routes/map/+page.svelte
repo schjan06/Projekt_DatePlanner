@@ -12,6 +12,7 @@
 	let focusTarget = $state(null);
 	let selectedCategory = $state('Alle');
 	let selectedPrice = $state('Alle');
+	let selectedDuration = $state('Alle');
 
 	const knownLocations = [
 		{ label: 'Zürich', aliases: ['zuerich', 'zurich'], latitude: 47.3769, longitude: 8.5417, zoom: 12 },
@@ -25,12 +26,13 @@
 	const coordinateActivities = $derived(
 		data.activities.filter((activity) => Number.isFinite(activity.latitude) && Number.isFinite(activity.longitude))
 	);
-	const activeMapFilters = $derived(selectedCategory !== 'Alle' || selectedPrice !== 'Alle');
+	const activeMapFilters = $derived(selectedCategory !== 'Alle' || selectedPrice !== 'Alle' || selectedDuration !== 'Alle');
 	const filteredMapActivities = $derived(
 		coordinateActivities.filter((activity) => {
 			const matchesCategory = selectedCategory === 'Alle' || activity.categories.includes(selectedCategory);
 			const matchesPrice = selectedPrice === 'Alle' || priceGroup(activity.priceText) === selectedPrice;
-			return matchesCategory && matchesPrice;
+			const matchesDuration = selectedDuration === 'Alle' || activity.durationGroup === selectedDuration;
+			return matchesCategory && matchesPrice && matchesDuration;
 		})
 	);
 	const activitiesInBounds = $derived(filteredMapActivities.filter((activity) => isInBounds(activity, mapBounds)));
@@ -45,7 +47,7 @@
 		searchLocation.trim()
 			? `Keine Aktivitäten für "${searchLocation.trim()}" gefunden. Suche nach einer Ortschaft wie Zürich, Winterthur oder St. Gallen.`
 			: activeMapFilters
-				? 'Keine Aktivitäten für diese Kategorie- und Preisauswahl gefunden.'
+				? 'Keine Aktivitäten für diese Filterauswahl gefunden.'
 				: 'Keine Aktivitäten in diesem Kartenausschnitt gefunden.'
 	);
 
@@ -138,6 +140,7 @@
 	function resetMapFilters() {
 		selectedCategory = 'Alle';
 		selectedPrice = 'Alle';
+		selectedDuration = 'Alle';
 		selectedActivity = null;
 	}
 
@@ -201,6 +204,14 @@
 					<select class="select" bind:value={selectedPrice}>
 						{#each filterOptions.price as price}
 							<option>{price}</option>
+						{/each}
+					</select>
+				</label>
+				<label>
+					<span class="field-label">Dauer</span>
+					<select class="select" bind:value={selectedDuration}>
+						{#each filterOptions.duration as duration}
+							<option>{duration}</option>
 						{/each}
 					</select>
 				</label>
