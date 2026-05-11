@@ -3,10 +3,15 @@ import { authenticateUser, createSession, setSessionCookie } from '$lib/server/a
 
 export async function POST({ request, cookies }) {
 	const { username = '', password = '' } = await request.json();
-	const user = await authenticateUser(String(username).trim().toLowerCase(), String(password));
+	let user = null;
+	try {
+		user = await authenticateUser(String(username).trim(), String(password));
+	} catch (error) {
+		return json({ error: error.message || 'Benutzername/E-Mail oder Passwort ist falsch.' }, { status: error.status || 400 });
+	}
 
 	if (!user) {
-		return json({ error: 'Benutzername oder Passwort ist falsch.' }, { status: 400 });
+		return json({ error: 'Benutzername/E-Mail oder Passwort ist falsch.' }, { status: 400 });
 	}
 
 	const token = await createSession(user.id);

@@ -1,7 +1,7 @@
 import { json, redirect } from '@sveltejs/kit';
 import { getUserBySessionToken, SESSION_COOKIE } from '$lib/server/auth.js';
 
-const PUBLIC_PATHS = ['/login'];
+const PUBLIC_PATHS = ['/login', '/register', '/verify-email'];
 const PUBLIC_API_PATHS = ['/api/auth/login'];
 
 function isAssetPath(pathname) {
@@ -23,7 +23,7 @@ export async function handle({ event, resolve }) {
 	const token = event.cookies.get(SESSION_COOKIE);
 	event.locals.user = await getUserBySessionToken(token);
 
-	if (event.locals.user && pathname === '/login') {
+	if (event.locals.user && (pathname === '/login' || pathname === '/register')) {
 		throw redirect(303, '/');
 	}
 

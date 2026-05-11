@@ -1,5 +1,8 @@
 <script>
+	import { page } from '$app/state';
+
 	let { form } = $props();
+	const verified = $derived(page.url.searchParams.get('verified') === '1');
 </script>
 
 <section class="login-page">
@@ -14,9 +17,13 @@
 			<p class="muted">Melde dich an, um Aktivitäten zu speichern, zu planen, zu bewerten und dein Profil zu verwalten.</p>
 		</div>
 
+		{#if verified}
+			<p class="success-message">Deine E-Mail-Adresse wurde bestätigt. Du kannst dich jetzt einloggen.</p>
+		{/if}
+
 		<form class="login-form" method="POST">
 			<label>
-				Benutzername
+				Benutzername oder E-Mail
 				<input class="field" name="username" autocomplete="username" value={form?.username ?? ''} />
 			</label>
 			<label>
@@ -29,6 +36,7 @@
 			{/if}
 
 			<button class="button" type="submit">Einloggen</button>
+			<a class="button secondary" href="/register">Noch kein Konto? Registrieren</a>
 		</form>
 	</div>
 </section>

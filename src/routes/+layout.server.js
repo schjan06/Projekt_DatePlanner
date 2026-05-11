@@ -4,7 +4,7 @@ export async function load({ locals, url }) {
 	if (!locals.user) {
 		return {
 			user: null,
-			isLogin: url.pathname === '/login',
+			isLogin: ['/login', '/register', '/verify-email'].includes(url.pathname),
 			wishlistIds: [],
 			wishlistCount: 0,
 			profile: null

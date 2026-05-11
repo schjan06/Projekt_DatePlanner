@@ -5,7 +5,7 @@
 	let copied = $state(false);
 	let error = $state('');
 
-	const inviteLink = $derived(`https://vibematch.local/invite/${profile?.userId || 'demo-user'}`);
+	const inviteLink = $derived(`https://vibematch.local/invite/${profile?.userId || 'user'}`);
 
 	$effect(() => {
 		if (open) {

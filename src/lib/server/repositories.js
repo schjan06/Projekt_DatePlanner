@@ -2,8 +2,6 @@ import { error } from '@sveltejs/kit';
 import { collection } from './db.js';
 import { hashPassword, verifyPassword } from './auth.js';
 
-export const DEMO_USER_ID = 'demo-user';
-
 function stripMongoId(document) {
 	if (!document) return document;
 	const { _id, ...rest } = document;
@@ -22,6 +20,12 @@ function validationError(message) {
 	const issue = new Error(message);
 	issue.status = 400;
 	return issue;
+}
+
+function requireUserId(userId) {
+	const normalized = String(userId || '').trim();
+	if (!normalized) throw error(401, 'Login erforderlich');
+	return normalized;
 }
 
 function normalizeUsername(value = '') {
@@ -305,7 +309,8 @@ async function uniqueActivityId(title, city) {
 	return candidate;
 }
 
-export async function createActivity(formData, userId = DEMO_USER_ID) {
+export async function createActivity(formData, userId) {
+	userId = requireUserId(userId);
 	const duration = String(formData.get('duration') || '').trim();
 	const input = {
 		title: String(formData.get('title') || '').trim(),
@@ -390,20 +395,23 @@ export async function createActivity(formData, userId = DEMO_USER_ID) {
 	return stripMongoId(activity);
 }
 
-export async function getWishlistIds(userId = DEMO_USER_ID) {
+export async function getWishlistIds(userId) {
+	userId = requireUserId(userId);
 	const wishlist = await collection('wishlistItems');
 	const items = await wishlist.find({ userId }).sort({ createdAt: -1 }).toArray();
 	return items.map((item) => item.activityId);
 }
 
-export async function getWishlistActivities(userId = DEMO_USER_ID) {
+export async function getWishlistActivities(userId) {
+	userId = requireUserId(userId);
 	const ids = await getWishlistIds(userId);
 	if (!ids.length) return [];
 	const activities = await collection('activities');
 	return stripMany(await activities.find({ id: { $in: ids } }).toArray());
 }
 
-export async function addWishlistItem(activityId, userId = DEMO_USER_ID) {
+export async function addWishlistItem(activityId, userId) {
+	userId = requireUserId(userId);
 	await requireActivity(activityId);
 	const wishlist = await collection('wishlistItems');
 	await wishlist.updateOne(
@@ -414,7 +422,8 @@ export async function addWishlistItem(activityId, userId = DEMO_USER_ID) {
 	return getWishlistIds(userId);
 }
 
-export async function removeWishlistItem(activityId, userId = DEMO_USER_ID) {
+export async function removeWishlistItem(activityId, userId) {
+	userId = requireUserId(userId);
 	const wishlist = await collection('wishlistItems');
 	await wishlist.deleteOne({ userId, activityId });
 	return getWishlistIds(userId);
@@ -453,7 +462,8 @@ export async function addReview({ activityId, userName, rating, comment, visitWi
 	return stripMongoId(review);
 }
 
-export async function addUserReview({ activityId, rating, comment, visitWith, visitDate }, userId = DEMO_USER_ID) {
+export async function addUserReview({ activityId, rating, comment, visitWith, visitDate }, userId) {
+	userId = requireUserId(userId);
 	const users = await collection('users');
 	const user = stripMongoId(await users.findOne({ id: userId }));
 	return addReview({
@@ -467,7 +477,8 @@ export async function addUserReview({ activityId, rating, comment, visitWith, vi
 	});
 }
 
-export async function getPlannedActivities(userId = DEMO_USER_ID) {
+export async function getPlannedActivities(userId) {
+	userId = requireUserId(userId);
 	const planned = await collection('plannedActivities');
 	const items = stripMany(
 		await planned
@@ -502,7 +513,8 @@ function validatePlannedInput(input = {}) {
 	return { date, time, location, notes };
 }
 
-export async function addPlannedActivity(activityId, details, userId = DEMO_USER_ID) {
+export async function addPlannedActivity(activityId, details, userId) {
+	userId = requireUserId(userId);
 	await requireActivity(activityId);
 	const planned = await collection('plannedActivities');
 	const now = new Date().toISOString();
@@ -522,7 +534,8 @@ export async function addPlannedActivity(activityId, details, userId = DEMO_USER
 	return stripMongoId(item);
 }
 
-export async function updatePlannedActivity(id, input, userId = DEMO_USER_ID) {
+export async function updatePlannedActivity(id, input, userId) {
+	userId = requireUserId(userId);
 	const values = validatePlannedInput(input);
 	const planned = await collection('plannedActivities');
 	const existing = await planned.findOne({ id, userId });
@@ -542,14 +555,16 @@ export async function updatePlannedActivity(id, input, userId = DEMO_USER_ID) {
 	return stripMongoId(await planned.findOne({ id, userId }));
 }
 
-export async function deletePlannedActivity(id, userId = DEMO_USER_ID) {
+export async function deletePlannedActivity(id, userId) {
+	userId = requireUserId(userId);
 	const planned = await collection('plannedActivities');
 	const result = await planned.deleteOne({ id, userId });
 	if (!result.deletedCount) throw error(404, 'Geplante Aktivität nicht gefunden');
 	return { success: true };
 }
 
-export async function completePlannedActivity(id, userId = DEMO_USER_ID) {
+export async function completePlannedActivity(id, userId) {
+	userId = requireUserId(userId);
 	const planned = await collection('plannedActivities');
 	const history = await collection('historyItems');
 	const existing = stripMongoId(
@@ -589,7 +604,8 @@ export async function completePlannedActivity(id, userId = DEMO_USER_ID) {
 	return stripMongoId(historyItem);
 }
 
-export async function getHistoryItems(userId = DEMO_USER_ID) {
+export async function getHistoryItems(userId) {
+	userId = requireUserId(userId);
 	const history = await collection('historyItems');
 	const items = stripMany(await history.find({ userId }).sort({ date: -1 }).toArray());
 	const ids = [...new Set(items.map((item) => item.activityId))];
@@ -598,7 +614,8 @@ export async function getHistoryItems(userId = DEMO_USER_ID) {
 	return items.map((item) => ({ ...item, activity: activityMap.get(item.activityId) })).filter((item) => item.activity);
 }
 
-export async function updateHistoryItem(id, input = {}, userId = DEMO_USER_ID) {
+export async function updateHistoryItem(id, input = {}, userId) {
+	userId = requireUserId(userId);
 	const history = await collection('historyItems');
 	const existing = await history.findOne({ id, userId });
 	if (!existing) throw error(404, 'Erinnerung nicht gefunden');
@@ -641,7 +658,8 @@ export async function getCommunityPosts() {
 	return items.map((item) => ({ ...item, activity: activityMap.get(item.activityId) }));
 }
 
-export async function addCommunityPost({ activityId, text, visibility = 'Öffentlich' }, userId = DEMO_USER_ID) {
+export async function addCommunityPost({ activityId, text, visibility = 'Öffentlich' }, userId) {
+	userId = requireUserId(userId);
 	const activity = await requireActivity(activityId);
 	const posts = await collection('communityPosts');
 	const users = await collection('users');
@@ -666,7 +684,8 @@ export async function addCommunityPost({ activityId, text, visibility = 'Öffent
 	return stripMongoId(post);
 }
 
-export async function getProfile(userId = DEMO_USER_ID) {
+export async function getProfile(userId) {
+	userId = requireUserId(userId);
 	const users = await collection('users');
 	const profiles = await collection('profiles');
 	const user = stripMongoId(await users.findOne({ id: userId }));
@@ -725,7 +744,8 @@ export async function getProfile(userId = DEMO_USER_ID) {
 	};
 }
 
-export async function updateProfile(userId = DEMO_USER_ID, input = {}) {
+export async function updateProfile(userId, input = {}) {
+	userId = requireUserId(userId);
 	const users = await collection('users');
 	const currentUser = await users.findOne({ id: userId });
 	if (!currentUser) throw validationError('Profil wurde nicht gefunden.');
@@ -754,6 +774,8 @@ export async function updateProfile(userId = DEMO_USER_ID, input = {}) {
 
 	const usernameOwner = await users.findOne({ username });
 	if (usernameOwner && usernameOwner.id !== userId) throw validationError('Dieser Benutzername ist bereits vergeben.');
+	const emailOwner = await users.findOne({ email });
+	if (emailOwner && emailOwner.id !== userId) throw validationError('Diese E-Mail-Adresse ist bereits registriert.');
 
 	const update = {
 		username,
@@ -775,7 +797,8 @@ export async function updateProfile(userId = DEMO_USER_ID, input = {}) {
 	return getProfile(userId);
 }
 
-export async function updateNotificationSettings(userId = DEMO_USER_ID, input = {}) {
+export async function updateNotificationSettings(userId, input = {}) {
+	userId = requireUserId(userId);
 	const users = await collection('users');
 	const settings = notificationDefaults({
 		plannedActivityReminders: Boolean(input.plannedActivityReminders),
@@ -798,7 +821,8 @@ export async function updateNotificationSettings(userId = DEMO_USER_ID, input = 
 	return getProfile(userId);
 }
 
-export async function updatePassword(userId = DEMO_USER_ID, { currentPassword = '', newPassword = '', confirmPassword = '' } = {}) {
+export async function updatePassword(userId, { currentPassword = '', newPassword = '', confirmPassword = '' } = {}) {
+	userId = requireUserId(userId);
 	const users = await collection('users');
 	const user = await users.findOne({ id: userId });
 	if (!user) throw validationError('User wurde nicht gefunden.');

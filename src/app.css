@@ -92,6 +92,27 @@
 	width: min(620px, 100%);
 }
 
+.success-message,
+.success-panel {
+	border: 1px solid rgba(46, 125, 87, 0.18);
+	background: #eaf8f3;
+	color: #245f43;
+	border-radius: 24px;
+	padding: 16px 18px;
+	font-weight: 700;
+}
+
+.success-panel {
+	display: grid;
+	gap: 12px;
+	font-weight: 500;
+}
+
+.success-panel h2,
+.success-panel p {
+	margin: 0;
+}
+
 @media (max-width: 720px) {
 	.wishlist-toolbar,
 	.community-comment-form {

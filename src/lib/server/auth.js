@@ -2,14 +2,13 @@ import { dev } from '$app/environment';
 import { collection } from './db.js';
 import { createHash, randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
+import { sendVerificationEmail } from './email.js';
 
 const scrypt = promisify(scryptCallback);
 
 export const SESSION_COOKIE = 'vm_session';
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
-const DEMO_USERNAME = 'demo';
-const DEMO_PASSWORD = 'demo123';
-const DEMO_USER_ID = 'demo-user';
+export const EMAIL_VERIFICATION_MAX_AGE = 60 * 60 * 24;
 
 export function sanitizeUser(user) {
 	if (!user) return null;
@@ -39,27 +38,131 @@ function hashSessionToken(token) {
 	return createHash('sha256').update(token).digest('hex');
 }
 
-export async function getUserByUsername(username) {
-	const users = await collection('users');
-	return users.findOne({ username: username.trim().toLowerCase() });
+function hashToken(token) {
+	return createHash('sha256').update(token).digest('hex');
 }
 
-async function createOrRepairDemoUser() {
+function validationError(message, fieldErrors = {}) {
+	const issue = new Error(message);
+	issue.status = 400;
+	issue.fieldErrors = fieldErrors;
+	return issue;
+}
+
+function normalizeUsername(value = '') {
+	return String(value).trim().toLowerCase();
+}
+
+function normalizeEmail(value = '') {
+	return String(value).trim().toLowerCase();
+}
+
+function initialsFromName(value = '') {
+	const parts = String(value || 'VM')
+		.trim()
+		.split(/\s+/)
+		.filter(Boolean);
+	return (parts.length > 1 ? `${parts[0][0]}${parts[1][0]}` : parts[0]?.slice(0, 2) || 'VM').toUpperCase();
+}
+
+function validateRegistrationInput(input = {}) {
+	const fieldErrors = {};
+	const displayName = String(input.displayName || '').trim();
+	const username = normalizeUsername(input.username);
+	const email = normalizeEmail(input.email);
+	const password = String(input.password || '');
+	const confirmPassword = String(input.confirmPassword || '');
+
+	if (displayName.length < 2 || displayName.length > 80) fieldErrors.displayName = 'Der Anzeigename muss 2 bis 80 Zeichen lang sein.';
+	if (!/^[a-z0-9._-]{3,30}$/.test(username)) {
+		fieldErrors.username = 'Der Benutzername muss 3 bis 30 Zeichen lang sein und darf Buchstaben, Zahlen, Punkt, Unterstrich oder Bindestrich enthalten.';
+	}
+	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fieldErrors.email = 'Bitte gib eine gültige E-Mail-Adresse ein.';
+	if (password.length < 6) fieldErrors.password = 'Das Passwort muss mindestens 6 Zeichen lang sein.';
+	if (password !== confirmPassword) fieldErrors.confirmPassword = 'Die Passwörter stimmen nicht überein.';
+
+	if (Object.keys(fieldErrors).length) throw validationError('Bitte prüfe die markierten Felder.', fieldErrors);
+	return { displayName, username, email, password };
+}
+
+export async function getUserByUsername(username) {
 	const users = await collection('users');
+	return users.findOne({ username: normalizeUsername(username) });
+}
+
+async function getUserByLoginIdentifier(identifier) {
+	const users = await collection('users');
+	const username = normalizeUsername(identifier);
+	const email = normalizeEmail(identifier);
+	return users.findOne({ $or: [{ username }, { email }] });
+}
+
+export async function getUserById(userId) {
+	const users = await collection('users');
+	return sanitizeUser(await users.findOne({ id: userId }));
+}
+
+export async function authenticateUser(usernameOrEmail, password) {
+	const normalizedPassword = String(password || '').trim();
+	const user = await getUserByLoginIdentifier(usernameOrEmail);
+	if (!user) return null;
+
+	const passwordValid = await verifyPassword(normalizedPassword, user.passwordHash);
+	if (!passwordValid) return null;
+	if (user.emailVerified !== true) {
+		const issue = validationError('Bitte bestätige zuerst deine E-Mail-Adresse.');
+		issue.code = 'EMAIL_NOT_VERIFIED';
+		throw issue;
+	}
+	return sanitizeUser(user);
+}
+
+export async function createEmailVerificationToken(userId, email) {
+	const rawToken = randomBytes(32).toString('hex');
+	const now = new Date();
+	const expiresAt = new Date(now.getTime() + EMAIL_VERIFICATION_MAX_AGE * 1000);
+	const tokens = await collection('emailVerificationTokens');
+
+	await tokens.updateMany({ userId, usedAt: null }, { $set: { usedAt: now.toISOString(), updatedAt: now.toISOString() } });
+	await tokens.insertOne({
+		id: `verify-${Date.now()}-${randomBytes(8).toString('hex')}`,
+		userId,
+		email,
+		tokenHash: hashToken(rawToken),
+		createdAt: now.toISOString(),
+		expiresAt: expiresAt.toISOString(),
+		usedAt: null
+	});
+
+	return rawToken;
+}
+
+export async function registerUser(input = {}, origin = '') {
+	const values = validateRegistrationInput(input);
+	const users = await collection('users');
+	const existingUsername = await users.findOne({ username: values.username });
+	const existingEmail = await users.findOne({ email: values.email });
+	const fieldErrors = {};
+
+	if (existingUsername) fieldErrors.username = 'Dieser Benutzername ist bereits vergeben.';
+	if (existingEmail) fieldErrors.email = 'Diese E-Mail-Adresse ist bereits registriert.';
+	if (Object.keys(fieldErrors).length) throw validationError('Bitte prüfe die markierten Felder.', fieldErrors);
+
 	const now = new Date().toISOString();
-	const demoUser = {
-		id: DEMO_USER_ID,
-		username: DEMO_USERNAME,
-		email: 'demo@vibematch.local',
-		passwordHash: await hashPassword(DEMO_PASSWORD),
-		displayName: 'Jan',
-		location: 'St. Gallen',
-		avatar: 'JA',
-		memberSince: 'Mai 2026',
-		bio: 'Plant gemeinsame Aktivitäten, sammelt Ideen und testet den VibeMatch-Prototyp.',
+	const user = {
+		id: `user-${Date.now()}-${randomBytes(6).toString('hex')}`,
+		username: values.username,
+		email: values.email,
+		passwordHash: await hashPassword(values.password),
+		displayName: values.displayName,
+		location: '',
+		avatar: initialsFromName(values.displayName),
+		memberSince: new Intl.DateTimeFormat('de-CH', { month: 'long', year: 'numeric' }).format(new Date()),
+		emailVerified: false,
+		emailVerifiedAt: null,
 		preferences: {
-			preferredCity: 'St. Gallen',
-			favoriteCategories: ['Aktiv', 'Gesellig'],
+			preferredCity: '',
+			favoriteCategories: [],
 			notifications: true,
 			notificationSettings: {
 				plannedActivityReminders: true,
@@ -70,43 +173,49 @@ async function createOrRepairDemoUser() {
 			}
 		},
 		stats: {},
+		createdAt: now,
 		updatedAt: now
 	};
 
+	await users.insertOne(user);
+	const token = await createEmailVerificationToken(user.id, user.email);
+	const appUrl = process.env.APP_URL || origin || 'http://localhost:5173';
+	const verificationUrl = `${appUrl.replace(/\/$/, '')}/verify-email?token=${encodeURIComponent(token)}`;
+
+	try {
+		await sendVerificationEmail({ to: user.email, displayName: user.displayName, verificationUrl });
+	} catch (error) {
+		await users.deleteOne({ id: user.id });
+		throw validationError(error.message || 'Die Bestätigungsmail konnte nicht versendet werden.');
+	}
+
+	return sanitizeUser(user);
+}
+
+export async function verifyEmailToken(token = '') {
+	const rawToken = String(token || '').trim();
+	if (!rawToken) throw validationError('Der Bestätigungslink ist ungültig.');
+
+	const tokens = await collection('emailVerificationTokens');
+	const tokenHash = hashToken(rawToken);
+	const verification = await tokens.findOne({ tokenHash });
+	if (!verification || verification.usedAt) throw validationError('Der Bestätigungslink ist ungültig oder wurde bereits verwendet.');
+	if (new Date(verification.expiresAt).getTime() <= Date.now()) throw validationError('Der Bestätigungslink ist abgelaufen.');
+
+	const now = new Date().toISOString();
+	const users = await collection('users');
 	await users.updateOne(
-		{ id: DEMO_USER_ID },
+		{ id: verification.userId },
 		{
 			$set: {
-				passwordHash: demoUser.passwordHash,
+				emailVerified: true,
+				emailVerifiedAt: now,
 				updatedAt: now
-			},
-			$setOnInsert: { ...demoUser, createdAt: now }
-		},
-		{ upsert: true }
+			}
+		}
 	);
-	return users.findOne({ id: DEMO_USER_ID });
-}
-
-export async function getUserById(userId) {
-	const users = await collection('users');
-	return sanitizeUser(await users.findOne({ id: userId }));
-}
-
-export async function authenticateUser(username, password) {
-	const normalizedUsername = username.trim().toLowerCase();
-	const normalizedPassword = password.trim();
-	let user = await getUserByUsername(normalizedUsername);
-	if (!user && normalizedUsername === DEMO_USERNAME && normalizedPassword === DEMO_PASSWORD) {
-		user = await createOrRepairDemoUser();
-	}
-	if (!user) return null;
-
-	let passwordValid = await verifyPassword(normalizedPassword, user.passwordHash);
-	if (!passwordValid && normalizedUsername === DEMO_USERNAME && normalizedPassword === DEMO_PASSWORD) {
-		user = await createOrRepairDemoUser();
-		passwordValid = await verifyPassword(normalizedPassword, user.passwordHash);
-	}
-	return passwordValid ? sanitizeUser(user) : null;
+	await tokens.updateOne({ tokenHash }, { $set: { usedAt: now, updatedAt: now } });
+	return { success: true };
 }
 
 export async function createSession(userId) {

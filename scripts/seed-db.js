@@ -71,8 +71,12 @@ try {
 		db.collection('profiles').createIndex({ userId: 1 }, { unique: true }),
 		db.collection('users').createIndex({ id: 1 }, { unique: true }),
 		db.collection('users').createIndex({ username: 1 }, { unique: true }),
+		db.collection('users').createIndex({ email: 1 }, { unique: true }),
 		db.collection('sessions').createIndex({ tokenHash: 1 }, { unique: true }),
-		db.collection('sessions').createIndex({ expiresAt: 1 })
+		db.collection('sessions').createIndex({ expiresAt: 1 }),
+		db.collection('emailVerificationTokens').createIndex({ tokenHash: 1 }, { unique: true }),
+		db.collection('emailVerificationTokens').createIndex({ userId: 1 }),
+		db.collection('emailVerificationTokens').createIndex({ expiresAt: 1 })
 	]);
 
 	const now = new Date().toISOString();
@@ -85,6 +89,8 @@ try {
 		location: 'St. Gallen',
 		avatar: 'JA',
 		memberSince: 'Mai 2026',
+		emailVerified: true,
+		emailVerifiedAt: now,
 		bio: 'Plant gemeinsame Aktivitäten, sammelt Ideen und testet den VibeMatch-Prototyp.',
 		preferences: {
 			preferredCity: 'St. Gallen',
@@ -124,7 +130,7 @@ try {
 	);
 
 	const counts = await Promise.all(
-		['activities', 'reviews', 'wishlistItems', 'plannedActivities', 'historyItems', 'communityPosts', 'profiles', 'users', 'sessions'].map(
+		['activities', 'reviews', 'wishlistItems', 'plannedActivities', 'historyItems', 'communityPosts', 'profiles', 'users', 'sessions', 'emailVerificationTokens'].map(
 			async (name) => [name, await db.collection(name).countDocuments()]
 		)
 	);
