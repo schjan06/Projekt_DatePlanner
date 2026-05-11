@@ -1,37 +1,72 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { authenticateUser, createSession, setSessionCookie } from '$lib/server/auth.js';
+import { authenticateUser, createSession, createUserAccount, setSessionCookie } from '$lib/server/auth.js';
+
+function readLoginValues(formData) {
+	return {
+		username: String(formData.get('username') || '').trim(),
+		password: String(formData.get('password') || '').trim()
+	};
+}
+
+function readSignupValues(formData) {
+	return {
+		displayName: String(formData.get('displayName') || '').trim(),
+		username: String(formData.get('signupUsername') || '').trim(),
+		email: String(formData.get('email') || '').trim(),
+		password: String(formData.get('signupPassword') || ''),
+		confirmPassword: String(formData.get('confirmPassword') || '')
+	};
+}
+
+async function signInUser(user, cookies) {
+	const token = await createSession(user.id);
+	setSessionCookie(cookies, token);
+	throw redirect(303, '/');
+}
 
 export const actions = {
-	default: async ({ request, cookies }) => {
-		const formData = await request.formData();
-		const username = String(formData.get('username') || '').trim();
-		const password = String(formData.get('password') || '').trim();
+	login: async ({ request, cookies }) => {
+		const values = readLoginValues(await request.formData());
 
-		if (!username || !password) {
+		if (!values.username || !values.password) {
 			return fail(400, {
+				mode: 'login',
 				error: 'Bitte gib Benutzername oder E-Mail und Passwort ein.',
-				username
+				username: values.username
 			});
 		}
+
+		const user = await authenticateUser(values.username, values.password);
+		if (!user) {
+			return fail(400, {
+				mode: 'login',
+				error: 'Benutzername/E-Mail oder Passwort ist falsch.',
+				username: values.username
+			});
+		}
+
+		await signInUser(user, cookies);
+	},
+
+	signup: async ({ request, cookies }) => {
+		const values = readSignupValues(await request.formData());
+		let user;
 
 		try {
-			const user = await authenticateUser(username, password);
-			if (!user) {
-				return fail(400, {
-					error: 'Benutzername/E-Mail oder Passwort ist falsch.',
-					username
-				});
-			}
-
-			const token = await createSession(user.id);
-			setSessionCookie(cookies, token);
+			user = await createUserAccount(values);
 		} catch (error) {
 			return fail(error.status || 400, {
-				error: error.message || 'Benutzername/E-Mail oder Passwort ist falsch.',
-				username
+				mode: 'signup',
+				error: error.message || 'Account konnte nicht erstellt werden.',
+				fieldErrors: error.fieldErrors || {},
+				values: {
+					displayName: values.displayName,
+					username: values.username,
+					email: values.email
+				}
 			});
 		}
 
-		throw redirect(303, '/');
+		await signInUser(user, cookies);
 	}
 };

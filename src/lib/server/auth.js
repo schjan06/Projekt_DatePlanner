@@ -2,13 +2,11 @@ import { dev } from '$app/environment';
 import { collection } from './db.js';
 import { createHash, randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
-import { sendVerificationEmail } from './email.js';
 
 const scrypt = promisify(scryptCallback);
 
 export const SESSION_COOKIE = 'vm_session';
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
-export const EMAIL_VERIFICATION_MAX_AGE = 60 * 60 * 24;
 
 export function sanitizeUser(user) {
 	if (!user) return null;
@@ -35,10 +33,6 @@ export async function verifyPassword(password, passwordHash) {
 }
 
 function hashSessionToken(token) {
-	return createHash('sha256').update(token).digest('hex');
-}
-
-function hashToken(token) {
 	return createHash('sha256').update(token).digest('hex');
 }
 
@@ -109,35 +103,10 @@ export async function authenticateUser(usernameOrEmail, password) {
 
 	const passwordValid = await verifyPassword(normalizedPassword, user.passwordHash);
 	if (!passwordValid) return null;
-	if (user.emailVerified !== true) {
-		const issue = validationError('Bitte bestätige zuerst deine E-Mail-Adresse.');
-		issue.code = 'EMAIL_NOT_VERIFIED';
-		throw issue;
-	}
 	return sanitizeUser(user);
 }
 
-export async function createEmailVerificationToken(userId, email) {
-	const rawToken = randomBytes(32).toString('hex');
-	const now = new Date();
-	const expiresAt = new Date(now.getTime() + EMAIL_VERIFICATION_MAX_AGE * 1000);
-	const tokens = await collection('emailVerificationTokens');
-
-	await tokens.updateMany({ userId, usedAt: null }, { $set: { usedAt: now.toISOString(), updatedAt: now.toISOString() } });
-	await tokens.insertOne({
-		id: `verify-${Date.now()}-${randomBytes(8).toString('hex')}`,
-		userId,
-		email,
-		tokenHash: hashToken(rawToken),
-		createdAt: now.toISOString(),
-		expiresAt: expiresAt.toISOString(),
-		usedAt: null
-	});
-
-	return rawToken;
-}
-
-export async function registerUser(input = {}, origin = '') {
+export async function createUserAccount(input = {}) {
 	const values = validateRegistrationInput(input);
 	const users = await collection('users');
 	const existingUsername = await users.findOne({ username: values.username });
@@ -158,8 +127,6 @@ export async function registerUser(input = {}, origin = '') {
 		location: '',
 		avatar: initialsFromName(values.displayName),
 		memberSince: new Intl.DateTimeFormat('de-CH', { month: 'long', year: 'numeric' }).format(new Date()),
-		emailVerified: false,
-		emailVerifiedAt: null,
 		preferences: {
 			preferredCity: '',
 			favoriteCategories: [],
@@ -178,44 +145,7 @@ export async function registerUser(input = {}, origin = '') {
 	};
 
 	await users.insertOne(user);
-	const token = await createEmailVerificationToken(user.id, user.email);
-	const appUrl = process.env.APP_URL || origin || 'http://localhost:5173';
-	const verificationUrl = `${appUrl.replace(/\/$/, '')}/verify-email?token=${encodeURIComponent(token)}`;
-
-	try {
-		await sendVerificationEmail({ to: user.email, displayName: user.displayName, verificationUrl });
-	} catch (error) {
-		await users.deleteOne({ id: user.id });
-		throw validationError(error.message || 'Die Bestätigungsmail konnte nicht versendet werden.');
-	}
-
 	return sanitizeUser(user);
-}
-
-export async function verifyEmailToken(token = '') {
-	const rawToken = String(token || '').trim();
-	if (!rawToken) throw validationError('Der Bestätigungslink ist ungültig.');
-
-	const tokens = await collection('emailVerificationTokens');
-	const tokenHash = hashToken(rawToken);
-	const verification = await tokens.findOne({ tokenHash });
-	if (!verification || verification.usedAt) throw validationError('Der Bestätigungslink ist ungültig oder wurde bereits verwendet.');
-	if (new Date(verification.expiresAt).getTime() <= Date.now()) throw validationError('Der Bestätigungslink ist abgelaufen.');
-
-	const now = new Date().toISOString();
-	const users = await collection('users');
-	await users.updateOne(
-		{ id: verification.userId },
-		{
-			$set: {
-				emailVerified: true,
-				emailVerifiedAt: now,
-				updatedAt: now
-			}
-		}
-	);
-	await tokens.updateOne({ tokenHash }, { $set: { usedAt: now, updatedAt: now } });
-	return { success: true };
 }
 
 export async function createSession(userId) {
