@@ -1,7 +1,6 @@
 <script>
 	let { profile, open = false, onClose = () => {}, onSaved = async () => {} } = $props();
 
-	let displayName = $state('');
 	let username = $state('');
 	let email = $state('');
 	let location = $state('');
@@ -19,7 +18,6 @@
 
 	$effect(() => {
 		if (open && profile) {
-			displayName = profile.displayName || profile.name || '';
 			username = profile.username || '';
 			email = profile.email || '';
 			location = profile.location || '';
@@ -47,7 +45,6 @@
 			method: 'PUT',
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({
-				displayName,
 				username,
 				email,
 				location,
@@ -82,16 +79,10 @@
 					<button class="modal-close" type="button" aria-label="Profilformular schließen" onclick={onClose}>×</button>
 				</div>
 
-				<div class="two-column">
-					<label>
-						Anzeigename
-						<input class="field" bind:value={displayName} />
-					</label>
-					<label>
-						Benutzername
-						<input class="field" bind:value={username} autocomplete="username" />
-					</label>
-				</div>
+				<label>
+					Benutzername
+					<input class="field" bind:value={username} autocomplete="username" />
+				</label>
 
 				<div class="two-column">
 					<label>

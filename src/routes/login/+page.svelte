@@ -48,10 +48,6 @@
 		{:else}
 			<form class="login-form" method="POST" action="?/signup">
 				<label>
-					Anzeigename
-					<input class="field" name="displayName" autocomplete="name" value={form?.values?.displayName || ''} />
-				</label>
-				<label>
 					Benutzername
 					<input class="field" name="signupUsername" autocomplete="username" value={form?.values?.username || ''} />
 				</label>

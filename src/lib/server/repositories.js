@@ -13,7 +13,7 @@ function stripMany(documents) {
 }
 
 function publicUserName(user) {
-	return user?.displayName || user?.username || 'VibeMatch User';
+	return user?.username || 'VibeMatch User';
 }
 
 function validationError(message) {
@@ -691,17 +691,17 @@ export async function getProfile(userId) {
 	const user = stripMongoId(await users.findOne({ id: userId }));
 	const legacyProfile = stripMongoId(await profiles.findOne({ userId }));
 	const preferences = user?.preferences || {};
-	const displayName = user?.displayName || user?.username || legacyProfile?.name || 'VibeMatch User';
+	const profileName = user?.username || legacyProfile?.username || legacyProfile?.name || 'VibeMatch User';
 	const profile = user
 		? {
 				userId: user.id,
 				username: user.username,
 				email: user.email,
-				name: displayName,
-				displayName,
+				name: profileName,
+				displayName: profileName,
 				location: user.location || '',
 				memberSince: user.memberSince || 'TODO',
-				avatar: user.avatar || initialsFromName(displayName),
+				avatar: user.avatar || initialsFromName(profileName),
 				bio:
 					user.bio ||
 					preferences.bio ||
@@ -750,7 +750,6 @@ export async function updateProfile(userId, input = {}) {
 	const currentUser = await users.findOne({ id: userId });
 	if (!currentUser) throw validationError('Profil wurde nicht gefunden.');
 
-	const displayName = String(input.displayName || input.name || '').trim();
 	const username = normalizeUsername(input.username || currentUser.username);
 	const email = normalizeEmail(input.email || currentUser.email);
 	const location = String(input.location || '').trim();
@@ -761,7 +760,6 @@ export async function updateProfile(userId, input = {}) {
 	const activities = await collection('activities');
 	const availableCategorySet = new Set((await activities.distinct('categories')).map((category) => category.toLowerCase()));
 
-	if (displayName.length < 2 || displayName.length > 80) throw validationError('Der Anzeigename muss 2 bis 80 Zeichen lang sein.');
 	if (!/^[a-z0-9._-]{3,30}$/.test(username)) throw validationError('Der Benutzername muss 3 bis 30 Zeichen lang sein und darf Buchstaben, Zahlen, Punkt, Unterstrich oder Bindestrich enthalten.');
 	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw validationError('Bitte gib eine gültige E-Mail-Adresse ein.');
 	if (location && (location.length < 2 || location.length > 80)) throw validationError('Der Ort muss 2 bis 80 Zeichen lang sein.');
@@ -780,7 +778,7 @@ export async function updateProfile(userId, input = {}) {
 	const update = {
 		username,
 		email,
-		displayName,
+		displayName: username,
 		location,
 		avatar,
 		bio,

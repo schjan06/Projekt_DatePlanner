@@ -61,13 +61,11 @@ function initialsFromName(value = '') {
 
 function validateRegistrationInput(input = {}) {
 	const fieldErrors = {};
-	const displayName = String(input.displayName || '').trim();
 	const username = normalizeUsername(input.username);
 	const email = normalizeEmail(input.email);
 	const password = String(input.password || '');
 	const confirmPassword = String(input.confirmPassword || '');
 
-	if (displayName.length < 2 || displayName.length > 80) fieldErrors.displayName = 'Der Anzeigename muss 2 bis 80 Zeichen lang sein.';
 	if (!/^[a-z0-9._-]{3,30}$/.test(username)) {
 		fieldErrors.username = 'Der Benutzername muss 3 bis 30 Zeichen lang sein und darf Buchstaben, Zahlen, Punkt, Unterstrich oder Bindestrich enthalten.';
 	}
@@ -76,7 +74,7 @@ function validateRegistrationInput(input = {}) {
 	if (password !== confirmPassword) fieldErrors.confirmPassword = 'Die Passwörter stimmen nicht überein.';
 
 	if (Object.keys(fieldErrors).length) throw validationError('Bitte prüfe die markierten Felder.', fieldErrors);
-	return { displayName, username, email, password };
+	return { username, email, password };
 }
 
 export async function getUserByUsername(username) {
@@ -123,9 +121,9 @@ export async function createUserAccount(input = {}) {
 		username: values.username,
 		email: values.email,
 		passwordHash: await hashPassword(values.password),
-		displayName: values.displayName,
+		displayName: values.username,
 		location: '',
-		avatar: initialsFromName(values.displayName),
+		avatar: initialsFromName(values.username),
 		memberSince: new Intl.DateTimeFormat('de-CH', { month: 'long', year: 'numeric' }).format(new Date()),
 		preferences: {
 			preferredCity: '',

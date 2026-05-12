@@ -10,7 +10,6 @@ function readLoginValues(formData) {
 
 function readSignupValues(formData) {
 	return {
-		displayName: String(formData.get('displayName') || '').trim(),
 		username: String(formData.get('signupUsername') || '').trim(),
 		email: String(formData.get('email') || '').trim(),
 		password: String(formData.get('signupPassword') || ''),
@@ -60,7 +59,6 @@ export const actions = {
 				error: error.message || 'Account konnte nicht erstellt werden.',
 				fieldErrors: error.fieldErrors || {},
 				values: {
-					displayName: values.displayName,
 					username: values.username,
 					email: values.email
 				}

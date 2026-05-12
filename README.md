@@ -359,13 +359,13 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 - **Manuelle Testcheckliste aktueller Prototyp:**
   - Login ohne gültige Session prüfen: geschützte Route öffnet `/login`.
   - Auf `/login` zwischen `Einloggen` und `Account erstellen` wechseln.
-  - Account mit Anzeigename, Benutzername, E-Mail und Passwort erstellen.
+  - Account mit Benutzername, E-Mail und Passwort erstellen.
   - Nach Account-Erstellung prüfen, dass direkt zur App weitergeleitet wird.
   - Logout ausführen und danach Login mit Benutzername oder E-Mail prüfen.
   - Login mit `demo` / `demo123` prüfen.
   - Zwei unterschiedliche Accounts verwenden und prüfen, dass Wishlist, Planung, History und Profil nicht vermischt werden.
   - Logout prüfen: Session wird gelöscht und `/login` ohne App-Navigation erscheint.
-  - Profil bearbeiten: Anzeigename, Benutzername, E-Mail, Ort, Avatar/Bio speichern und Reload prüfen.
+  - Profil bearbeiten: Benutzername, E-Mail, Ort, Avatar/Bio speichern und Reload prüfen.
   - Passwort ändern: falsches altes Passwort und korrektes altes Passwort testen.
   - Benachrichtigungseinstellungen ändern und Reload prüfen.
   - Hilfe & Support öffnen und Feedback-Simulation prüfen.

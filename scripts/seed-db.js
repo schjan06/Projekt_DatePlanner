@@ -82,7 +82,7 @@ try {
 		username: 'demo',
 		email: 'demo@vibematch.local',
 		passwordHash: await hashPassword('demo123'),
-		displayName: 'Jan',
+		displayName: 'demo',
 		location: 'St. Gallen',
 		avatar: 'JA',
 		memberSince: 'Mai 2026',
