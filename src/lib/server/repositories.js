@@ -185,7 +185,7 @@ async function imageFromFile(file, alt) {
 	if (!file || typeof file.arrayBuffer !== 'function' || file.size === 0) return null;
 	const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
 	if (!allowedTypes.includes(file.type)) throw validationError('Nur JPG, PNG oder WebP sind erlaubt.');
-	if (file.size > 500 * 1024) throw validationError('Bilder dürfen maximal 500 KB groß sein.');
+	if (file.size > 500 * 1024) throw validationError('Bilder dürfen maximal 500 KB gross sein.');
 	const buffer = Buffer.from(await file.arrayBuffer());
 	return {
 		src: `data:${file.type};base64,${buffer.toString('base64')}`,
@@ -767,7 +767,7 @@ export async function updateProfile(userId, input = {}) {
 	if (bio.length > 240) throw validationError('Die Kurzbeschreibung darf maximal 240 Zeichen lang sein.');
 
 	if (favoriteCategories.some((category) => !availableCategorySet.has(category.toLowerCase()))) {
-		throw validationError('Bitte wÃ¤hle nur vorhandene Kategorien aus.');
+		throw validationError('Bitte wähle nur vorhandene Kategorien aus.');
 	}
 
 	const usernameOwner = await users.findOne({ username });

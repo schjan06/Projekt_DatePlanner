@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { showToast } from '$lib/state/appState.svelte.js';
 
-	const categoryOptions = ['Romantisch', 'Aktiv', 'Kreativ', 'Essen & Trinken', 'Abenteuer', 'Entspannung', 'Draußen', 'Indoor'];
+	const categoryOptions = ['Romantisch', 'Aktiv', 'Kreativ', 'Essen & Trinken', 'Abenteuer', 'Entspannung', 'Draussen', 'Indoor'];
 	const peopleOptions = ['2 Personen', '2-4 Personen', '3-4 Personen', 'Gruppe'];
 	const indoorOutdoorOptions = ['Indoor', 'Outdoor', 'Beides'];
 	const moodOptions = ['Entspannt', 'Abenteuerlustig', 'Romantisch', 'Gesellig', 'Kreativ', 'Aktiv'];
@@ -62,7 +62,7 @@
 				continue;
 			}
 			if (file.size > 500 * 1024) {
-				fieldErrors = { ...fieldErrors, images: 'Bilder dürfen maximal 500 KB groß sein.' };
+				fieldErrors = { ...fieldErrors, images: 'Bilder dürfen maximal 500 KB gross sein.' };
 				continue;
 			}
 			next.push({ file, url: URL.createObjectURL(file), name: file.name });
@@ -177,7 +177,7 @@
 				</div>
 				<label>
 					Adresse optional
-					<input class="field" bind:value={address} placeholder="Straße, Hausnummer oder Treffpunkt" />
+					<input class="field" bind:value={address} placeholder="Strasse, Hausnummer oder Treffpunkt" />
 				</label>
 				<label>
 					Dauer *

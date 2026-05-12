@@ -353,8 +353,15 @@ h3 {
 
 .nav-icon {
 	width: 28px;
-	text-align: center;
-	font-weight: 900;
+	height: 28px;
+	display: inline-grid;
+	place-items: center;
+	flex: 0 0 28px;
+	color: currentColor;
+}
+
+.nav-icon svg {
+	display: block;
 }
 
 .sidebar-card {

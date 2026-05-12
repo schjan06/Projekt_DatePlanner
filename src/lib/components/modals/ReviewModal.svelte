@@ -81,7 +81,7 @@
 						<h2>Bewertung schreiben</h2>
 						<p class="muted">{activity.title}</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Bewertung schließen" onclick={close}>×</button>
+					<button class="modal-close" type="button" aria-label="Bewertung schliessen" onclick={close}>×</button>
 				</div>
 
 				<div class="review-rating-panel">

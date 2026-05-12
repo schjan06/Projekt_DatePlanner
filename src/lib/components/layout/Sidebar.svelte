@@ -1,16 +1,17 @@
 <script>
 	import { page } from '$app/state';
+	import NavIcon from './NavIcon.svelte';
 
 	const links = [
-		{ href: '/', label: 'Inspiration', icon: 'IN' },
-		{ href: '/activities/new', label: 'Erfassen', icon: 'NE' },
-		{ href: '/categories', label: 'Kategorien', icon: 'FI' },
-		{ href: '/map', label: 'Karte', icon: 'MA' },
-		{ href: '/wishlist', label: 'Wishlist', icon: 'WI' },
-		{ href: '/upcoming', label: 'Kommende', icon: 'PL' },
-		{ href: '/history', label: 'Erinnerungen', icon: 'ER' },
-		{ href: '/community', label: 'Community', icon: 'CO' },
-		{ href: '/profile', label: 'Profil', icon: 'PR' }
+		{ href: '/', label: 'Inspiration', icon: 'sparkles' },
+		{ href: '/activities/new', label: 'Erfassen', icon: 'plus' },
+		{ href: '/categories', label: 'Kategorien', icon: 'filter' },
+		{ href: '/map', label: 'Karte', icon: 'map' },
+		{ href: '/wishlist', label: 'Wishlist', icon: 'heart' },
+		{ href: '/upcoming', label: 'Kommende', icon: 'calendar' },
+		{ href: '/history', label: 'Erinnerungen', icon: 'history' },
+		{ href: '/community', label: 'Community', icon: 'users' },
+		{ href: '/profile', label: 'Profil', icon: 'user' }
 	];
 
 	function isActive(href) {
@@ -28,7 +29,7 @@
 	<nav>
 		{#each links as link}
 			<a class={`nav-link ${isActive(link.href) ? 'active' : ''}`} href={link.href}>
-				<span class="nav-icon">{link.icon}</span>
+				<span class="nav-icon"><NavIcon name={link.icon} /></span>
 				<span>{link.label}</span>
 			</a>
 		{/each}

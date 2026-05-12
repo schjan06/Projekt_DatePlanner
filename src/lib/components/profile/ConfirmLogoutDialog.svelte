@@ -22,7 +22,7 @@
 						<h2>Ausloggen?</h2>
 						<p class="muted">Deine aktuelle Session wird beendet und du wirst zur Login-Seite weitergeleitet.</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Dialog schließen" onclick={onClose}>×</button>
+					<button class="modal-close" type="button" aria-label="Dialog schliessen" onclick={onClose}>×</button>
 				</div>
 
 				<div class="action-row">

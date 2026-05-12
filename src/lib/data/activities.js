@@ -5,7 +5,7 @@ export const categories = [
 	'Essen & Trinken',
 	'Abenteuer',
 	'Entspannung',
-	'Draußen',
+	'Draussen',
 	'Indoor'
 ];
 
@@ -36,7 +36,7 @@ export const activities = [
 				alt: 'Picknickkorb mit Snacks und Getränken im Freien'
 			}
 		],
-		categories: ['Romantisch', 'Entspannung', 'Draußen'],
+		categories: ['Romantisch', 'Entspannung', 'Draussen'],
 		priceLevel: 1,
 		priceText: 'CHF 20-40',
 		duration: '2h',
@@ -123,7 +123,7 @@ export const activities = [
 				alt: 'Gepflegte Grünfläche und Spielbahn für einen entspannten Abend'
 			}
 		],
-		categories: ['Aktiv', 'Gesellig', 'Draußen'],
+		categories: ['Aktiv', 'Gesellig', 'Draussen'],
 		priceLevel: 1,
 		priceText: 'CHF 12 p.P.',
 		duration: '1.5h',
@@ -296,7 +296,7 @@ export const activities = [
 				alt: 'Geteilte Speisen und Snacks für eine Food-Tour'
 			}
 		],
-		categories: ['Essen & Trinken', 'Gesellig', 'Draußen'],
+		categories: ['Essen & Trinken', 'Gesellig', 'Draussen'],
 		priceLevel: 2,
 		priceText: 'CHF 45 p.P.',
 		duration: '3h',
@@ -339,7 +339,7 @@ export const activities = [
 				alt: 'Nachthimmel mit Sternen über dunkler Landschaft'
 			}
 		],
-		categories: ['Romantisch', 'Draußen', 'Entspannung'],
+		categories: ['Romantisch', 'Draussen', 'Entspannung'],
 		priceLevel: 0,
 		priceText: 'Kostenlos',
 		duration: '2h',
@@ -442,7 +442,7 @@ export const activities = [
 	{
 		id: 'kunst-museum',
 		title: 'Kunstmuseum Besuch',
-		description: 'Ruhiger Kulturmoment mit inspirierenden Ausstellungen und anschließendem Kaffee-Stopp.',
+		description: 'Ruhiger Kulturmoment mit inspirierenden Ausstellungen und anschliessendem Kaffee-Stopp.',
 		image: 'https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=1200&q=80',
 		imageAlt: 'Besucherinnen und Besucher betrachten Kunstwerke in einer hellen Galerie',
 		imageCredit: 'Unsplash',
@@ -507,7 +507,7 @@ export const activities = [
 				alt: 'Naturpfad und Berge als Kulisse für einen ruhigen Ausflug'
 			}
 		],
-		categories: ['Draußen', 'Entspannung', 'Abenteuer'],
+		categories: ['Draussen', 'Entspannung', 'Abenteuer'],
 		priceLevel: 2,
 		priceText: 'CHF 55 p.P.',
 		duration: '2.5h',

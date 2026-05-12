@@ -49,7 +49,7 @@
 						<h2>Passwort ändern</h2>
 						<p class="muted">Das neue Passwort wird gehasht gespeichert und nicht im Klartext abgelegt.</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Passwortformular schließen" onclick={onClose}>×</button>
+					<button class="modal-close" type="button" aria-label="Passwortformular schliessen" onclick={onClose}>×</button>
 				</div>
 
 				<label>

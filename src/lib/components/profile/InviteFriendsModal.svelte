@@ -50,7 +50,7 @@
 						<h2>Freunde einladen</h2>
 						<p class="muted">Der Link ist eine Prototyp-Simulation. Es wird keine echte Einladung verschickt.</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Einladung schließen" onclick={onClose}>×</button>
+					<button class="modal-close" type="button" aria-label="Einladung schliessen" onclick={onClose}>×</button>
 				</div>
 
 				<div class="invite-link-box">

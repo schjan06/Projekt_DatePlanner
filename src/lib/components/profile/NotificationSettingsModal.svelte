@@ -60,7 +60,7 @@
 						<h2>Benachrichtigungen</h2>
 						<p class="muted">Diese Einstellungen werden gespeichert. Echte Benachrichtigungen werden im Prototyp nicht versendet.</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Benachrichtigungen schließen" onclick={onClose}>×</button>
+					<button class="modal-close" type="button" aria-label="Benachrichtigungen schliessen" onclick={onClose}>×</button>
 				</div>
 
 				<div class="settings-toggle-list">

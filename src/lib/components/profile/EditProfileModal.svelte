@@ -76,7 +76,7 @@
 						<h2>Profil bearbeiten</h2>
 						<p class="muted">Passe deine Angaben an. Änderungen werden in MongoDB gespeichert.</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Profilformular schließen" onclick={onClose}>×</button>
+					<button class="modal-close" type="button" aria-label="Profilformular schliessen" onclick={onClose}>×</button>
 				</div>
 
 				<label>

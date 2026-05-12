@@ -24,7 +24,7 @@ export const historyItems = [
 		date: '2026-02-14',
 		rating: 5,
 		favorite: true,
-		memory: 'Kalt, aber wunderschön. Heißer Tee war die beste Entscheidung.'
+		memory: 'Kalt, aber wunderschön. Heisser Tee war die beste Entscheidung.'
 	},
 	{
 		id: 'history-4',

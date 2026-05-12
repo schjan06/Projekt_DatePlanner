@@ -10,7 +10,7 @@
 		{ question: 'Wie speichere ich eine Aktivität?', answer: 'Öffne eine Aktivität und klicke auf „Zur Wishlist hinzufügen“.' },
 		{ question: 'Wie plane ich eine Aktivität?', answer: 'Auf der Detailseite kannst du über „Planen“ Datum, Uhrzeit und Notiz erfassen.' },
 		{ question: 'Wie teile ich eine Erinnerung?', answer: 'In der History kannst du Erinnerungen als Community-Beitrag teilen.' },
-		{ question: 'Wie funktionieren Bewertungen?', answer: 'Bewertungen werden auf der Detailseite als Rezension gespeichert und fließen in die Aktivitätsbewertung ein.' }
+		{ question: 'Wie funktionieren Bewertungen?', answer: 'Bewertungen werden auf der Detailseite als Rezension gespeichert und fliessen in die Aktivitätsbewertung ein.' }
 	];
 
 	$effect(() => {
@@ -53,7 +53,7 @@
 						<h2>Hilfe & Support</h2>
 						<p class="muted">Kurze Antworten für den Prototyp und ein simuliertes Feedbackformular.</p>
 					</div>
-					<button class="modal-close" type="button" aria-label="Hilfe schließen" onclick={onClose}>×</button>
+					<button class="modal-close" type="button" aria-label="Hilfe schliessen" onclick={onClose}>×</button>
 				</div>
 
 				<div class="faq-list">
@@ -76,7 +76,7 @@
 
 				<div class="action-row">
 					<button class="button" type="submit" disabled={sending}>{sending ? 'Senden...' : 'Feedback senden'}</button>
-					<button class="button secondary" type="button" onclick={onClose}>Schließen</button>
+					<button class="button secondary" type="button" onclick={onClose}>Schliessen</button>
 				</div>
 			</form>
 		</div>
