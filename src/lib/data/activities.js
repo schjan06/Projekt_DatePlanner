@@ -111,16 +111,16 @@ export const activities = [
 				alt: 'Minigolfschläger und Ball auf einer grünen Minigolfbahn'
 			},
 			{
+				src: 'https://images.unsplash.com/photo-1657085716783-c0afbdabf96e?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Minigolfbahn mit Fahne und kurzen Bahnen im Freien'
+			},
+			{
 				src: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Golfball auf kurz geschnittenem Grün als spielerisches Detail'
+				alt: 'Golfball und Schläger als Detail für eine lockere Minigolf-Runde'
 			},
 			{
 				src: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Freizeitspiel auf gepflegter Grünfläche am Abend'
-			},
-			{
-				src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Grüne Outdoor-Umgebung für einen lockeren Abend draussen'
+				alt: 'Gepflegte Grünfläche und Spielbahn für einen entspannten Abend'
 			}
 		],
 		categories: ['Aktiv', 'Gesellig', 'Draußen'],
@@ -146,25 +146,25 @@ export const activities = [
 		title: 'Escape Room Challenge',
 		description:
 			'Rätsel lösen, Hinweise kombinieren und gemeinsam unter Zeitdruck entkommen. Gut für Teams und Gruppen.',
-		image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
-		imageAlt: 'Gruppe arbeitet gemeinsam an einem Tisch und löst Aufgaben',
+		image: 'https://images.unsplash.com/photo-1569002925653-ed18f55d7292?auto=format&fit=crop&w=1200&q=80',
+		imageAlt: 'Leuchtendes Escape-Room-Schild in dunkler Raumstimmung',
 		imageCredit: 'Unsplash',
 		gallery: [
 			{
+				src: 'https://images.unsplash.com/photo-1569002925653-ed18f55d7292?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Leuchtendes Escape-Room-Schild in dunkler Raumstimmung'
+			},
+			{
+				src: 'https://images.unsplash.com/photo-1529990989741-fe1c5b001e4b?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Geheimnisvoller Raum mit offener Tür und Rätselstimmung'
+			},
+			{
+				src: 'https://images.unsplash.com/photo-1435265796918-0e3d3e4af435?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Tisch mit Hinweisen und dunkler Atmosphäre für eine Escape-Challenge'
+			},
+			{
 				src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Gruppe arbeitet gemeinsam an einem Tisch und löst Aufgaben'
-			},
-			{
-				src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Team bespricht Hinweise und Ideen gemeinsam'
-			},
-			{
-				src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Dunklere Raumstimmung passend zu einer Rätsel-Challenge'
-			},
-			{
-				src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Notizen und digitale Hinweise für ein gemeinsames Rätsel'
+				alt: 'Gruppe arbeitet gemeinsam an Hinweisen und Rätseln'
 			}
 		],
 		categories: ['Abenteuer', 'Indoor', 'Aktiv'],
@@ -288,8 +288,8 @@ export const activities = [
 				alt: 'Frisch zubereitetes Street Food auf einem Teller'
 			},
 			{
-				src: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Belebte Outdoor-Atmosphäre für einen entspannten Stadtabend'
+				src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Belebter Food-Stand mit frischen Gerichten und Marktstimmung'
 			},
 			{
 				src: 'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80',
@@ -361,25 +361,21 @@ export const activities = [
 		id: 'bowling-night',
 		title: 'Bowling Night',
 		description: 'Ein Klassiker für Gruppenabende mit Musik, Snacks und freundschaftlichem Wettbewerb.',
-		image: 'https://images.unsplash.com/photo-1538511059256-46e475d804da?auto=format&fit=crop&w=1200&q=80',
-		imageAlt: 'Bowlingkugel rollt auf einer Bahn Richtung Pins',
-		imageCredit: 'Unsplash',
+		image: 'https://images.pexels.com/photos/9821621/pexels-photo-9821621.jpeg?auto=compress&cs=tinysrgb&w=1200',
+		imageAlt: 'Neonbeleuchtete Bowlingbahn mit Pins am Ende der Bahn',
+		imageCredit: 'Pexels',
 		gallery: [
 			{
-				src: 'https://images.unsplash.com/photo-1538511059256-46e475d804da?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Bowlingkugel rollt auf einer Bahn Richtung Pins'
+				src: 'https://images.pexels.com/photos/9821621/pexels-photo-9821621.jpeg?auto=compress&cs=tinysrgb&w=1200',
+				alt: 'Neonbeleuchtete Bowlingbahn mit Pins am Ende der Bahn'
 			},
 			{
-				src: 'https://images.unsplash.com/photo-1573508915901-b5f84c1dcde1?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Bowlingbahnen mit leuchtenden Bahnen für einen Gruppenabend'
+				src: 'https://images.pexels.com/photos/7429607/pexels-photo-7429607.jpeg?auto=compress&cs=tinysrgb&w=1200',
+				alt: 'Bowlingpins stehen bereit auf einer glänzenden Bowlingbahn'
 			},
 			{
-				src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Indoor-Abendstimmung für eine gemeinsame Aktivität'
-			},
-			{
-				src: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Gruppe verbringt einen geselligen Abend zusammen'
+				src: 'https://images.pexels.com/photos/5952998/pexels-photo-5952998.jpeg?auto=compress&cs=tinysrgb&w=1200',
+				alt: 'Bowlingbahn mit Pins und dunkler Abendstimmung'
 			}
 		],
 		categories: ['Aktiv', 'Indoor', 'Gesellig'],
@@ -490,17 +486,17 @@ export const activities = [
 		id: 'alpaka-spaziergang',
 		title: 'Alpaka Spaziergang',
 		description: 'Ein besonderer Ausflug in der Natur mit geführtem Spaziergang und ruhiger Begleitung.',
-		image: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1200&q=80',
-		imageAlt: 'Alpaka steht auf einer grünen Wiese in ländlicher Umgebung',
+		image: 'https://images.unsplash.com/photo-1589182337358-2cb63099350c?auto=format&fit=crop&w=1200&q=80',
+		imageAlt: 'Alpaka mit weichem Fell auf einem Spaziergang in ländlicher Umgebung',
 		imageCredit: 'Unsplash',
 		gallery: [
 			{
-				src: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Alpaka steht auf einer grünen Wiese in ländlicher Umgebung'
+				src: 'https://images.unsplash.com/photo-1589182337358-2cb63099350c?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Alpaka mit weichem Fell auf einem Spaziergang in ländlicher Umgebung'
 			},
 			{
-				src: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1200&q=80',
-				alt: 'Ländliche Wiese mit Tieren und ruhiger Ausflugsstimmung'
+				src: 'https://images.unsplash.com/photo-1565867496556-e6f84b777af8?auto=format&fit=crop&w=1200&q=80',
+				alt: 'Geführter Spaziergang mit Alpakas auf einer grünen Wiese'
 			},
 			{
 				src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',

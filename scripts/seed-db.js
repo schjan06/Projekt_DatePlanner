@@ -31,7 +31,10 @@ function loadEnv() {
 
 async function upsertMany(collection, documents, key = 'id') {
 	for (const document of documents) {
-		await collection.updateOne({ [key]: document[key] }, { $set: document }, { upsert: true });
+		const filter = Array.isArray(key)
+			? Object.fromEntries(key.map((field) => [field, document[field]]))
+			: { [key]: document[key] };
+		await collection.updateOne(filter, { $set: document }, { upsert: true });
 	}
 }
 
@@ -121,7 +124,8 @@ try {
 			userId: DEMO_USER_ID,
 			activityId,
 			createdAt: new Date(Date.now() - index * 60000).toISOString()
-		}))
+		})),
+		['userId', 'activityId']
 	);
 
 	const counts = await Promise.all(
