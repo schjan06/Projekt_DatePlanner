@@ -1,71 +1,62 @@
-<svg host="app.diagrams.net" xmlns="http://www.w3.org/2000/svg" version="1.1" width="1180" height="420" viewBox="0 0 1180 420" content="&lt;mxfile host=&quot;app.diagrams.net&quot; modified=&quot;2026-05-13T00:00:00.000Z&quot; agent=&quot;Codex&quot; version=&quot;24.7.17&quot;&gt;&lt;diagram id=&quot;journey-paar-flow&quot; name=&quot;Paar-Flow&quot;&gt;&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=&quot;0&quot;/&gt;&lt;mxCell id=&quot;1&quot; parent=&quot;0&quot;/&gt;&lt;mxCell id=&quot;summary&quot; value=&quot;Paar-Flow: Login - Home - Schnellfilter/Kategorien - Detailseite - Wishlist/Planen - Upcoming - History - Bewertung&quot; style=&quot;text;html=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#241f33;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;40&quot; y=&quot;40&quot; width=&quot;980&quot; height=&quot;40&quot; as=&quot;geometry&quot;/&gt;&lt;/mxCell&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;&lt;/diagram&gt;&lt;/mxfile&gt;">
+<svg host="app.diagrams.net" xmlns="http://www.w3.org/2000/svg" version="1.1" width="760" height="1080" viewBox="0 0 760 1080" content="&lt;mxfile host=&quot;app.diagrams.net&quot; modified=&quot;2026-05-13T00:00:00.000Z&quot; agent=&quot;Codex&quot; version=&quot;24.7.17&quot;&gt;&lt;diagram id=&quot;journey-paar-flow&quot; name=&quot;Paar-Flow&quot;&gt;&lt;mxGraphModel&gt;&lt;root&gt;&lt;mxCell id=&quot;0&quot;/&gt;&lt;mxCell id=&quot;1&quot; parent=&quot;0&quot;/&gt;&lt;mxCell id=&quot;note&quot; value=&quot;Klassischer Workflow: Start, Aktivitaeten als Rechtecke, Entscheidung als Raute, Ja/Nein-Pfade, Ende.&quot; style=&quot;text;html=1;&quot; vertex=&quot;1&quot; parent=&quot;1&quot;&gt;&lt;mxGeometry x=&quot;40&quot; y=&quot;40&quot; width=&quot;520&quot; height=&quot;40&quot; as=&quot;geometry&quot;/&gt;&lt;/mxCell&gt;&lt;/root&gt;&lt;/mxGraphModel&gt;&lt;/diagram&gt;&lt;/mxfile&gt;">
   <defs>
-    <linearGradient id="vm-bg-paar" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#fbf9ff"/>
-      <stop offset="100%" stop-color="#f1ebff"/>
-    </linearGradient>
-    <filter id="shadow-paar" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#6d4cff" flood-opacity="0.12"/>
-    </filter>
+    <pattern id="grid-paar" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#eeeaf8" stroke-width="1"/>
+    </pattern>
     <marker id="arrow-paar" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M2,2 L10,6 L2,10 Z" fill="#6d4cff"/>
+      <path d="M2,2 L10,6 L2,10 Z" fill="#241f33"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="1180" height="420" rx="28" fill="url(#vm-bg-paar)"/>
-  <text x="40" y="48" fill="#241f33" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">Paar-Flow: Quality Time planen</text>
-  <text x="40" y="78" fill="#6f6a80" font-family="Inter, Arial, sans-serif" font-size="15">Persona: Lea Meier · Ziel: schnell eine passende Aktivität finden, speichern, planen und nach dem Erlebnis bewerten</text>
+  <rect width="760" height="1080" fill="#fbf9ff"/>
+  <rect width="760" height="1080" fill="url(#grid-paar)" opacity="0.75"/>
+  <text x="380" y="42" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#241f33">Paar-Flow: Quality Time planen</text>
+  <text x="380" y="68" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6f6a80">Persona: Lea Meier</text>
 
-  <g font-family="Inter, Arial, sans-serif" font-size="14" fill="#241f33">
-    <g filter="url(#shadow-paar)">
-      <rect x="40" y="120" width="150" height="88" rx="18" fill="#ffffff" stroke="#e7ddff"/>
-      <text x="62" y="150" font-weight="800">1 Login</text>
-      <text x="62" y="174" fill="#6f6a80">Account öffnen</text>
-      <text x="62" y="194" fill="#6f6a80">oder erstellen</text>
-    </g>
-    <path d="M195 164 H230" stroke="#6d4cff" stroke-width="3" fill="none" marker-end="url(#arrow-paar)"/>
-    <g filter="url(#shadow-paar)">
-      <rect x="240" y="120" width="150" height="88" rx="18" fill="#ffffff" stroke="#e7ddff"/>
-      <text x="262" y="150" font-weight="800">2 Home</text>
-      <text x="262" y="174" fill="#6f6a80">Inspiration und</text>
-      <text x="262" y="194" fill="#6f6a80">Schnellfilter</text>
-    </g>
-    <path d="M395 164 H430" stroke="#6d4cff" stroke-width="3" fill="none" marker-end="url(#arrow-paar)"/>
-    <g filter="url(#shadow-paar)">
-      <rect x="440" y="120" width="150" height="88" rx="18" fill="#ffffff" stroke="#e7ddff"/>
-      <text x="462" y="150" font-weight="800">3 Detail</text>
-      <text x="462" y="174" fill="#6f6a80">Bilder, Tipps</text>
-      <text x="462" y="194" fill="#6f6a80">und Reviews</text>
-    </g>
-    <path d="M595 164 H630" stroke="#6d4cff" stroke-width="3" fill="none" marker-end="url(#arrow-paar)"/>
-    <g filter="url(#shadow-paar)">
-      <path d="M715 116 L800 164 L715 212 L630 164 Z" fill="#fff8e8" stroke="#f2c94c"/>
-      <text x="674" y="158" font-weight="800">Entscheid</text>
-      <text x="665" y="180" fill="#6f6a80">speichern?</text>
-    </g>
-    <path d="M805 164 H840" stroke="#6d4cff" stroke-width="3" fill="none" marker-end="url(#arrow-paar)"/>
-    <g filter="url(#shadow-paar)">
-      <rect x="850" y="120" width="150" height="88" rx="18" fill="#ffffff" stroke="#e7ddff"/>
-      <text x="872" y="150" font-weight="800">4 Planen</text>
-      <text x="872" y="174" fill="#6f6a80">Wishlist oder</text>
-      <text x="872" y="194" fill="#6f6a80">Termin setzen</text>
-    </g>
-    <path d="M1005 164 H1040" stroke="#6d4cff" stroke-width="3" fill="none" marker-end="url(#arrow-paar)"/>
-    <g filter="url(#shadow-paar)">
-      <rect x="1050" y="120" width="90" height="88" rx="18" fill="#efe7ff" stroke="#cbb7ff"/>
-      <text x="1070" y="150" font-weight="800">5</text>
-      <text x="1070" y="174" fill="#6f6a80">Kalender</text>
-      <text x="1070" y="194" fill="#6f6a80">prüfen</text>
-    </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="15" fill="#241f33" stroke="#241f33" stroke-width="2">
+    <rect x="270" y="95" width="220" height="58" rx="29" fill="#ffffff"/>
+    <text x="380" y="131" text-anchor="middle" stroke="none" font-weight="700">Start</text>
+    <path d="M380 153V185" fill="none" marker-end="url(#arrow-paar)"/>
+
+    <rect x="250" y="190" width="260" height="64" fill="#ffffff"/>
+    <text x="380" y="215" text-anchor="middle" stroke="none">Login oder App</text>
+    <text x="380" y="235" text-anchor="middle" stroke="none">oeffnen</text>
+    <path d="M380 254V286" fill="none" marker-end="url(#arrow-paar)"/>
+
+    <rect x="250" y="292" width="260" height="64" fill="#ffffff"/>
+    <text x="380" y="317" text-anchor="middle" stroke="none">Home oeffnen</text>
+    <text x="380" y="337" text-anchor="middle" stroke="none">und Inspiration ansehen</text>
+    <path d="M380 356V388" fill="none" marker-end="url(#arrow-paar)"/>
+
+    <rect x="250" y="394" width="260" height="64" fill="#ffffff"/>
+    <text x="380" y="419" text-anchor="middle" stroke="none">Schnellfilter oder</text>
+    <text x="380" y="439" text-anchor="middle" stroke="none">Kategorien nutzen</text>
+    <path d="M380 458V490" fill="none" marker-end="url(#arrow-paar)"/>
+
+    <rect x="250" y="496" width="260" height="64" fill="#ffffff"/>
+    <text x="380" y="521" text-anchor="middle" stroke="none">Detailseite mit Bildern,</text>
+    <text x="380" y="541" text-anchor="middle" stroke="none">Tipps und Reviews pruefen</text>
+    <path d="M380 560V592" fill="none" marker-end="url(#arrow-paar)"/>
+
+    <polygon points="380,596 500,676 380,756 260,676" fill="#fff8e8"/>
+    <text x="380" y="672" text-anchor="middle" stroke="none" font-weight="700">Aktivitaet</text>
+    <text x="380" y="692" text-anchor="middle" stroke="none" font-weight="700">passt?</text>
+
+    <path d="M260 676H140V426H244" fill="none" marker-end="url(#arrow-paar)"/>
+    <text x="202" y="660" text-anchor="middle" stroke="none" font-size="14" fill="#6f6a80">Nein</text>
+    <path d="M380 756V788" fill="none" marker-end="url(#arrow-paar)"/>
+    <text x="405" y="779" stroke="none" font-size="14" fill="#6f6a80">Ja</text>
+
+    <rect x="250" y="794" width="260" height="64" fill="#ffffff"/>
+    <text x="380" y="819" text-anchor="middle" stroke="none">Speichern oder</text>
+    <text x="380" y="839" text-anchor="middle" stroke="none">direkt planen</text>
+    <path d="M380 858V890" fill="none" marker-end="url(#arrow-paar)"/>
+
+    <rect x="250" y="896" width="260" height="54" fill="#ffffff"/>
+    <text x="380" y="928" text-anchor="middle" stroke="none">Upcoming / History / Bewertung</text>
+    <path d="M380 950V988" fill="none" marker-end="url(#arrow-paar)"/>
   </g>
-
-  <path d="M1095 214 V268 H682" stroke="#6d4cff" stroke-width="3" fill="none" marker-end="url(#arrow-paar)"/>
-  <g font-family="Inter, Arial, sans-serif">
-    <rect x="380" y="252" width="286" height="88" rx="18" fill="#ffffff" stroke="#e7ddff" filter="url(#shadow-paar)"/>
-    <text x="408" y="284" fill="#241f33" font-size="15" font-weight="800">6 Nachbearbeitung</text>
-    <text x="408" y="310" fill="#6f6a80" font-size="14">Als erledigt markieren, History</text>
-    <text x="408" y="330" fill="#6f6a80" font-size="14">öffnen und Erlebnis bewerten</text>
-    <rect x="40" y="265" width="285" height="64" rx="16" fill="#ffffff" stroke="#d8cdf4" stroke-dasharray="8 6"/>
-    <text x="62" y="293" fill="#4b2fd6" font-size="14" font-weight="800">Mögliche Frustration</text>
-    <text x="62" y="315" fill="#6f6a80" font-size="14">zu viele Optionen oder unklare Dauer</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="15" fill="#241f33" stroke="#241f33" stroke-width="2">
+    <rect x="270" y="994" width="220" height="58" rx="29" fill="#ffffff"/>
+    <text x="380" y="1030" text-anchor="middle" stroke="none" font-weight="700">Ende</text>
   </g>
 </svg>

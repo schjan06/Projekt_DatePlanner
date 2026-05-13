@@ -123,15 +123,32 @@ flowchart TD
     Recent --> Home
 ```
 
-Zusätzlich sind die einzelnen Journeys als editierbare Draw.io-Workflows im Ordner `docs` dokumentiert. Die Diagramme zeigen pro Persona den logischen Ablauf, die zentrale Entscheidung, die Folgeaktion sowie bewusst markierte Gaps.
+Zusätzlich sind die einzelnen Journeys als editierbare Draw.io-Workflows im Ordner `docs` dokumentiert. Die Diagramme sind als klassische Prozessdiagramme aufgebaut: Start und Ende sind als Ovale dargestellt, Aktivitätsschritte als Rechtecke, Entscheidungen als Rauten mit beschrifteten `Ja`-/`Nein`-Pfaden und noch offene Gaps als gestrichelte Elemente.
 
-| Draw.io-Workflow | Persona / Fokus | Diagramm |
-|---|---|---|
-| Paar-Flow: Quality Time planen | Lea Meier, gemeinsame Inspiration und Planung | ![Paar-Flow](docs/journey-paar-flow.drawio.svg) |
-| First-Date-Flow: sichere Idee finden | Nico Keller, Vibe prüfen und öffentlich planen | ![First-Date-Flow](docs/journey-first-date-flow.drawio.svg) |
-| Gruppen-Flow: gemeinsame Aktivität organisieren | Sara Baumann, mehrere Interessen koordinieren | ![Gruppen-Flow](docs/journey-gruppen-flow.drawio.svg) |
-| Time-Saver-Flow: schnelle Entscheidung | Mia Huber, wenige Klicks bis zum Termin | ![Time-Saver-Flow](docs/journey-time-saver-flow.drawio.svg) |
-| Creator-Flow: eigene Aktivität sichtbar machen | Jonas Frei, Aktivität erfassen und Sichtbarkeit prüfen | ![Creator-Flow](docs/journey-creator-flow.drawio.svg) |
+**Paar-Flow: Quality Time planen**  
+Lea Meier findet Inspiration, prüft eine Aktivität, plant sie und bewertet das Erlebnis danach.
+
+![Paar-Flow](docs/journey-paar-flow.drawio.svg)
+
+**First-Date-Flow: sichere Idee finden**  
+Nico Keller filtert nach Ort, Preis, Dauer und Bewertung, bevor er eine Date-Idee speichert oder plant.
+
+![First-Date-Flow](docs/journey-first-date-flow.drawio.svg)
+
+**Gruppen-Flow: gemeinsame Aktivität organisieren**  
+Sara Baumann sammelt und teilt Optionen, bis die Gruppe eine passende Aktivität planen kann.
+
+![Gruppen-Flow](docs/journey-gruppen-flow.drawio.svg)
+
+**Time-Saver-Flow: schnelle Entscheidung**  
+Mia Huber nutzt Schnellfilter oder zuletzt angesehene Ideen, um ohne lange Suche direkt zu planen.
+
+![Time-Saver-Flow](docs/journey-time-saver-flow.drawio.svg)
+
+**Creator-Flow: eigene Aktivität sichtbar machen**  
+Jonas Frei erfasst eine neue Aktivität, fügt Bilder hinzu und prüft danach die Sichtbarkeit in der App.
+
+![Creator-Flow](docs/journey-creator-flow.drawio.svg)
 
 | Journey | Einstiegspunkt | Such-/Filterprozess | Entscheidung | Folgeaktion | Nachbearbeitung | Mögliche Frustration | Benötigte Features |
 |---|---|---|---|---|---|---|---|
