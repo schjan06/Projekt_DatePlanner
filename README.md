@@ -30,6 +30,16 @@ VibeMatch adressiert das alltägliche Problem, dass gemeinsame Aktivitäten oft 
 - **Primäre Zielgruppe:** Paare, Freundesgruppen und kleine Gruppen, die gemeinsame Freizeitaktivitäten in der Schweiz schneller entdecken und planen möchten.
 - **Weitere Stakeholder [Optional]:** Sekundär profitieren Personen mit wenig Zeit, Singles oder First-Date-Situationen sowie mögliche lokale Anbieter von Aktivitäten. Im aktuellen Prototyp werden lokale Anbieter jedoch nicht als eigene Nutzerrolle umgesetzt.
 
+**Konkurrenzanalyse vor Projektstart:** Vor der Umsetzung wurden ähnliche Produktkategorien betrachtet, um wiederkehrende Muster und sinnvolle Abgrenzungen für VibeMatch abzuleiten. Die konkrete Liste der tatsächlich analysierten Webseiten muss für die Abgabe noch manuell mit Quellen ergänzt werden; die folgende Tabelle dokumentiert die fachliche Einordnung und die daraus übernommenen Produktentscheidungen.
+
+| Referenz / Produktkategorie | Beobachtete Funktionen | Erkenntnis für VibeMatch | Bewusste Abgrenzung |
+|---|---|---|---|
+| Event- und Freizeitplattformen, z. B. Eventbrite oder lokale Eventkalender | Suche, Kategorien, Datum, Ort, Ticket-/Event-Fokus | Aktivitäten müssen schnell scannbar, filterbar und lokal verständlich sein | VibeMatch verkauft keine Tickets und bildet keine Anbieterprozesse ab |
+| Karten- und Ausflugsplattformen, z. B. Google Maps, Outdoor- oder Tourismusportale | Kartenmarker, Ortsbezug, Bewertungen, Öffnungszeiten | Karte und Detailvorschau helfen bei der Entscheidung vor Ort | Keine Routenplanung, kein Live-Standort und kein produktives Geocoding |
+| Inspirations- und Social-Plattformen, z. B. Pinterest, Instagram oder lokale Blogs | Visuelle Karten, gespeicherte Ideen, Community-Impulse | Bilder, Wishlist und geteilte Erinnerungen machen Aktivitäten emotional greifbarer | Kein vollwertiges Social Network und keine Follower-/Kommentarlogik als MVP |
+| Dating- und Matching-Apps, z. B. Bumble Date Ideas oder Tinder-ähnliche Swipe-Muster | schnelle Entscheidung, spielerischer Vergleich, niedrige Einstiegshürde | Eine spätere Swipe-/Matching-Idee kann Entscheidungsmüdigkeit reduzieren | Fokus liegt auf Aktivitäten, nicht auf Personenmatching |
+| Planungs- und Kalender-Tools | Terminübersicht, Status, Erinnerungen | Aus Inspiration muss ein geplanter Termin werden | Kein Kalenderexport und kein Reminder-System im aktuellen Prototyp |
+
 ## 2. Lösungsidee
 VibeMatch ist eine Web-App für Inspiration, Auswahl und Planung gemeinsamer Aktivitäten. Die App fokussiert nicht auf Dating-Matching zwischen Personen, sondern auf passende Aktivitätsideen für Paare, Freundinnen und Freunde sowie Gruppen.
 
@@ -57,6 +67,16 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 | **Sara Baumann** | 34, Projektleiterin, organisiert Freizeitaktivitäten mit Freundesgruppe und Kolleginnen/Kollegen | Mittel bis hoch, nutzt Kalender und Gruppen-Chats | Gruppenaktivitäten schneller koordinieren und Ideen sammeln | Weniger Organisationsaufwand, faire Budgetauswahl, gemeinsame Entscheidung | Terminfindung, unterschiedliche Interessen, Logistik und Kosten | Sammelt mehrere Optionen, teilt Ideen, achtet auf Personenanzahl, Ort und Dauer | Gruppenfreundliche Suche, Teilen, Wishlist, Kalender und Community-Impulse | Kategorien, Preis/Dauer/Ort, Wishlist, Teilen, Upcoming/Kalender, Community, Aktivität erfassen |
 | **Mia Huber** | 41, Pflegefachfrau, lebt in Winterthur, wenig freie Zeit und unregelmässige Arbeitszeiten | Mittel, nutzt Apps pragmatisch, möchte wenig konfigurieren | In wenigen Minuten eine passende Aktivität finden und direkt planen | Zeit sparen, klare Vorschläge, wenig mentale Belastung nach der Arbeit | Zu viele Filter, lange Texte, unsichere Öffnungszeiten oder unklare Dauer | Nutzt schnelle Einstiege, entscheidet visuell, kehrt zu zuletzt angesehenen Ideen zurück | Sehr schnelle Suche, wenige Klicks, klare Metadaten und direkte Planung | Home, Schnellfilter, zuletzt angesehen, Detailseite, Planen, Upcoming |
 | **Jonas Frei** | 31, Vereinsmitglied und Freizeitorganisator aus St. Gallen, erstellt regelmässig Ideen für Gruppen | Hoch, ist bereit Formulare zu pflegen, erwartet aber klare Validierung | Eigene Aktivitätsideen erfassen, sichtbar machen und später verbessern | Lokale Ideen teilen, Gruppe inspirieren, neue Vorschläge in VibeMatch bringen | Wenn eigene Inhalte nicht auffindbar sind oder nachträglich nicht bearbeitet werden können | Füllt strukturierte Formulare aus, lädt Bilder hoch, prüft danach Detailseite und Filterbarkeit | Activity-Creation, Bild/Galerie, Sichtbarkeit in Listen, später Creator-Verwaltung | `/activities/new`, Bilder/Galerie, Detailseite, Kategorien, Profil, zukünftiges Bearbeiten/Löschen |
+
+#### Persona-zu-Journey-Zuordnung
+
+| Persona | Hauptjourney | In der App abgebildet? | Begründung |
+|---|---|---|---|
+| Lea Meier | Paar-Flow: Quality Time planen | Vollständig | Inspiration, Detailseite, Wishlist, Planen, Upcoming, History und Bewertung sind vorhanden |
+| Nico Keller | First-Date-Flow: sichere Idee finden | Weitgehend | Filter, Karte, Detailseite, Galerie, Reviews und Planung sind vorhanden; echte Sicherheits-/Verifizierungslogik fehlt bewusst |
+| Sara Baumann | Gruppen-Flow: gemeinsame Aktivität organisieren | Teilweise | Gruppentaugliche Filter, Teilen, Wishlist und Planung sind vorhanden; echte Gruppenabstimmung ist offen |
+| Mia Huber | Time-Saver-Flow: schnelle Entscheidung | Weitgehend | Schnellfilter, zuletzt angesehen und direkte Planung sind vorhanden; personalisierte Startvorschläge sind offen |
+| Jonas Frei | Creator-Flow: eigene Aktivität sichtbar machen | Teilweise | Aktivitätserfassung, Bilder und Sichtbarkeit in Listen sind vorhanden; Bearbeiten/Löschen eigener Aktivitäten fehlt |
 
 #### User Stories Nach Persona
 
@@ -169,6 +189,16 @@ Jonas Frei erfasst eine neue Aktivität, fügt Bilder hinzu und prüft danach di
 | Wie finden Personen mit wenig Zeit schnell eine Idee? | Home-Schnellfilter, zuletzt angesehen, direkte Planung | Ja | Personalisierte Startvorschläge |
 | Wie werden usergenerierte Aktivitäten verwaltet? | Aktivität erfassen und Detailseite | Teilweise | Creator-Bereich im Profil mit Bearbeiten/Löschen |
 
+Journey-Status:
+
+| Journey | Status | Begründung |
+|---|---|---|
+| Paar-Flow: Quality Time planen | Vollständig | Der gesamte Ablauf von Inspiration über Speichern/Planen bis History und Bewertung ist im Prototyp nutzbar |
+| First-Date-Flow: sichere Idee finden | Weitgehend | Filter, Karte, Detailentscheidung und Planung sind vorhanden; Verifizierung oder echte Sicherheitsmerkmale sind nicht Teil des MVP |
+| Gruppen-Flow: gemeinsame Aktivität organisieren | Teilweise | Suche, Teilen und Planung funktionieren; eine echte Abstimmung mit mehreren Personen fehlt |
+| Time-Saver-Flow: schnelle Entscheidung | Weitgehend | Home-Schnellfilter, zuletzt angesehen und Direktplanung sind vorhanden; personalisierte Vorschläge fehlen |
+| Creator-Flow: eigene Aktivität sichtbar machen | Teilweise | Neue Aktivitäten können erfasst und angezeigt werden; eigene Aktivitäten können noch nicht bearbeitet oder gelöscht werden |
+
 ### 3.4 Prototype
 
 #### 3.4.1. Entwurf (Design)
@@ -206,11 +236,27 @@ Screen-to-Journey-Mapping:
 | Swipe / Matching | spielerische gemeinsame Entscheidung | Paare, Gruppen | Nein |
 | Gruppenabstimmung | gemeinsame Auswahl über mehrere Personen | Sara | Nein |
 
+Routenübersicht der Pages:
+
+| Route | Zweck der Seite | Wichtigste UI-Elemente | Verwendete Daten | Journey-Bezug |
+|---|---|---|---|---|
+| `/login` | Einstieg, Login und Account-Erstellung | Login-Formular, Account-erstellen-Modus, Fehlermeldungen | `users`, `sessions` | Startpunkt aller geschützten Journeys |
+| `/` | Inspiration und schnelle Aktivitätswahl | Hero, Schnellfilter, Activity Cards, zuletzt angesehen, CTA zum Erfassen | `activities`, `wishlistItems`, `localStorage` | Paar-, Time-Saver- und Creator-Flow |
+| `/categories` | gezielte Suche und Filterung | Suche, Basisfilter, erweiterte Filter, Chips, Sortierung, Ergebnisliste | `activities`, Kategorien aus Activity-Daten | Paar-, First-Date- und Gruppen-Flow |
+| `/activity/[id]` | Detailentscheidung zu einer Aktivität | Hero-Galerie, Metadaten, Tipps, Reviews, Planen/Teilen/Wishlist | `activities`, `reviews`, `wishlistItems` | zentrale Entscheidung in fast allen Journeys |
+| `/wishlist` | gespeicherte Ideen vergleichen und planen | Wishlist-Cards, Sortierung, Planen-Button, Empty State | `wishlistItems`, `activities` | Paar- und Gruppen-Flow |
+| `/upcoming` | geplante Aktivitäten verwalten | Liste, Kalender, Bearbeitungsmodal, Abschliessen | `plannedActivities`, `activities` | Planungs- und Kalenderabschnitt |
+| `/history` | vergangene Aktivitäten nachbearbeiten | History Cards, Bewertung, Erinnerung, Favorit, Teilen | `historyItems`, `activities` | Nachbearbeitung und Erinnerungen |
+| `/community` | geteilte Ideen und Erinnerungen anzeigen | Community Cards, Tabs, Teilen-Interaktionen | `communityPosts`, `activities` | Gruppen- und Community-Flow |
+| `/map` | Aktivitäten räumlich entdecken | Leaflet-Karte, Marker, Such-/Filterpanel, Ergebnisliste | `activities` mit Koordinaten | First-Date- und Ortsentscheidung |
+| `/profile` | Userdaten, Vorlieben und Einstellungen | Profil-Header, Statistiken, Kategorien, Modals | `users`, `profiles`, userbezogene Zählwerte | Profil- und Multi-User-Validierung |
+| `/activities/new` | eigene Aktivität erfassen | Formular-Cards, Bild-Upload, Galerie, Vorschau, Speichern | `activities`, `users.createdBy` | Creator-Flow |
+
 Architekturdiagramm:
 
-![Architecture](doc/architecture.drawio.svg)
+![Architecture](docs/architecture.drawio.svg)
 
-TODO: Pfad des Architekturdiagramms abgleichen. Im Repository existiert aktuell `docs/architecture.drawio.svg`; gefordert ist der Markdown-Verweis auf `doc/architecture.drawio.svg`.
+Das Architekturdiagramm liegt als Draw.io-SVG im Ordner `docs`. Es dient als technischer Überblick und wird durch die textliche Systembeschreibung in Kapitel 3.4.2 ergänzt.
 
 Navigation der Webseite:
 
@@ -368,6 +414,64 @@ flowchart TD
     Profile -- "Logout" --> ApiLogout
 ```
 
+Routen- und API-Übersicht:
+
+| Route/API | Methode | Zweck | Datenquelle | Auth erforderlich | Journey-Bezug |
+|---|---|---|---|---|---|
+| `/login` | Page Actions / `POST /api/auth/login` | Login und Account-Erstellung | `users`, `sessions` | Nein | Einstieg |
+| `/` | Page Load | Inspiration, Schnellfilter, zuletzt angesehen | `activities`, `wishlistItems`, `localStorage` | Ja | Discover / Time-Saver |
+| `/categories` | Page Load | Aktivitäten suchen, filtern und sortieren | `activities` | Ja | Filter- und Gruppen-Flow |
+| `/activity/[id]` | Page Load | Detailseite, Galerie, Reviews, Aktionen | `activities`, `reviews`, `wishlistItems` | Ja | Entscheidung |
+| `/activities/new` | `POST /api/activities` | Aktivität erfassen und speichern | `activities`, `users` | Ja | Creator-Flow |
+| `/wishlist` / `/api/wishlist` | GET/POST/DELETE | Aktivitäten speichern, entfernen und planen | `wishlistItems`, `activities` | Ja | Speichern |
+| `/upcoming` / `/api/planned` | GET/POST/PATCH/DELETE | Termine planen, bearbeiten, entfernen, abschliessen | `plannedActivities`, `historyItems` | Ja | Planung/Kalender |
+| `/history` / `/api/history` | GET/PATCH | vergangene Aktivitäten bewerten und bearbeiten | `historyItems`, `activities` | Ja | Nachbearbeitung |
+| `/community` / `/api/community` | GET/POST | öffentliche Beiträge anzeigen und erstellen | `communityPosts`, `activities` | Ja | Teilen/Community |
+| `/map` | Page Load | Aktivitäten auf Karte anzeigen und filtern | `activities` mit Koordinaten | Ja | Ortsentscheidung |
+| `/profile` / `/api/profile` | GET/PUT | Profil, Statistiken, Vorlieben bearbeiten | `users`, `profiles`, userbezogene Collections | Ja | Profil/Userdaten |
+| `/api/reviews` | GET/POST | Reviews laden und speichern | `reviews`, `activities` | Ja | Bewertung |
+| `/api/support` | POST | Support-Feedback simulieren | Request-Daten, eingeloggter User | Ja | Einstellungen |
+
+Komponentenübersicht:
+
+| Komponente | Aufgabe | Eingaben/Props oder Daten | Einsatzort | Unterstützte Journey |
+|---|---|---|---|---|
+| `ActivityCard`, `ActivityGrid`, `ActivityListItem` | Aktivitäten als Cards oder Listen anzeigen | Activity-Daten, Wishlist-Status | Home, Kategorien, Wishlist, ähnliche Aktivitäten | Discover, Speichern |
+| `ActivityGallery`, `ActivityMeta` | Bildergalerie und Metadaten einer Aktivität darstellen | `image`, `gallery`, Dauer, Ort, Preis, Personen | Detailseite | Entscheidung |
+| `FilterPanel`, `FilterChip`, `SegmentedControl` | Suche, Filter, aktive Chips und Auswahlzustände | URL-Parameter, Kategorien, Filterwerte | Kategorienseite | Filter-Flow |
+| `PlanActivityModal`, `PlannedActivityModal`, `UpcomingCalendar` | Aktivität planen, Termine bearbeiten und Kalender anzeigen | Activity- und Planned-Daten | Detailseite, Wishlist, Upcoming | Planung/Kalender |
+| `ReviewModal`, `ReviewSummary`, `RatingStars` | Bewertung erfassen, Durchschnitt und Verteilung anzeigen | Reviews, Rating-Werte | Detailseite, History | Bewertung |
+| `ShareModal`, `CommunityPostCard` | Teilen und Community-Beiträge darstellen | Activity-, History- und Post-Daten | Detailseite, History, Community | Community |
+| `LeafletActivityMap` | Kartenmarker, Vorschau und Kartennavigation | Aktivitäten mit Koordinaten | Map-Page | Ortsentscheidung |
+| Profil-Modals und `StatCard` | Profil bearbeiten, Passwort, Notifications, Support, Logout | User-, Profile- und Statistikdaten | Profilseite | Profil/Userverwaltung |
+| `AppShell`, `Sidebar`, `Topbar`, `MobileNav`, `NavIcon` | globale Navigation und App-Rahmen | Layout-Daten, User, Wishlist-Zähler | alle geschützten Pages | Orientierung |
+| `Toast`, `EmptyState` | Feedback und leere Zustände anzeigen | UI-State, Meldungen | App-weit | UX-Qualität |
+
+ER-Modell:
+
+![ER-Modell](docs/er-model.drawio.svg)
+
+| Entität / Collection | Wichtigste Attribute | Beziehung zu Funktionen |
+|---|---|---|
+| `users` | `id`, `username`, `email`, `passwordHash`, `preferences`, `createdAt` | Login, Profil, Multi-User-Trennung |
+| `sessions` | `tokenHash`, `userId`, `expiresAt` | Cookie-Session `vm_session` und Auth-Guard |
+| `profiles` | `userId`, Legacy-/Demo-Profildaten | ergänzende Profildaten und Seed-Kompatibilität |
+| `activities` | `id`, `title`, `categories`, `location`, `image`, `gallery`, `createdBy`, `status` | Feed, Detailseite, Filter, Map, Activity-Creation |
+| `wishlistItems` | `userId`, `activityId`, `createdAt` | Wishlist und direktes Planen aus gespeicherten Ideen |
+| `plannedActivities` | `id`, `userId`, `activityId`, `date`, `time`, `status` | Upcoming, Kalender, Abschliessen |
+| `historyItems` | `id`, `userId`, `activityId`, `rating`, `memory`, `favorite` | Erinnerungen, Bewertung, Teilen |
+| `reviews` | `id`, `activityId`, `userId`, `rating`, `comment`, `visitDate` | Detailseite, Review-Zusammenfassung, Activity-Rating |
+| `communityPosts` | `id`, `userId`, `activityId`, `text`, `visibility`, `likes` | Community-Feed und geteilte Erinnerungen |
+
+Systemarchitektur:
+
+- **Frontend:** SvelteKit/Svelte Pages und Komponenten unter `src/routes` und `src/lib/components`; AppShell mit Sidebar/Topbar/MobileNav für geschützte Bereiche.
+- **Backend/API:** SvelteKit Server Loads und API-Routen unter `src/routes/api`; zentrale Businesslogik und MongoDB-Zugriffe in `src/lib/server/repositories.js`.
+- **Datenbank:** MongoDB mit Collections für User, Sessions, Aktivitäten, Reviews, Wishlist, Planung, History, Community und Profile; Seed-Daten unter `src/lib/data`.
+- **Authentifizierung:** Session-Cookie `vm_session`, gehashte Session-Tokens in `sessions`, Passwort-Hashing mit `scrypt`, Route-Schutz über `hooks.server.js`.
+- **Externe Dienste:** Leaflet mit OpenStreetMap-Tiles für die Karte; externe kuratierte Bild-URLs für Seed-Aktivitäten.
+- **Notification-/E-Mail-Konzept:** Benachrichtigungseinstellungen sind prototypisch gespeichert; es gibt bewusst keinen echten E-Mail-, Push- oder SMTP-Versand.
+
 ### 3.5 Validate
 - **URL der getesteten Version** (separat deployt): TODO: Deployment- oder Test-URL ergänzen.
 - **Ziele der Prüfung:** Validiert werden soll, ob Nutzerinnen und Nutzer schnell eine passende Aktivität finden, Filter verstehen, eine Aktivität speichern oder planen können und ob Detailseite, Karte, Bewertungsmodal, Login, Profil und Aktivitätserfassung nachvollziehbar sind.
@@ -499,12 +603,32 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 - **MVP-Fokus:** Für die aktuelle Abgabe sind die Kernflows bereits abgedeckt. Am wertvollsten für spätere Entwicklung wären eigene Aktivitäten bearbeiten/löschen für Creator, schnellere Startvorschläge für Nutzer mit wenig Zeit, Gruppenabstimmung und bessere Map-Integration neuer Aktivitäten.
 - **Bewusste Abgrenzung:** Kein Payment, kein Buchungssystem, kein Anbieterportal, kein OAuth, kein produktives Social Network und kein vollständiges Rollen-/Rechtesystem.
 
+### 4.11 Funktionen und mögliche Erweiterungen nach Priorität
+- **Beschreibung & Nutzen:** Die folgende Tabelle fasst bestehende Funktionen und geplante Erweiterungen fachlich zusammen. Sie verbindet MVP-Relevanz, User Journeys und technische Bereiche, damit spätere Umsetzungsschritte direkt aus der Dokumentation ableitbar sind.
+
+| Funktion | Status | Priorität | Nutzen | Betroffene Journey | Technische Bereiche |
+|---|---|---|---|---|---|
+| Erinnerungen / History | Umgesetzt | Must | Erlebnisse nachbearbeiten, bewerten und teilen | Paar-, Gruppen- und First-Date-Flow | `historyItems`, `/history`, History-API |
+| Community Map / Kartenansicht | Teilweise umgesetzt | Must/Should | lokale Aktivitäten räumlich entdecken und filtern | First-Date- und Gruppen-Flow | `/map`, `LeafletActivityMap`, `activities.latitude/longitude` |
+| Matching-/Swipe-Funktion | Offen | Could | spielerischer Vergleich und schnellere Entscheidung | Paar- und Gruppen-Flow | zukünftige Discovery-Komponente, optional `activityVotes` |
+| Aktivitäts-Erstellung | Umgesetzt | Must | User können eigene Ideen in die App einbringen | Creator-Flow | `/activities/new`, `POST /api/activities`, `activities.createdBy` |
+| Bewertungen und Review-Zusammenfassung | Umgesetzt | Must | Entscheidungen werden glaubwürdiger | Detailentscheidung, First-Date-Flow | `reviews`, `ReviewSummary`, `RatingStars` |
+| Wishlist | Umgesetzt | Must | Ideen sammeln, vergleichen und direkt planen | Paar- und Gruppen-Flow | `wishlistItems`, `/wishlist`, Wishlist-API |
+| Geplante Aktivitäten / Kalender | Umgesetzt | Must | aus Ideen werden konkrete Termine | Planungs-Flow | `plannedActivities`, `/upcoming`, Planned-API |
+| Eigene Aktivitäten bearbeiten/löschen | Offen | Should | Creator können Fehler korrigieren und Inhalte pflegen | Creator-Flow | zukünftiges `PATCH/DELETE /api/activities/[id]` |
+| Gruppenabstimmung | Offen | Should | mehrere Personen können gemeinsam entscheiden | Gruppen-Flow | zukünftige Voting- oder Shared-List-Logik |
+| Personalisierte Empfehlungen | Offen | Could | weniger Suchaufwand und relevantere Startvorschläge | Time-Saver-Flow | Profilpräferenzen, Wishlist-/History-Auswertung |
+
 ## 5. Projektorganisation [Optional]
 - **Repository & Struktur:** Dieses Repository enthält den SvelteKit-Prototyp für VibeMatch. Wichtige Bereiche sind `src/routes` für Pages und API-Routen, `src/lib/components` für UI-Komponenten, `src/lib/data` für Demo-/Seed-Daten, `src/lib/server` für MongoDB-Zugriffe und `docs` für Dokumentationsartefakte.
 - **Issue-Management:** Anforderungen wurden in einzelne Feature- und Qualitäts-Issues aufgeteilt, z. B. Bildergalerie, Home-Schnellfilter, Filterchips/Sortierung, Login/User-System, interaktive Profilseite und Aktivität erfassen. TODO: GitHub-Issue-Links ergänzen, falls sie für die Abgabe referenziert werden sollen.
 - **Commit-Praxis:** Änderungen sollten pro Feature oder Dokumentationsschritt nachvollziehbar committed werden, z. B. `feat: add activity gallery`, `feat: add login system`, `docs: update README for profile features`. TODO: Tatsächliche Commit-Historie prüfen und kurz beschreiben.
 - **Dokumentationsregel:** Bei jeder neuen Funktion wird die README im gleichen Arbeitsschritt aktualisiert. Die Kapitelstruktur darf nicht verändert werden. Neue Features werden in Kapitel 4 beschrieben; Designauswirkungen werden in 3.4.1 ergänzt; technische Details, Routen, APIs und Datenmodelländerungen werden in 3.4.2 ergänzt. Unsichere oder noch nicht getestete Punkte werden als TODO markiert.
 - **Qualitätssicherung:** Vor Abschluss eines Features wird geprüft, ob Routing, API, UI, Datenmodell, Fehlermeldungen, Mobile-Darstellung, README und manuelle Testhinweise konsistent sind.
+- **Rollen & Aufgabenverteilung:** Das Projekt wird in der Dokumentation als studentischer Prototyp geführt. Falls es sich um ein Einzelprojekt handelt, liegen Konzeption, UX, Frontend, Backend, Datenmodell, Testing und Dokumentation bei einer Person; KI wurde unterstützend für Analyse, Planung, Textentwürfe und Codeunterstützung eingesetzt. Falls Teammitglieder beteiligt waren, müssen Namen und Zuständigkeiten hier manuell ergänzt werden.
+- **Arbeitsweise:** Die Umsetzung erfolgte iterativ entlang konkreter Issues und Workflows. Typischer Ablauf: fachliches Ziel klären, Codebasis analysieren, Plan erstellen, Funktion umsetzen, Build prüfen, manuell testen und README aktualisieren.
+- **Verwendete Tools:** SvelteKit, Svelte 5, JavaScript, MongoDB, Node/npm, Draw.io, Figma, Git/GitHub, VS Code sowie KI-Assistenz für Planung, Analyse und Dokumentationsarbeit.
+- **Planung & Testing:** Features werden anhand von User Journeys priorisiert. Für technische Prüfung wird `npm.cmd run build` genutzt; für fachliche Prüfung dienen manuelle Testchecklisten im Anhang.
 
 ## 6. KI-Deklaration
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
@@ -522,9 +646,52 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 
 ## 7. Anhang [Optional]
 - **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. TODO: Bildlizenzen und externe Assets vollständig prüfen und ergänzen.
-- **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1. TODO: Pfad `doc/architecture.drawio.svg` und vorhandene Datei `docs/architecture.drawio.svg` angleichen.
+- **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1; verwendeter Pfad: `docs/architecture.drawio.svg`.
 - **Testskript & Materialien:** TODO: Testskript für Validate ergänzen.
 - **Rohdaten/Auswertung:** TODO: Ergebnisse der Nutzertests nach Durchführung ablegen und verlinken.
+
+**Artefaktübersicht:**
+
+| Artefakt | Dateipfad / Link | Zweck | Bezug zum Projekt | Status |
+|---|---|---|---|---|
+| Gesamtdokumentation | `README.md` | zentrale fachliche, technische und organisatorische Dokumentation | Abgabe, Nachvollziehbarkeit, Requirements | vorhanden |
+| Crazy-8-Skizze | `docs/Crazy 8.jpg` | frühe Ideenskizzen und Variantenfindung | Sketch-Phase | vorhanden |
+| Architekturdiagramm | `docs/architecture.drawio.svg` | technischer Überblick über Systembestandteile | Prototype / Technik | vorhanden, fachlich noch prüfbar |
+| ER-Modell | `docs/er-model.drawio.svg` | Datenmodell und Collection-Beziehungen | Datenbank, APIs, User Journeys | ergänzt |
+| Paar-Flow | `docs/journey-paar-flow.drawio.svg` | Prozessdiagramm für Quality-Time-Journey | Lea / Paar-Flow | vorhanden |
+| First-Date-Flow | `docs/journey-first-date-flow.drawio.svg` | Prozessdiagramm für sichere Date-Idee | Nico / First-Date-Flow | vorhanden |
+| Gruppen-Flow | `docs/journey-gruppen-flow.drawio.svg` | Prozessdiagramm für Gruppenorganisation | Sara / Gruppen-Flow | vorhanden |
+| Time-Saver-Flow | `docs/journey-time-saver-flow.drawio.svg` | Prozessdiagramm für schnelle Entscheidung | Mia / Time-Saver-Flow | vorhanden |
+| Creator-Flow | `docs/journey-creator-flow.drawio.svg` | Prozessdiagramm für Aktivitätserfassung | Jonas / Creator-Flow | vorhanden |
+| Seed-Daten | `src/lib/data/*.js` | Demo-Aktivitäten, Reviews, History, Community und Profile | Testdaten und Datenmodell | vorhanden |
+| SvelteKit-Routen | `src/routes/**` | Pages und API-Endpunkte | App-Implementierung | vorhanden |
+| UI-Komponenten | `src/lib/components/**` | wiederverwendbare UI-Bausteine | Designsystem und Journeys | vorhanden |
+| Serverlogik | `src/lib/server/**` | Auth, DB und Repository-Funktionen | Backend/API | vorhanden |
+| Figma-Mockup | Figma-Link in Kapitel 3.3 | frühe Mockup-Referenz | Decide/Prototype | vorhanden, Screenshots TODO |
+| GitHub Issues | TODO: Links ergänzen | Planung und Nachvollziehbarkeit einzelner Features | Projektorganisation | offen |
+| Präsentationsunterlagen | TODO: Pfad/Link ergänzen | Abgabepräsentation oder Video-Walkthrough | Abschluss | offen |
+
+**Offene manuelle Ergänzungen:**
+
+| Thema | Warum offen? | Empfohlene Ergänzung |
+|---|---|---|
+| konkrete Konkurrenzprodukte | muss mit tatsächlich analysierten Quellen abgeglichen werden | Namen, Links und Datum der Analyse ergänzen |
+| Teamrollen | hängt von realer Projektorganisation ab | Teammitglieder oder Einzelprojekt explizit eintragen |
+| GitHub Issues | Links sind im README noch nicht referenziert | relevante Issue-Nummern und Labels ergänzen |
+| Validierung | Nutzertests sind als TODO markiert | Testpersonen, Beobachtungen und Resultate dokumentieren |
+| Deployment | Test-/Produktions-URL fehlt | finale URL ergänzen |
+| Bild- und Asset-Lizenzen | externe Bildquellen müssen final geprüft werden | Quellen und Lizenzhinweise vervollständigen |
+
+**Dokumentations-Checkliste:**
+
+- Konkurrenzanalyse ist mit Quellen und Abgrenzung dokumentiert.
+- Personas, User Stories und User Journeys sind auf bestehende App-Funktionen rückführbar.
+- Routen, APIs und Komponenten sind fachlich und technisch beschrieben.
+- ER-Modell und Architekturdiagramm sind eingebunden.
+- Erweiterungen sind nach Must/Should/Could priorisiert.
+- Projektorganisation, Tools und Arbeitsweise sind nachvollziehbar.
+- Offene Punkte sind als TODO oder `offen` markiert und nicht als umgesetzt dargestellt.
+
 - **Journey-Testcheckliste für Walkthrough und Validierung:**
   - **Lea / Paar-Flow:** Einloggen, Home öffnen, Schnellfilter nutzen, Detailseite vergleichen, Aktivität speichern, aus Wishlist planen, Termin im Kalender prüfen, als erledigt markieren und in History bewerten.
   - **Nico / First-Date-Flow:** Kategorie-/Preis-/Dauerfilter setzen, sichere öffentliche Aktivität wählen, Reviews und Galerie prüfen, Karte öffnen, Detailseite erneut öffnen und Aktivität planen.
