@@ -46,7 +46,43 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 ### 3.1 Understand & Define
 - **Zielgruppenverständnis:** Ausgangspunkt war die Beobachtung, dass gemeinsame Aktivitätswahl im Alltag oft unklar, langwierig oder frustrierend ist. Als primäre Proto-Personas wurden Paare und kleine Gruppen angenommen, die schnell passende Ideen in ihrer Nähe suchen. Ergänzend wurden Personen mit wenig Zeit und First-Date-Situationen als sekundäre Zielgruppen betrachtet.
 - **Wesentliche Erkenntnisse:** Entscheidungsmüdigkeit ist ein zentrales Problem. Lokale Vorschläge, einfache Filter, visuelle Cards, Bewertungen und eine Wishlist können helfen, Optionen schneller einzugrenzen. Aus der Reflexion des Entscheidungsprozesses ging hervor, dass die Idee wegen Alltagsrelevanz, visueller Umsetzbarkeit und Nutzen für mehrere Zielgruppen gewählt wurde.
-- **Artefakte:** Reflexion des Entscheidungsprozesses, Übung 10 zum Prototyping-Workflow, Methodik-Unterlagen Woche 9. TODO: Proto-Personas und User Journey mit finalen Screenshots oder separaten Artefakten ergänzen.
+- **Artefakte:** Reflexion des Entscheidungsprozesses, Übung 10 zum Prototyping-Workflow, Methodik-Unterlagen Woche 9, Proto-Personas, User Stories und User Journey Flows. Die folgenden Personas und Journeys sind direkt auf den aktuellen Prototyp rückführbar und dienen als Grundlage für Requirements Engineering, Validierung und spätere Erweiterungen.
+
+#### Proto-Personas
+
+| Persona | Profil | Technisches Verständnis | Ziele | Motivation | Frustrationen | Typisches Verhalten | Erwartung an VibeMatch | Relevante Features |
+|---|---|---|---|---|---|---|---|---|
+| **Lea Meier** | 29, Marketing Managerin, lebt in Zürich, seit mehreren Jahren in einer Beziehung | Hoch im Alltag, nutzt viele Apps, erwartet schnelle Bedienung | Wieder mehr gemeinsame Quality Time planen, ohne lange Diskussion | Abwechslung, gemeinsame Erinnerungen, einfache Inspiration nach Stimmung | Routine, zu viele Optionen, unterschiedliche Budgets und Zeitfenster | Öffnet Apps spontan abends oder am Wochenende, vergleicht visuelle Vorschläge, speichert Ideen für später | Schnelle Inspiration, Filter nach Stimmung/Budget/Dauer, Wishlist, Kalender und History | Home, Schnellfilter, Kategorien, Detailseite, Wishlist, Planen, Upcoming, History, Bewertungen |
+| **Nico Keller** | 26, Softwareentwickler, Single, plant ein erstes Date in St. Gallen | Sehr hoch, achtet auf klare Informationen und Bewertungen | Eine lockere, sichere Date-Idee finden, die Gesprächspausen reduziert | Ein guter erster Eindruck, entspannte Atmosphäre, öffentlicher Ort | Unsicherheit beim passenden Vibe, Angst vor langweiligen Standarddates | Prüft Bewertungen, Bilder, Ort und Dauer genau, bevorzugt sichere öffentliche Orte | Verlässliche Detailinfos, Review-Zusammenfassung, Karte, Preis-/Dauerfilter und Planung | Filter, Map, Detailseite, Galerie, Reviews, Planungsmodal, Wishlist |
+| **Sara Baumann** | 34, Projektleiterin, organisiert Freizeitaktivitäten mit Freundesgruppe und Kolleginnen/Kollegen | Mittel bis hoch, nutzt Kalender und Gruppen-Chats | Gruppenaktivitäten schneller koordinieren und Ideen sammeln | Weniger Organisationsaufwand, faire Budgetauswahl, gemeinsame Entscheidung | Terminfindung, unterschiedliche Interessen, Logistik und Kosten | Sammelt mehrere Optionen, teilt Ideen, achtet auf Personenanzahl, Ort und Dauer | Gruppenfreundliche Suche, Teilen, Wishlist, Kalender und Community-Impulse | Kategorien, Preis/Dauer/Ort, Wishlist, Teilen, Upcoming/Kalender, Community, Aktivität erfassen |
+| **Mia Huber** | 41, Pflegefachfrau, lebt in Winterthur, wenig freie Zeit und unregelmässige Arbeitszeiten | Mittel, nutzt Apps pragmatisch, möchte wenig konfigurieren | In wenigen Minuten eine passende Aktivität finden und direkt planen | Zeit sparen, klare Vorschläge, wenig mentale Belastung nach der Arbeit | Zu viele Filter, lange Texte, unsichere Öffnungszeiten oder unklare Dauer | Nutzt schnelle Einstiege, entscheidet visuell, kehrt zu zuletzt angesehenen Ideen zurück | Sehr schnelle Suche, wenige Klicks, klare Metadaten und direkte Planung | Home, Schnellfilter, zuletzt angesehen, Detailseite, Planen, Upcoming |
+| **Jonas Frei** | 31, Vereinsmitglied und Freizeitorganisator aus St. Gallen, erstellt regelmässig Ideen für Gruppen | Hoch, ist bereit Formulare zu pflegen, erwartet aber klare Validierung | Eigene Aktivitätsideen erfassen, sichtbar machen und später verbessern | Lokale Ideen teilen, Gruppe inspirieren, neue Vorschläge in VibeMatch bringen | Wenn eigene Inhalte nicht auffindbar sind oder nachträglich nicht bearbeitet werden können | Füllt strukturierte Formulare aus, lädt Bilder hoch, prüft danach Detailseite und Filterbarkeit | Activity-Creation, Bild/Galerie, Sichtbarkeit in Listen, später Creator-Verwaltung | `/activities/new`, Bilder/Galerie, Detailseite, Kategorien, Profil, zukünftiges Bearbeiten/Löschen |
+
+#### User Stories Nach Persona
+
+| Persona | User Story | Priorität | Betroffene Seiten/Funktionen | Bereits implementiert? |
+|---|---|---:|---|---|
+| Lea | Als Lea möchte ich schnell passende Vorschläge nach Stimmung und Budget sehen, damit wir nicht lange diskutieren müssen. | Must | Home, Schnellfilter, Kategorien | Ja |
+| Lea | Als Lea möchte ich Aktivitäten speichern, damit ich sie später mit meinem Partner vergleichen kann. | Must | Activity Cards, Detailseite, Wishlist | Ja |
+| Lea | Als Lea möchte ich eine gespeicherte Idee direkt planen, damit aus Inspiration ein konkreter Termin wird. | Must | Wishlist, PlanActivityModal, Upcoming | Ja |
+| Lea | Als Lea möchte ich vergangene Aktivitäten bewerten und kommentieren, damit wir gute Erlebnisse wiederfinden. | Should | History, Reviews, Community | Ja |
+| Nico | Als Nico möchte ich sichere und lockere Date-Ideen nach Ort, Preis und Dauer filtern, damit das erste Treffen entspannt bleibt. | Must | Kategorien, Filter, Map | Ja |
+| Nico | Als Nico möchte ich Bewertungen und Review-Verteilung prüfen, damit ich eine glaubwürdige Entscheidung treffen kann. | Should | Detailseite, ReviewSummary, RatingStars | Ja |
+| Nico | Als Nico möchte ich Aktivitäten auf einer Karte sehen, damit ich einen gut erreichbaren Treffpunkt wählen kann. | Should | Map, Leaflet, Detailvorschau | Ja |
+| Nico | Als Nico möchte ich eine Date-Idee erst speichern und später planen, damit ich nicht sofort entscheiden muss. | Should | Wishlist, Planen, Upcoming | Ja |
+| Sara | Als Sara möchte ich Aktivitäten nach Gruppentauglichkeit, Dauer und Budget filtern, damit die Idee für mehrere Personen passt. | Must | Kategorien, erweiterte Filter | Ja |
+| Sara | Als Sara möchte ich eine Aktivität teilen, damit andere die Idee sehen und darauf reagieren können. | Should | ShareModal, Community | Teilweise |
+| Sara | Als Sara möchte ich geplante Aktivitäten im Kalender verschieben, damit die Organisation flexibel bleibt. | Should | Upcoming, Kalender, PlannedActivityModal | Ja |
+| Sara | Als Sara möchte ich eigene Aktivitätsideen erfassen, damit die Gruppe nicht nur aus Seed-Vorschlägen auswählt. | Could | `/activities/new`, Activity-Creation | Ja |
+| Sara | Als Sara möchte ich Gruppenabstimmungen durchführen, damit mehrere Personen gemeinsam entscheiden können. | Could | Voting/Matching-Idee | Nein |
+| Mia | Als Mia möchte ich mit wenigen Klicks passende Vorschläge sehen, damit ich nach der Arbeit keine lange Suche starten muss. | Must | Home, Schnellfilter, Kategorien | Ja |
+| Mia | Als Mia möchte ich zuletzt angesehene Aktivitäten wiederfinden, damit ich eine gute Idee später schnell erneut öffnen kann. | Should | Home, Detailseite, localStorage | Ja |
+| Mia | Als Mia möchte ich eine Aktivität direkt planen, damit ich aus einer schnellen Entscheidung sofort einen Termin machen kann. | Must | Detailseite, PlanActivityModal, Upcoming | Ja |
+| Mia | Als Mia möchte ich personalisierte Empfehlungen sehen, damit ich noch weniger filtern muss. | Could | Empfehlungen, Profilpräferenzen | Nein |
+| Jonas | Als Jonas möchte ich eine eigene Aktivität mit Bildern erfassen, damit meine Gruppe neue lokale Ideen in VibeMatch sieht. | Must | `/activities/new`, Upload, `POST /api/activities` | Ja |
+| Jonas | Als Jonas möchte ich prüfen, ob meine Aktivität in Listen und auf der Detailseite sichtbar ist, damit ich weiss, dass sie nutzbar ist. | Should | Home, Kategorien, Detailseite | Ja |
+| Jonas | Als Jonas möchte ich eigene Aktivitäten später bearbeiten oder löschen, damit fehlerhafte Angaben korrigiert werden können. | Should | Creator-Verwaltung, Activity-API | Nein |
+| Jonas | Als Jonas möchte ich sehen, welche Aktivitäten von ihm erstellt wurden, damit er seine Ideen im Profil verwalten kann. | Could | Profil, eigene Aktivitäten | Nein |
 
 ### 3.2 Sketch
 - **Variantenüberblick:** In der Sketch-Phase wurden mehrere Ansätze geprüft, darunter Detailansicht, Planen, Bewertungen, Kartenansicht, History/Erinnerungen, Upcoming Events und Community-/Teilen-Funktionen.
@@ -61,6 +97,60 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 - **Gewählte Variante & Begründung:** Gewählt wurde eine Dashboard-artige Web-App mit Sidebar-Navigation, Aktivitätscards, Detailseiten und klaren Folgeaktionen. Diese Variante unterstützt den zentralen Use Case am besten: Inspiration finden, Aktivität prüfen, speichern, planen, bewerten oder teilen.
 - **End-to-End-Ablauf:** Der bisherige Figma-/Mockup-Workflow startet auf der Hauptseite, zeigt kommende oder vorgeschlagene Aktivitäten, führt über einen `Details`-Klick zur Aktivitätsdetailseite und erlaubt dort das Teilen einer Aktivität. Im aktuellen Prototyp wurde dieser Ablauf erweitert: Login -> Home -> Detailseite -> Wishlist/Planen/Teilen/Bewerten sowie Home -> Wishlist -> direkt planen -> Upcoming -> als erledigt markieren -> History.
 - **Mockup:** Figma-Link aus Übung 10: https://www.figma.com/design/E7gsRcP1iqdcxWtTci8CYT/Prototyping_Mockups-f%C3%BCr-Projekt?node-id=0-1&t=3vTtEWy7cSfTMhxj-1. TODO: Finale Figma-Screenshots und kurze Beschreibungen in die Dokumentation oder den Anhang aufnehmen.
+
+#### User Journey Flows Als Entscheidungsgrundlage
+
+Die folgenden Journeys wurden für den Prototyp priorisiert, weil sie die wichtigsten Zielgruppen und Kernfunktionen abdecken.
+
+```mermaid
+flowchart TD
+    Start["Login / Account erstellen"] --> Home["Home / Inspiration"]
+    Home --> Filters["Schnellfilter oder Kategorienseite"]
+    Filters --> Detail["Aktivitätsdetailseite"]
+    Detail --> Wishlist["Speichern in Wishlist"]
+    Detail --> Plan["Aktivität planen"]
+    Wishlist --> Plan
+    Plan --> Upcoming["Kommende Aktivitäten / Kalender"]
+    Upcoming --> History["Als erledigt markieren / History"]
+    History --> Review["Bewerten, Erinnerung bearbeiten, teilen"]
+    Review --> Community["Community-Beitrag"]
+
+    Detail --> Map["Karte / Ort prüfen"]
+    Map --> Detail
+    Home --> Create["Aktivität erfassen"]
+    Create --> Detail
+    Detail --> Recent["Zuletzt angesehen"]
+    Recent --> Home
+```
+
+Zusätzlich sind die einzelnen Journeys als editierbare Draw.io-Workflows im Ordner `docs` dokumentiert. Die Diagramme zeigen pro Persona den logischen Ablauf, die zentrale Entscheidung, die Folgeaktion sowie bewusst markierte Gaps.
+
+| Draw.io-Workflow | Persona / Fokus | Diagramm |
+|---|---|---|
+| Paar-Flow: Quality Time planen | Lea Meier, gemeinsame Inspiration und Planung | ![Paar-Flow](docs/journey-paar-flow.drawio.svg) |
+| First-Date-Flow: sichere Idee finden | Nico Keller, Vibe prüfen und öffentlich planen | ![First-Date-Flow](docs/journey-first-date-flow.drawio.svg) |
+| Gruppen-Flow: gemeinsame Aktivität organisieren | Sara Baumann, mehrere Interessen koordinieren | ![Gruppen-Flow](docs/journey-gruppen-flow.drawio.svg) |
+| Time-Saver-Flow: schnelle Entscheidung | Mia Huber, wenige Klicks bis zum Termin | ![Time-Saver-Flow](docs/journey-time-saver-flow.drawio.svg) |
+| Creator-Flow: eigene Aktivität sichtbar machen | Jonas Frei, Aktivität erfassen und Sichtbarkeit prüfen | ![Creator-Flow](docs/journey-creator-flow.drawio.svg) |
+
+| Journey | Einstiegspunkt | Such-/Filterprozess | Entscheidung | Folgeaktion | Nachbearbeitung | Mögliche Frustration | Benötigte Features |
+|---|---|---|---|---|---|---|---|
+| **Paar-Flow: Quality Time planen** | Login -> Home | Schnellfilter nach Stimmung, Budget, Dauer oder Kategorienseite | Vergleich über Bilder, Metadaten, Reviews und Tipps | Wishlist oder direkt planen | Upcoming, Kalender, History, Bewertung | Zu viele Optionen oder unklare Dauer | Home, Filter, Detailseite, Wishlist, Planen, Kalender, History |
+| **First-Date-Flow: sichere Idee finden** | Home oder Map | Filter nach Ort, Preis, Dauer, Indoor/Outdoor und Bewertung | Detailseite mit Galerie, Review-Zusammenfassung und Anforderungen | Aktivität planen oder für später speichern | Nach Date bewerten und Erinnerung ergänzen | Unsicherheit, ob Ort und Vibe passen | Kategorien, Map, Detailseite, Reviews, Planungsmodal |
+| **Gruppen-Flow: gemeinsame Aktivität organisieren** | Kategorien oder Wishlist | Filter nach Personenanzahl, Budget, Ort, Dauer und Kategorie | Mehrere Optionen speichern oder teilen | Termin im Kalender verwalten | Als erledigt markieren, teilen, Community-Beitrag | Unterschiedliche Interessen, Terminfindung, fehlende Abstimmung | Erweiterte Filter, Wishlist, Teilen, Upcoming, Community |
+| **Time-Saver-Flow: schnelle Entscheidung** | Home | Schnellfilter oder zuletzt angesehen, möglichst ohne tiefe Konfiguration | Kurzer Vergleich über Card, Dauer, Preis und Detailseite | Direkt planen | Upcoming prüfen und später erledigen | Zu viele Auswahlmöglichkeiten, zu viele Formularschritte | Home, Schnellfilter, zuletzt angesehen, Detailseite, Planen |
+| **Creator-Flow: eigene Aktivität sichtbar machen** | Sidebar `Erfassen` oder Home-Button | Formular mit Kategorien, Ort, Eigenschaften und Bildern | Live-Vorschau und Pflichtfeldvalidierung | Speichern und Redirect zur Detailseite | Sichtbarkeit in Home/Kategorien prüfen | Fehlende Bearbeiten-/Löschen-Funktion nach dem Speichern | `/activities/new`, `POST /api/activities`, Galerie, Detailseite |
+
+| Entscheidungspunkt | Aktuelle Lösung | Status | Nächste mögliche Verbesserung |
+|---|---|---|---|
+| Welche Aktivität passt zur Situation? | Schnellfilter, Kategorien, Suche, Sortierung | Ja | Personalisierte Empfehlungen auf Basis von Profil/Wishlist |
+| Ist die Aktivität glaubwürdig? | Bewertungen, Review-Zusammenfassung, Bildergalerie | Ja | Moderierte oder verifizierte Reviews |
+| Wo findet die Aktivität statt? | Map mit Stadt-, Kategorie-, Preis- und Dauerfilter | Ja | Geocoding für neue Aktivitäten ohne Koordinaten |
+| Wie wird aus einer Idee ein Termin? | Planungsmodal, Wishlist-Direktplanung, Upcoming/Kalender | Ja | Reminder oder Kalenderexport |
+| Wie entscheidet eine Gruppe gemeinsam? | Teilen und Community-Prototyp | Teilweise | Gruppenabstimmung oder Voting-Link |
+| Wie werden eigene Ideen gepflegt? | Aktivität erfassen | Teilweise | Eigene Aktivitäten bearbeiten/löschen |
+| Wie finden Personen mit wenig Zeit schnell eine Idee? | Home-Schnellfilter, zuletzt angesehen, direkte Planung | Ja | Personalisierte Startvorschläge |
+| Wie werden usergenerierte Aktivitäten verwaltet? | Aktivität erfassen und Detailseite | Teilweise | Creator-Bereich im Profil mit Bearbeiten/Löschen |
 
 ### 3.4 Prototype
 
@@ -78,6 +168,26 @@ Beschreibt die Gestaltung und Interaktion.
 - **Kommende Aktivitäten:** Die Page besitzt eine Listenansicht und eine moderne Kalenderansicht. Der Kalender zeigt geplante Aktivitäten in einer Monatsansicht, markiert den heutigen Tag, bietet Monatsnavigation und zeigt Details zum ausgewählten Tag. Termine können über ein Modal bearbeitet oder aus der Planung entfernt werden; auf Desktop ist zusätzlich ein einfaches Drag-&-Drop-Verschieben auf andere Tage vorgesehen.
 - **Profil:** Die Profilseite zeigt dynamische Userdaten in einem klareren Header, Statistik-Karten, persönliche Informationen, Vorlieben und Einstellungseinträge. Manuell gewählte Lieblingskategorien werden getrennt von automatisch aus Wishlist/History erkannten Kategorien angezeigt. Die Aktionen öffnen Modals für Profil bearbeiten, Passwort ändern, Benachrichtigungen, Hilfe & Support, Freunde einladen und Logout.
 - **Aktivität erfassen:** Die Page `/activities/new` ist als Formular in mehreren Cards aufgebaut. Sie enthält Basisdaten, Ort, Kategorien, Eigenschaften, Bilder/Galerie, Tipps, Anforderungen und eine Live-Vorschau im Stil der bestehenden Activity Cards.
+
+Screen-to-Journey-Mapping:
+
+| Screen / Bereich | Unterstützte Journey-Schritte | Zielgruppenbezug | Status |
+|---|---|---|---|
+| Login | Einstieg, Account-Erstellung, Multi-User-Trennung | Alle Personas | Ja |
+| Home / Inspiration | Erste Inspiration, Schnellfilter, zuletzt angesehen | Lea, Nico, Sara | Ja |
+| Kategorien & Filter | Gezieltes Eingrenzen nach Ort, Preis, Dauer, Stimmung, Personen und Bewertung | Alle Personas | Ja |
+| Aktivitätsdetailseite | Entscheidung über Bilder, Metadaten, Tipps, Anforderungen und Reviews | Lea, Nico | Ja |
+| Wishlist | Ideen sammeln, vergleichen und direkt planen | Lea, Sara | Ja |
+| Upcoming / Kalender | Termine verwalten, verschieben, entfernen und abschliessen | Lea, Sara | Ja |
+| History | Erlebnisse nachbearbeiten, bewerten, favorisieren und teilen | Lea, Sara | Ja |
+| Map | Lokale Entscheidung und Treffpunktprüfung | Nico, Sara | Ja |
+| Community | Inspiration durch geteilte Erlebnisse, einfache Interaktionen | Sara | Teilweise |
+| Profil | persönliche Daten, Vorlieben, Statistiken und Einstellungen | Alle Personas | Ja |
+| Aktivität erfassen | eigene Ideen in den Feed bringen | Sara, Jonas | Ja |
+| Zuletzt angesehen | schnelle Rückkehr zu bereits geprüften Ideen | Mia | Ja |
+| Eigene Aktivitäten verwalten | usergenerierte Inhalte nachträglich pflegen | Jonas | Nein |
+| Swipe / Matching | spielerische gemeinsame Entscheidung | Paare, Gruppen | Nein |
+| Gruppenabstimmung | gemeinsame Auswahl über mehrere Personen | Sara | Nein |
 
 Architekturdiagramm:
 
@@ -146,8 +256,30 @@ Fasst die technische Realisierung zusammen.
 - **Zuletzt angesehen:** Die Detailseite speichert die zuletzt geöffneten Aktivitäts-IDs clientseitig in `localStorage` unter `vibematch.recentActivities`. Die Home-Seite liest diese IDs beim Laden im Browser aus, gleicht sie mit den vorhandenen Aktivitätsdaten ab und zeigt maximal vier passende Activity Cards. Dafür ist keine zusätzliche API und keine MongoDB-Collection notwendig.
 - **Map:** Die Karte nutzt Leaflet/OpenStreetMap. Aktivitäten mit Koordinaten werden als Marker dargestellt. Kategorie-, Preis- und Dauerfilter nutzen die bestehenden Aktivitätsdaten sowie die Preisgruppierung aus der Filterlogik. Die Listen- und Kartendarstellung sind responsiv abgestimmt.
 - **Reviews:** Reviews werden pro Aktivität über `GET /api/reviews` geladen und über `POST /api/reviews` gespeichert. Die Detailseite berechnet daraus Durchschnitt, Anzahl Bewertungen und eine einfache 5-bis-1-Sterne-Verteilung ohne zusätzliche API. Die Demo-/Seed-Daten enthalten pro Aktivität 1-12 realistische und bewusst unterschiedlich gute Reviews; `reviewCount` und `rating` der Aktivitäten sind darauf abgestimmt.
+- **Technische Rückführbarkeit der Journeys:** Die Kernjourneys sind auf konkrete Routen, Komponenten und MongoDB-Collections abbildbar. Inspiration und Filter nutzen `activities` sowie Filterkomponenten; Wishlist nutzt `wishlistItems`; Planung nutzt `plannedActivities`; History nutzt `historyItems`; Bewertungen nutzen `reviews`; Community nutzt `communityPosts`; Profil und Auth nutzen `users` und `sessions`.
 - **Deployment:** TODO: Deployment-URL ergänzen, sobald eine getestete Version separat veröffentlicht wurde.
 - **Besondere Entscheidungen:** Im Gegensatz zur ursprünglichen React-Idee wurde die Umsetzung mit SvelteKit realisiert. Leaflet/OpenStreetMap wurde gewählt, um eine kostenlose Kartenlösung für den Prototyp zu nutzen. Bildupload und Benachrichtigungen sind bewusst prototypisch gehalten; es gibt kein Cloud-Storage und keine echten Push-/E-Mail-Benachrichtigungen.
+
+Journey-to-Technology-Mapping:
+
+| Journey-Schritt | Datenmodelle / Collections | UI-Komponenten / Pages | APIs / Serverlogik | Status |
+|---|---|---|---|---|
+| Account erstellen / Login | `users`, `sessions` | `/login`, Layout/Auth-Guard | Login-Actions, `/api/auth/login`, `/api/auth/logout`, `auth.js`, `hooks.server.js` | Ja |
+| Aktivitäten entdecken | `activities`, `reviews` | `/`, `ActivityCard`, `ActivityGrid` | `getActivities()` | Ja |
+| Aktivitäten filtern | `activities` | `/categories`, `FilterPanel`, Filterchips | `getActivities(filters)`, `activityFilters.js` | Ja |
+| Detailentscheidung | `activities`, `reviews`, `wishlistItems` | `/activity/[id]`, `ActivityGallery`, `ReviewSummary`, Modals | `requireActivity()`, `getReviews()`, Wishlist-/Review-APIs | Ja |
+| Speichern | `wishlistItems` | Herz-Buttons, `/wishlist` | `/api/wishlist`, `addWishlistItem()`, `removeWishlistItem()` | Ja |
+| Planen | `plannedActivities` | `PlanActivityModal`, `/upcoming` | `/api/planned`, `addPlannedActivity()` | Ja |
+| Kalender verwalten | `plannedActivities` | `UpcomingCalendar`, `PlannedActivityModal` | `PATCH/DELETE /api/planned/[id]`, Complete-Endpoint | Ja |
+| History und Bewertung | `historyItems`, `reviews`, `activities` | `/history`, Review-Modal, History-Editor | `PATCH /api/history/[id]`, `/api/reviews` | Ja |
+| Teilen und Community | `communityPosts`, `activities`, `historyItems` | `/community`, `CommunityPostCard`, ShareModal | `/api/community`, `/api/history/share` | Teilweise |
+| Karte | `activities` mit Koordinaten | `/map`, `LeafletActivityMap` | `getMapActivitiesByPlace()` | Ja |
+| Profil und Vorlieben | `users`, `wishlistItems`, `historyItems` | `/profile`, Profil-Modals | `/api/profile`, Profil-Repository-Funktionen | Ja |
+| Aktivität erfassen | `activities` | `/activities/new` | `POST /api/activities`, `createActivity()` | Ja |
+| Schnelle Rückkehr zu Ideen | Browser-`localStorage`, `activities` | Home-Bereich `Zuletzt angesehen`, Detailseite | keine zusätzliche API, Abgleich mit geladenen Aktivitäten | Ja |
+| Eigene Aktivitäten verwalten | zukünftig: `activities.createdBy`, `status` | zukünftiger Profilbereich oder Detailseiten-Aktionen | zukünftig: `PATCH/DELETE /api/activities/[id]` | Nein |
+| Swipe / Matching | zukünftig: `activityVotes` oder browserlokaler Prototyp | zukünftige Discovery-Komponente | zukünftige API optional | Nein |
+| Gruppenabstimmung | zukünftig: `groupVotes`, `sharedLists` | zukünftiger Voting-Link oder Gruppenansicht | zukünftige Voting-API | Nein |
 
 Technische Routing-Struktur der Pages:
 
@@ -330,6 +462,26 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 - **Testhinweis:** Detailseite öffnen, zur Home-Seite zurückkehren und prüfen, ob die Aktivität unter `Zuletzt angesehen` erscheint. Mehrere Aktivitäten öffnen und Reihenfolge sowie Duplikatvermeidung prüfen.
 - **Aus Evaluation abgeleitet?:** Nein, als kleines UX-Zusatzfeature nach den Kernflows umgesetzt.
 
+### 4.10 Journey-Gaps und priorisierte Roadmap
+- **Beschreibung & Nutzen:** Aus den Personas und Journeys ergeben sich Lücken, die für spätere Iterationen relevant sind. Sie helfen, zwischen MVP-Fokus und Erweiterungen zu unterscheiden.
+- **Bereits abbildbar:** Inspiration, Filter, Detailentscheidung, Wishlist, direkte Planung, Kalenderverwaltung, History-Bearbeitung, Reviews, Kartenansicht, Profil, Login/Multi-User und Aktivitätserfassung.
+- **Teilweise abbildbar:** Community-Interaktion, Teilen in Gruppen, neue Aktivitäten auf der Karte ohne Koordinaten, Social Discovery und Gruppenentscheidung.
+- **Fehlende Features:** Swipe-/Matching-Idee, echte Gruppenabstimmung, Bearbeiten/Löschen eigener Aktivitäten, Follow-System, echte Kommentare, personalisierte Empfehlungen und Kalenderexport.
+
+| Verbesserung | Zugehörige Journey | Mehrwert | Machbarkeit | Priorität |
+|---|---|---|---|---|
+| Eigene Aktivitäten bearbeiten/löschen | Jonas / Creator-Flow | Korrigiert und pflegt usergenerierte Inhalte | Mittel | Should |
+| Gruppenabstimmung für gespeicherte Ideen | Sara / Gruppen-Flow | Unterstützt echte gemeinsame Entscheidung | Mittel bis gross | Should |
+| Swipe- oder Matching-Modus | Lea / Paare, Sara / Gruppen | Spielerischer Einstieg und schneller Vergleich | Mittel | Could |
+| Map-Integration neuer Aktivitäten ohne Koordinaten | Nico / Map, Sara / Activity-Creation | Neue Ideen werden räumlich besser sichtbar | Mittel | Should |
+| Community-Kommentare und Follow-Logik | Sara / Community | Glaubwürdigere soziale Nutzung | Gross | Could |
+| Schnellere Startvorschläge | Mia / Time-Saver-Flow | Reduziert Suchaufwand für Nutzer mit wenig Zeit | Mittel | Should |
+| Personalisierte Empfehlungen | Alle Personas | Bessere Vorschläge aus Profil, Wishlist und History | Gross | Later |
+| Kalenderexport oder Reminder | Lea, Sara / Planung | Bessere Alltagstauglichkeit | Mittel bis gross | Later |
+
+- **MVP-Fokus:** Für die aktuelle Abgabe sind die Kernflows bereits abgedeckt. Am wertvollsten für spätere Entwicklung wären eigene Aktivitäten bearbeiten/löschen für Creator, schnellere Startvorschläge für Nutzer mit wenig Zeit, Gruppenabstimmung und bessere Map-Integration neuer Aktivitäten.
+- **Bewusste Abgrenzung:** Kein Payment, kein Buchungssystem, kein Anbieterportal, kein OAuth, kein produktives Social Network und kein vollständiges Rollen-/Rechtesystem.
+
 ## 5. Projektorganisation [Optional]
 - **Repository & Struktur:** Dieses Repository enthält den SvelteKit-Prototyp für VibeMatch. Wichtige Bereiche sind `src/routes` für Pages und API-Routen, `src/lib/components` für UI-Komponenten, `src/lib/data` für Demo-/Seed-Daten, `src/lib/server` für MongoDB-Zugriffe und `docs` für Dokumentationsartefakte.
 - **Issue-Management:** Anforderungen wurden in einzelne Feature- und Qualitäts-Issues aufgeteilt, z. B. Bildergalerie, Home-Schnellfilter, Filterchips/Sortierung, Login/User-System, interaktive Profilseite und Aktivität erfassen. TODO: GitHub-Issue-Links ergänzen, falls sie für die Abgabe referenziert werden sollen.
@@ -356,6 +508,13 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 - **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1. TODO: Pfad `doc/architecture.drawio.svg` und vorhandene Datei `docs/architecture.drawio.svg` angleichen.
 - **Testskript & Materialien:** TODO: Testskript für Validate ergänzen.
 - **Rohdaten/Auswertung:** TODO: Ergebnisse der Nutzertests nach Durchführung ablegen und verlinken.
+- **Journey-Testcheckliste für Walkthrough und Validierung:**
+  - **Lea / Paar-Flow:** Einloggen, Home öffnen, Schnellfilter nutzen, Detailseite vergleichen, Aktivität speichern, aus Wishlist planen, Termin im Kalender prüfen, als erledigt markieren und in History bewerten.
+  - **Nico / First-Date-Flow:** Kategorie-/Preis-/Dauerfilter setzen, sichere öffentliche Aktivität wählen, Reviews und Galerie prüfen, Karte öffnen, Detailseite erneut öffnen und Aktivität planen.
+  - **Sara / Gruppen-Flow:** Gruppentaugliche Aktivität nach Personenanzahl, Budget und Dauer suchen, mehrere Ideen speichern, Aktivität teilen, Termin in Upcoming verwalten und Erinnerung in Community teilen.
+  - **Mia / Time-Saver-Flow:** Home öffnen, Schnellfilter oder `Zuletzt angesehen` nutzen, Detailseite kurz prüfen, Aktivität direkt planen und in Upcoming kontrollieren.
+  - **Jonas / Creator-Flow:** Neue Aktivität erfassen, Bild hinzufügen, speichern, Detailseite öffnen und prüfen, ob die Aktivität in Home/Kategorien erscheint.
+  - **Gap-Prüfung:** Swipe/Matching, Gruppenabstimmung, Bearbeiten/Löschen eigener Aktivitäten und echte Follow-/Kommentarlogik bewusst als nicht oder nur teilweise umgesetzt markieren.
 - **Manuelle Testcheckliste aktueller Prototyp:**
   - Login ohne gültige Session prüfen: geschützte Route öffnet `/login`.
   - Auf `/login` zwischen `Einloggen` und `Account erstellen` wechseln.
