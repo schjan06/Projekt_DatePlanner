@@ -441,7 +441,7 @@ Komponentenübersicht:
 |---|---|---|---|---|
 | `ActivityCard`, `ActivityGrid`, `ActivityListItem` | Aktivitäten als Cards oder Listen anzeigen | Activity-Daten, Wishlist-Status | Home, Kategorien, Wishlist, ähnliche Aktivitäten | Discover, Speichern |
 | `ActivityGallery`, `ActivityMeta` | Bildergalerie und Metadaten einer Aktivität darstellen | `image`, `gallery`, Dauer, Ort, Preis, Personen | Detailseite | Entscheidung |
-| `FilterPanel`, `FilterChip`, `SegmentedControl` | Suche, Filter, aktive Chips und Auswahlzustände | URL-Parameter, Kategorien, Filterwerte | Kategorienseite | Filter-Flow |
+| `FilterPanel` | Suche, Filter, aktive Chips und Auswahlzustände | URL-Parameter, Kategorien, Filterwerte | Kategorienseite | Filter-Flow |
 | `PlanActivityModal`, `PlannedActivityModal`, `UpcomingCalendar` | Aktivität planen, Termine bearbeiten und Kalender anzeigen | Activity- und Planned-Daten | Detailseite, Wishlist, Upcoming | Planung/Kalender |
 | `ReviewModal`, `ReviewSummary`, `RatingStars` | Bewertung erfassen, Durchschnitt und Verteilung anzeigen | Reviews, Rating-Werte | Detailseite, History | Bewertung |
 | `ShareModal`, `CommunityPostCard` | Teilen und Community-Beiträge darstellen | Activity-, History- und Post-Daten | Detailseite, History, Community | Community |
@@ -492,13 +492,13 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 ### 4.1 Kategorien & Filter
 - **Beschreibung & Nutzen:** Die Filterseite ermöglicht es, Aktivitäten gezielt nach Suche, Kategorie, Stadt, Preis, Dauer, Stimmung, Personenanzahl, Bewertung, bester Zeit und Sortierung einzugrenzen. Dadurch wird der Einstieg aus Home-Schnellfiltern nützlicher, weil Nutzer gesetzte Filter sehen und weiter anpassen können.
 - **Wo umgesetzt:**
-  - **Frontend:** `src/routes/categories`, `src/lib/components/filters/FilterPanel.svelte`, `FilterChip.svelte`.
+  - **Frontend:** `src/routes/categories`, `src/lib/components/filters/FilterPanel.svelte`.
   - **Backend:** Filterparameter werden in `src/lib/server/repositories.js` in MongoDB-Queries übersetzt.
   - **Datenbank:** Aktivitäten werden in der Collection `activities` über Attribute wie `categories`, `priceLevel`, `durationGroup`, `city`, `mood`, `people`, `rating` und `bestTime` gefiltert.
 - **Technische Umsetzung:** Suche, Kategorie und Stadt sind immer sichtbar; erweiterte Filter werden ein- und ausgeklappt. Aktive Filter werden als Chips angezeigt und können einzeln entfernt werden. Sortierung und Filter werden über URL-Parameter gespeichert.
 - **Abgrenzung/Prototyp-Charakter:** Es gibt keine KI-Empfehlungslogik und keine personalisierten Filterprofile. Die Filter arbeiten auf den vorhandenen MongoDB-Daten.
 - **Testhinweis:** `/categories?mood=Entspannt` öffnen, aktive Chips prüfen, Sortierung ändern, einzelne Filter entfernen und `Alle zurücksetzen` testen.
-- **Aus Evaluation abgeleitet?:** Nein, bisher aus der Lösungsidee und dem Prototyping-Konzept abgeleitet. TODO: Nach Evaluation prüfen.
+- **Aus Evaluation abgeleitet?:** Nein, bisher aus der Lösungsidee und dem Prototyping-Konzept abgeleitet. Der Validate-Testplan prüft diese Annahme mit konkreten Filteraufgaben.
 
 ### 4.2 Login- und User-System
 - **Beschreibung & Nutzen:** Die App ist nur nach Login nutzbar. Neue Nutzer können direkt auf der Login-Seite einen Account erstellen und danach sofort auf die App zugreifen. Dadurch können Profil, Wishlist, geplante Aktivitäten und weitere nutzerbezogene Aktionen sauber einem User zugeordnet werden.
