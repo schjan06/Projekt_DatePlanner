@@ -86,11 +86,27 @@
 				<div class="panel">
 					<h2>Überblick</h2>
 					<p>{activity.description}</p>
-					<div class="info-grid">
-						<div class="info-tile"><span class="muted">Preis</span><strong>{activity.priceText}</strong></div>
-						<div class="info-tile"><span class="muted">Dauer</span><strong>{activity.duration}</strong></div>
-						<div class="info-tile"><span class="muted">Ort</span><strong>{activity.city}</strong></div>
-						<div class="info-tile"><span class="muted">Personen</span><strong>{activity.people}</strong></div>
+					<div class="detail-facts" aria-label="Aktivitaetsdetails">
+						<div class="detail-fact">
+							<span>Preis</span>
+							<strong>{activity.priceText}</strong>
+						</div>
+						<div class="detail-fact">
+							<span>Dauer</span>
+							<strong>{activity.duration}</strong>
+						</div>
+						<div class="detail-fact">
+							<span>Ort</span>
+							<strong>{activity.city}</strong>
+						</div>
+						<div class="detail-fact">
+							<span>Personen</span>
+							<strong>{activity.people}</strong>
+						</div>
+						<div class="detail-fact detail-fact-wide">
+							<span>Beste Zeit</span>
+							<strong>{bestTime.length ? bestTime.join(', ') : 'Flexibel'}</strong>
+						</div>
 					</div>
 				</div>
 
@@ -153,13 +169,24 @@
 				</div>
 			</div>
 
-			<aside class="panel">
-				<p class="eyebrow">Planungsinfos</p>
-				<h2>{activity.location}</h2>
-				<p class="muted">Beste Zeit: {bestTime.length ? bestTime.join(', ') : 'Flexibel'}</p>
+			<aside class="detail-plan-card" aria-label="Planungsinfos">
+				<div>
+					<p class="eyebrow">Planungsinfos</p>
+					<h2>{activity.location}</h2>
+				</div>
+				<div class="plan-info-list">
+					<div>
+						<span>Treffpunkt</span>
+						<strong>{activity.city}</strong>
+					</div>
+					<div>
+						<span>Beste Zeit</span>
+						<strong>{bestTime.length ? bestTime.join(', ') : 'Flexibel'}</strong>
+					</div>
+				</div>
 				<h3>Was ihr braucht</h3>
 				{#if requirements.length}
-					<div class="badge-row">
+					<div class="badge-row detail-requirements">
 						{#each requirements as requirement}
 							<CategoryBadge label={requirement} />
 						{/each}

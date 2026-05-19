@@ -1152,8 +1152,89 @@ textarea {
 .detail-grid {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) 340px;
+	align-items: start;
 	gap: 24px;
 	margin-top: 24px;
+}
+
+.detail-facts {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+	margin-top: 18px;
+}
+
+.detail-fact {
+	display: grid;
+	align-content: start;
+	gap: 6px;
+	min-height: 96px;
+	padding: 16px;
+	border: 1px solid rgba(231, 226, 240, 0.9);
+	border-radius: 16px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 245, 255, 0.82));
+}
+
+.detail-fact span,
+.plan-info-list span {
+	color: var(--muted);
+	font-size: 0.78rem;
+	font-weight: 850;
+	text-transform: uppercase;
+}
+
+.detail-fact strong {
+	color: var(--ink);
+	font-size: 1.08rem;
+	line-height: 1.25;
+	overflow-wrap: anywhere;
+}
+
+.detail-fact-wide {
+	grid-column: span 2;
+}
+
+.detail-plan-card {
+	display: grid;
+	align-self: start;
+	gap: 18px;
+	padding: 20px;
+	border: 1px solid rgba(231, 226, 240, 0.9);
+	border-radius: 22px;
+	background: rgba(255, 255, 255, 0.92);
+	box-shadow: 0 12px 30px rgba(51, 41, 88, 0.07);
+}
+
+.detail-plan-card h2,
+.detail-plan-card h3 {
+	margin-bottom: 0;
+}
+
+.plan-info-list {
+	display: grid;
+	gap: 10px;
+}
+
+.plan-info-list div {
+	display: grid;
+	gap: 4px;
+	padding: 12px 0;
+	border-top: 1px solid rgba(231, 226, 240, 0.9);
+}
+
+.plan-info-list div:last-child {
+	border-bottom: 1px solid rgba(231, 226, 240, 0.9);
+}
+
+.plan-info-list strong {
+	color: var(--ink);
+	font-size: 0.98rem;
+	line-height: 1.35;
+	overflow-wrap: anywhere;
+}
+
+.detail-requirements {
+	gap: 6px;
 }
 
 .info-grid,
@@ -2398,6 +2479,7 @@ textarea {
 
 	.activity-grid,
 	.quick-grid,
+	.detail-facts,
 	.info-grid,
 	.stats-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2490,6 +2572,7 @@ textarea {
 
 	.quick-grid,
 	.activity-grid,
+	.detail-facts,
 	.info-grid,
 	.stats-grid,
 	.quick-filter-groups,
@@ -2497,6 +2580,10 @@ textarea {
 	.two-column.equal,
 	.image-preview-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.detail-fact-wide {
+		grid-column: auto;
 	}
 
 	.profile-identity {
