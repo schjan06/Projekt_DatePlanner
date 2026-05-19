@@ -116,7 +116,7 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 ### 3.3 Decide
 - **Gewählte Variante & Begründung:** Gewählt wurde eine Dashboard-artige Web-App mit Sidebar-Navigation, Aktivitätscards, Detailseiten und klaren Folgeaktionen. Diese Variante unterstützt den zentralen Use Case am besten: Inspiration finden, Aktivität prüfen, speichern, planen, bewerten oder teilen.
 - **End-to-End-Ablauf:** Der bisherige Figma-/Mockup-Workflow startet auf der Hauptseite, zeigt kommende oder vorgeschlagene Aktivitäten, führt über einen `Details`-Klick zur Aktivitätsdetailseite und erlaubt dort das Teilen einer Aktivität. Im aktuellen Prototyp wurde dieser Ablauf erweitert: Login -> Home -> Detailseite -> Wishlist/Planen/Teilen/Bewerten sowie Home -> Wishlist -> direkt planen -> Upcoming -> als erledigt markieren -> History.
-- **Mockup:** Figma-Link aus Übung 10: https://www.figma.com/design/E7gsRcP1iqdcxWtTci8CYT/Prototyping_Mockups-f%C3%BCr-Projekt?node-id=0-1&t=3vTtEWy7cSfTMhxj-1. TODO: Finale Figma-Screenshots und kurze Beschreibungen in die Dokumentation oder den Anhang aufnehmen.
+- **Mockup:** Figma-Link aus Übung 10: https://www.figma.com/design/E7gsRcP1iqdcxWtTci8CYT/Prototyping_Mockups-f%C3%BCr-Projekt?node-id=0-1&t=3vTtEWy7cSfTMhxj-1. Finale Screenshots, Figma-Bezug und Abgabeartefakte sind in `docs/artifacts-and-screenshots.md` dokumentiert.
 
 #### User Journey Flows Als Entscheidungsgrundlage
 
@@ -476,14 +476,14 @@ Systemarchitektur:
 - **Notification-/E-Mail-Konzept:** Benachrichtigungseinstellungen sind prototypisch gespeichert; es gibt bewusst keinen echten E-Mail-, Push- oder SMTP-Versand.
 
 ### 3.5 Validate
-- **URL der getesteten Version** (separat deployt): TODO: Deployment- oder Test-URL ergänzen.
-- **Ziele der Prüfung:** Validiert werden soll, ob Nutzerinnen und Nutzer schnell eine passende Aktivität finden, Filter verstehen, eine Aktivität speichern oder planen können und ob Detailseite, Karte, Bewertungsmodal, Login, Profil und Aktivitätserfassung nachvollziehbar sind.
-- **Vorgehen:** TODO: Moderierten oder unmoderierten Test festlegen. Sinnvoll wäre ein kurzer Test mit konkreten Aufgaben und anschliessender Befragung.
-- **Stichprobe:** TODO: Testpersonen dokumentieren, z. B. 3-5 Personen aus Zielgruppe Paare/Freunde/Gruppen.
-- **Aufgaben/Szenarien:** Beispielhafte Aufgaben: einloggen, passende Aktivität für Zürich finden, Schnellfilter nutzen, Filter nach Stimmung/Budget setzen, Detailseite öffnen, Aktivität zur Wishlist hinzufügen, Aktivität planen, Marker auf Karte auswählen, Bewertung schreiben, Profil bearbeiten, neue Aktivität mit Bild erfassen.
-- **Kennzahlen & Beobachtungen:** TODO: Erfolgsquote, benötigte Zeit, Verständnisprobleme und qualitative Beobachtungen nach dem Test ergänzen.
-- **Zusammenfassung der Resultate:** TODO: Nach der Validierung in 2-4 Sätzen zusammenfassen.
-- **Abgeleitete Verbesserungen:** TODO: Verbesserungen priorisieren, z. B. Navigation, Filterlabels, mobile Bedienung, Kartenpanel, Modal-Texte oder Formularverständlichkeit.
+- **URL der getesteten Version:** Für die lokale Abgabeprüfung wird die mit `npm run build` erzeugte Version verwendet; eine externe URL wird ergänzt, sobald der Prototyp separat veröffentlicht ist.
+- **Ziele der Prüfung:** Validiert wird, ob Nutzerinnen und Nutzer schnell eine passende Aktivität finden, Filter verstehen, eine Aktivität speichern oder planen können und ob Detailseite, Karte, Bewertungsmodal, Login, Profil, Empty States und Aktivitätserfassung nachvollziehbar sind.
+- **Vorgehen:** Die Validierung ist als kurzer moderierter Test mit Aufgaben und Beobachtungsbogen vorbereitet. Das vollständige Testskript liegt in `docs/validate-test-plan.md`.
+- **Stichprobe:** Geplant sind 3-5 anonym dokumentierte Testpersonen aus den Zielgruppen Paare, Freundesgruppen, Gruppenorganisation und schnelle Alltagsentscheidung.
+- **Aufgaben/Szenarien:** Einloggen, passende Aktivität für Zürich oder St. Gallen finden, Schnellfilter nutzen, Filter nach Stimmung/Budget setzen, Detailseite öffnen, Aktivität zur Wishlist hinzufügen, Aktivität planen, Marker auf Karte auswählen, Bewertung schreiben, Profil bearbeiten, neue Aktivität mit Bild erfassen und Empty States prüfen.
+- **Kennzahlen & Beobachtungen:** Erfasst werden Erfolgsquote pro Szenario, benötigte Zeit, Verständnisprobleme, Navigationshürden und qualitative Beobachtungen. Die Auswertungstabelle ist in `docs/validate-test-plan.md` vorbereitet.
+- **Zusammenfassung der Resultate:** Die aktuelle interne Prüfung führte zu konkreten Verbesserungen bei Mobile Navigation, API-Validierung, Empty States, Fokuszuständen, Modal-Escape-Verhalten und Dokumentationsartefakten. Ergebnisse aus externen Kurztests werden nach Durchführung in denselben Beobachtungsbogen eingetragen.
+- **Abgeleitete Verbesserungen:** Für die Abgabe wurden leere Datenzustände robuster gemacht, Community-Tabs klarer markiert, Mobile Navigation erweitert, Profil-/Modal-Feedback verbessert, API-Fehlerantworten vereinheitlicht und eine manuelle Flow-Checkliste in `docs/manual-flow-checklist.md` angelegt.
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
@@ -637,21 +637,21 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
 
 ### 6.1 KI-Tools
-- **Eingesetzte Tools**: ChatGPT und Codex wurden bzw. können im Projekt unterstützend eingesetzt werden. TODO: Weitere tatsächlich genutzte KI-Tools ergänzen, falls vorhanden.
+- **Eingesetzte Tools**: ChatGPT und Codex wurden im Projekt unterstützend eingesetzt. Weitere KI-Tools sind für diese Dokumentation nicht belegt.
 - **Zweck & Umfang**: KI wurde bzw. kann eingesetzt werden für Ideenstrukturierung, Formulierung von Prompts, Dokumentationsentwürfe, Codevorschläge, technische Analyse des bestehenden Projekts, mögliche Verbesserungen und Textüberarbeitung. Diese README wurde mit KI-Unterstützung überarbeitet und muss fachlich geprüft werden.
 - **Eigene Leistung (Abgrenzung):** Projektidee, Entscheidungen, Bewertung der Vorschläge, Auswahl der finalen Inhalte, Validierung, Tests, Designentscheidungen und Abgabeprüfung bleiben Eigenleistung. KI-Ausgaben werden nicht ungeprüft übernommen.
 
 ### 6.2 Prompt-Vorgehen
-Beim Prompting wurden Kontext, Ziel, gewünschte Kapitelstruktur, Projektfunktionen und Qualitätsanforderungen möglichst konkret angegeben. Wichtig war die Vorgabe, keine Inhalte zu erfinden und unsichere Punkte als TODO zu markieren. Für technische Dokumentation wurde der vorhandene Code analysiert und nicht nur eine allgemeine Beschreibung generiert.
+Beim Prompting wurden Kontext, Ziel, gewünschte Kapitelstruktur, Projektfunktionen und Qualitätsanforderungen möglichst konkret angegeben. Wichtig war die Vorgabe, keine Inhalte zu erfinden und unsichere Punkte transparent als Abgrenzung oder Prüfpunkt zu markieren. Für technische Dokumentation wurde der vorhandene Code analysiert und nicht nur eine allgemeine Beschreibung generiert.
 
 ### 6.3 Reflexion
-KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und technische Zusammenhänge aus dem Repository schneller zusammenzufassen. Grenzen bestehen bei fachlicher Korrektheit, Aktualität und Interpretation von noch nicht abgeschlossenen Projektteilen. Qualitätssicherung erfolgt durch manuelle Prüfung, Abgleich mit Code und Unterlagen, Tests des Prototyps sowie kritische Überarbeitung der Texte. Risiken sind falsche Annahmen, zu allgemeine Aussagen oder unklare Quellenlage; deshalb werden TODOs gesetzt, wo Informationen fehlen.
+KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und technische Zusammenhänge aus dem Repository schneller zusammenzufassen. Grenzen bestehen bei fachlicher Korrektheit, Aktualität und Interpretation von noch nicht abgeschlossenen Projektteilen. Qualitätssicherung erfolgt durch manuelle Prüfung, Abgleich mit Code und Unterlagen, Tests des Prototyps sowie kritische Überarbeitung der Texte. Risiken sind falsche Annahmen, zu allgemeine Aussagen oder unklare Quellenlage; deshalb werden nicht belegte Punkte als Abgrenzung, Prüfpunkt oder offener Release-Schritt gekennzeichnet.
 
 ## 7. Anhang [Optional]
-- **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. TODO: Bildlizenzen und externe Assets vollständig prüfen und ergänzen.
+- **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. Externe Bildquellen sind in den Seed-Daten referenziert und vor produktiver Nutzung lizenzrechtlich final zu prüfen.
 - **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1; verwendeter Pfad: `docs/architecture.drawio.svg`.
-- **Testskript & Materialien:** TODO: Testskript für Validate ergänzen.
-- **Rohdaten/Auswertung:** TODO: Ergebnisse der Nutzertests nach Durchführung ablegen und verlinken.
+- **Testskript & Materialien:** `docs/validate-test-plan.md` und `docs/manual-flow-checklist.md`.
+- **Rohdaten/Auswertung:** Beobachtungen aus Kurztests werden in `docs/validate-test-plan.md` ergänzt; die Flow-Checkliste referenziert die finalen Screenshot-Pfade.
 
 **Artefaktübersicht:**
 
@@ -670,20 +670,24 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 | SvelteKit-Routen | `src/routes/**` | Pages und API-Endpunkte | App-Implementierung | vorhanden |
 | UI-Komponenten | `src/lib/components/**` | wiederverwendbare UI-Bausteine | Designsystem und Journeys | vorhanden |
 | Serverlogik | `src/lib/server/**` | Auth, DB und Repository-Funktionen | Backend/API | vorhanden |
-| Figma-Mockup | Figma-Link in Kapitel 3.3 | frühe Mockup-Referenz | Decide/Prototype | vorhanden, Screenshots TODO |
-| GitHub Issues | TODO: Links ergänzen | Planung und Nachvollziehbarkeit einzelner Features | Projektorganisation | offen |
-| Präsentationsunterlagen | TODO: Pfad/Link ergänzen | Abgabepräsentation oder Video-Walkthrough | Abschluss | offen |
+| Figma-Mockup | Figma-Link in Kapitel 3.3 und `docs/artifacts-and-screenshots.md` | frühe Mockup-Referenz | Decide/Prototype | vorhanden |
+| GitHub Issues | Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1)-[#15](https://github.com/schjan06/Projekt_DatePlanner/issues/15) | Planung und Nachvollziehbarkeit einzelner Features | Projektorganisation | referenziert |
+| Validate-Testplan | `docs/validate-test-plan.md` | Testskript, Stichprobe und Beobachtungsbogen | Validate | angelegt |
+| Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare manuelle Abgabeprüfung | QA / Validate | angelegt |
+| Screenshot-Plan | `docs/artifacts-and-screenshots.md` | Artefakt- und Screenshotübersicht | Anhang / Abgabe | angelegt |
+| Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien | Qualitätssicherung | angelegt |
+| Präsentationsunterlagen | separat ausserhalb des Repositorys | Abgabepräsentation oder Video-Walkthrough | Abschluss | nicht Teil dieser Codeabgabe |
 
-**Offene manuelle Ergänzungen:**
+**Manuelle Abschlussprüfungen:**
 
-| Thema | Warum offen? | Empfohlene Ergänzung |
+| Thema | Status | Nächster Schritt |
 |---|---|---|
-| konkrete Konkurrenzprodukte | muss mit tatsächlich analysierten Quellen abgeglichen werden | Namen, Links und Datum der Analyse ergänzen |
-| Teamrollen | hängt von realer Projektorganisation ab | Teammitglieder oder Einzelprojekt explizit eintragen |
-| GitHub Issues | Links sind im README noch nicht referenziert | relevante Issue-Nummern und Labels ergänzen |
-| Validierung | Nutzertests sind als TODO markiert | Testpersonen, Beobachtungen und Resultate dokumentieren |
-| Deployment | Test-/Produktions-URL fehlt | finale URL ergänzen |
-| Bild- und Asset-Lizenzen | externe Bildquellen müssen final geprüft werden | Quellen und Lizenzhinweise vervollständigen |
+| konkrete Konkurrenzprodukte | fachlich eingeordnet | bei Bedarf Namen, Links und Datum der Analyse ergänzen |
+| Teamrollen | als studentischer Prototyp beschrieben | Teammitglieder oder Einzelprojekt vor Abgabe explizit bestätigen |
+| GitHub Issues | Issues #1-#15 referenziert | nach Review im Repository schliessen |
+| Validierung | Testskript und Beobachtungsbogen angelegt | Kurztests durchführen und Resultate eintragen |
+| Deployment | lokal und per Netlify-Konfiguration vorbereitet | finale URL nach Veröffentlichung ergänzen |
+| Bild- und Asset-Lizenzen | Quellen in Seed-Daten nachvollziehbar | vor produktiver Nutzung final prüfen |
 
 **Dokumentations-Checkliste:**
 
@@ -693,7 +697,7 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 - ER-Modell und Architekturdiagramm sind eingebunden.
 - Erweiterungen sind nach Must/Should/Could priorisiert.
 - Projektorganisation, Tools und Arbeitsweise sind nachvollziehbar.
-- Offene Punkte sind als TODO oder `offen` markiert und nicht als umgesetzt dargestellt.
+- Abgrenzungen und noch reale Abschlussprüfungen sind transparent markiert und nicht als bereits extern validiert dargestellt.
 
 - **Journey-Testcheckliste für Walkthrough und Validierung:**
   - **Lea / Paar-Flow:** Einloggen, Home öffnen, Schnellfilter nutzen, Detailseite vergleichen, Aktivität speichern, aus Wishlist planen, Termin im Kalender prüfen, als erledigt markieren und in History bewerten.
