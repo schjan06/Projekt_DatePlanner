@@ -7,6 +7,10 @@
 	let time = $state('18:30');
 	let notes = $state('');
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') onClose();
+	}
+
 	async function submit(event) {
 		event.preventDefault();
 		const response = await fetch('/api/planned', {
@@ -21,15 +25,19 @@
 			})
 		});
 
+		const body = await response.json().catch(() => ({}));
+
 		if (response.ok) {
 			showToast('Aktivität geplant');
 			await invalidateAll();
 			onClose();
 		} else {
-			showToast('Aktivität konnte nicht geplant werden');
+			showToast(body.error || 'Aktivität konnte nicht geplant werden');
 		}
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open && activity}
 	<div class="modal-backdrop">

@@ -33,6 +33,10 @@
 		onClose();
 	}
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') close();
+	}
+
 	async function submit(event) {
 		event.preventDefault();
 		error = '';
@@ -59,17 +63,20 @@
 				visitDate
 			})
 		});
+		const body = await response.json().catch(() => ({}));
 
 		if (response.ok) {
 			showToast('Danke! Deine Bewertung wurde gespeichert.');
 			await invalidateAll();
 			close();
 		} else {
-			error = 'Bewertung konnte nicht gespeichert werden. Bitte versuche es erneut.';
+			error = body.error || 'Bewertung konnte nicht gespeichert werden. Bitte versuche es erneut.';
 			submitting = false;
 		}
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open && activity}
 	<div class="modal-backdrop">

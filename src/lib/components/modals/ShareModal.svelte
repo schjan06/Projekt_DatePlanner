@@ -6,6 +6,10 @@
 	let visibility = $state('Privat');
 	let message = $state('');
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') onClose();
+	}
+
 	async function share(event) {
 		event.preventDefault();
 		const response = await fetch('/api/community', {
@@ -17,6 +21,7 @@
 				visibility
 			})
 		});
+		const body = await response.json().catch(() => ({}));
 
 		if (response.ok) {
 			showToast('Beitrag in der Community gespeichert');
@@ -25,10 +30,12 @@
 			await invalidateAll();
 			onClose();
 		} else {
-			showToast('Teilen konnte nicht gespeichert werden');
+			showToast(body.error || 'Teilen konnte nicht gespeichert werden');
 		}
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open && activity}
 	<div class="modal-backdrop">

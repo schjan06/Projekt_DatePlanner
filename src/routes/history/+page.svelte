@@ -30,6 +30,10 @@
 		fieldErrors = {};
 	}
 
+	function handleKeydown(event) {
+		if (editingItem && event.key === 'Escape') closeEditor();
+	}
+
 	async function saveHistory(event) {
 		event.preventDefault();
 		if (!editingItem) return;
@@ -59,6 +63,8 @@
 		}
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <section class="page">
 	<div class="page-header">

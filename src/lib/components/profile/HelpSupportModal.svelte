@@ -21,6 +21,10 @@
 		}
 	});
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') onClose();
+	}
+
 	async function submit(event) {
 		event.preventDefault();
 		error = '';
@@ -42,6 +46,8 @@
 		sending = false;
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open}
 	<div class="modal-backdrop">

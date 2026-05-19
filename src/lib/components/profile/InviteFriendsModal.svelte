@@ -15,6 +15,10 @@
 		}
 	});
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') onClose();
+	}
+
 	async function copyLink() {
 		error = '';
 		try {
@@ -39,6 +43,8 @@
 		onClose();
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open}
 	<div class="modal-backdrop">

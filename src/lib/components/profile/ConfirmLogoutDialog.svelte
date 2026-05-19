@@ -6,11 +6,17 @@
 		if (open) loggingOut = false;
 	});
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') onClose();
+	}
+
 	async function confirm() {
 		loggingOut = true;
 		await onConfirm();
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open}
 	<div class="modal-backdrop">

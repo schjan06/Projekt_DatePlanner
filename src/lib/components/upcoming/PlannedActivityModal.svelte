@@ -29,6 +29,10 @@
 		}
 	});
 
+	function handleKeydown(event) {
+		if (open && event.key === 'Escape') onClose();
+	}
+
 	async function save(event) {
 		event.preventDefault();
 		if (!item) return;
@@ -87,6 +91,8 @@
 		}
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#if open && item}
 	<div class="modal-backdrop" role="presentation">

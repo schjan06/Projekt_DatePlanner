@@ -159,6 +159,11 @@ button {
 	cursor: pointer;
 }
 
+:where(a, button, input, select, textarea):focus-visible {
+	outline: 3px solid rgba(97, 74, 219, 0.42);
+	outline-offset: 3px;
+}
+
 img {
 	display: block;
 	max-width: 100%;
@@ -401,7 +406,7 @@ textarea {
 	border-radius: 16px;
 	background: white;
 	color: var(--ink);
-	outline: none;
+	outline: 2px solid transparent;
 }
 
 .topbar-search input {
@@ -2431,10 +2436,10 @@ textarea {
 	.mobile-nav a {
 		display: grid;
 		place-items: center;
-		min-height: 44px;
-		border-radius: 16px;
+		min-height: 38px;
+		border-radius: 12px;
 		color: var(--muted);
-		font-size: 0.76rem;
+		font-size: 0.7rem;
 		font-weight: 800;
 	}
 
