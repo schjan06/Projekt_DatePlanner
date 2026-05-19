@@ -6,6 +6,7 @@
 	let { data } = $props();
 	let tab = $state('Entdecken');
 	let showShare = $state(false);
+	const shareActivity = $derived(data.activities[0] ?? null);
 	const tabs = ['Entdecken', 'Folge ich', 'Meine Beiträge'];
 	const filteredPosts = $derived.by(() => {
 		if (tab === 'Meine Beiträge') return data.communityPosts.filter((post) => post.userId === data.currentUserId);
@@ -21,7 +22,7 @@
 			<h1>Ideen teilen und entdecken</h1>
 			<p class="muted">Beiträge anderer Personen mit Inspiration, Likes und Kommentaren.</p>
 		</div>
-		<button class="button" type="button" onclick={() => (showShare = true)}>Idee teilen</button>
+		<button class="button" type="button" disabled={!shareActivity} onclick={() => (showShare = true)}>Idee teilen</button>
 	</div>
 
 	<div class="action-row" style="margin-bottom: 22px;">
@@ -50,7 +51,14 @@
 			actionHref="/history"
 			actionLabel="Erinnerungen öffnen"
 		/>
+	{:else}
+		<EmptyState
+			title="Noch keine Community-Beiträge"
+			text="Die Community ist leer oder Seed-Daten fehlen. Teile eine Aktivität, sobald Aktivitätsdaten vorhanden sind."
+			actionHref="/categories"
+			actionLabel="Aktivitäten entdecken"
+		/>
 	{/if}
 </section>
 
-<ShareModal activity={data.activities[0]} open={showShare} onClose={() => (showShare = false)} />
+<ShareModal activity={shareActivity} open={showShare} onClose={() => (showShare = false)} />

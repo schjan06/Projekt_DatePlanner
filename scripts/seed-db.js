@@ -54,6 +54,11 @@ if (!uri) {
 	process.exit(1);
 }
 
+if (/USER:PASSWORD@HOST|<|>|\s/.test(uri)) {
+	console.error('DB_URI enthaelt noch Platzhalterwerte. Bitte .env mit einer gueltigen MongoDB-Verbindung aktualisieren.');
+	process.exit(1);
+}
+
 const client = new MongoClient(uri);
 
 try {

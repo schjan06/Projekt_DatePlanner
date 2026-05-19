@@ -22,6 +22,12 @@ function validationError(message) {
 	return issue;
 }
 
+function requireActivityId(activityId) {
+	const normalized = String(activityId || '').trim();
+	if (!normalized) throw validationError('activityId ist erforderlich.');
+	return normalized;
+}
+
 function requireUserId(userId) {
 	const normalized = String(userId || '').trim();
 	if (!normalized) throw error(401, 'Login erforderlich');
@@ -150,6 +156,17 @@ function durationGroupFromDuration(duration = '', provided = '') {
 
 function fieldError(fieldErrors, field, message) {
 	fieldErrors[field] = message;
+}
+
+function assertFieldErrors(fieldErrors, message = 'Bitte pruefe die markierten Felder.') {
+	if (!Object.keys(fieldErrors).length) return;
+	const issue = validationError(message);
+	issue.fieldErrors = fieldErrors;
+	throw issue;
+}
+
+function isDateInput(value) {
+	return /^\d{4}-\d{2}-\d{2}$/.test(String(value || '').trim()) && !Number.isNaN(new Date(`${value}T00:00:00`).getTime());
 }
 
 function validateActivityInput(input, imageCount) {
@@ -282,11 +299,12 @@ export async function getFeaturedActivities(limit = 6) {
 
 export async function getActivityById(id) {
 	const activities = await collection('activities');
-	return stripMongoId(await activities.findOne({ id }));
+	return stripMongoId(await activities.findOne({ id: String(id || '').trim() }));
 }
 
 export async function requireActivity(id) {
-	const activity = await getActivityById(id);
+	const activityId = requireActivityId(id);
+	const activity = await getActivityById(activityId);
 	if (!activity) throw error(404, 'Aktivität nicht gefunden');
 	return activity;
 }
@@ -412,6 +430,7 @@ export async function getWishlistActivities(userId) {
 
 export async function addWishlistItem(activityId, userId) {
 	userId = requireUserId(userId);
+	activityId = requireActivityId(activityId);
 	await requireActivity(activityId);
 	const wishlist = await collection('wishlistItems');
 	await wishlist.updateOne(
@@ -424,17 +443,36 @@ export async function addWishlistItem(activityId, userId) {
 
 export async function removeWishlistItem(activityId, userId) {
 	userId = requireUserId(userId);
+	activityId = requireActivityId(activityId);
 	const wishlist = await collection('wishlistItems');
 	await wishlist.deleteOne({ userId, activityId });
 	return getWishlistIds(userId);
 }
 
 export async function getReviews(activityId) {
+	activityId = String(activityId || '').trim();
+	if (!activityId) return [];
 	const reviews = await collection('reviews');
 	return stripMany(await reviews.find({ activityId }).sort({ createdAt: -1 }).toArray());
 }
 
 export async function addReview({ activityId, userName, rating, comment, visitWith, visitDate, userId }) {
+	activityId = requireActivityId(activityId);
+	const fieldErrors = {};
+	const numericRating = Number(rating);
+	const trimmedComment = String(comment || '').trim();
+	const trimmedVisitDate = String(visitDate || '').trim();
+
+	if (!Number.isFinite(numericRating) || numericRating < 1 || numericRating > 5) {
+		fieldError(fieldErrors, 'rating', 'Waehle eine Bewertung zwischen 1 und 5 Sternen.');
+	}
+	if (trimmedComment && trimmedComment.length < 10) {
+		fieldError(fieldErrors, 'comment', 'Wenn du eine Rezension schreibst, sollte sie mindestens 10 Zeichen lang sein.');
+	}
+	if (trimmedComment.length > 500) fieldError(fieldErrors, 'comment', 'Die Rezension darf maximal 500 Zeichen lang sein.');
+	if (trimmedVisitDate && !isDateInput(trimmedVisitDate)) fieldError(fieldErrors, 'visitDate', 'Besuchsdatum muss ein gueltiges Datum sein.');
+	assertFieldErrors(fieldErrors);
+
 	await requireActivity(activityId);
 	const reviews = await collection('reviews');
 	const review = {
@@ -442,10 +480,10 @@ export async function addReview({ activityId, userName, rating, comment, visitWi
 		activityId,
 		userId: userId || '',
 		userName: userName?.trim() || 'Gast',
-		rating: Number(rating),
-		comment: comment?.trim() || '',
+		rating: numericRating,
+		comment: trimmedComment,
 		visitWith: visitWith?.trim() || '',
-		visitDate: visitDate || '',
+		visitDate: trimmedVisitDate,
 		date: new Intl.DateTimeFormat('de-CH').format(new Date()),
 		createdAt: new Date().toISOString()
 	};
@@ -499,7 +537,7 @@ function validatePlannedInput(input = {}) {
 	const location = String(input.location || '').trim();
 	const notes = String(input.notes || '').trim();
 
-	if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) fieldError(fieldErrors, 'date', 'Datum muss im Format JJJJ-MM-TT sein.');
+	if (!isDateInput(date)) fieldError(fieldErrors, 'date', 'Datum muss im Format JJJJ-MM-TT sein.');
 	if (!/^\d{2}:\d{2}$/.test(time)) fieldError(fieldErrors, 'time', 'Uhrzeit muss im Format HH:MM sein.');
 	if (location.length > 120) fieldError(fieldErrors, 'location', 'Ort darf maximal 120 Zeichen lang sein.');
 	if (notes.length > 300) fieldError(fieldErrors, 'notes', 'Notiz darf maximal 300 Zeichen lang sein.');
@@ -515,6 +553,8 @@ function validatePlannedInput(input = {}) {
 
 export async function addPlannedActivity(activityId, details, userId) {
 	userId = requireUserId(userId);
+	activityId = requireActivityId(activityId);
+	const values = validatePlannedInput(details);
 	await requireActivity(activityId);
 	const planned = await collection('plannedActivities');
 	const now = new Date().toISOString();
@@ -522,10 +562,7 @@ export async function addPlannedActivity(activityId, details, userId) {
 		id: `planned-${Date.now()}`,
 		userId,
 		activityId,
-		date: details.date,
-		time: details.time,
-		location: details.location,
-		notes: details.notes || '',
+		...values,
 		status: 'planned',
 		createdAt: now,
 		updatedAt: now
@@ -628,11 +665,7 @@ export async function updateHistoryItem(id, input = {}, userId) {
 	if (memory.length > 400) fieldError(fieldErrors, 'memory', 'Die Erinnerung darf maximal 400 Zeichen lang sein.');
 	if (!Number.isFinite(rating) || rating < 0 || rating > 5) fieldError(fieldErrors, 'rating', 'Waehle eine Bewertung zwischen 0 und 5 Sternen.');
 
-	if (Object.keys(fieldErrors).length) {
-		const issue = validationError('Bitte pruefe die markierten Felder.');
-		issue.fieldErrors = fieldErrors;
-		throw issue;
-	}
+	assertFieldErrors(fieldErrors);
 
 	await history.updateOne(
 		{ id, userId },
@@ -655,11 +688,22 @@ export async function getCommunityPosts() {
 	const ids = [...new Set(items.map((item) => item.activityId))];
 	const activities = await collection('activities');
 	const activityMap = new Map((await activities.find({ id: { $in: ids } }).toArray()).map((item) => [item.id, stripMongoId(item)]));
-	return items.map((item) => ({ ...item, activity: activityMap.get(item.activityId) }));
+	return items.map((item) => ({ ...item, activity: activityMap.get(item.activityId) })).filter((item) => item.activity);
 }
 
 export async function addCommunityPost({ activityId, text, visibility = 'Öffentlich' }, userId) {
 	userId = requireUserId(userId);
+	activityId = requireActivityId(activityId);
+	const trimmedText = String(text || '').trim();
+	const normalizedVisibility = String(visibility || 'Privat').trim();
+	const allowedVisibility = ['Privat', 'Nur mit Link', '\u00d6ffentlich'];
+	const fieldErrors = {};
+
+	if (trimmedText && trimmedText.length < 3) fieldError(fieldErrors, 'text', 'Der Beitragstext muss mindestens 3 Zeichen lang sein.');
+	if (trimmedText.length > 280) fieldError(fieldErrors, 'text', 'Der Beitragstext darf maximal 280 Zeichen lang sein.');
+	if (!allowedVisibility.includes(normalizedVisibility)) fieldError(fieldErrors, 'visibility', 'Waehle eine gueltige Sichtbarkeit.');
+	assertFieldErrors(fieldErrors);
+
 	const activity = await requireActivity(activityId);
 	const posts = await collection('communityPosts');
 	const users = await collection('users');
@@ -667,13 +711,12 @@ export async function addCommunityPost({ activityId, text, visibility = 'Öffent
 	const post = {
 		id: `post-${Date.now()}`,
 		userName: publicUserName(user),
-		userLocation: 'Zürich',
 		avatar: user?.avatar || 'VM',
 		userLocation: user?.location || 'Schweiz',
 		userId,
 		activityId,
-		text: text?.trim() || `Ich möchte diese Idee teilen: ${activity.title}`,
-		visibility,
+		text: trimmedText || `Ich möchte diese Idee teilen: ${activity.title}`,
+		visibility: normalizedVisibility,
 		images: [activity.image],
 		likes: 0,
 		comments: 0,
@@ -700,7 +743,7 @@ export async function getProfile(userId) {
 				name: profileName,
 				displayName: profileName,
 				location: user.location || '',
-				memberSince: user.memberSince || 'TODO',
+				memberSince: user.memberSince || 'Nicht hinterlegt',
 				avatar: user.avatar || initialsFromName(profileName),
 				bio:
 					user.bio ||

@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import ActivityGrid from '$lib/components/activities/ActivityGrid.svelte';
 	import ActivityCard from '$lib/components/activities/ActivityCard.svelte';
+	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 	import { priceGroup } from '$lib/utils/activityFilters';
 
 	const recentStorageKey = 'vibematch.recentActivities';
@@ -11,7 +12,7 @@
 	let recentActivityIds = $state([]);
 
 	const activities = $derived(data.activities);
-	const featured = $derived(data.featuredActivities[0] ?? data.activities[0]);
+	const featured = $derived(data.featuredActivities[0] ?? data.activities[0] ?? null);
 	const recentActivities = $derived(
 		recentActivityIds
 			.map((id) => activities.find((activity) => activity.id === id))
@@ -62,6 +63,7 @@
 </script>
 
 <section class="page">
+	{#if featured}
 	<div class="hero" style={`--hero-image: url('${featured.image}')`}>
 		<div>
 			<p class="eyebrow">VibeMatch</p>
@@ -83,6 +85,14 @@
 			<a class="button" href={`/activity/${featured.id}`}>Details öffnen</a>
 		</div>
 	</div>
+	{:else}
+		<EmptyState
+			title="Noch keine Aktivitäten vorhanden."
+			text="Die Datenbank ist leer oder Seed-Daten fehlen. Führe npm run seed aus oder erfasse eine erste Aktivität."
+			actionHref="/activities/new"
+			actionLabel="Aktivität erfassen"
+		/>
+	{/if}
 
 	<section class="quick-filter-panel panel" aria-label="Schnellfilter">
 		<div class="quick-filter-intro">
@@ -137,6 +147,7 @@
 		</div>
 	{/if}
 
+	{#if activities.length > 6}
 	<div class="section">
 		<div class="page-header">
 			<div>
@@ -151,4 +162,5 @@
 			{/each}
 		</div>
 	</div>
+	{/if}
 </section>

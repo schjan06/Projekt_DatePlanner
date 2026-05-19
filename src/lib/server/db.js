@@ -6,9 +6,16 @@ const DB_NAME = env.DB_NAME || 'vibematch';
 
 let clientPromise;
 
+function looksLikePlaceholderUri(uri = '') {
+	return /USER:PASSWORD@HOST|<|>|\s/.test(uri);
+}
+
 export function getMongoClient() {
 	if (!DB_URI) {
 		throw new Error('DB_URI fehlt. Bitte in .env setzen.');
+	}
+	if (looksLikePlaceholderUri(DB_URI)) {
+		throw new Error('DB_URI enthaelt noch Platzhalterwerte. Bitte .env mit einer gueltigen MongoDB-Verbindung aktualisieren.');
 	}
 
 	if (!clientPromise) {
