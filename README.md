@@ -43,10 +43,10 @@ VibeMatch adressiert das alltägliche Problem, dass gemeinsame Aktivitäten oft 
 ## 2. Lösungsidee
 VibeMatch ist eine Web-App für Inspiration, Auswahl und Planung gemeinsamer Aktivitäten. Die App fokussiert nicht auf Dating-Matching zwischen Personen, sondern auf passende Aktivitätsideen für Paare, Freundinnen und Freunde sowie Gruppen.
 
-- **Kernfunktionalität:** Die Web-App bietet einen Home-/Inspiration-Feed, Aktivitätsdetailseiten, Kategorien und Filter, Wishlist, kommende Aktivitäten, vergangene Aktivitäten/Erinnerungen, eine Kartenansicht mit OpenStreetMap-/Leaflet-Markern, Community-Beiträge, Profil/Einstellungen, eine Page zum Erfassen neuer Aktivitäten sowie Modals zum Planen, Teilen und Bewerten.
-- **Aktueller Funktionsumfang:** Zusätzlich zum ursprünglichen Klick-Prototyp sind inzwischen ein einfaches Login-/User-System, eine interaktive Profilseite, eine Aktivität-erfassen-Page, eine Hero-Bildergalerie auf Detailseiten, Home-Schnellfilter, zuletzt angesehene Aktivitäten, aktive Filterchips, Sortierung, userbezogene Daten, bearbeitbare Erinnerungen, eine interaktivere Community und eine verbesserte Map-Page umgesetzt.
+- **Kernfunktionalität:** Die Web-App bietet einen Home-/Inspiration-Feed, Aktivitätsdetailseiten, Kategorien und Filter, Wishlist, kommende Aktivitäten, vergangene Aktivitäten/Erinnerungen, eine Kartenansicht mit OpenStreetMap-/Leaflet-Markern, Profil/Einstellungen, eine Page zum Erfassen neuer Aktivitäten sowie Modals zum Planen, Teilen und Bewerten.
+- **Aktueller Funktionsumfang:** Zusätzlich zum ursprünglichen Klick-Prototyp sind inzwischen ein einfaches Login-/User-System, eine interaktive Profilseite, eine Aktivität-erfassen-Page, eine Hero-Bildergalerie auf Detailseiten, Home-Schnellfilter, zuletzt angesehene Aktivitäten, aktive Filterchips, Sortierung, userbezogene Daten, bearbeitbare Erinnerungen, eine Community-Ausblickseite für ein späteres MVP und eine verbesserte Map-Page umgesetzt.
 - **Annahmen [Optional]:** Nutzerinnen und Nutzer entscheiden schneller, wenn Aktivitäten nach Stimmung, Ort, Budget, Dauer, Personenanzahl und Bewertung filterbar sind. Es wird angenommen, dass ein visueller Feed, Kartenmarker und gespeicherte Ideen die Entscheidungsmüdigkeit reduzieren. Eine weitere Hypothese ist, dass Bewertungen, Erinnerungen und eigene Ideen helfen, zukünftige Entscheidungen besser einzuordnen.
-- **Abgrenzung [Optional]:** Der Prototyp enthält ein einfaches Login-, Account-Erstellungs- und User-System, aber kein produktionsreifes Rollen-, Rechte- oder Account-Management. Es gibt kein Zahlungs- oder Buchungssystem, keine produktive Anbieterintegration, kein OAuth, keinen Passwort-Reset, keine E-Mail-Verifikation und kein Cloud-Storage. Die Kartenlösung nutzt OpenStreetMap/Leaflet statt einer kostenpflichtigen Google-Maps-API. Bilduploads für neue Aktivitäten werden prototypisch als kleine Data-URLs in MongoDB gespeichert. Produktive Datenschutz-, Rollen- und Rechtekonzepte sind bewusst ausserhalb des Abgabeumfangs.
+- **Abgrenzung [Optional]:** Der Prototyp enthält ein einfaches Login-, Account-Erstellungs- und User-System, aber kein produktionsreifes Rollen-, Rechte- oder Account-Management. Es gibt kein Zahlungs- oder Buchungssystem, keine produktive Anbieterintegration, kein OAuth, keinen Passwort-Reset, keine E-Mail-Verifikation und kein Cloud-Storage. Die Kartenlösung nutzt OpenStreetMap/Leaflet statt einer kostenpflichtigen Google-Maps-API. Bilduploads für neue Aktivitäten werden prototypisch als kleine Data-URLs in MongoDB gespeichert. Eine produktive Community mit Feed, Follow-System, Kommentaren, Moderation und Privatsphäre-Konzept ist bewusst MVP-2 und nicht Teil der aktuellen Abgabe.
 
 ## 3. Vorgehen & Artefakte
 Die Durchführung erfolgt phasenbasiert; dokumentieren Sie die wichtigsten Ergebnisse je Phase.
@@ -64,7 +64,7 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 |---|---|---|---|---|---|---|---|---|
 | **Lea Meier** | 29, Marketing Managerin, lebt in Zürich, seit mehreren Jahren in einer Beziehung | Hoch im Alltag, nutzt viele Apps, erwartet schnelle Bedienung | Wieder mehr gemeinsame Quality Time planen, ohne lange Diskussion | Abwechslung, gemeinsame Erinnerungen, einfache Inspiration nach Stimmung | Routine, zu viele Optionen, unterschiedliche Budgets und Zeitfenster | Öffnet Apps spontan abends oder am Wochenende, vergleicht visuelle Vorschläge, speichert Ideen für später | Schnelle Inspiration, Filter nach Stimmung/Budget/Dauer, Wishlist, Kalender und History | Home, Schnellfilter, Kategorien, Detailseite, Wishlist, Planen, Upcoming, History, Bewertungen |
 | **Nico Keller** | 26, Softwareentwickler, Single, plant ein erstes Date in St. Gallen | Sehr hoch, achtet auf klare Informationen und Bewertungen | Eine lockere, sichere Date-Idee finden, die Gesprächspausen reduziert | Ein guter erster Eindruck, entspannte Atmosphäre, öffentlicher Ort | Unsicherheit beim passenden Vibe, Angst vor langweiligen Standarddates | Prüft Bewertungen, Bilder, Ort und Dauer genau, bevorzugt sichere öffentliche Orte | Verlässliche Detailinfos, Review-Zusammenfassung, Karte, Preis-/Dauerfilter und Planung | Filter, Map, Detailseite, Galerie, Reviews, Planungsmodal, Wishlist |
-| **Sara Baumann** | 34, Projektleiterin, organisiert Freizeitaktivitäten mit Freundesgruppe und Kolleginnen/Kollegen | Mittel bis hoch, nutzt Kalender und Gruppen-Chats | Gruppenaktivitäten schneller koordinieren und Ideen sammeln | Weniger Organisationsaufwand, faire Budgetauswahl, gemeinsame Entscheidung | Terminfindung, unterschiedliche Interessen, Logistik und Kosten | Sammelt mehrere Optionen, teilt Ideen, achtet auf Personenanzahl, Ort und Dauer | Gruppenfreundliche Suche, Teilen, Wishlist, Kalender und Community-Impulse | Kategorien, Preis/Dauer/Ort, Wishlist, Teilen, Upcoming/Kalender, Community, Aktivität erfassen |
+| **Sara Baumann** | 34, Projektleiterin, organisiert Freizeitaktivitäten mit Freundesgruppe und Kolleginnen/Kollegen | Mittel bis hoch, nutzt Kalender und Gruppen-Chats | Gruppenaktivitäten schneller koordinieren und Ideen sammeln | Weniger Organisationsaufwand, faire Budgetauswahl, gemeinsame Entscheidung | Terminfindung, unterschiedliche Interessen, Logistik und Kosten | Sammelt mehrere Optionen, teilt Ideen, achtet auf Personenanzahl, Ort und Dauer | Gruppenfreundliche Suche, Teilen, Wishlist, Kalender und später Community-Impulse | Kategorien, Preis/Dauer/Ort, Wishlist, Teilen, Upcoming/Kalender, Community-Ausblick, Aktivität erfassen |
 | **Mia Huber** | 41, Pflegefachfrau, lebt in Winterthur, wenig freie Zeit und unregelmässige Arbeitszeiten | Mittel, nutzt Apps pragmatisch, möchte wenig konfigurieren | In wenigen Minuten eine passende Aktivität finden und direkt planen | Zeit sparen, klare Vorschläge, wenig mentale Belastung nach der Arbeit | Zu viele Filter, lange Texte, unsichere Öffnungszeiten oder unklare Dauer | Nutzt schnelle Einstiege, entscheidet visuell, kehrt zu zuletzt angesehenen Ideen zurück | Sehr schnelle Suche, wenige Klicks, klare Metadaten und direkte Planung | Home, Schnellfilter, zuletzt angesehen, Detailseite, Planen, Upcoming |
 | **Jonas Frei** | 31, Vereinsmitglied und Freizeitorganisator aus St. Gallen, erstellt regelmässig Ideen für Gruppen | Hoch, ist bereit Formulare zu pflegen, erwartet aber klare Validierung | Eigene Aktivitätsideen erfassen, sichtbar machen und später verbessern | Lokale Ideen teilen, Gruppe inspirieren, neue Vorschläge in VibeMatch bringen | Wenn eigene Inhalte nicht auffindbar sind oder nachträglich nicht bearbeitet werden können | Füllt strukturierte Formulare aus, lädt Bilder hoch, prüft danach Detailseite und Filterbarkeit | Activity-Creation, Bild/Galerie, Sichtbarkeit in Listen, später Creator-Verwaltung | `/activities/new`, Bilder/Galerie, Detailseite, Kategorien, Profil, zukünftiges Bearbeiten/Löschen |
 
@@ -85,13 +85,13 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 | Lea | Als Lea möchte ich schnell passende Vorschläge nach Stimmung und Budget sehen, damit wir nicht lange diskutieren müssen. | Must | Home, Schnellfilter, Kategorien | Ja |
 | Lea | Als Lea möchte ich Aktivitäten speichern, damit ich sie später mit meinem Partner vergleichen kann. | Must | Activity Cards, Detailseite, Wishlist | Ja |
 | Lea | Als Lea möchte ich eine gespeicherte Idee direkt planen, damit aus Inspiration ein konkreter Termin wird. | Must | Wishlist, PlanActivityModal, Upcoming | Ja |
-| Lea | Als Lea möchte ich vergangene Aktivitäten bewerten und kommentieren, damit wir gute Erlebnisse wiederfinden. | Should | History, Reviews, Community | Ja |
+| Lea | Als Lea möchte ich vergangene Aktivitäten bewerten und kommentieren, damit wir gute Erlebnisse wiederfinden. | Should | History, Reviews | Ja |
 | Nico | Als Nico möchte ich sichere und lockere Date-Ideen nach Ort, Preis und Dauer filtern, damit das erste Treffen entspannt bleibt. | Must | Kategorien, Filter, Map | Ja |
 | Nico | Als Nico möchte ich Bewertungen und Review-Verteilung prüfen, damit ich eine glaubwürdige Entscheidung treffen kann. | Should | Detailseite, ReviewSummary, RatingStars | Ja |
 | Nico | Als Nico möchte ich Aktivitäten auf einer Karte sehen, damit ich einen gut erreichbaren Treffpunkt wählen kann. | Should | Map, Leaflet, Detailvorschau | Ja |
 | Nico | Als Nico möchte ich eine Date-Idee erst speichern und später planen, damit ich nicht sofort entscheiden muss. | Should | Wishlist, Planen, Upcoming | Ja |
 | Sara | Als Sara möchte ich Aktivitäten nach Gruppentauglichkeit, Dauer und Budget filtern, damit die Idee für mehrere Personen passt. | Must | Kategorien, erweiterte Filter | Ja |
-| Sara | Als Sara möchte ich eine Aktivität teilen, damit andere die Idee sehen und darauf reagieren können. | Should | ShareModal, Community | Teilweise |
+| Sara | Als Sara möchte ich eine Aktivität teilen, damit andere die Idee sehen und sie später in einer Community weiterentwickelt werden kann. | Should | ShareModal, Community-Ausblick | Teilweise |
 | Sara | Als Sara möchte ich geplante Aktivitäten im Kalender verschieben, damit die Organisation flexibel bleibt. | Should | Upcoming, Kalender, PlannedActivityModal | Ja |
 | Sara | Als Sara möchte ich eigene Aktivitätsideen erfassen, damit die Gruppe nicht nur aus Seed-Vorschlägen auswählt. | Could | `/activities/new`, Activity-Creation | Ja |
 | Sara | Als Sara möchte ich Gruppenabstimmungen durchführen, damit mehrere Personen gemeinsam entscheiden können. | Could | Voting/Matching-Idee | Nein |
@@ -111,7 +111,7 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 
 ![Crazy-8-Skizzen](docs/Crazy%208.jpg)
 
-- **Übertrag in den Prototyp:** Mehrere Skizzenideen sind inzwischen umgesetzt, unter anderem Detailseite, Hero-Galerie, Planen-/Teilen-/Bewerten-Modals, Map-Page, Upcoming, History, Wishlist und Community.
+- **Übertrag in den Prototyp:** Mehrere Skizzenideen sind inzwischen umgesetzt, unter anderem Detailseite, Hero-Galerie, Planen-/Teilen-/Bewerten-Modals, Map-Page, Upcoming, History, Wishlist und eine Community-Ausblickseite.
 
 ### 3.3 Decide
 - **Gewählte Variante & Begründung:** Gewählt wurde eine Dashboard-artige Web-App mit Sidebar-Navigation, Aktivitätscards, Detailseiten und klaren Folgeaktionen. Diese Variante unterstützt den zentralen Use Case am besten: Inspiration finden, Aktivität prüfen, speichern, planen, bewerten oder teilen.
@@ -133,7 +133,7 @@ flowchart TD
     Plan --> Upcoming["Kommende Aktivitäten / Kalender"]
     Upcoming --> History["Als erledigt markieren / History"]
     History --> Review["Bewerten, Erinnerung bearbeiten, teilen"]
-    Review --> Community["Community-Beitrag"]
+    Review --> Community["Teilen-Prototyp"]
 
     Detail --> Map["Karte / Ort prüfen"]
     Map --> Detail
@@ -174,7 +174,7 @@ Jonas Frei erfasst eine neue Aktivität, fügt Bilder hinzu und prüft danach di
 |---|---|---|---|---|---|---|---|
 | **Paar-Flow: Quality Time planen** | Login -> Home | Schnellfilter nach Stimmung, Budget, Dauer oder Kategorienseite | Vergleich über Bilder, Metadaten, Reviews und Tipps | Wishlist oder direkt planen | Upcoming, Kalender, History, Bewertung | Zu viele Optionen oder unklare Dauer | Home, Filter, Detailseite, Wishlist, Planen, Kalender, History |
 | **First-Date-Flow: sichere Idee finden** | Home oder Map | Filter nach Ort, Preis, Dauer, Indoor/Outdoor und Bewertung | Detailseite mit Galerie, Review-Zusammenfassung und Anforderungen | Aktivität planen oder für später speichern | Nach Date bewerten und Erinnerung ergänzen | Unsicherheit, ob Ort und Vibe passen | Kategorien, Map, Detailseite, Reviews, Planungsmodal |
-| **Gruppen-Flow: gemeinsame Aktivität organisieren** | Kategorien oder Wishlist | Filter nach Personenanzahl, Budget, Ort, Dauer und Kategorie | Mehrere Optionen speichern oder teilen | Termin im Kalender verwalten | Als erledigt markieren, teilen, Community-Beitrag | Unterschiedliche Interessen, Terminfindung, fehlende Abstimmung | Erweiterte Filter, Wishlist, Teilen, Upcoming, Community |
+| **Gruppen-Flow: gemeinsame Aktivität organisieren** | Kategorien oder Wishlist | Filter nach Personenanzahl, Budget, Ort, Dauer und Kategorie | Mehrere Optionen speichern oder teilen | Termin im Kalender verwalten | Als erledigt markieren und teilen | Unterschiedliche Interessen, Terminfindung, fehlende Abstimmung | Erweiterte Filter, Wishlist, Teilen, Upcoming, Community-Ausblick |
 | **Time-Saver-Flow: schnelle Entscheidung** | Home | Schnellfilter oder zuletzt angesehen, möglichst ohne tiefe Konfiguration | Kurzer Vergleich über Card, Dauer, Preis und Detailseite | Direkt planen | Upcoming prüfen und später erledigen | Zu viele Auswahlmöglichkeiten, zu viele Formularschritte | Home, Schnellfilter, zuletzt angesehen, Detailseite, Planen |
 | **Creator-Flow: eigene Aktivität sichtbar machen** | Sidebar `Erfassen` oder Home-Button | Formular mit Kategorien, Ort, Eigenschaften und Bildern | Live-Vorschau und Pflichtfeldvalidierung | Speichern und Redirect zur Detailseite | Sichtbarkeit in Home/Kategorien prüfen | Fehlende Bearbeiten-/Löschen-Funktion nach dem Speichern | `/activities/new`, `POST /api/activities`, Galerie, Detailseite |
 
@@ -184,7 +184,7 @@ Jonas Frei erfasst eine neue Aktivität, fügt Bilder hinzu und prüft danach di
 | Ist die Aktivität glaubwürdig? | Bewertungen, Review-Zusammenfassung, Bildergalerie | Ja | Moderierte oder verifizierte Reviews |
 | Wo findet die Aktivität statt? | Map mit Stadt-, Kategorie-, Preis- und Dauerfilter | Ja | Geocoding für neue Aktivitäten ohne Koordinaten |
 | Wie wird aus einer Idee ein Termin? | Planungsmodal, Wishlist-Direktplanung, Upcoming/Kalender | Ja | Reminder oder Kalenderexport |
-| Wie entscheidet eine Gruppe gemeinsam? | Teilen und Community-Prototyp | Teilweise | Gruppenabstimmung oder Voting-Link |
+| Wie entscheidet eine Gruppe gemeinsam? | Teilen-Prototyp und Community-Ausblick | Teilweise | Gruppenabstimmung oder Voting-Link |
 | Wie werden eigene Ideen gepflegt? | Aktivität erfassen | Teilweise | Eigene Aktivitäten bearbeiten/löschen |
 | Wie finden Personen mit wenig Zeit schnell eine Idee? | Home-Schnellfilter, zuletzt angesehen, direkte Planung | Ja | Personalisierte Startvorschläge |
 | Wie werden usergenerierte Aktivitäten verwaltet? | Aktivität erfassen und Detailseite | Teilweise | Creator-Bereich im Profil mit Bearbeiten/Löschen |
@@ -205,7 +205,7 @@ Journey-Status:
 Beschreibt die Gestaltung und Interaktion.
 > **Hinweis:** Hier wird der **Prototyp** beschrieben, nicht das **Mockup**.
 
-- **Informationsarchitektur:** Die App ist um die Hauptbereiche Home/Inspiration, Kategorien & Filter, Karte, Wishlist, Kommende Aktivitäten mit Kalender, Vergangene Aktivitäten, Community, Aktivität erfassen und Profil aufgebaut. Detailseiten sind über Aktivitätscards, Listen, Marker und weitere Teaser erreichbar. Aus der Wishlist können gespeicherte Ideen direkt geplant werden. Nicht eingeloggte Nutzer werden zuerst zur Login-Seite geführt.
+- **Informationsarchitektur:** Die App ist um die Hauptbereiche Home/Inspiration, Kategorien & Filter, Karte, Wishlist, Kommende Aktivitäten mit Kalender, Vergangene Aktivitäten, Community-Ausblick, Aktivität erfassen und Profil aufgebaut. Detailseiten sind über Aktivitätscards, Listen, Marker und weitere Teaser erreichbar. Aus der Wishlist können gespeicherte Ideen direkt geplant werden. Nicht eingeloggte Nutzer werden zuerst zur Login-Seite geführt.
 - **User Interface Design:** Der Prototyp nutzt ein modernes, helles Dashboard-Design mit Desktop-Sidebar, mobiler Navigation, Such- und Filterelementen, Aktivitätscards, Detail-Hero, Bewertungsanzeige, Map-Panel und Modals. Die Hauptfarbe ist Violett/Lila, ergänzt durch helle Pastelltöne und weisse Flächen.
 - **Login-Seite:** Die Login-Seite ist als fokussierte Einstiegskarte gestaltet. Sie enthält Branding, einen kurzen Nutzenhinweis und zwei Modi: `Einloggen` für vorhandene Accounts sowie `Account erstellen` für neue Accounts. Demo-Zugangsdaten werden nicht mehr prominent angezeigt, damit die Seite sauberer wirkt.
 - **Home / Inspiration:** Die Startseite zeigt Inspiration, Aktivitätscards und Schnellfilter für Stimmung, Ort und Budget. Nach dem Öffnen von Detailseiten erscheint zusätzlich der Bereich `Zuletzt angesehen`, damit Nutzer dort fortfahren können, wo sie zuletzt gestöbert haben. Zusätzlich gibt es den Einstieg zur neuen Page `Aktivität erfassen`.
@@ -228,7 +228,7 @@ Screen-to-Journey-Mapping:
 | Upcoming / Kalender | Termine verwalten, verschieben, entfernen und abschliessen | Lea, Sara | Ja |
 | History | Erlebnisse nachbearbeiten, bewerten, favorisieren und teilen | Lea, Sara | Ja |
 | Map | Lokale Entscheidung und Treffpunktprüfung | Nico, Sara | Ja |
-| Community | Inspiration durch geteilte Erlebnisse, einfache Interaktionen | Sara | Teilweise |
+| Community-Ausblick | spätere soziale Inspiration, Follow-/Kommentarlogik und Moderation | Sara | MVP-2 |
 | Profil | persönliche Daten, Vorlieben, Statistiken und Einstellungen | Alle Personas | Ja |
 | Aktivität erfassen | eigene Ideen in den Feed bringen | Sara, Jonas | Ja |
 | Zuletzt angesehen | schnelle Rückkehr zu bereits geprüften Ideen | Mia | Ja |
@@ -247,7 +247,7 @@ Routenübersicht der Pages:
 | `/wishlist` | gespeicherte Ideen vergleichen und planen | Wishlist-Cards, Sortierung, Planen-Button, Empty State | `wishlistItems`, `activities` | Paar- und Gruppen-Flow |
 | `/upcoming` | geplante Aktivitäten verwalten | Liste, Kalender, Bearbeitungsmodal, Abschliessen | `plannedActivities`, `activities` | Planungs- und Kalenderabschnitt |
 | `/history` | vergangene Aktivitäten nachbearbeiten | History Cards, Bewertung, Erinnerung, Favorit, Teilen | `historyItems`, `activities` | Nachbearbeitung und Erinnerungen |
-| `/community` | geteilte Ideen und Erinnerungen anzeigen | Community Cards, Tabs, Teilen-Interaktionen | `communityPosts`, `activities` | Gruppen- und Community-Flow |
+| `/community` | MVP-2-Ausblick für Community-Konzept erklären | Roadmap-Karten, Abgrenzung, Link zu Aktivitäten | keine Seitendaten nötig | Produkt-Roadmap und Abgabeabgrenzung |
 | `/map` | Aktivitäten räumlich entdecken | Leaflet-Karte, Marker, Such-/Filterpanel, Ergebnisliste | `activities` mit Koordinaten | First-Date- und Ortsentscheidung |
 | `/profile` | Userdaten, Vorlieben und Einstellungen | Profil-Header, Statistiken, Kategorien, Modals | `users`, `profiles`, userbezogene Zählwerte | Profil- und Multi-User-Validierung |
 | `/activities/new` | eigene Aktivität erfassen | Formular-Cards, Bild-Upload, Galerie, Vorschau, Speichern | `activities`, `users.createdBy` | Creator-Flow |
@@ -276,7 +276,7 @@ flowchart TD
     Marker["Marker auswählen"]
     Upcoming["Kommende Aktivitäten"]
     History["Vergangene Aktivitäten"]
-    Community["Community / Ideen teilen"]
+    Community["Community-Ausblick"]
     Profile["Profil & Einstellungen"]
     ProfileModals["Profil-Modals"]
 
@@ -310,10 +310,10 @@ Fasst die technische Realisierung zusammen.
 - **Technologie-Stack:** Der Prototyp ist mit SvelteKit, Svelte 5, Vite und JavaScript umgesetzt. Als Datenbank wird MongoDB verwendet. Für die Kartenansicht wird Leaflet mit OpenStreetMap-Tiles eingesetzt.
 - **Tooling:** Entwicklung mit Node/npm, SvelteKit, Vite und einem Seed-Skript (`npm run seed`) für MongoDB-Demodaten. Die App kann lokal mit `npm run dev` gestartet und mit `npm run build` gebaut werden. Der Einsatz von KI wird im Kapitel **KI-Deklaration** beschrieben.
 - **Lokales Setup:** `.env.example` nach `.env` kopieren, `DB_URI` mit einer gültigen MongoDB-Verbindung ersetzen und `DB_NAME` auf die gewünschte Datenbank setzen, z. B. `vibematch`. Danach `npm install`, `npm run seed`, `npm run dev` und vor der Abgabe `npm run build` ausführen. Wenn `DB_URI` fehlt oder noch Platzhalter enthält, bricht die App bzw. das Seed-Skript mit einer verständlichen Fehlermeldung ab.
-- **Projektstruktur:** Die Pages liegen unter `src/routes`. Wiederverwendbare UI-Elemente liegen unter `src/lib/components`, unter anderem Layout-Komponenten (`AppShell`, `Sidebar`, `Topbar`, `MobileNav`), Activity-Komponenten (`ActivityCard`, `ActivityGrid`, `ActivityListItem`, `ActivityMeta`, `ActivityGallery`), Filter-Komponenten, Map-Komponente (`LeafletActivityMap`), Community-Karte, Profil-Komponenten und Modals. Serverseitige Datenzugriffe sind in `src/lib/server/repositories.js` gebündelt. MongoDB wird über `src/lib/server/db.js` angebunden. Das globale Toast-State-Handling liegt in `src/lib/state/appState.svelte.js`.
+- **Projektstruktur:** Die Pages liegen unter `src/routes`. Wiederverwendbare UI-Elemente liegen unter `src/lib/components`, unter anderem Layout-Komponenten (`AppShell`, `Sidebar`, `Topbar`, `MobileNav`), Activity-Komponenten (`ActivityCard`, `ActivityGrid`, `ActivityListItem`, `ActivityMeta`, `ActivityGallery`), Filter-Komponenten, Map-Komponente (`LeafletActivityMap`), Profil-Komponenten und Modals. Serverseitige Datenzugriffe sind in `src/lib/server/repositories.js` gebündelt. MongoDB wird über `src/lib/server/db.js` angebunden. Das globale Toast-State-Handling liegt in `src/lib/state/appState.svelte.js`.
 - **Auth/Login:** Das Login-System nutzt `src/hooks.server.js`, `src/lib/server/auth.js`, MongoDB-Collections `users` und `sessions` sowie das Cookie `vm_session`. Passwörter werden mit Node.js `crypto.scrypt` gehasht. Auf `/login` gibt es zwei Modi: vorhandene Accounts melden sich mit Benutzername oder E-Mail und Passwort an; neue Nutzer erstellen direkt einen Account und werden anschliessend eingeloggt. Der Demo-Login lautet `demo` / `demo123`; der Demo-User ist ein normaler Seed-/Präsentationsaccount und wird nicht mehr zur Laufzeit als Fallback erzeugt. `passwordHash` wird nie ans Frontend gesendet.
-- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Community-Erstellung und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Userbezogene Repository-Funktionen verlangen explizit eine User-ID und fallen nicht mehr automatisch auf `demo-user` zurück. Dadurch bleiben Demo-Daten beim Demo-Account und neue Accounts starten mit eigenen leeren Listen und eigenem Profil. Gespeicherte Wishlist-Aktivitäten können direkt über das bestehende Planungsmodal geplant und in der Wishlist sortiert werden. Geplante Aktivitäten können über `PATCH /api/planned/[id]` aktualisiert, über `DELETE /api/planned/[id]` entfernt und über `POST /api/planned/[id]/complete` als erledigt in die History übernommen werden. History-Einträge können über `PATCH /api/history/[id]` nachträglich bewertet, kommentiert und als Favorit markiert werden.
-- **Robustheit und Empty States:** Home, Upcoming, History, Community und Profilstatistiken sind so ausgelegt, dass leere userbezogene Listen oder fehlende Seed-Daten verständlich erklärt werden. API-POST-Routen liefern kontrollierte JSON-Fehler mit `error` und optional `fieldErrors`, statt ungültige Eingaben ungeprüft weiterzugeben.
+- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Teilen-Prototyp und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Userbezogene Repository-Funktionen verlangen explizit eine User-ID und fallen nicht mehr automatisch auf `demo-user` zurück. Dadurch bleiben Demo-Daten beim Demo-Account und neue Accounts starten mit eigenen leeren Listen und eigenem Profil. Gespeicherte Wishlist-Aktivitäten können direkt über das bestehende Planungsmodal geplant und in der Wishlist sortiert werden. Geplante Aktivitäten können über `PATCH /api/planned/[id]` aktualisiert, über `DELETE /api/planned/[id]` entfernt und über `POST /api/planned/[id]/complete` als erledigt in die History übernommen werden. History-Einträge können über `PATCH /api/history/[id]` nachträglich bewertet, kommentiert und als Favorit markiert werden.
+- **Robustheit und Empty States:** Home, Upcoming, History und Profilstatistiken sind so ausgelegt, dass leere userbezogene Listen oder fehlende Seed-Daten verständlich erklärt werden. `/community` ist bewusst eine Ausblickseite und nicht mehr von Seed-Communitydaten abhängig. API-POST-Routen liefern kontrollierte JSON-Fehler mit `error` und optional `fieldErrors`, statt ungültige Eingaben ungeprüft weiterzugeben.
 - **Accessibility:** Globale `:focus-visible`-Styles machen Tastaturnavigation sichtbar. Modals lassen sich per Schliessen-Button, Abbrechen-Aktion und Escape-Taste verlassen; dies wird in der manuellen Flow-Checkliste geprüft.
 - **Profiltechnik:** Die Profilseite lädt Daten über `src/routes/profile/+page.server.js`. Profiländerungen laufen über `GET/PUT /api/profile`, Passwortänderungen über `PUT /api/profile/password`, Benachrichtigungseinstellungen über `PUT /api/profile/notifications` und Support-Feedback über `POST /api/support`. Lieblingskategorien stammen direkt aus den gespeicherten User-Präferenzen; zusätzlich werden Nutzungskategorien separat aus Wishlist und History berechnet. Statistikwerte werden userbezogen berechnet, die Durchschnittsbewertung ignoriert unbewertete History-Einträge mit `rating: 0`. Die Modals liegen unter `src/lib/components/profile`.
 - **Aktivitäten erfassen:** Die Route `/activities/new` enthält ein Formular mit clientseitiger Validierung und Live-Vorschau. Das Speichern erfolgt über `POST /api/activities`. Die Repository-Funktion `createActivity()` erzeugt eine eindeutige ID, validiert Pflichtfelder und Bilder, setzt Defaults wie `rating: 0`, `reviewCount: 0`, `status: 'active'`, `createdBy`, `createdAt` und `updatedAt` und speichert die Aktivität in MongoDB.
@@ -322,7 +322,7 @@ Fasst die technische Realisierung zusammen.
 - **Zuletzt angesehen:** Die Detailseite speichert die zuletzt geöffneten Aktivitäts-IDs clientseitig in `localStorage` unter `vibematch.recentActivities`. Die Home-Seite liest diese IDs beim Laden im Browser aus, gleicht sie mit den vorhandenen Aktivitätsdaten ab und zeigt maximal vier passende Activity Cards. Dafür ist keine zusätzliche API und keine MongoDB-Collection notwendig.
 - **Map:** Die Karte nutzt Leaflet/OpenStreetMap. Aktivitäten mit Koordinaten werden als Marker dargestellt. Kategorie-, Preis- und Dauerfilter nutzen die bestehenden Aktivitätsdaten sowie die Preisgruppierung aus der Filterlogik. Die Listen- und Kartendarstellung sind responsiv abgestimmt.
 - **Reviews:** Reviews werden pro Aktivität über `GET /api/reviews` geladen und über `POST /api/reviews` gespeichert. Die Detailseite berechnet daraus Durchschnitt, Anzahl Bewertungen und eine einfache 5-bis-1-Sterne-Verteilung ohne zusätzliche API. Die Demo-/Seed-Daten enthalten pro Aktivität 1-12 realistische und bewusst unterschiedlich gute Reviews; `reviewCount` und `rating` der Aktivitäten sind darauf abgestimmt.
-- **Technische Rückführbarkeit der Journeys:** Die Kernjourneys sind auf konkrete Routen, Komponenten und MongoDB-Collections abbildbar. Inspiration und Filter nutzen `activities` sowie Filterkomponenten; Wishlist nutzt `wishlistItems`; Planung nutzt `plannedActivities`; History nutzt `historyItems`; Bewertungen nutzen `reviews`; Community nutzt `communityPosts`; Profil und Auth nutzen `users` und `sessions`.
+- **Technische Rückführbarkeit der Journeys:** Die Kernjourneys sind auf konkrete Routen, Komponenten und MongoDB-Collections abbildbar. Inspiration und Filter nutzen `activities` sowie Filterkomponenten; Wishlist nutzt `wishlistItems`; Planung nutzt `plannedActivities`; History nutzt `historyItems`; Bewertungen nutzen `reviews`; Teilen nutzt prototypisch `communityPosts`; `/community` dokumentiert den MVP-2-Ausblick; Profil und Auth nutzen `users` und `sessions`.
 - **Deployment:** Das Projekt enthält mit `netlify.toml` eine Netlify-Konfiguration. Solange keine separate Deployment-URL eingetragen ist, gilt die lokal gebaute Version nach `npm run build` und optional `npm run preview` als geprüfte Abgabeversion.
 - **Besondere Entscheidungen:** Im Gegensatz zur ursprünglichen React-Idee wurde die Umsetzung mit SvelteKit realisiert. Leaflet/OpenStreetMap wurde gewählt, um eine kostenlose Kartenlösung für den Prototyp zu nutzen. Bildupload und Benachrichtigungen sind bewusst prototypisch gehalten; es gibt kein Cloud-Storage und keine echten Push-/E-Mail-Benachrichtigungen.
 
@@ -338,7 +338,7 @@ Journey-to-Technology-Mapping:
 | Planen | `plannedActivities` | `PlanActivityModal`, `/upcoming` | `/api/planned`, `addPlannedActivity()` | Ja |
 | Kalender verwalten | `plannedActivities` | `UpcomingCalendar`, `PlannedActivityModal` | `PATCH/DELETE /api/planned/[id]`, Complete-Endpoint | Ja |
 | History und Bewertung | `historyItems`, `reviews`, `activities` | `/history`, Review-Modal, History-Editor | `PATCH /api/history/[id]`, `/api/reviews` | Ja |
-| Teilen und Community | `communityPosts`, `activities`, `historyItems` | `/community`, `CommunityPostCard`, ShareModal | `/api/community`, `/api/history/share` | Teilweise |
+| Teilen und Community-Ausblick | `communityPosts`, `activities`, `historyItems` | ShareModal, `/community` als MVP-2-Konzeptseite | `/api/community`, `/api/history/share` | Teilen: Teilweise, Community: MVP-2 |
 | Karte | `activities` mit Koordinaten | `/map`, `LeafletActivityMap` | `getMapActivitiesByPlace()` | Ja |
 | Profil und Vorlieben | `users`, `wishlistItems`, `historyItems` | `/profile`, Profil-Modals | `/api/profile`, Profil-Repository-Funktionen | Ja |
 | Aktivität erfassen | `activities` | `/activities/new` | `POST /api/activities`, `createActivity()` | Ja |
@@ -398,8 +398,6 @@ flowchart TD
     Wishlist --> Activity
     Upcoming --> Activity
     Map --> Activity
-    Community --> Activity
-
     Root -- "Daten laden" --> ApiActivities
     Activity -- "Detaildaten" --> ApiActivityId
     Activity -- "Wishlist Toggle" --> ApiWishlist
@@ -407,7 +405,7 @@ flowchart TD
     Activity -- "Planen" --> ApiPlanned
     Upcoming -- "Als erledigt markieren" --> ApiPlannedComplete
     Upcoming -- "Termin bearbeiten/entfernen" --> ApiPlannedId
-    Activity -- "Teilen" --> ApiCommunity
+    Activity -- "Teilen-Prototyp" --> ApiCommunity
     History -- "Historydaten" --> ApiHistory
     History -- "Erinnerung teilen" --> ApiHistoryShare
     Profile -- "Profildaten" --> ApiProfile
@@ -429,7 +427,7 @@ Routen- und API-Übersicht:
 | `/wishlist` / `/api/wishlist` | GET/POST/DELETE | Aktivitäten speichern, entfernen und planen | `wishlistItems`, `activities` | Ja | Speichern |
 | `/upcoming` / `/api/planned` | GET/POST/PATCH/DELETE | Termine planen, bearbeiten, entfernen, abschliessen | `plannedActivities`, `historyItems` | Ja | Planung/Kalender |
 | `/history` / `/api/history` | GET/PATCH | vergangene Aktivitäten bewerten und bearbeiten | `historyItems`, `activities` | Ja | Nachbearbeitung |
-| `/community` / `/api/community` | GET/POST | öffentliche Beiträge anzeigen und erstellen | `communityPosts`, `activities` | Ja | Teilen/Community |
+| `/community` / `/api/community` | GET/POST | MVP-2-Ausblick anzeigen; prototypische Share-Posts erstellen | `communityPosts`, `activities` | Teilweise | Teilen-Prototyp / Community-Ausblick |
 | `/map` | Page Load | Aktivitäten auf Karte anzeigen und filtern | `activities` mit Koordinaten | Ja | Ortsentscheidung |
 | `/profile` / `/api/profile` | GET/PUT | Profil, Statistiken, Vorlieben bearbeiten | `users`, `profiles`, userbezogene Collections | Ja | Profil/Userdaten |
 | `/api/reviews` | GET/POST | Reviews laden und speichern | `reviews`, `activities` | Ja | Bewertung |
@@ -444,7 +442,7 @@ Komponentenübersicht:
 | `FilterPanel` | Suche, Filter, aktive Chips und Auswahlzustände | URL-Parameter, Kategorien, Filterwerte | Kategorienseite | Filter-Flow |
 | `PlanActivityModal`, `PlannedActivityModal`, `UpcomingCalendar` | Aktivität planen, Termine bearbeiten und Kalender anzeigen | Activity- und Planned-Daten | Detailseite, Wishlist, Upcoming | Planung/Kalender |
 | `ReviewModal`, `ReviewSummary`, `RatingStars` | Bewertung erfassen, Durchschnitt und Verteilung anzeigen | Reviews, Rating-Werte | Detailseite, History | Bewertung |
-| `ShareModal`, `CommunityPostCard` | Teilen und Community-Beiträge darstellen | Activity-, History- und Post-Daten | Detailseite, History, Community | Community |
+| `ShareModal`, `CommunityPostCard` | Teilen prototypisch vorbereiten und vorhandene Post-Daten darstellen | Activity-, History- und Post-Daten | Detailseite, History, spätere Community-Iteration | Teilen / Community-Ausblick |
 | `LeafletActivityMap` | Kartenmarker, Vorschau und Kartennavigation | Aktivitäten mit Koordinaten | Map-Page | Ortsentscheidung |
 | Profil-Modals und `StatCard` | Profil bearbeiten, Passwort, Notifications, Support, Logout | User-, Profile- und Statistikdaten | Profilseite | Profil/Userverwaltung |
 | `AppShell`, `Sidebar`, `Topbar`, `MobileNav`, `NavIcon` | globale Navigation und App-Rahmen | Layout-Daten, User, Wishlist-Zähler | alle geschützten Pages | Orientierung |
@@ -464,13 +462,13 @@ ER-Modell:
 | `plannedActivities` | `id`, `userId`, `activityId`, `date`, `time`, `status` | Upcoming, Kalender, Abschliessen |
 | `historyItems` | `id`, `userId`, `activityId`, `rating`, `memory`, `favorite` | Erinnerungen, Bewertung, Teilen |
 | `reviews` | `id`, `activityId`, `userId`, `rating`, `comment`, `visitDate` | Detailseite, Review-Zusammenfassung, Activity-Rating |
-| `communityPosts` | `id`, `userId`, `activityId`, `text`, `visibility`, `likes` | Community-Feed und geteilte Erinnerungen |
+| `communityPosts` | `id`, `userId`, `activityId`, `text`, `visibility`, `likes` | technische Vorstufe für prototypisches Teilen und spätere Community |
 
 Systemarchitektur:
 
 - **Frontend:** SvelteKit/Svelte Pages und Komponenten unter `src/routes` und `src/lib/components`; AppShell mit Sidebar/Topbar/MobileNav für geschützte Bereiche.
 - **Backend/API:** SvelteKit Server Loads und API-Routen unter `src/routes/api`; zentrale Businesslogik und MongoDB-Zugriffe in `src/lib/server/repositories.js`.
-- **Datenbank:** MongoDB mit Collections für User, Sessions, Aktivitäten, Reviews, Wishlist, Planung, History, Community und Profile; Seed-Daten unter `src/lib/data`.
+- **Datenbank:** MongoDB mit Collections für User, Sessions, Aktivitäten, Reviews, Wishlist, Planung, History, prototypische Share-/Community-Daten und Profile; Seed-Daten unter `src/lib/data`.
 - **Authentifizierung:** Session-Cookie `vm_session`, gehashte Session-Tokens in `sessions`, Passwort-Hashing mit `scrypt`, Route-Schutz über `hooks.server.js`.
 - **Externe Dienste:** Leaflet mit OpenStreetMap-Tiles für die Karte; externe kuratierte Bild-URLs für Seed-Aktivitäten.
 - **Notification-/E-Mail-Konzept:** Benachrichtigungseinstellungen sind prototypisch gespeichert; es gibt bewusst keinen echten E-Mail-, Push- oder SMTP-Versand.
@@ -483,7 +481,7 @@ Systemarchitektur:
 - **Aufgaben/Szenarien:** Einloggen, passende Aktivität für Zürich oder St. Gallen finden, Schnellfilter nutzen, Filter nach Stimmung/Budget setzen, Detailseite öffnen, Aktivität zur Wishlist hinzufügen, Aktivität planen, Marker auf Karte auswählen, Bewertung schreiben, Profil bearbeiten, neue Aktivität mit Bild erfassen und Empty States prüfen.
 - **Kennzahlen & Beobachtungen:** Erfasst werden Erfolgsquote pro Szenario, benötigte Zeit, Verständnisprobleme, Navigationshürden und qualitative Beobachtungen. Die Auswertungstabelle ist in `docs/validate-test-plan.md` vorbereitet.
 - **Zusammenfassung der Resultate:** Die aktuelle interne Prüfung führte zu konkreten Verbesserungen bei Mobile Navigation, API-Validierung, Empty States, Fokuszuständen, Modal-Escape-Verhalten und Dokumentationsartefakten. Ergebnisse aus externen Kurztests werden nach Durchführung in denselben Beobachtungsbogen eingetragen.
-- **Abgeleitete Verbesserungen:** Für die Abgabe wurden leere Datenzustände robuster gemacht, Community-Tabs klarer markiert, Mobile Navigation erweitert, Profil-/Modal-Feedback verbessert, API-Fehlerantworten vereinheitlicht und eine manuelle Flow-Checkliste in `docs/manual-flow-checklist.md` angelegt.
+- **Abgeleitete Verbesserungen:** Für die Abgabe wurden leere Datenzustände robuster gemacht, Community bewusst als MVP-2-Ausblick deklariert, Mobile Navigation erweitert, Profil-/Modal-Feedback verbessert, API-Fehlerantworten vereinheitlicht und eine manuelle Flow-Checkliste in `docs/manual-flow-checklist.md` angelegt.
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
@@ -554,16 +552,16 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 - **Testhinweis:** `/map` öffnen, Stadt wählen, Kategorie, Preis und Dauer filtern, Marker anklicken, Empty State prüfen und Detailnavigation testen.
 - **Aus Evaluation abgeleitet?:** Teilweise aus UX-Beobachtung im eigenen Test: Die Ergebnisliste durfte die letzte Aktivität nicht abschneiden.
 
-### 4.7 Community, Teilen und Reviews
-- **Beschreibung & Nutzen:** Aktivitäten und Erinnerungen können geteilt und bewertet werden. Vergangene Aktivitäten können in der History nachträglich bewertet, kommentiert und als Favorit markiert werden. Dadurch entsteht ein sozialer Prototyp-Charakter, ohne VibeMatch in eine Dating- oder Social-Media-App umzubauen.
+### 4.7 Teilen, Reviews und Community-Ausblick
+- **Beschreibung & Nutzen:** Aktivitäten und Erinnerungen können im Prototyp geteilt und bewertet werden. Vergangene Aktivitäten können in der History nachträglich bewertet, kommentiert und als Favorit markiert werden. Die eigentliche Community wird bewusst als MVP-2-Ausblick geführt, weil ein glaubwürdiges Social Feature Follow-Logik, Kommentare, Privatsphäre und Moderation braucht.
 - **Wo umgesetzt:**
-  - **Frontend:** `src/routes/community`, `src/lib/components/community/CommunityPostCard.svelte`, `ShareModal.svelte`, `ReviewModal.svelte`.
-  - **Backend:** `/api/community`, `/api/reviews`, `/api/history/share`.
+  - **Frontend:** `ShareModal.svelte`, `ReviewModal.svelte`, `src/routes/community` als Roadmap-/Ausblickseite.
+  - **Backend:** `/api/community`, `/api/reviews`, `/api/history/share` bleiben als technische Vorstufe und Prototyp-Endpunkte erhalten.
   - **Datenbank:** Collections `communityPosts`, `reviews`, `historyItems`.
-- **Technische Umsetzung:** Bewertungen werden mit Rating, Kommentar, Besuchsdatum und Userbezug gespeichert. Das Bewertungsmodal nutzt eine interaktive Sterneauswahl mit sichtbarem Auswahlstatus. Die Seed-Daten enthalten durchmischte Review-Anzahlen zwischen 1 und 12 pro Aktivität sowie bewusst variierende Durchschnittswerte von mittelmässig bis sehr gut, damit Activity Cards, Listen und Detailseiten konsistente und glaubwürdigere Bewertungszahlen anzeigen. Auf der Detailseite werden Durchschnitt, Anzahl Reviews und eine einfache Bewertungsverteilung als Balken aus den geladenen Review-Daten berechnet. Die Einzelrezensionen werden initial auf drei Einträge begrenzt und können per Button vollständig eingeblendet werden. History-Einträge lassen sich über ein Bearbeiten-Modal aktualisieren. Community-Tabs trennen öffentliche Beiträge, eigene Beiträge und einen Prototyp-Zustand für gefolgte Beiträge. Likes, Kommentare und Speichern reagieren als Prototyp-Interaktionen mit sichtbarem Feedback. Teilen erzeugt Community-Posts oder geteilte Erinnerungen. Erfolgsmeldungen laufen über Toasts.
-- **Abgrenzung/Prototyp-Charakter:** Likes, Kommentare, Speichern und Follow-Logik sind prototypisch bzw. begrenzt. Es gibt keine Moderation und kein öffentliches Produktivsystem.
-- **Testhinweis:** Detailseite öffnen, Review-Zusammenfassung prüfen, maximal drei sichtbare Einzelrezensionen und Button für weitere Rezensionen testen, Bewertung schreiben, aktualisierte Verteilung prüfen, History-Eintrag bearbeiten, Aktivität teilen, Community-Tabs prüfen und Community-Interaktionen testen.
-- **Aus Evaluation abgeleitet?:** Nein, aus dem geplanten Funktionsumfang und den Crazy-8-Ansätzen abgeleitet.
+- **Technische Umsetzung:** Bewertungen werden mit Rating, Kommentar, Besuchsdatum und Userbezug gespeichert. Das Bewertungsmodal nutzt eine interaktive Sterneauswahl mit sichtbarem Auswahlstatus. Die Seed-Daten enthalten durchmischte Review-Anzahlen zwischen 1 und 12 pro Aktivität sowie bewusst variierende Durchschnittswerte von mittelmässig bis sehr gut. Auf der Detailseite werden Durchschnitt, Anzahl Reviews und eine einfache Bewertungsverteilung berechnet. Teilen erzeugt weiterhin prototypische Community-Posts oder geteilte Erinnerungen, die API bleibt für eine spätere Iteration anschlussfähig. Die Route `/community` zeigt keine halbfertigen Tabs oder simulierten Social-Interaktionen mehr, sondern erklärt Ziel, Abgrenzung und geplante MVP-2-Funktionen.
+- **Abgrenzung/Prototyp-Charakter:** Öffentlicher Feed, Follow-System, produktive Kommentare, Moderation und Privatsphäre-Regeln sind nicht Teil der aktuellen Abgabe.
+- **Testhinweis:** Detailseite öffnen, Review-Zusammenfassung prüfen, maximal drei sichtbare Einzelrezensionen und Button für weitere Rezensionen testen, Bewertung schreiben, aktualisierte Verteilung prüfen, History-Eintrag bearbeiten, Teilen-Flow prüfen und `/community` als verständliche MVP-2-Ausblickseite öffnen.
+- **Aus Evaluation abgeleitet?:** Teilweise aus der Produktentscheidung abgeleitet, Community nicht halbfertig als MVP-Funktion auszuliefern.
 
 ### 4.8 Moderne Kalenderansicht für kommende Aktivitäten
 - **Beschreibung & Nutzen:** Die Page `Kommende Aktivitäten` zeigt geplante Aktivitäten nicht nur als Liste, sondern auch als echte Monatskalenderansicht. Dadurch können Nutzerinnen und Nutzer geplante Termine zeitlich besser einordnen, verschieben und verwalten.
@@ -588,9 +586,9 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 
 ### 4.10 Journey-Gaps und priorisierte Roadmap
 - **Beschreibung & Nutzen:** Aus den Personas und Journeys ergeben sich Lücken, die für spätere Iterationen relevant sind. Sie helfen, zwischen MVP-Fokus und Erweiterungen zu unterscheiden.
-- **Bereits abbildbar:** Inspiration, Filter, Detailentscheidung, Wishlist, direkte Planung, Kalenderverwaltung, History-Bearbeitung, Reviews, Kartenansicht, Profil, Login/Multi-User und Aktivitätserfassung.
-- **Teilweise abbildbar:** Community-Interaktion, Teilen in Gruppen, neue Aktivitäten auf der Karte ohne Koordinaten, Social Discovery und Gruppenentscheidung.
-- **Fehlende Features:** Swipe-/Matching-Idee, echte Gruppenabstimmung, Bearbeiten/Löschen eigener Aktivitäten, Follow-System, echte Kommentare, personalisierte Empfehlungen und Kalenderexport.
+- **Bereits abbildbar:** Inspiration, Filter, Detailentscheidung, Wishlist, direkte Planung, Kalenderverwaltung, History-Bearbeitung, Reviews, Kartenansicht, Profil, Login/Multi-User, Aktivitätserfassung und prototypisches Teilen.
+- **Teilweise abbildbar:** Teilen in Gruppen, neue Aktivitäten auf der Karte ohne Koordinaten und Gruppenentscheidung.
+- **Fehlende Features:** Community-Feed, Swipe-/Matching-Idee, echte Gruppenabstimmung, Bearbeiten/Löschen eigener Aktivitäten, Follow-System, echte Kommentare, personalisierte Empfehlungen und Kalenderexport.
 
 | Verbesserung | Zugehörige Journey | Mehrwert | Machbarkeit | Priorität |
 |---|---|---|---|---|
@@ -598,12 +596,12 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 | Gruppenabstimmung für gespeicherte Ideen | Sara / Gruppen-Flow | Unterstützt echte gemeinsame Entscheidung | Mittel bis gross | Should |
 | Swipe- oder Matching-Modus | Lea / Paare, Sara / Gruppen | Spielerischer Einstieg und schneller Vergleich | Mittel | Could |
 | Map-Integration neuer Aktivitäten ohne Koordinaten | Nico / Map, Sara / Activity-Creation | Neue Ideen werden räumlich besser sichtbar | Mittel | Should |
-| Community-Kommentare und Follow-Logik | Sara / Community | Glaubwürdigere soziale Nutzung | Gross | Could |
+| Community-Feed, Kommentare und Follow-Logik | Sara / Community | Glaubwürdigere soziale Nutzung mit Moderation und Privatsphäre | Gross | Later |
 | Schnellere Startvorschläge | Mia / Time-Saver-Flow | Reduziert Suchaufwand für Nutzer mit wenig Zeit | Mittel | Should |
 | Personalisierte Empfehlungen | Alle Personas | Bessere Vorschläge aus Profil, Wishlist und History | Gross | Later |
 | Kalenderexport oder Reminder | Lea, Sara / Planung | Bessere Alltagstauglichkeit | Mittel bis gross | Later |
 
-- **MVP-Fokus:** Für die aktuelle Abgabe sind die Kernflows bereits abgedeckt. Am wertvollsten für spätere Entwicklung wären eigene Aktivitäten bearbeiten/löschen für Creator, schnellere Startvorschläge für Nutzer mit wenig Zeit, Gruppenabstimmung und bessere Map-Integration neuer Aktivitäten.
+- **MVP-Fokus:** Für die aktuelle Abgabe sind die Kernflows bereits abgedeckt. Am wertvollsten für spätere Entwicklung wären eigene Aktivitäten bearbeiten/löschen für Creator, schnellere Startvorschläge für Nutzer mit wenig Zeit, Gruppenabstimmung, bessere Map-Integration neuer Aktivitäten und die sauber konzipierte Community als MVP 2.
 - **Bewusste Abgrenzung:** Kein Payment, kein Buchungssystem, kein Anbieterportal, kein OAuth, kein produktives Social Network und kein vollständiges Rollen-/Rechtesystem.
 
 ### 4.11 Funktionen und mögliche Erweiterungen nach Priorität
@@ -702,7 +700,7 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 - **Journey-Testcheckliste für Walkthrough und Validierung:**
   - **Lea / Paar-Flow:** Einloggen, Home öffnen, Schnellfilter nutzen, Detailseite vergleichen, Aktivität speichern, aus Wishlist planen, Termin im Kalender prüfen, als erledigt markieren und in History bewerten.
   - **Nico / First-Date-Flow:** Kategorie-/Preis-/Dauerfilter setzen, sichere öffentliche Aktivität wählen, Reviews und Galerie prüfen, Karte öffnen, Detailseite erneut öffnen und Aktivität planen.
-  - **Sara / Gruppen-Flow:** Gruppentaugliche Aktivität nach Personenanzahl, Budget und Dauer suchen, mehrere Ideen speichern, Aktivität teilen, Termin in Upcoming verwalten und Erinnerung in Community teilen.
+  - **Sara / Gruppen-Flow:** Gruppentaugliche Aktivität nach Personenanzahl, Budget und Dauer suchen, mehrere Ideen speichern, Aktivität teilen, Termin in Upcoming verwalten und Erinnerung bearbeiten.
   - **Mia / Time-Saver-Flow:** Home öffnen, Schnellfilter oder `Zuletzt angesehen` nutzen, Detailseite kurz prüfen, Aktivität direkt planen und in Upcoming kontrollieren.
   - **Jonas / Creator-Flow:** Neue Aktivität erfassen, Bild hinzufügen, speichern, Detailseite öffnen und prüfen, ob die Aktivität in Home/Kategorien erscheint.
   - **Gap-Prüfung:** Swipe/Matching, Gruppenabstimmung, Bearbeiten/Löschen eigener Aktivitäten und echte Follow-/Kommentarlogik bewusst als nicht oder nur teilweise umgesetzt markieren.
@@ -738,7 +736,7 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
   - Geplante Aktivität aus dem Bearbeitungsmodal entfernen.
   - Bewertung schreiben und Erfolgsmeldung prüfen.
   - Nach neuer Bewertung prüfen, ob Review-Zusammenfassung und Balkenverteilung aktualisiert werden.
-  - Aktivität oder Erinnerung teilen, Community-Tabs prüfen und Like/Kommentar/Speichern im Prototyp testen.
+  - Aktivität oder Erinnerung teilen und `/community` als MVP-2-Ausblickseite prüfen.
   - `/activities/new` öffnen, Pflichtfeldfehler prüfen, gültige Aktivität mit Bild speichern und Detailseite öffnen.
   - Ungültige Bilddatei oder zu grosses Bild testen.
   - `/map` öffnen, Stadt wählen, Marker anklicken und Detailseite öffnen.

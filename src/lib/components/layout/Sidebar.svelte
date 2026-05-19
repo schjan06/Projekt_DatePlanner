@@ -14,10 +14,20 @@
 		{ href: '/profile', label: 'Profil', icon: 'user' }
 	];
 
+	const createSections = [
+		{ href: '#basis', label: 'Basis' },
+		{ href: '#ort-zeit', label: 'Ort & Zeit' },
+		{ href: '#eigenschaften', label: 'Eigenschaften' },
+		{ href: '#budget', label: 'Budget' },
+		{ href: '#bilder', label: 'Bilder' }
+	];
+
 	function isActive(href) {
 		if (href === '/') return page.url.pathname === '/';
 		return page.url.pathname.startsWith(href);
 	}
+
+	const isCreatePage = $derived(page.url.pathname === '/activities/new');
 </script>
 
 <aside class="sidebar" aria-label="Hauptnavigation">
@@ -35,9 +45,21 @@
 		{/each}
 	</nav>
 
-	<div class="sidebar-card">
-		<p class="eyebrow">Heute passend</p>
-		<h3>3 neue Ideen in deiner Nähe</h3>
-		<p class="muted">Filtere nach Stimmung, Zeit und Budget, um schneller etwas Gutes zu finden.</p>
-	</div>
+	{#if isCreatePage}
+		<div class="sidebar-card sidebar-card-guide">
+			<p class="eyebrow">Erfassen</p>
+			<h3>Idee Schritt für Schritt</h3>
+			<div class="sidebar-card-links" aria-label="Formularabschnitte">
+				{#each createSections as section}
+					<a href={section.href}>{section.label}</a>
+				{/each}
+			</div>
+		</div>
+	{:else}
+		<a class="sidebar-card sidebar-card-link" href="/categories">
+			<p class="eyebrow">Heute passend</p>
+			<h3>3 neue Ideen in deiner Nähe</h3>
+			<p class="muted">Filtere nach Stimmung, Zeit und Budget, um schneller etwas Gutes zu finden.</p>
+		</a>
+	{/if}
 </aside>

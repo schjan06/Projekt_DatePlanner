@@ -1,7 +1,7 @@
 # Validate-Testplan VibeMatch
 
 ## Ziel
-Validiert wird, ob Nutzerinnen und Nutzer mit VibeMatch ohne Erklaerung von Inspiration zu einer geplanten Aktivitaet kommen. Wichtig sind Verstaendlichkeit der Filter, mobile Navigation, Detailentscheidung, Wishlist, Planung, Karte, History, Community und Profil.
+Validiert wird, ob Nutzerinnen und Nutzer mit VibeMatch ohne Erklaerung von Inspiration zu einer geplanten Aktivitaet kommen. Wichtig sind Verstaendlichkeit der Filter, mobile Navigation, Detailentscheidung, Wishlist, Planung, Karte, History, Teilen-Prototyp, Community-Ausblick und Profil.
 
 ## Stichprobe
 Geplant sind 3 bis 5 kurze Tests mit Personen aus den Zielgruppen Paare, Freundesgruppen und kleine Gruppen. Fuer die Abgabe werden die Personen anonym als T1 bis T5 dokumentiert.
@@ -21,7 +21,8 @@ Geplant sind 3 bis 5 kurze Tests mit Personen aus den Zielgruppen Paare, Freunde
 | Aktivitaet finden | Aktivitaet in Zuerich oder St. Gallen ueber Filter finden | Filterchip ist sichtbar, Ergebnis fuehrt zur Detailseite |
 | Wishlist und Planung | Aktivitaet speichern und einen Termin erstellen | Aktivitaet erscheint in Wishlist und Upcoming |
 | Karte | Map oeffnen, Marker auswaehlen und Detailseite oeffnen | Marker und Detailnavigation funktionieren |
-| History und Community | Termin als erledigt markieren, Erinnerung bearbeiten und teilen | History-Eintrag wird sichtbar, Community-Beitrag kann erstellt werden |
+| History und Teilen | Termin als erledigt markieren, Erinnerung bearbeiten und Teilen-Flow pruefen | History-Eintrag wird sichtbar und Teilen wird als Prototyp verstaendlich |
+| Community-Ausblick | `/community` oeffnen und einordnen | Nutzer versteht, dass Community fuer ein spaeteres MVP geplant ist |
 | Profil | Profil oeffnen und Einstellung oder Lieblingskategorie bearbeiten | Rueckmeldung erscheint und Aenderung bleibt nach Reload erhalten |
 | Aktivitaet erfassen | Neue Aktivitaet mit Pflichtfeldern speichern | Validierung greift bei Fehlern, gueltige Aktivitaet wird gespeichert |
 

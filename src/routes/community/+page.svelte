@@ -1,64 +1,65 @@
 <script>
-	import CommunityPostCard from '$lib/components/community/CommunityPostCard.svelte';
-	import ShareModal from '$lib/components/modals/ShareModal.svelte';
-	import EmptyState from '$lib/components/ui/EmptyState.svelte';
+	const nextFeatures = [
+		'Eigene Gruppen oder Freundeskreise',
+		'Kommentare und Reaktionen auf geteilte Erlebnisse',
+		'Follow-Logik für Personen oder Orte',
+		'Moderation, Privatsphäre und Meldefunktionen'
+	];
 
-	let { data } = $props();
-	let tab = $state('Entdecken');
-	let showShare = $state(false);
-	const shareActivity = $derived(data.activities[0] ?? null);
-	const tabs = ['Entdecken', 'Folge ich', 'Meine Beiträge'];
-	const filteredPosts = $derived.by(() => {
-		if (tab === 'Meine Beiträge') return data.communityPosts.filter((post) => post.userId === data.currentUserId);
-		if (tab === 'Folge ich') return [];
-		return data.communityPosts;
-	});
+	const currentScope = [
+		'Aktivitäten können als Prototyp geteilt werden',
+		'Reviews und Erinnerungen bleiben im aktuellen MVP nutzbar',
+		'Community-Datenmodell und API bleiben als technische Vorstufe vorhanden'
+	];
 </script>
 
 <section class="page">
 	<div class="page-header">
 		<div>
 			<p class="eyebrow">Community</p>
-			<h1>Ideen teilen und entdecken</h1>
-			<p class="muted">Beiträge anderer Personen mit Inspiration, Likes und Kommentaren.</p>
+			<h1>Geplant für ein späteres MVP</h1>
+			<p class="muted">Die Community wird bewusst nicht als fertiges Social Feature ausgeliefert.</p>
 		</div>
-		<button class="button" type="button" disabled={!shareActivity} onclick={() => (showShare = true)}>Idee teilen</button>
+		<a class="button secondary" href="/categories">Aktivitäten entdecken</a>
 	</div>
 
-	<div class="action-row" style="margin-bottom: 22px;">
-		{#each tabs as item}
-			<button class={`button ${tab === item ? '' : 'secondary'}`} type="button" onclick={() => (tab = item)}>{item}</button>
-		{/each}
+	<section class="panel community-roadmap-hero">
+		<p class="eyebrow">MVP-2 Ausblick</p>
+		<h2>Warum noch nicht jetzt?</h2>
+		<p>
+			VibeMatch konzentriert sich im aktuellen MVP auf Inspiration, Auswahl, Planung und Nachbearbeitung von
+			Aktivitäten. Eine echte Community braucht klare Regeln für Privatsphäre, Moderation, Kommentare und
+			Gruppenlogik. Diese Punkte werden deshalb transparent als nächste Produktiteration behandelt.
+		</p>
+	</section>
+
+	<div class="two-column equal community-roadmap-grid">
+		<section class="panel">
+			<p class="eyebrow">Aktueller Prototyp</p>
+			<h2>Was heute enthalten ist</h2>
+			<div class="activity-list">
+				{#each currentScope as item}
+					<div class="info-tile">{item}</div>
+				{/each}
+			</div>
+		</section>
+
+		<section class="panel">
+			<p class="eyebrow">MVP 2</p>
+			<h2>Was später konzipiert wird</h2>
+			<div class="activity-list">
+				{#each nextFeatures as item}
+					<div class="info-tile">{item}</div>
+				{/each}
+			</div>
+		</section>
 	</div>
 
-	{#if filteredPosts.length}
-		<div class="activity-grid">
-			{#each filteredPosts as post}
-				<CommunityPostCard {post} />
-			{/each}
-		</div>
-	{:else if tab === 'Folge ich'}
-		<EmptyState
-			title="Noch keine gefolgten Beiträge"
-			text="Ein echtes Folgen-System ist im Prototyp vorbereitet. Entdecke vorerst öffentliche Beiträge oder teile selbst eine Idee."
-			actionHref="/community"
-			actionLabel="Entdecken"
-		/>
-	{:else if tab === 'Meine Beiträge'}
-		<EmptyState
-			title="Noch keine eigenen Beiträge"
-			text="Teile eine Aktivität oder Erinnerung, damit sie hier erscheint."
-			actionHref="/history"
-			actionLabel="Erinnerungen öffnen"
-		/>
-	{:else}
-		<EmptyState
-			title="Noch keine Community-Beiträge"
-			text="Die Community ist leer oder Seed-Daten fehlen. Teile eine Aktivität, sobald Aktivitätsdaten vorhanden sind."
-			actionHref="/categories"
-			actionLabel="Aktivitäten entdecken"
-		/>
-	{/if}
+	<section class="panel community-roadmap-note">
+		<h2>Abgrenzung für die Abgabe</h2>
+		<p class="muted">
+			Teilen bleibt als sichtbarer Prototyp-Flow bestehen. Ein öffentlicher Feed, Follow-System,
+			Produktiv-Kommentare und Community-Moderation sind nicht Teil des aktuellen Abgabeumfangs.
+		</p>
+	</section>
 </section>
-
-<ShareModal activity={shareActivity} open={showShare} onClose={() => (showShare = false)} />

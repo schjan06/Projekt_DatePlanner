@@ -370,10 +370,52 @@ h3 {
 }
 
 .sidebar-card {
+	display: grid;
+	gap: 10px;
 	margin-top: auto;
 	padding: 18px;
 	border-radius: 22px;
 	background: linear-gradient(135deg, var(--purple-soft), #fff4fb);
+}
+
+.sidebar-card h3,
+.sidebar-card p {
+	margin: 0;
+}
+
+.sidebar-card-link {
+	transition:
+		transform 0.18s ease,
+		box-shadow 0.18s ease;
+}
+
+.sidebar-card-link:hover {
+	box-shadow: 0 12px 24px rgba(118, 87, 255, 0.12);
+	transform: translateY(-1px);
+}
+
+.sidebar-card-guide {
+	background: linear-gradient(135deg, #f6f1ff, #f5fbf8);
+}
+
+.sidebar-card-links {
+	display: grid;
+	gap: 6px;
+}
+
+.sidebar-card-links a {
+	padding: 8px 10px;
+	border: 1px solid rgba(118, 87, 255, 0.14);
+	border-radius: 12px;
+	background: rgba(255, 255, 255, 0.62);
+	color: var(--purple-dark);
+	font-size: 0.86rem;
+	font-weight: 850;
+}
+
+.sidebar-card-links a:hover {
+	border-color: rgba(118, 87, 255, 0.3);
+	background: white;
 }
 
 .topbar {
@@ -820,6 +862,22 @@ textarea {
 	gap: 18px;
 }
 
+.activity-create-form > .panel {
+	scroll-margin-top: 18px;
+}
+
+.activity-create-form .form-grid label {
+	display: grid;
+	align-content: start;
+	gap: 8px;
+	color: var(--ink);
+	font-weight: 750;
+}
+
+.activity-create-form .form-grid :where(.field, .select, textarea):focus-visible {
+	outline-offset: 2px;
+}
+
 .activity-preview-panel {
 	position: sticky;
 	top: 18px;
@@ -875,13 +933,33 @@ textarea {
 .upload-drop {
 	display: grid;
 	place-items: center;
-	min-height: 120px;
+	align-content: center;
+	justify-items: center;
+	min-height: 136px;
+	padding: 24px;
 	border: 1px dashed rgba(118, 87, 255, 0.36);
 	border-radius: 18px;
 	background: var(--surface-soft);
 	color: var(--purple-dark);
 	font-weight: 900;
+	text-align: center;
 	cursor: pointer;
+}
+
+.activity-create-form .form-grid label.upload-drop {
+	align-content: center;
+	gap: 0;
+}
+
+.upload-drop span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 42px;
+	padding: 0 16px;
+	border-radius: 999px;
+	background: white;
+	box-shadow: 0 10px 22px rgba(51, 41, 88, 0.08);
 }
 
 .upload-drop input {
@@ -1044,6 +1122,33 @@ textarea {
 .activity-list {
 	display: grid;
 	gap: 14px;
+}
+
+.community-roadmap-hero {
+	display: grid;
+	gap: 10px;
+	padding: 28px;
+	background:
+		linear-gradient(135deg, rgba(118, 87, 255, 0.12), rgba(255, 122, 168, 0.1)),
+		rgba(255, 255, 255, 0.9);
+}
+
+.community-roadmap-hero h2,
+.community-roadmap-note h2 {
+	margin-bottom: 0;
+}
+
+.community-roadmap-hero p,
+.community-roadmap-note p {
+	max-width: 780px;
+}
+
+.community-roadmap-grid {
+	margin-top: 22px;
+}
+
+.community-roadmap-note {
+	margin-top: 22px;
 }
 
 .planned-card {

@@ -137,7 +137,7 @@
 
 	<form class="activity-create-layout" onsubmit={submit}>
 		<div class="activity-create-form">
-			<section class="panel form-grid">
+			<section id="basis" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Basis</p>
 					<h2>Basisinformationen</h2>
@@ -158,7 +158,7 @@
 				</label>
 			</section>
 
-			<section class="panel form-grid">
+			<section id="ort-zeit" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Ort & Zeit</p>
 					<h2>Wo und wie lange?</h2>
@@ -186,7 +186,7 @@
 				</label>
 			</section>
 
-			<section class="panel form-grid">
+			<section id="eigenschaften" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Eigenschaften</p>
 					<h2>Kategorien & Stimmung</h2>
@@ -236,7 +236,7 @@
 				</label>
 			</section>
 
-			<section class="panel form-grid">
+			<section id="budget" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Preis</p>
 					<h2>Budget & Vorbereitung</h2>
@@ -258,7 +258,7 @@
 				</label>
 			</section>
 
-			<section class="panel form-grid">
+			<section id="bilder" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Bilder</p>
 					<h2>Hauptbild & Galerie</h2>
