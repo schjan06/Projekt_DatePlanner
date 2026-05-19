@@ -2375,7 +2375,7 @@ textarea {
 	}
 
 	.app-main {
-		padding: 18px 18px 96px;
+		padding: 18px 18px 128px;
 	}
 
 	.hero,
@@ -2418,11 +2418,11 @@ textarea {
 		bottom: 14px;
 		z-index: 50;
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: 4px;
 		padding: 8px;
 		border: 1px solid var(--line);
-		border-radius: 24px;
+		border-radius: 18px;
 		background: rgba(255, 255, 255, 0.9);
 		box-shadow: var(--shadow);
 		backdrop-filter: blur(18px);

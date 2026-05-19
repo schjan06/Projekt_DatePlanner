@@ -6,6 +6,9 @@
 		{ href: '/categories', label: 'Filter' },
 		{ href: '/map', label: 'Map' },
 		{ href: '/wishlist', label: 'Wunsch' },
+		{ href: '/upcoming', label: 'Plan' },
+		{ href: '/history', label: 'History' },
+		{ href: '/community', label: 'Community' },
 		{ href: '/profile', label: 'Profil' }
 	];
 
