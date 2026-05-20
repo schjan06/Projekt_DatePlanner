@@ -14,6 +14,7 @@
 | Figma-Mockup | Link in README Kapitel 3.3 | fruehe Mockup-Referenz |
 | Validate-Testplan | `docs/validate-test-plan.md` | Testskript und Beobachtungsbogen |
 | Usability-Beobachtungsbogen | `docs/usability-observation-sheet.html` | druckbare Vier-Felder-Matrix fuer Testnotizen |
+| Usability-Issue-Vorlage | `docs/usability-feedback-issues.md` | priorisierte GitHub-Issues aus der Feedback-Datei |
 | Manuelle Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare Abgabepruefung |
 | Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien |
 | Studierenden-Usability-Test | `docs/validate-test-plan.md` und README Kapitel 3.5 | Vorarbeit, Testaufbau, Beobachtungen und Erkenntnisse |

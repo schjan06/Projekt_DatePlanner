@@ -28,9 +28,12 @@
 </script>
 
 <article class="activity-card card">
-	<a class="activity-image-wrap" href={`/activity/${activity.id}`} aria-label={`${activity.title} öffnen`}>
-		<img src={activity.image} alt={activity.imageAlt ?? activity.title} />
+	<a class="activity-card-link" href={`/activity/${activity.id}`} aria-label={`${activity.title} öffnen`}>
+		<span class="visually-hidden">{activity.title} öffnen</span>
 	</a>
+	<div class="activity-image-wrap">
+		<img src={activity.image} alt={activity.imageAlt ?? activity.title} />
+	</div>
 	<button
 		class={`wishlist-button ${wishlisted ? 'wishlisted' : ''}`}
 		type="button"
@@ -45,9 +48,7 @@
 				<CategoryBadge label={category} />
 			{/each}
 		</div>
-		<a href={`/activity/${activity.id}`}>
-			<h3 style="margin-top: 14px;">{activity.title}</h3>
-		</a>
+		<h3 style="margin-top: 14px;">{activity.title}</h3>
 		<RatingStars rating={activity.rating} count={activity.reviewCount} />
 		<ActivityMeta {activity} />
 	</div>

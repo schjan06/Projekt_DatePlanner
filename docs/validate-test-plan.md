@@ -9,10 +9,11 @@ Die Testingphase ist Teil der Projektdokumentation. Vorarbeit, Testaufbau, Beoba
 | Frage | Woran wird es erkannt? |
 |---|---|
 | Verstehen Testpersonen sofort, was VibeMatch macht? | Sie koennen Home und Hauptnavigation in eigenen Worten erklaeren. |
-| Finden sie eine passende Aktivitaet fuer ein konkretes Szenario? | Sie nutzen Schnellfilter, Kategorien oder Map und erreichen eine Detailseite. |
+| Finden sie eine passende Aktivitaet fuer ein konkretes Szenario? | Sie nutzen Home, Kategorien oder Map und erreichen eine Detailseite. |
 | Sind Detailinformationen ausreichend klar? | Preis, Dauer, Ort, Bilder, Reviews und Planungsinfos werden in der Entscheidung genannt. |
 | Funktionieren Wishlist und Planung als Folgeaktion? | Aktivitaet wird gespeichert oder geplant und danach in Wishlist/Upcoming wiedergefunden. |
-| Sind Teilen-Prototyp und Community-Ausblick verstaendlich abgegrenzt? | Testperson erkennt, dass Community fuer ein spaeteres MVP geplant ist. |
+| Ist die Kalenderverwaltung verstaendlich? | Geplante Termine koennen in Upcoming/Kalender gefunden und verschoben werden. |
+| Sind History, Teilen-Prototyp und MVP-Abgrenzung verstaendlich? | Testperson versteht History als vergangene Aktivitaeten und echte Reminder als spaeteres MVP. |
 | Wirkt die Erfassungsseite bedienbar und professionell? | Pflichtfelder, Bild-Upload, Validierung und Vorschau sind nachvollziehbar. |
 
 ## Testaufbau
@@ -50,40 +51,37 @@ Die Testingphase ist Teil der Projektdokumentation. Vorarbeit, Testaufbau, Beoba
 5. Nachfragen stellen.
 6. Wichtigste Huerden und Verbesserungsideen direkt markieren.
 
-## Workflowbasierte Testaufgaben
-Die Testaufgaben sind direkt aus den in der README dokumentierten User-Journey-Workflows abgeleitet. Jede Aufgabe testet einen realistischen Nutzungskontext und nicht nur eine einzelne Funktion.
+## Funktionsbezogene Testaufgaben
+Die finalen Testaufgaben wurden nach der Feedback-Erfassung ueberarbeitet. Sie testen zentrale App-Funktionen ueber mehrere Bereiche hinweg und sind nicht mehr nur unterschiedliche Filter- oder Suchwege.
 
-| Aufgabe | README-Workflow | Aufgabenstellung fuer Testperson | Getestete Prototypteile | Beobachtungsfokus | Erfolgskriterium | Nachfragen |
+| Aufgabe | Fokus | Aufgabenstellung fuer Testperson | Getestete Prototypteile | Beobachtungsfokus | Erfolgskriterium | Nachfragen |
 |---|---|---|---|---|---|---|
-| 1 | Lea / Paar-Flow: Quality Time planen | Sie moechten heute eine passende Aktivitaet fuer einen entspannten Abend zu zweit finden und entscheiden, ob Sie diese speichern oder direkt planen. | Home, Schnellfilter, Kategorien, Detailseite, Wishlist, Planung | Wird der Einstieg verstanden? Werden Preis, Dauer, Ort, Bilder und Reviews beachtet? | Testperson findet eine passende Aktivitaet und nutzt Wishlist oder Planen. | Welche Information hat Ihre Entscheidung beeinflusst? Was hat gefehlt? |
-| 2 | Nico / First-Date-Flow: sichere Idee finden | Sie moechten ein erstes Date in St. Gallen planen und herausfinden, ob eine Aktivitaet sicher, oeffentlich und gut erreichbar wirkt. | Kategorien, Filter, Map, Detailseite, Reviews, Planungsmodal | Findet die Person Ort und Sicherheits-/Oeffentlichkeitsinformationen? Werden Reviews und Karte genutzt? | Testperson findet eine passende Aktivitaet in/bei St. Gallen und kann die Entscheidung begruenden. | Hat die App genug Vertrauen fuer ein erstes Date vermittelt? |
-| 3 | Sara / Gruppen-Flow: gemeinsame Aktivitaet organisieren | Sie moechten eine Aktivitaet fuer eine kleine Gruppe organisieren und dabei Budget, Dauer und Gruppentauglichkeit beruecksichtigen. | Kategorien, erweiterte Filter, Detailseite, Teilen-Prototyp, Upcoming | Werden Personenanzahl, Budget und Dauer gefunden? Ist Teilen als Prototyp verstaendlich? | Testperson findet eine gruppentaugliche Aktivitaet und versteht die Folgeaktion Teilen/Planen. | Was braeuchte eine Gruppe noch, um gemeinsam zu entscheiden? |
-| 4 | Mia / Time-Saver-Flow: schnelle Entscheidung | Sie haben wenig Zeit und moechten moeglichst schnell zu einer passenden Aktivitaet kommen, die Sie direkt planen koennen. | Home, Schnellfilter, Zuletzt angesehen, Detailseite, Planen, Upcoming | Wird ein schneller Weg erkannt? Gibt es zu viele Entscheidungen oder zu viel Text? | Testperson kommt mit wenigen Schritten zu einer geplanten Aktivitaet. | Was hat Sie beschleunigt oder aufgehalten? |
-| 5 | Jonas / Creator-Flow: eigene Aktivitaet sichtbar machen | Sie moechten eine eigene lokale Aktivitaet erfassen und pruefen, ob die App Sie bei fehlenden Pflichtangaben verstaendlich unterstuetzt. | Aktivitaet erfassen, Pflichtfeldvalidierung, Bild-Upload, Vorschau, Detailseite | Sind Labels, Fehlermeldungen, Bild-Upload und Vorschau verstaendlich? | Testperson erkennt den Fehler, korrigiert ihn und landet nach dem Speichern auf der Detailseite. | War klar, welche Angaben Pflicht sind und was nach dem Speichern passiert? |
-| 6 | Community-Ausblick / MVP-Abgrenzung | Sie moechten verstehen, welche Community-Funktionen im aktuellen MVP enthalten sind und was erst fuer eine spaetere Version geplant ist. | Community-Ausblickseite, Navigation, MVP-Abgrenzung | Wird die Abgrenzung verstanden oder wirkt die Seite wie ein unfertiger Feed? | Testperson erkennt Community als geplantes MVP-2-Feature. | Ist die Abgrenzung glaubwuerdig und verstaendlich? |
+| 1 | Inspiration und Detailentscheidung | Sie moechten ueber Home oder Kategorien eine passende Aktivitaet entdecken, die Detailseite oeffnen und anhand der wichtigsten Informationen entscheiden, ob sie passend ist. | Home, Kategorien, Aktivitaetskarten, Detailseite, Preis/Dauer/Ort/Reviews | Wird klar, welche Elemente zur Detailseite fuehren? Reichen die Detailinformationen fuer eine Entscheidung? | Testperson gelangt zur Detailseite und kann die Entscheidung begruenden. | Welche Information hat Ihre Entscheidung beeinflusst? War der Weg zur Detailseite klar? |
+| 2 | Wishlist und spaetere Planung | Sie moechten eine Aktivitaet fuer spaeter merken, sie in der Wishlist wiederfinden und aus der Wishlist fuer einen spaeteren Zeitpunkt planen. | Detailseite, Wishlist-Button, Wishlist-Seite, Planungsmodal, Upcoming | Wird die Wishlist-Aktion gefunden? Ist klar, wie aus einer gespeicherten Idee ein Termin wird? | Aktivitaet erscheint in der Wishlist und danach als geplanter Termin. | War klar, wo gespeicherte Ideen wiedergefunden und geplant werden? |
+| 3 | Upcoming und Kalenderverwaltung | Sie moechten einen bereits geplanten Termin in Upcoming/Kalender auf einen anderen Tag verschieben und pruefen, ob die Aenderung sichtbar bleibt. | Upcoming, Kalenderansicht, Drag & Drop, Terminbearbeitung | Wird die Kalenderansicht erkannt? Ist die Verschiebung per Drag & Drop verstaendlich? | Termin wird auf einen anderen Tag verschoben und bleibt dort sichtbar. | Was hat beim Verschieben geholfen oder gefehlt? |
+| 4 | History, Teilen und MVP-Abgrenzung | Sie moechten nachvollziehen, was mit vergangenen Aktivitaeten nach der Durchfuehrung passiert, diese in der History pruefen/bewerten/teilen und verstehen, dass echte Reminder nicht Teil des MVP sind. | History, Bewertung, Erinnerungstext, Teilen-Prototyp, README-/MVP-Abgrenzung | Ist History als vergangene Aktivitaeten verstaendlich? Werden Reminder-Erwartungen vermieden? | Testperson versteht History und kann Reminder als nicht umgesetztes MVP einordnen. | War der Unterschied zwischen History/Erinnerung und echten Remindern klar? |
+| 5 | Aktivitaet erfassen und Validierung | Sie moechten eine eigene lokale Aktivitaet erfassen und pruefen, ob Pflichtfeldfehler sowie Bildangaben verstaendlich behandelt werden. | Aktivitaet erfassen, Pflichtfelder, Fehlermeldungen, Bild-Upload, Vorschau, Redirect | Sind Fehlermeldungen sichtbar genug? Ist klar, ob Bilder Pflicht oder optional sind? | Testperson erkennt Fehler, korrigiert sie und versteht die Bildlogik. | Welche Fehlermeldung war hilfreich oder zu unauffaellig? |
+| 6 | Karte und ortsbasierte Planung | Sie moechten ueber die Karte eine Aktivitaet in einer Ortschaft finden, auswaehlen und planen. | Map, Ortsuche, Filter, Marker, Map-Preview, Detailseite, Planungsmodal | Ist Ortsuche intuitiv? Kann die Preview wieder verlassen werden? Fuehrt die Karte zur Planung? | Testperson findet eine Aktivitaet ueber die Karte und kann sie planen. | War die Karten-Preview kontrollierbar und verstaendlich? |
 
 ## Aufgabenkarte Fuer Testpersonen
 Diese Kurzfassung kann waehrend des Tests auf Papier, einem separaten Laptop oder Smartphone angezeigt werden.
 
-1. Sie moechten heute eine passende Aktivitaet fuer einen entspannten Abend zu zweit finden und entscheiden, ob Sie diese speichern oder direkt planen.
-2. Sie moechten ein erstes Date in St. Gallen planen und herausfinden, ob eine Aktivitaet sicher, oeffentlich und gut erreichbar wirkt.
-3. Sie moechten eine Aktivitaet fuer eine kleine Gruppe organisieren und dabei Budget, Dauer und Gruppentauglichkeit beruecksichtigen.
-4. Sie haben wenig Zeit und moechten moeglichst schnell zu einer passenden Aktivitaet kommen, die Sie direkt planen koennen.
-5. Sie moechten eine eigene lokale Aktivitaet erfassen und pruefen, ob die App Sie bei fehlenden Pflichtangaben verstaendlich unterstuetzt.
-6. Sie moechten verstehen, welche Community-Funktionen im aktuellen MVP enthalten sind und was erst fuer eine spaetere Version geplant ist.
+1. Sie moechten ueber Home oder Kategorien eine passende Aktivitaet entdecken, die Detailseite oeffnen und anhand der wichtigsten Informationen entscheiden, ob sie passend ist.
+2. Sie moechten eine Aktivitaet fuer spaeter merken, sie in der Wishlist wiederfinden und aus der Wishlist fuer einen spaeteren Zeitpunkt planen.
+3. Sie moechten einen bereits geplanten Termin in Upcoming/Kalender auf einen anderen Tag verschieben und pruefen, ob die Aenderung sichtbar bleibt.
+4. Sie moechten nachvollziehen, was mit vergangenen Aktivitaeten nach der Durchfuehrung passiert, diese in der History pruefen/bewerten/teilen und verstehen, dass echte Reminder nicht Teil des MVP sind.
+5. Sie moechten eine eigene lokale Aktivitaet erfassen und pruefen, ob Pflichtfeldfehler sowie Bildangaben verstaendlich behandelt werden.
+6. Sie moechten ueber die Karte eine Aktivitaet in einer Ortschaft finden, auswaehlen und planen.
 
 ## Testszenarien
 | Szenario | Aufgabe an Testperson | Erfolgskriterium | Beobachtung |
 |---|---|---|---|
-| Einstieg | Sie moechten verstehen, welchen Zweck VibeMatch hat und welche Moeglichkeiten Ihnen die Startseite bietet. | Zweck, Navigation und Einstieg sind verstaendlich. | offen |
-| Aktivitaet finden | Sie moechten eine Aktivitaet in Zuerich oder St. Gallen finden, die zu einem Treffen passt. | Filter oder Suche fuehren zu passender Detailseite. | offen |
-| Detailentscheidung | Sie moechten anhand der Detailseite entscheiden, ob die Aktivitaet fuer Sie passend ist. | Preis, Dauer, Ort, Bilder oder Reviews werden genutzt. | offen |
-| Wishlist und Planung | Sie moechten eine interessante Idee fuer spaeter speichern oder direkt in einen Termin umwandeln. | Aktivitaet erscheint in Wishlist und Upcoming. | offen |
-| Map | Sie moechten pruefen, wo eine passende Aktivitaet liegt und ob Sie ueber die Karte zur Detailseite gelangen. | Map, Marker und Detailnavigation funktionieren. | offen |
-| History und Review | Sie moechten ein abgeschlossenes Erlebnis nachvollziehen und bewerten oder bearbeiten. | History-Eintrag und Review-Feedback sind nachvollziehbar. | offen |
-| Teilen und Community-Ausblick | Sie moechten eine Idee teilen und verstehen, welche Community-Funktionen erst spaeter geplant sind. | Community wird als MVP-2-Ausblick verstanden. | offen |
-| Aktivitaet erfassen | Sie moechten eine eigene Aktivitaet erfassen und herausfinden, ob Pflichtfeldfehler verstaendlich erklaert werden. | Validierung, Bild-Upload und Redirect sind verstaendlich. | offen |
-| Mobile optional | Sie moechten zentrale Funktionen auf Smartphonegroesse nutzen und pruefen, ob die Navigation bedienbar bleibt. | Mobile Navigation und Inhalte bleiben bedienbar. | offen |
+| Home/Kategorien -> Detail | Sie moechten ueber Home oder Kategorien eine passende Aktivitaet entdecken und auf der Detailseite beurteilen. | Detailseite wird erreicht und Informationen werden verstanden. | T1 fand die Aufgabe schnell, war aber bei Card-Klickbarkeit unsicher. |
+| Wishlist -> Planung | Sie moechten eine Aktivitaet merken, in der Wishlist wiederfinden und fuer spaeter planen. | Aktivitaet erscheint in Wishlist und Upcoming. | T1 fand den Flow schnell; Zuruecknavigation von Detailseite wurde gewuenscht. |
+| Upcoming/Kalender | Sie moechten einen geplanten Termin im Kalender auf einen anderen Tag verschieben. | Termin wird verschoben und bleibt sichtbar. | T1 konnte Drag & Drop nutzen; Kalender-Hinweis/Icon wurde gewuenscht. |
+| History / vergangene Aktivitaeten | Sie moechten vergangene Aktivitaeten pruefen, bewerten oder teilen und Reminder klar vom MVP abgrenzen. | History ist als vergangene Aktivitaeten verstaendlich. | Aus Feedback: Erinnerungen nicht als echte Reminder umsetzen, sondern als History schaerfen. |
+| Aktivitaet erfassen | Sie moechten eine eigene Aktivitaet erfassen und Pflichtfeldvalidierung testen. | Fehler werden erkannt und korrigierbar dargestellt. | T1 fand Fehlerhinweis, wuenschte ihn groesser; T2 regte Bildpflicht an. |
+| Map -> Planung | Sie moechten ueber die Karte eine Aktivitaet an einem Ort finden und planen. | Karte, Preview, Detailseite und Planung funktionieren. | T1 fand den Flow intuitiv; Map-Preview konnte nicht geschlossen werden. |
 
 ## Nachfragen
 - Was war der Zweck der App aus deiner Sicht?
@@ -106,10 +104,10 @@ Diese Kurzfassung kann waehrend des Tests auf Papier, einem separaten Laptop ode
 ## Auswertungsvorlage
 | Erkenntnis | Beobachtung aus Test | Auswirkung | Entscheidung |
 |---|---|---|---|
-| offen | offen | offen | umsetzen / dokumentieren / spaeteres MVP |
-| offen | offen | offen | umsetzen / dokumentieren / spaeteres MVP |
-| offen | offen | offen | umsetzen / dokumentieren / spaeteres MVP |
-| offen | offen | offen | umsetzen / dokumentieren / spaeteres MVP |
+| Aktivitaetskarten wirken nicht vollstaendig klickbar. | T1 erkannte nicht sofort, dass Bild/Titel zur Detailseite fuehren. | Einstieg zur Detailseite kann stocken. | GitHub-Issue: Card-Klickbarkeit und Hover/Fokus verbessern. |
+| Wishlist, Planung, Kalender und Map wurden grundsaetzlich verstanden. | T1 fand diese Flows schnell und konnte Drag & Drop sowie Map-Ortssuche nutzen. | Kernflows sind validierbar und koennen dokumentiert werden. | In README als positive Beobachtung festhalten. |
+| Einzelne UI-Hinweise sind zu schwach. | Kalender braucht klareres Symbol; Formularfehler sollten sichtbarer sein; Map-Preview braucht Close-Aktion. | Bedienbarkeit leidet trotz funktionalem Flow. | Hoch/mittel priorisierte Usability-Issues erstellen. |
+| Reminder und Freunde-Einladung sind nicht aktueller MVP. | Excel-Feedback nennt Erinnerungen nicht umsetzen und Freunde zu Events einladen als Idee. | Abgrenzung muss dokumentiert werden. | Reminder als bewusst ausgeschlossen dokumentieren; Freunde einladen als MVP-2-Issue. |
 
 ## Erwartete Auswertung
 Nach den Tests werden die wichtigsten Erkenntnisse in der README unter `3.5 Validate` zusammengefasst. Dokumentiert werden tatsaechliche Stichprobe, getestete Geraete, zentrale Huerden, positive Beobachtungen, abgeleitete Aenderungen und bewusst nicht umgesetzte Punkte.

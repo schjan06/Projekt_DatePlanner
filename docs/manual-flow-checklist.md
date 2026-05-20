@@ -4,12 +4,12 @@ Diese Checkliste wird vor der Abgabe mit der lokalen App, Seed-Daten und Build-V
 
 | Flow | Schritte | Erwartetes Ergebnis | Status | Screenshot |
 |---|---|---|---|---|
-| Home -> Detail | Login, Home oeffnen, empfohlene Aktivitaet auswaehlen | Detailseite mit Galerie, Metadaten und Aktionen oeffnet | bereit | `docs/screenshots/home-detail.png` |
-| Filter | `/categories` oeffnen, Stimmung/Budget/Ort setzen, Chip entfernen | Ergebnisliste und aktive Filter bleiben nachvollziehbar | bereit | `docs/screenshots/filter.png` |
-| Wishlist | Detailseite oeffnen, Aktivitaet speichern, Wishlist pruefen | Aktivitaet erscheint in `/wishlist` und kann geplant werden | bereit | `docs/screenshots/wishlist.png` |
-| Planen | Aktivitaet planen, Upcoming oeffnen, Liste/Kalender pruefen | Termin erscheint in Liste und Kalender | bereit | `docs/screenshots/upcoming.png` |
-| Map | `/map` oeffnen, Stadt waehlen, Marker anklicken | Marker zeigt passende Aktivitaet und Detailnavigation | bereit | `docs/screenshots/map.png` |
-| History -> Teilen | Termin als erledigt markieren, Erinnerung bearbeiten, Teilen-Flow pruefen | History-Eintrag bleibt sichtbar und Teilen-Feedback erscheint | bereit | `docs/screenshots/history-share.png` |
+| Home/Kategorien -> Detail | Login, Home oder Kategorien oeffnen, Aktivitaet auswaehlen, Detailseite beurteilen | Detailseite mit Galerie, Metadaten und Aktionen oeffnet; Card-Klickbarkeit wird beobachtet | bereit | `docs/screenshots/home-detail.png` |
+| Wishlist -> Planung | Detailseite oeffnen, Aktivitaet speichern, in `/wishlist` wiederfinden und spaeter planen | Aktivitaet erscheint in Wishlist und anschliessend in Upcoming | bereit | `docs/screenshots/wishlist.png` |
+| Kalender verschieben | Upcoming oeffnen, Kalenderansicht pruefen, geplanten Termin per Drag & Drop verschieben | Termin liegt am neuen Tag und bleibt sichtbar | bereit | `docs/screenshots/upcoming.png` |
+| History / vergangene Aktivitaeten | Termin als erledigt markieren, History pruefen, bewerten/bearbeiten/teilen | History-Eintrag bleibt sichtbar; echte Reminder werden als nicht aktueller MVP abgegrenzt | bereit | `docs/screenshots/history-share.png` |
+| Aktivitaet erfassen | `/activities/new` oeffnen, Pflichtfeldfehler ausloesen, Bildangaben pruefen, gueltig speichern | Fehlermeldungen sind verstaendlich; Bildlogik ist klar; Redirect zur Detailseite funktioniert | bereit | `docs/screenshots/activity-create.png` |
+| Map -> Planung | `/map` oeffnen, Ortschaft suchen, Aktivitaet auswaehlen, Detailseite oeffnen und planen | Karte, Preview, Detailnavigation und Planung funktionieren; Preview-Schliessen wird beobachtet | bereit | `docs/screenshots/map.png` |
 | Community-Ausblick | `/community` oeffnen | Seite erklaert MVP-2-Status, Abgrenzung und naechste Community-Funktionen | bereit | `docs/screenshots/community-roadmap.png` |
 | Profil | Profil bearbeiten, Kategorien setzen, Benachrichtigungen oeffnen | Modals geben Feedback und sind per Escape schliessbar | bereit | `docs/screenshots/profile.png` |
 | Leere Daten | Datenbank ohne Seed-Daten oder leere Listen pruefen | Empty States erklaeren den Zustand und bieten naechste Aktion | bereit | `docs/screenshots/empty-states.png` |
