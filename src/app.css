@@ -1228,11 +1228,29 @@ textarea {
 }
 
 .activity-list-item {
+	position: relative;
 	display: grid;
 	grid-template-columns: 140px minmax(0, 1fr) auto;
 	gap: 16px;
 	align-items: center;
 	padding: 12px;
+}
+
+.activity-list-item-link {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	border-radius: inherit;
+}
+
+.activity-list-item-link:focus-visible {
+	outline: 3px solid rgba(97, 74, 219, 0.42);
+	outline-offset: -3px;
+}
+
+.activity-list-item-action {
+	position: relative;
+	z-index: 2;
 }
 
 .activity-list-item img {
