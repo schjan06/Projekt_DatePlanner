@@ -55,35 +55,35 @@ Die Testaufgaben sind direkt aus den in der README dokumentierten User-Journey-W
 
 | Aufgabe | README-Workflow | Aufgabenstellung fuer Testperson | Getestete Prototypteile | Beobachtungsfokus | Erfolgskriterium | Nachfragen |
 |---|---|---|---|---|---|---|
-| 1 | Lea / Paar-Flow: Quality Time planen | Stell dir vor, du moechtest heute eine gemeinsame Aktivitaet fuer einen entspannten Abend finden. Suche eine passende Idee, pruefe die Detailinformationen und speichere oder plane sie. | Home, Schnellfilter, Kategorien, Detailseite, Wishlist, Planung | Wird der Einstieg verstanden? Werden Preis, Dauer, Ort, Bilder und Reviews beachtet? | Testperson findet eine passende Aktivitaet und nutzt Wishlist oder Planen. | Welche Information hat deine Entscheidung beeinflusst? Was hat gefehlt? |
-| 2 | Nico / First-Date-Flow: sichere Idee finden | Du planst ein erstes Date in St. Gallen. Finde eine sichere, oeffentliche Aktivitaet, pruefe Bewertungen und Ort und entscheide, ob du sie planen wuerdest. | Kategorien, Filter, Map, Detailseite, Reviews, Planungsmodal | Findet die Person Ort und Sicherheits-/Oeffentlichkeitsinformationen? Werden Reviews und Karte genutzt? | Testperson findet eine passende Aktivitaet in/bei St. Gallen und kann die Entscheidung begruenden. | Hat die App genug Vertrauen fuer ein erstes Date vermittelt? |
-| 3 | Sara / Gruppen-Flow: gemeinsame Aktivitaet organisieren | Du organisierst etwas fuer eine kleine Gruppe. Finde eine Aktivitaet, die fuer mehrere Personen passt, achte auf Budget und Dauer und teile die Idee. | Kategorien, erweiterte Filter, Detailseite, Teilen-Prototyp, Upcoming | Werden Personenanzahl, Budget und Dauer gefunden? Ist Teilen als Prototyp verstaendlich? | Testperson findet eine gruppentaugliche Aktivitaet und versteht die Folgeaktion Teilen/Planen. | Was braeuchte eine Gruppe noch, um gemeinsam zu entscheiden? |
-| 4 | Mia / Time-Saver-Flow: schnelle Entscheidung | Du hast wenig Zeit und moechtest moeglichst schnell eine passende Aktivitaet finden. Nutze den schnellsten Weg, den du in der App erkennst, und plane die Aktivitaet. | Home, Schnellfilter, Zuletzt angesehen, Detailseite, Planen, Upcoming | Wird ein schneller Weg erkannt? Gibt es zu viele Entscheidungen oder zu viel Text? | Testperson kommt mit wenigen Schritten zu einer geplanten Aktivitaet. | Was hat dich beschleunigt oder aufgehalten? |
-| 5 | Jonas / Creator-Flow: eigene Aktivitaet sichtbar machen | Du kennst eine gute lokale Aktivitaet und moechtest sie in VibeMatch erfassen. Loese einmal bewusst einen Pflichtfeldfehler aus, korrigiere ihn und speichere die Aktivitaet. | Aktivitaet erfassen, Pflichtfeldvalidierung, Bild-Upload, Vorschau, Detailseite | Sind Labels, Fehlermeldungen, Bild-Upload und Vorschau verstaendlich? | Testperson erkennt den Fehler, korrigiert ihn und landet nach dem Speichern auf der Detailseite. | War klar, welche Angaben Pflicht sind und was nach dem Speichern passiert? |
-| 6 | Community-Ausblick / MVP-Abgrenzung | Oeffne die Community-Seite und erklaere kurz, ob fuer dich klar ist, was in diesem MVP umgesetzt ist und was erst spaeter geplant ist. | Community-Ausblickseite, Navigation, MVP-Abgrenzung | Wird die Abgrenzung verstanden oder wirkt die Seite wie ein unfertiger Feed? | Testperson erkennt Community als geplantes MVP-2-Feature. | Ist die Abgrenzung glaubwuerdig und verstaendlich? |
+| 1 | Lea / Paar-Flow: Quality Time planen | Sie moechten heute eine passende Aktivitaet fuer einen entspannten Abend zu zweit finden und entscheiden, ob Sie diese speichern oder direkt planen. | Home, Schnellfilter, Kategorien, Detailseite, Wishlist, Planung | Wird der Einstieg verstanden? Werden Preis, Dauer, Ort, Bilder und Reviews beachtet? | Testperson findet eine passende Aktivitaet und nutzt Wishlist oder Planen. | Welche Information hat Ihre Entscheidung beeinflusst? Was hat gefehlt? |
+| 2 | Nico / First-Date-Flow: sichere Idee finden | Sie moechten ein erstes Date in St. Gallen planen und herausfinden, ob eine Aktivitaet sicher, oeffentlich und gut erreichbar wirkt. | Kategorien, Filter, Map, Detailseite, Reviews, Planungsmodal | Findet die Person Ort und Sicherheits-/Oeffentlichkeitsinformationen? Werden Reviews und Karte genutzt? | Testperson findet eine passende Aktivitaet in/bei St. Gallen und kann die Entscheidung begruenden. | Hat die App genug Vertrauen fuer ein erstes Date vermittelt? |
+| 3 | Sara / Gruppen-Flow: gemeinsame Aktivitaet organisieren | Sie moechten eine Aktivitaet fuer eine kleine Gruppe organisieren und dabei Budget, Dauer und Gruppentauglichkeit beruecksichtigen. | Kategorien, erweiterte Filter, Detailseite, Teilen-Prototyp, Upcoming | Werden Personenanzahl, Budget und Dauer gefunden? Ist Teilen als Prototyp verstaendlich? | Testperson findet eine gruppentaugliche Aktivitaet und versteht die Folgeaktion Teilen/Planen. | Was braeuchte eine Gruppe noch, um gemeinsam zu entscheiden? |
+| 4 | Mia / Time-Saver-Flow: schnelle Entscheidung | Sie haben wenig Zeit und moechten moeglichst schnell zu einer passenden Aktivitaet kommen, die Sie direkt planen koennen. | Home, Schnellfilter, Zuletzt angesehen, Detailseite, Planen, Upcoming | Wird ein schneller Weg erkannt? Gibt es zu viele Entscheidungen oder zu viel Text? | Testperson kommt mit wenigen Schritten zu einer geplanten Aktivitaet. | Was hat Sie beschleunigt oder aufgehalten? |
+| 5 | Jonas / Creator-Flow: eigene Aktivitaet sichtbar machen | Sie moechten eine eigene lokale Aktivitaet erfassen und pruefen, ob die App Sie bei fehlenden Pflichtangaben verstaendlich unterstuetzt. | Aktivitaet erfassen, Pflichtfeldvalidierung, Bild-Upload, Vorschau, Detailseite | Sind Labels, Fehlermeldungen, Bild-Upload und Vorschau verstaendlich? | Testperson erkennt den Fehler, korrigiert ihn und landet nach dem Speichern auf der Detailseite. | War klar, welche Angaben Pflicht sind und was nach dem Speichern passiert? |
+| 6 | Community-Ausblick / MVP-Abgrenzung | Sie moechten verstehen, welche Community-Funktionen im aktuellen MVP enthalten sind und was erst fuer eine spaetere Version geplant ist. | Community-Ausblickseite, Navigation, MVP-Abgrenzung | Wird die Abgrenzung verstanden oder wirkt die Seite wie ein unfertiger Feed? | Testperson erkennt Community als geplantes MVP-2-Feature. | Ist die Abgrenzung glaubwuerdig und verstaendlich? |
 
 ## Aufgabenkarte Fuer Testpersonen
 Diese Kurzfassung kann waehrend des Tests auf Papier, einem separaten Laptop oder Smartphone angezeigt werden.
 
-1. Finde eine passende Aktivitaet fuer einen entspannten Abend zu zweit und speichere oder plane sie.
-2. Plane ein erstes Date in St. Gallen: Suche eine sichere, oeffentliche Aktivitaet und pruefe Bewertungen und Ort.
-3. Organisiere eine Aktivitaet fuer eine kleine Gruppe: Achte auf Personenanzahl, Budget, Dauer und teile die Idee.
-4. Du hast wenig Zeit: Finde auf dem schnellsten Weg eine passende Aktivitaet und plane sie.
-5. Erfasse eine eigene lokale Aktivitaet, loese einmal einen Pflichtfeldfehler aus und speichere danach gueltig.
-6. Oeffne die Community-Seite und erklaere, was jetzt umgesetzt ist und was erst spaeter geplant ist.
+1. Sie moechten heute eine passende Aktivitaet fuer einen entspannten Abend zu zweit finden und entscheiden, ob Sie diese speichern oder direkt planen.
+2. Sie moechten ein erstes Date in St. Gallen planen und herausfinden, ob eine Aktivitaet sicher, oeffentlich und gut erreichbar wirkt.
+3. Sie moechten eine Aktivitaet fuer eine kleine Gruppe organisieren und dabei Budget, Dauer und Gruppentauglichkeit beruecksichtigen.
+4. Sie haben wenig Zeit und moechten moeglichst schnell zu einer passenden Aktivitaet kommen, die Sie direkt planen koennen.
+5. Sie moechten eine eigene lokale Aktivitaet erfassen und pruefen, ob die App Sie bei fehlenden Pflichtangaben verstaendlich unterstuetzt.
+6. Sie moechten verstehen, welche Community-Funktionen im aktuellen MVP enthalten sind und was erst fuer eine spaetere Version geplant ist.
 
 ## Testszenarien
 | Szenario | Aufgabe an Testperson | Erfolgskriterium | Beobachtung |
 |---|---|---|---|
-| Einstieg | Logge dich ein und erklaere kurz, was du auf der Startseite machen kannst. | Zweck, Navigation und Einstieg sind verstaendlich. | offen |
-| Aktivitaet finden | Finde eine Aktivitaet in Zuerich oder St. Gallen, die zu einem Treffen passt. | Filter oder Suche fuehren zu passender Detailseite. | offen |
-| Detailentscheidung | Entscheide anhand der Detailseite, ob du diese Aktivitaet planen wuerdest. | Preis, Dauer, Ort, Bilder oder Reviews werden genutzt. | offen |
-| Wishlist und Planung | Speichere die Idee und plane daraus einen Termin. | Aktivitaet erscheint in Wishlist und Upcoming. | offen |
-| Map | Oeffne die Karte, waehle Ort/Filter und oeffne eine Aktivitaet ueber Marker oder Liste. | Map, Marker und Detailnavigation funktionieren. | offen |
-| History und Review | Markiere einen Termin als erledigt oder bearbeite eine Erinnerung/Bewertung. | History-Eintrag und Review-Feedback sind nachvollziehbar. | offen |
-| Teilen und Community-Ausblick | Pruefe den Teilen-Flow und oeffne `/community`. | Community wird als MVP-2-Ausblick verstanden. | offen |
-| Aktivitaet erfassen | Erfasse eine neue Aktivitaet, loese einmal einen Pflichtfeldfehler aus und speichere danach gueltig. | Validierung, Bild-Upload und Redirect sind verstaendlich. | offen |
-| Mobile optional | Nutze Navigation, Filter oder Erfassung auf Smartphonegroesse. | Mobile Navigation und Inhalte bleiben bedienbar. | offen |
+| Einstieg | Sie moechten verstehen, welchen Zweck VibeMatch hat und welche Moeglichkeiten Ihnen die Startseite bietet. | Zweck, Navigation und Einstieg sind verstaendlich. | offen |
+| Aktivitaet finden | Sie moechten eine Aktivitaet in Zuerich oder St. Gallen finden, die zu einem Treffen passt. | Filter oder Suche fuehren zu passender Detailseite. | offen |
+| Detailentscheidung | Sie moechten anhand der Detailseite entscheiden, ob die Aktivitaet fuer Sie passend ist. | Preis, Dauer, Ort, Bilder oder Reviews werden genutzt. | offen |
+| Wishlist und Planung | Sie moechten eine interessante Idee fuer spaeter speichern oder direkt in einen Termin umwandeln. | Aktivitaet erscheint in Wishlist und Upcoming. | offen |
+| Map | Sie moechten pruefen, wo eine passende Aktivitaet liegt und ob Sie ueber die Karte zur Detailseite gelangen. | Map, Marker und Detailnavigation funktionieren. | offen |
+| History und Review | Sie moechten ein abgeschlossenes Erlebnis nachvollziehen und bewerten oder bearbeiten. | History-Eintrag und Review-Feedback sind nachvollziehbar. | offen |
+| Teilen und Community-Ausblick | Sie moechten eine Idee teilen und verstehen, welche Community-Funktionen erst spaeter geplant sind. | Community wird als MVP-2-Ausblick verstanden. | offen |
+| Aktivitaet erfassen | Sie moechten eine eigene Aktivitaet erfassen und herausfinden, ob Pflichtfeldfehler verstaendlich erklaert werden. | Validierung, Bild-Upload und Redirect sind verstaendlich. | offen |
+| Mobile optional | Sie moechten zentrale Funktionen auf Smartphonegroesse nutzen und pruefen, ob die Navigation bedienbar bleibt. | Mobile Navigation und Inhalte bleiben bedienbar. | offen |
 
 ## Nachfragen
 - Was war der Zweck der App aus deiner Sicht?
