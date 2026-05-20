@@ -15,6 +15,7 @@
 | Validate-Testplan | `docs/validate-test-plan.md` | Testskript und Beobachtungsbogen |
 | Manuelle Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare Abgabepruefung |
 | Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien |
+| Studierenden-Usability-Test | `docs/validate-test-plan.md` und README Kapitel 3.5 | Vorarbeit, Testaufbau, Beobachtungen und Erkenntnisse |
 
 ## Screenshot-Liste
 Screenshots werden fuer die finale Abgabe unter `docs/screenshots/` abgelegt und in der Flow-Checkliste referenziert.
@@ -34,3 +35,4 @@ Screenshots werden fuer die finale Abgabe unter `docs/screenshots/` abgelegt und
 
 ## Hinweis fuer die Abgabe
 Die vorhandenen Diagramme sind bereits versioniert. Screenshots sollten erst nach dem finalen Build aufgenommen werden, damit sie exakt zur eingereichten Version passen.
+Nach der Testingphase werden zentrale Beobachtungen und daraus abgeleitete Verbesserungen in README Kapitel 3.5 nachgetragen.

@@ -1,6 +1,6 @@
 # Manuelle Flow-Checkliste
 
-Diese Checkliste wird vor der Abgabe mit der lokalen App, Seed-Daten und Build-Version durchgegangen.
+Diese Checkliste wird vor der Abgabe mit der lokalen App, Seed-Daten und Build-Version durchgegangen. Waehrend der Testingphase am 20. Mai 2026 werden Status und Screenshot-Pfade nach den Studierenden-Tests aktualisiert.
 
 | Flow | Schritte | Erwartetes Ergebnis | Status | Screenshot |
 |---|---|---|---|---|
@@ -20,3 +20,4 @@ Diese Checkliste wird vor der Abgabe mit der lokalen App, Seed-Daten und Build-V
 - Seed-Daten lassen sich mit `npm run seed` einspielen.
 - Alle zentralen Flows haben Status `bestanden` oder eine begruendete Notiz.
 - Screenshots werden unter den oben genannten Pfaden abgelegt, sobald die finale Version lokal oder deployt geprueft wurde.
+- Erkenntnisse aus den Studierenden-Tests sind in `docs/validate-test-plan.md` und README `3.5 Validate` zusammengefasst.
