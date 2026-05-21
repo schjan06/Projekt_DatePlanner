@@ -28,6 +28,7 @@
 	let fieldErrors = $state({});
 	let error = $state('');
 	let saving = $state(false);
+	const hasFieldErrors = $derived(Object.values(fieldErrors).some(Boolean));
 
 	const previewActivity = $derived({
 		title: title || 'Neue Aktivität',
@@ -137,6 +138,13 @@
 
 	<form class="activity-create-layout" onsubmit={submit}>
 		<div class="activity-create-form">
+			{#if hasFieldErrors}
+				<div class="form-error-summary" role="alert">
+					<strong>Bitte prüfe die markierten Pflichtfelder.</strong>
+					<span>Die Hinweise stehen direkt bei den betroffenen Eingaben.</span>
+				</div>
+			{/if}
+
 			<section id="basis" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Basis</p>

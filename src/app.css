@@ -903,6 +903,29 @@ textarea {
 	outline-offset: 2px;
 }
 
+.form-error-summary {
+	display: grid;
+	gap: 4px;
+	padding: 14px 16px;
+	border: 1px solid rgba(157, 47, 103, 0.28);
+	border-radius: 16px;
+	background: #fff4f8;
+	color: #7f244f;
+	box-shadow: 0 12px 28px rgba(157, 47, 103, 0.1);
+}
+
+.form-error-summary strong {
+	font-size: 1rem;
+	line-height: 1.35;
+}
+
+.form-error-summary span {
+	color: #9d2f67;
+	font-size: 0.9rem;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
 .activity-preview-panel {
 	position: sticky;
 	top: 18px;
@@ -941,6 +964,21 @@ textarea {
 	color: #9d2f67;
 	font-size: 0.84rem;
 	font-weight: 800;
+}
+
+.activity-create-form .field-error {
+	width: fit-content;
+	max-width: 100%;
+	margin-top: 8px;
+	padding: 8px 11px;
+	border: 1px solid rgba(157, 47, 103, 0.22);
+	border-radius: 12px;
+	background: #fff4f8;
+	color: #832753;
+	font-size: 0.93rem;
+	font-weight: 850;
+	line-height: 1.35;
+	box-shadow: 0 8px 18px rgba(157, 47, 103, 0.08);
 }
 
 .form-label {
