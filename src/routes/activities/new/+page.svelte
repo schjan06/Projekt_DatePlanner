@@ -90,6 +90,12 @@
 		error = '';
 		fieldErrors = {};
 
+		if (!previews.length) {
+			fieldErrors = { images: 'Bitte lade mindestens ein Bild hoch.' };
+			saving = false;
+			return;
+		}
+
 		const formData = new FormData();
 		formData.set('title', title);
 		formData.set('description', description);
@@ -269,8 +275,8 @@
 			<section id="bilder" class="panel form-grid">
 				<div>
 					<p class="eyebrow">Bilder</p>
-					<h2>Hauptbild & Galerie</h2>
-					<p class="muted">Bis zu 5 Bilder, JPG/PNG/WebP, maximal 500 KB pro Bild.</p>
+					<h2>Hauptbild & Galerie *</h2>
+					<p class="muted">Mindestens 1 Bild, bis zu 5 Bilder, JPG/PNG/WebP, maximal 500 KB pro Bild.</p>
 				</div>
 				<label class="upload-drop">
 					<input type="file" accept="image/jpeg,image/png,image/webp" multiple onchange={handleImages} />

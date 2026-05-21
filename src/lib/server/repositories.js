@@ -193,6 +193,7 @@ function validateActivityInput(input, imageCount) {
 	if ((input.latitude && !input.longitude) || (!input.latitude && input.longitude)) {
 		fieldError(fieldErrors, 'coordinates', 'Latitude und Longitude müssen gemeinsam angegeben werden.');
 	}
+	if (imageCount < 1) fieldError(fieldErrors, 'images', 'Bitte lade mindestens ein Bild hoch.');
 	if (imageCount > 5) fieldError(fieldErrors, 'images', 'Maximal 5 Bilder sind erlaubt.');
 
 	return { fieldErrors, categories, mood, bestTime };
@@ -367,11 +368,11 @@ export async function createActivity(formData, userId) {
 		if (galleryImage) gallery.push(galleryImage);
 	}
 
-	const fallbackImage = {
-		src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
-		alt: imageAlt || 'VibeMatch Aktivität'
-	};
-	if (!gallery.length) gallery.push(fallbackImage);
+	if (!gallery.length) {
+		const issue = validationError('Bitte lade mindestens ein Bild hoch.');
+		issue.fieldErrors = { images: 'Bitte lade mindestens ein Bild hoch.' };
+		throw issue;
+	}
 
 	const now = new Date().toISOString();
 	const id = await uniqueActivityId(input.title, input.city);
@@ -381,7 +382,7 @@ export async function createActivity(formData, userId) {
 		description: input.description,
 		image: gallery[0].src,
 		imageAlt: gallery[0].alt,
-		imageCredit: images.length ? 'User upload' : 'Unsplash',
+		imageCredit: 'User upload',
 		gallery,
 		categories,
 		priceLevel: priceLevelFromText(input.priceText),
