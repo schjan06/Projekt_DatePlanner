@@ -1,5 +1,6 @@
 <script>
 	import { invalidateAll } from '$app/navigation';
+	import NavIcon from '$lib/components/layout/NavIcon.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
 	import PlannedActivityCard from '$lib/components/upcoming/PlannedActivityCard.svelte';
 	import PlannedActivityModal from '$lib/components/upcoming/PlannedActivityModal.svelte';
@@ -53,7 +54,10 @@
 		</div>
 		<div class="action-row">
 			<button class={`button ${view === 'Liste' ? '' : 'secondary'}`} type="button" onclick={() => (view = 'Liste')}>Liste</button>
-			<button class={`button ${view === 'Kalender' ? '' : 'secondary'}`} type="button" onclick={() => (view = 'Kalender')}>Kalender</button>
+			<button class={`button ${view === 'Kalender' ? '' : 'secondary'}`} type="button" onclick={() => (view = 'Kalender')}>
+				<NavIcon name="calendar" size={18} />
+				Kalender
+			</button>
 			<a class="button ghost" href="/categories">Neue Aktivität planen</a>
 		</div>
 	</div>

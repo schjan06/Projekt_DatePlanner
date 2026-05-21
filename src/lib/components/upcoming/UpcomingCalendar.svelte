@@ -1,4 +1,5 @@
 <script>
+	import NavIcon from '$lib/components/layout/NavIcon.svelte';
 	import PlannedActivityCard from './PlannedActivityCard.svelte';
 
 	let { planned = [], onEdit = () => {}, onMove = () => {} } = $props();
@@ -98,9 +99,16 @@
 
 <section class="calendar-shell panel">
 	<div class="calendar-header">
-		<div>
-			<p class="eyebrow">Kalender</p>
-			<h2>{monthLabel}</h2>
+		<div class="calendar-title-block">
+			<div class="calendar-title-row">
+				<span class="calendar-title-icon">
+					<NavIcon name="calendar" size={22} />
+				</span>
+				<div>
+					<p class="eyebrow">Kalender</p>
+					<h2>{monthLabel}</h2>
+				</div>
+			</div>
 		</div>
 		<div class="action-row">
 			<button class="button secondary" type="button" onclick={() => changeMonth(-1)}>Zurück</button>
