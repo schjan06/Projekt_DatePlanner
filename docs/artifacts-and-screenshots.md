@@ -29,7 +29,7 @@ Screenshots werden fuer die finale Abgabe unter `docs/screenshots/` abgelegt und
 | `wishlist.png` | gespeicherte Aktivitaeten |
 | `upcoming.png` | Liste oder Kalender geplanter Aktivitaeten |
 | `map.png` | Leaflet-Karte mit Marker und Detailvorschau |
-| `history-share.png` | bearbeitete Erinnerung und Teilen-Prototyp |
+| `history-share.png` | bearbeitete Erinnerung und Teilen-Flow |
 | `community-roadmap.png` | Community-Ausblick als MVP-2-Konzeptseite |
 | `profile.png` | Profil mit Lieblingskategorien oder Einstellungsmodal |
 | `empty-states.png` | Empty State bei leerer Liste |

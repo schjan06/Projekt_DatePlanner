@@ -36,6 +36,12 @@
 		<path d="M16 3v4" />
 		<path d="M8 3v4" />
 		<path d="M3 10h18" />
+	{:else if name === 'share'}
+		<circle cx="18" cy="5" r="3" />
+		<circle cx="6" cy="12" r="3" />
+		<circle cx="18" cy="19" r="3" />
+		<path d="M8.6 10.5l6.8-4" />
+		<path d="M8.6 13.5l6.8 4" />
 	{:else if name === 'history'}
 		<path d="M3 12a9 9 0 1 0 3-6.7" />
 		<path d="M3 4v6h6" />

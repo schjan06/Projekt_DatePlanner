@@ -140,7 +140,7 @@ Diese Liste enthaelt die aus der Feedback-Datei abgeleiteten Issues. Sie ist als
 **Bezug zur Testaufgabe:** Aufgabe 3/4: Upcoming und History
 
 ### 9. WhatsApp-/System-Share fuer Aktivitaeten evaluieren
-**Beschreibung:** Der bestehende Teilen-Prototyp soll um realistischere Sharing-Optionen geprueft werden.
+**Beschreibung:** Der bestehende Teilen-Flow soll um realistischere Sharing-Optionen geprueft werden.
 
 **Beobachtung aus dem Test:** Feedback nennt Teilen via WhatsApp als erwartbares Nutzungsszenario.
 
@@ -149,7 +149,7 @@ Diese Liste enthaelt die aus der Feedback-Datei abgeleiteten Issues. Sie ist als
 **Akzeptanzkriterien:**
 - Entscheidung zwischen Web Share API, WhatsApp-Link oder MVP-2-Dokumentation ist getroffen.
 - README-Abgrenzung ist aktualisiert.
-- Bestehender Teilen-Prototyp bleibt nachvollziehbar.
+- Bestehender Teilen-Flow bleibt nachvollziehbar.
 
 **Prioritaet:** Niedrig  
 **Labels:** `enhancement`, `mvp-2`, `usability`  

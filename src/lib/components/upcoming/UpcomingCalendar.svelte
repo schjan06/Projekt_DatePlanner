@@ -2,7 +2,7 @@
 	import NavIcon from '$lib/components/layout/NavIcon.svelte';
 	import PlannedActivityCard from './PlannedActivityCard.svelte';
 
-	let { planned = [], onEdit = () => {}, onMove = () => {} } = $props();
+	let { planned = [], onEdit = () => {}, onMove = () => {}, onShare = () => {} } = $props();
 
 	const today = new Date();
 	const todayIso = toIsoDate(today);
@@ -173,7 +173,7 @@
 	{#if selectedItems.length}
 		<div class="activity-list">
 			{#each selectedItems as item}
-				<PlannedActivityCard {item} compact onEdit={onEdit} />
+				<PlannedActivityCard {item} compact onEdit={onEdit} onShare={onShare} />
 			{/each}
 		</div>
 	{:else}
@@ -190,7 +190,7 @@
 					<h3>{formatDate(group.date)}</h3>
 					<div class="activity-list">
 						{#each group.items as item}
-							<PlannedActivityCard {item} compact onEdit={onEdit} />
+							<PlannedActivityCard {item} compact onEdit={onEdit} onShare={onShare} />
 						{/each}
 					</div>
 				</div>

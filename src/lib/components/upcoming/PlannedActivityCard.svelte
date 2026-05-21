@@ -1,5 +1,5 @@
 <script>
-	let { item, onEdit = () => {}, compact = false } = $props();
+	let { item, onEdit = () => {}, onShare = () => {}, compact = false } = $props();
 
 	function formatDate(value) {
 		return new Intl.DateTimeFormat('de-CH', {
@@ -25,6 +25,7 @@
 	</div>
 	<div class="planned-card-actions">
 		<button class="button ghost" type="button" onclick={() => onEdit(item)}>Bearbeiten</button>
+		<button class="button ghost" type="button" onclick={() => onShare(item.activity, item)}>Teilen</button>
 		<a class="button secondary" href={`/activity/${item.activity.id}`}>Details</a>
 	</div>
 </article>

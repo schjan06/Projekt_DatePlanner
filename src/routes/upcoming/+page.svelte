@@ -2,6 +2,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import NavIcon from '$lib/components/layout/NavIcon.svelte';
 	import EmptyState from '$lib/components/ui/EmptyState.svelte';
+	import ShareModal from '$lib/components/modals/ShareModal.svelte';
 	import PlannedActivityCard from '$lib/components/upcoming/PlannedActivityCard.svelte';
 	import PlannedActivityModal from '$lib/components/upcoming/PlannedActivityModal.svelte';
 	import UpcomingCalendar from '$lib/components/upcoming/UpcomingCalendar.svelte';
@@ -11,12 +12,17 @@
 
 	let view = $state('Liste');
 	let selectedItem = $state(null);
+	let shareActivity = $state(null);
 	let modalOpen = $state(false);
 	const planned = $derived(data.plannedActivities);
 
 	function openEditor(item) {
 		selectedItem = item;
 		modalOpen = true;
+	}
+
+	function openShare(activity) {
+		shareActivity = activity;
 	}
 
 	async function refreshWithToast(message) {
@@ -66,11 +72,11 @@
 		{#if view === 'Liste'}
 			<div class="activity-list">
 				{#each planned as item}
-					<PlannedActivityCard {item} onEdit={openEditor} />
+					<PlannedActivityCard {item} onEdit={openEditor} onShare={openShare} />
 				{/each}
 			</div>
 		{:else}
-			<UpcomingCalendar {planned} onEdit={openEditor} onMove={movePlannedActivity} />
+			<UpcomingCalendar {planned} onEdit={openEditor} onMove={movePlannedActivity} onShare={openShare} />
 		{/if}
 	{:else}
 		<EmptyState title="Noch keine Aktivitäten geplant." text="Speichere eine Idee als Termin, damit sie hier in deiner Planung erscheint." actionHref="/categories" actionLabel="Aktivitäten entdecken" />
@@ -83,4 +89,12 @@
 	onClose={() => (modalOpen = false)}
 	onSaved={refreshWithToast}
 	onDeleted={refreshWithToast}
+/>
+
+<ShareModal
+	activity={shareActivity}
+	open={Boolean(shareActivity)}
+	onClose={() => {
+		shareActivity = null;
+	}}
 />
