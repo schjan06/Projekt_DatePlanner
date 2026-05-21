@@ -22,5 +22,21 @@
 		<RatingStars rating={activity.rating} count={activity.reviewCount} />
 		<ActivityMeta {activity} />
 	</div>
-	<a class="button secondary activity-list-item-action" href={`/activity/${activity.id}`}>Details</a>
+	<div class="activity-list-item-detail">
+		<a class="button secondary activity-list-item-action" href={`/activity/${activity.id}`}>Details</a>
+		<aside class="activity-detail-preview" aria-hidden="true">
+			<img src={activity.image} alt="" />
+			<div class="activity-detail-preview-body">
+				<div class="badge-row">
+					{#each activity.categories.slice(0, 2) as category}
+						<CategoryBadge label={category} />
+					{/each}
+				</div>
+				<h3>{activity.title}</h3>
+				<p class="muted">{activity.description}</p>
+				<RatingStars rating={activity.rating} count={activity.reviewCount} />
+				<ActivityMeta {activity} />
+			</div>
+		</aside>
+	</div>
 </article>

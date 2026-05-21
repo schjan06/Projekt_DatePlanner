@@ -1229,11 +1229,17 @@ textarea {
 
 .activity-list-item {
 	position: relative;
+	isolation: isolate;
 	display: grid;
 	grid-template-columns: 140px minmax(0, 1fr) auto;
 	gap: 16px;
 	align-items: center;
 	padding: 12px;
+}
+
+.activity-list-item:hover,
+.activity-list-item:focus-within {
+	z-index: 4;
 }
 
 .activity-list-item-link {
@@ -1248,16 +1254,93 @@ textarea {
 	outline-offset: -3px;
 }
 
+.activity-list-item-detail {
+	position: relative;
+	z-index: 3;
+}
+
 .activity-list-item-action {
 	position: relative;
-	z-index: 2;
+	z-index: 1;
+}
+
+.activity-list-item-image {
+	position: relative;
+	overflow: hidden;
+	border-radius: 16px;
+	background: var(--purple-soft);
 }
 
 .activity-list-item img {
 	width: 140px;
 	height: 105px;
-	border-radius: 16px;
 	object-fit: cover;
+}
+
+.activity-detail-preview {
+	position: absolute;
+	top: 50%;
+	right: calc(100% + 14px);
+	z-index: 5;
+	width: min(360px, calc(100vw - 48px));
+	border: 1px solid rgba(118, 87, 255, 0.16);
+	border-radius: 18px;
+	background: white;
+	box-shadow: var(--shadow);
+	opacity: 0;
+	visibility: hidden;
+	transform: translate(10px, -50%) scale(0.98);
+	transform-origin: right center;
+	transition:
+		opacity 0.18s ease,
+		transform 0.18s ease,
+		visibility 0.18s ease;
+	pointer-events: none;
+}
+
+.activity-detail-preview::after {
+	position: absolute;
+	top: 50%;
+	right: -7px;
+	width: 14px;
+	height: 14px;
+	content: "";
+	border-top: 1px solid rgba(118, 87, 255, 0.16);
+	border-right: 1px solid rgba(118, 87, 255, 0.16);
+	background: white;
+	transform: translateY(-50%) rotate(45deg);
+}
+
+.activity-detail-preview img {
+	display: block;
+	width: 100%;
+	height: 150px;
+	border-radius: 18px 18px 0 0;
+	object-fit: cover;
+}
+
+.activity-detail-preview-body {
+	display: grid;
+	gap: 8px;
+	padding: 14px;
+}
+
+.activity-detail-preview h3 {
+	margin: 2px 0 0;
+}
+
+.activity-detail-preview .muted {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.activity-list-item-detail:hover .activity-detail-preview,
+.activity-list-item-detail:focus-within .activity-detail-preview {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(0, -50%) scale(1);
 }
 
 .detail-hero {
@@ -2837,8 +2920,13 @@ textarea {
 		height: 96px;
 	}
 
+	.activity-list-item-detail,
 	.activity-list-item .button {
 		grid-column: 1 / -1;
+	}
+
+	.activity-detail-preview {
+		display: none;
 	}
 
 	.detail-hero {
