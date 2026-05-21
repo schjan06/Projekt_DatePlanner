@@ -10,6 +10,7 @@
 		emptyText = '',
 		focusTarget = null,
 		onSelect = () => {},
+		onClearSelection = () => {},
 		onBoundsChange = () => {}
 	} = $props();
 
@@ -117,7 +118,16 @@
 		}
 	}
 
+	function handleKeydown(event) {
+		if (event.key === 'Escape' && selected) onClearSelection();
+	}
+
 	onMount(initialiseMap);
+
+	onMount(() => {
+		window.addEventListener('keydown', handleKeydown);
+		return () => window.removeEventListener('keydown', handleKeydown);
+	});
 
 	onDestroy(() => {
 		if (map) map.remove();
@@ -153,6 +163,9 @@
 
 	{#if selected}
 		<aside class="map-detail-card card" aria-label="Ausgewählte Aktivität">
+			<button class="map-preview-close" type="button" aria-label="Karten-Preview schliessen" onclick={onClearSelection}>
+				×
+			</button>
 			<img src={selected.image} alt={selected.imageAlt ?? selected.title} />
 			<div class="activity-body">
 				<div class="badge-row">

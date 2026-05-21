@@ -133,6 +133,10 @@
 		selectedActivity = activity;
 	}
 
+	function clearSelectedActivity() {
+		selectedActivity = null;
+	}
+
 	function handleBoundsChange(bounds) {
 		mapBounds = bounds;
 	}
@@ -167,6 +171,7 @@
 			{focusTarget}
 			{emptyText}
 			onSelect={handleMarkerSelect}
+			onClearSelection={clearSelectedActivity}
 			onBoundsChange={handleBoundsChange}
 		/>
 
