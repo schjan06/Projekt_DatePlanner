@@ -1380,6 +1380,29 @@ textarea {
 	max-width: 760px;
 }
 
+.detail-back-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 40px;
+	margin-bottom: 18px;
+	padding: 0 14px;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.14);
+	color: white;
+	font-weight: 850;
+	backdrop-filter: blur(14px);
+	box-shadow: 0 10px 24px rgba(18, 15, 31, 0.18);
+	cursor: pointer;
+}
+
+.detail-back-button:hover,
+.detail-back-button:focus-visible {
+	background: rgba(255, 255, 255, 0.24);
+	border-color: rgba(255, 255, 255, 0.44);
+}
+
 .detail-grid {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) 340px;

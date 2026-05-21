@@ -7,7 +7,7 @@
 	import ShareModal from '$lib/components/modals/ShareModal.svelte';
 	import ReviewModal from '$lib/components/modals/ReviewModal.svelte';
 	import ReviewSummary from '$lib/components/reviews/ReviewSummary.svelte';
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { showToast } from '$lib/state/appState.svelte.js';
 
 	const recentStorageKey = 'vibematch.recentActivities';
@@ -44,6 +44,15 @@
 		}
 	}
 
+	function goBack() {
+		if (typeof window !== 'undefined' && window.history.length > 1) {
+			window.history.back();
+			return;
+		}
+
+		goto('/');
+	}
+
 	$effect(() => {
 		if (!activity?.id || typeof localStorage === 'undefined') return;
 
@@ -63,6 +72,9 @@
 	<section class="page">
 		<ActivityGallery gallery={heroGallery} title={activity.title} variant="hero">
 			<div class="detail-hero-content">
+				<button class="detail-back-button" type="button" aria-label="Zur vorherigen Seite zurück" onclick={goBack}>
+					← Zurück
+				</button>
 				<div class="badge-row">
 					{#each activity.categories as category}
 						<CategoryBadge label={category} />
