@@ -5,5 +5,5 @@ export const profile = {
 	memberSince: 'Mai 2026',
 	avatar: 'JA',
 	bio: 'Plant gemeinsame Aktivitäten, sammelt Ideen und testet den VibeMatch-Prototyp.',
-	settings: ['Einstellungen', 'Benachrichtigungen', 'Hilfe & Support', 'Ausloggen']
+	settings: ['Profil bearbeiten', 'Reminder & Benachrichtigungen', 'Hilfe & Support', 'Ausloggen']
 };

@@ -11,14 +11,24 @@
 
 	let { data } = $props();
 	const profile = $derived(data.profile);
+
+	function profileHasSetting(setting) {
+		return [setting.label, ...(setting.aliases || [])].some((label) => profile.settings?.includes(label));
+	}
+
 	const settings = $derived(
 		[
 			{ label: 'Profil bearbeiten', description: 'Name, Ort, Bio und Vorlieben ändern', modal: 'edit' },
-			{ label: 'Benachrichtigungen', description: 'Prototyp-Einstellungen verwalten', modal: 'notifications' },
+			{
+				label: 'Reminder & Benachrichtigungen',
+				description: 'MVP-2-Abgrenzung ansehen',
+				modal: 'notifications',
+				aliases: ['Benachrichtigungen']
+			},
 			{ label: 'Hilfe & Support', description: 'FAQ und Feedback öffnen', modal: 'support' },
 			{ label: 'Freunde einladen', description: 'Demo-Link teilen', modal: 'invite' },
 			{ label: 'Ausloggen', description: 'Session beenden', modal: 'logout', danger: true }
-		].filter((setting) => profile.settings?.includes(setting.label))
+		].filter(profileHasSetting)
 	);
 
 	let activeModal = $state('');
@@ -151,7 +161,7 @@
 
 <EditProfileModal profile={profile} open={activeModal === 'edit'} onClose={() => (activeModal = '')} onSaved={refreshWithToast} />
 <ChangePasswordModal open={activeModal === 'password'} onClose={() => (activeModal = '')} onSaved={refreshWithToast} />
-<NotificationSettingsModal profile={profile} open={activeModal === 'notifications'} onClose={() => (activeModal = '')} onSaved={refreshWithToast} />
+<NotificationSettingsModal open={activeModal === 'notifications'} onClose={() => (activeModal = '')} />
 <HelpSupportModal open={activeModal === 'support'} onClose={() => (activeModal = '')} onSent={refreshWithToast} />
 <InviteFriendsModal profile={profile} open={activeModal === 'invite'} onClose={() => (activeModal = '')} onSent={refreshWithToast} />
 <ConfirmLogoutDialog open={activeModal === 'logout'} onClose={() => (activeModal = '')} onConfirm={logout} />

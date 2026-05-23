@@ -11,7 +11,7 @@ Diese Checkliste wird vor der Abgabe mit der lokalen App, Seed-Daten und Build-V
 | Aktivitaet erfassen | `/activities/new` oeffnen, Pflichtfeldfehler ausloesen, Bildangaben pruefen, gueltig speichern | Fehlermeldungen sind verstaendlich; Bildlogik ist klar; Redirect zur Detailseite funktioniert | bereit | `docs/screenshots/activity-create.png` |
 | Map -> Planung | `/map` oeffnen, Ortschaft suchen, Aktivitaet auswaehlen, Detailseite oeffnen und planen | Karte, Preview, Detailnavigation und Planung funktionieren; Preview-Schliessen wird beobachtet | bereit | `docs/screenshots/map.png` |
 | Community-Ausblick | `/community` oeffnen | Seite erklaert MVP-2-Status, Abgrenzung und naechste Community-Funktionen | bereit | `docs/screenshots/community-roadmap.png` |
-| Profil | Profil bearbeiten, Kategorien setzen, Benachrichtigungen oeffnen | Modals geben Feedback und sind per Escape schliessbar | bereit | `docs/screenshots/profile.png` |
+| Profil | Profil bearbeiten, Kategorien setzen, Reminder-/Benachrichtigungsabgrenzung oeffnen | Modals geben Feedback; Reminder, Push und E-Mail werden klar als nicht aktueller MVP abgegrenzt | bereit | `docs/screenshots/profile.png` |
 | Leere Daten | Datenbank ohne Seed-Daten oder leere Listen pruefen | Empty States erklaeren den Zustand und bieten naechste Aktion | bereit | `docs/screenshots/empty-states.png` |
 | Tastatur | Per Tab durch Header, Filter, Modals und MobileNav navigieren | Fokus ist sichtbar, Escape schliesst Modals | bereit | `docs/screenshots/accessibility.png` |
 

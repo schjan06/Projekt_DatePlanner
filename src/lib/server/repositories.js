@@ -756,7 +756,7 @@ export async function getProfile(userId) {
 					favoriteCategories: preferences.favoriteCategories || user.favoriteCategories || [],
 					notificationSettings: notificationDefaults(preferences.notificationSettings || user.notificationSettings || preferences)
 				},
-				settings: ['Profil bearbeiten', 'Benachrichtigungen', 'Hilfe & Support', 'Freunde einladen', 'Ausloggen']
+				settings: ['Profil bearbeiten', 'Reminder & Benachrichtigungen', 'Hilfe & Support', 'Freunde einladen', 'Ausloggen']
 			}
 		: legacyProfile;
 	if (profile && user && !user.bio && !preferences.bio) profile.bio = 'Noch keine Kurzbeschreibung hinterlegt.';
