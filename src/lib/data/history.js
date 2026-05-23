@@ -25,14 +25,5 @@ export const historyItems = [
 		rating: 5,
 		favorite: true,
 		memory: 'Kalt, aber wunderschön. Heisser Tee war die beste Entscheidung.'
-	},
-	{
-		id: 'history-4',
-		userId: 'demo-user',
-		activityId: 'bowling-night',
-		date: '2026-01-31',
-		rating: 4,
-		favorite: false,
-		memory: 'Sehr lustiger Gruppenabend, ideal für spontane Pläne.'
 	}
 ];

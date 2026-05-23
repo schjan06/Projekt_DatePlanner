@@ -10,7 +10,6 @@
 	let editingItem = $state(null);
 	let editRating = $state(0);
 	let editMemory = $state('');
-	let editFavorite = $state(false);
 	let saving = $state(false);
 	let error = $state('');
 	let fieldErrors = $state({});
@@ -19,7 +18,6 @@
 		editingItem = item;
 		editRating = Number(item.rating || 0);
 		editMemory = item.memory || '';
-		editFavorite = Boolean(item.favorite);
 		error = '';
 		fieldErrors = {};
 	}
@@ -46,19 +44,18 @@
 			headers: { 'content-type': 'application/json' },
 			body: JSON.stringify({
 				rating: editRating,
-				memory: editMemory,
-				favorite: editFavorite
+				memory: editMemory
 			})
 		});
 		const body = await response.json().catch(() => ({}));
 		saving = false;
 
 		if (response.ok) {
-			showToast('Erinnerung gespeichert');
+			showToast('History-Eintrag gespeichert');
 			await invalidateAll();
 			closeEditor();
 		} else {
-			error = body.error || 'Erinnerung konnte nicht gespeichert werden.';
+			error = body.error || 'History-Eintrag konnte nicht gespeichert werden.';
 			fieldErrors = body.fieldErrors || {};
 		}
 	}
@@ -70,8 +67,8 @@
 	<div class="page-header">
 		<div>
 			<p class="eyebrow">Vergangene Aktivitäten</p>
-			<h1>Erinnerungen</h1>
-			<p class="muted">Bewertungen, Favoriten und kleine Rückblicke auf bereits gemachte Erlebnisse.</p>
+			<h1>Vergangene Aktivitäten</h1>
+			<p class="muted">Bewertungen und Rückblicksnotizen zu bereits gemachten Erlebnissen.</p>
 		</div>
 	</div>
 
@@ -85,7 +82,7 @@
 							<img src={activity.image} alt={activity.imageAlt ?? activity.title} />
 						</a>
 						<div class="activity-body">
-							<p class="eyebrow">{item.date}{item.favorite ? ' · Favorit' : ''}</p>
+							<p class="eyebrow">{item.date}</p>
 							<h3>{activity.title}</h3>
 							{#if Number(item.rating) > 0}
 								<RatingStars rating={item.rating} />
@@ -99,7 +96,7 @@
 									Bearbeiten
 								</button>
 								<button class="button ghost" type="button" onclick={() => (selectedActivity = activity)}>
-									Erinnerung teilen
+									Aktivität teilen
 								</button>
 							</div>
 						</div>
@@ -109,7 +106,7 @@
 		</div>
 	{:else}
 		<EmptyState
-			title="Noch keine Erinnerungen"
+			title="Noch keine vergangenen Aktivitäten"
 			text="Markiere geplante Aktivitäten als erledigt, damit sie hier erscheinen."
 			actionHref="/upcoming"
 			actionLabel="Planung öffnen"
@@ -121,54 +118,60 @@
 
 {#if editingItem}
 	<div class="modal-backdrop" role="presentation">
-		<button class="modal-backdrop-close" type="button" aria-label="Erinnerung bearbeiten schliessen" onclick={closeEditor}></button>
+		<button class="modal-backdrop-close" type="button" aria-label="Vergangene Aktivität bearbeiten schliessen" onclick={closeEditor}></button>
 		<form class="modal profile-modal history-edit-modal" onsubmit={saveHistory}>
 			<div class="review-modal-header">
 				<div>
-					<p class="eyebrow">Erinnerung</p>
+					<p class="eyebrow">Vergangene Aktivität</p>
 					<h2>{editingItem.activity.title}</h2>
-					<p class="muted">Bewertung, Notiz und Favorit bearbeiten.</p>
+					<p class="muted">Bewertung und Rückblicksnotiz bearbeiten.</p>
 				</div>
 				<button class="modal-close" type="button" aria-label="Schliessen" onclick={closeEditor}>×</button>
 			</div>
 
-			<div class="form-grid">
-				<div>
-					<span class="field-label">Bewertung</span>
-					<div class="review-rating-control history-rating-control">
-						{#each [1, 2, 3, 4, 5] as value}
-							<button
-								type="button"
-								class:active={editRating >= value}
-								aria-pressed={editRating === value}
-								aria-label={`${value} von 5 Sternen`}
-								onclick={() => (editRating = value)}
-							>
-								★
-							</button>
-						{/each}
+			<div class="form-grid history-edit-fields">
+				<div class="review-rating-panel history-rating-panel">
+					<div class="history-rating-header">
+						<span class="field-label">Bewertung</span>
+						<span class:active={editRating > 0} class="review-rating-value">
+							{editRating > 0 ? `${editRating} von 5 Sternen` : 'Noch nicht bewertet'}
+						</span>
 					</div>
-					<button class="button ghost tiny-action" type="button" onclick={() => (editRating = 0)}>Bewertung entfernen</button>
+
+					<div class="review-rating-control history-rating-control" role="group" aria-label="Bewertung auswählen">
+						<div class="review-stars history-stars">
+							{#each [1, 2, 3, 4, 5] as value}
+								<button
+									type="button"
+									class:active={editRating >= value}
+									aria-pressed={editRating === value}
+									aria-label={`${value} von 5 Sternen auswählen`}
+									onclick={() => (editRating = value)}
+								>
+									★
+								</button>
+							{/each}
+						</div>
+						<button class="button ghost tiny-action history-rating-clear" type="button" disabled={editRating === 0} onclick={() => (editRating = 0)}>
+							Bewertung entfernen
+						</button>
+					</div>
 					{#if fieldErrors.rating}<span class="field-error">{fieldErrors.rating}</span>{/if}
 				</div>
 
-				<label>
-					Erinnerung
-					<textarea rows="4" bind:value={editMemory} maxlength="400" placeholder="Was bleibt euch in Erinnerung?"></textarea>
+				<label class="history-note-field">
+					Rückblicksnotiz
+					<textarea rows="4" bind:value={editMemory} maxlength="400" placeholder="Was war gut, besonders oder hilfreich für später?"></textarea>
 					{#if fieldErrors.memory}<span class="field-error">{fieldErrors.memory}</span>{/if}
 				</label>
 
-				<label class="checkbox-row">
-					<input type="checkbox" bind:checked={editFavorite} />
-					<span>Als Favorit markieren</span>
-				</label>
 			</div>
 
 			{#if error}
 				<p class="form-error">{error}</p>
 			{/if}
 
-			<div class="action-row">
+			<div class="action-row history-modal-actions">
 				<button class="button" type="submit" disabled={saving}>{saving ? 'Speichern...' : 'Speichern'}</button>
 				<button class="button secondary" type="button" onclick={closeEditor}>Abbrechen</button>
 			</div>

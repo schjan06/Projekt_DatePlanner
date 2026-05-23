@@ -2,11 +2,11 @@ export const plannedActivities = [
 	{
 		id: 'planned-1',
 		userId: 'demo-user',
-		activityId: 'minigolf-abend',
+		activityId: 'escape-room',
 		date: '2026-05-10',
 		time: '18:30',
-		location: 'Drei Weieren, St. Gallen',
-		notes: 'Danach noch etwas trinken gehen.',
+		location: 'Altstadt, Luzern',
+		notes: 'Danach kurz besprechen, welche Rätsel am besten waren.',
 		createdAt: '2026-04-28T12:00:00.000Z'
 	},
 	{

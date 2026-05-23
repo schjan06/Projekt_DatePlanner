@@ -8,7 +8,7 @@
 
 	const currentScope = [
 		'Aktivitäten können als Prototyp geteilt werden',
-		'Reviews und Erinnerungen bleiben im aktuellen MVP nutzbar',
+		'Reviews und Rückblicksnotizen bleiben im aktuellen MVP nutzbar',
 		'Community-Datenmodell und API bleiben als technische Vorstufe vorhanden'
 	];
 </script>

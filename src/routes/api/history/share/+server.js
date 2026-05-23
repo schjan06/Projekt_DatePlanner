@@ -12,6 +12,6 @@ export async function POST({ request, locals }) {
 		}, locals.user.id);
 		return json({ post }, { status: 201 });
 	} catch (issue) {
-		return jsonError(issue, 'Erinnerung konnte nicht geteilt werden.');
+		return jsonError(issue, 'Vergangene Aktivität konnte nicht geteilt werden.');
 	}
 }

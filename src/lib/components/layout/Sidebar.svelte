@@ -9,7 +9,7 @@
 		{ href: '/map', label: 'Karte', icon: 'map' },
 		{ href: '/wishlist', label: 'Wishlist', icon: 'heart' },
 		{ href: '/upcoming', label: 'Kommende', icon: 'calendar' },
-		{ href: '/history', label: 'Erinnerungen', icon: 'history' },
+		{ href: '/history', label: 'Vergangen', icon: 'history' },
 		{ href: '/community', label: 'Community', icon: 'users' },
 		{ href: '/profile', label: 'Profil', icon: 'user' }
 	];

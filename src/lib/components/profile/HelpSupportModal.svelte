@@ -9,7 +9,7 @@
 		{ question: 'Was ist VibeMatch?', answer: 'VibeMatch hilft dir, gemeinsame Aktivitäten schneller zu finden, zu speichern und zu planen.' },
 		{ question: 'Wie speichere ich eine Aktivität?', answer: 'Öffne eine Aktivität und klicke auf „Zur Wishlist hinzufügen“.' },
 		{ question: 'Wie plane ich eine Aktivität?', answer: 'Auf der Detailseite kannst du über „Planen“ Datum, Uhrzeit und Notiz erfassen.' },
-		{ question: 'Wie teile ich eine Erinnerung?', answer: 'In der History kannst du Erinnerungen als Community-Beitrag teilen.' },
+		{ question: 'Wie teile ich eine vergangene Aktivität?', answer: 'In der History kannst du vergangene Aktivitäten per Teilen-Dialog als Link, WhatsApp-Nachricht oder über die native Teilen-Funktion weitergeben.' },
 		{ question: 'Wie funktionieren Bewertungen?', answer: 'Bewertungen werden auf der Detailseite als Rezension gespeichert und fliessen in die Aktivitätsbewertung ein.' }
 	];
 

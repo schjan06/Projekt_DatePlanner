@@ -656,14 +656,14 @@ export async function updateHistoryItem(id, input = {}, userId) {
 	userId = requireUserId(userId);
 	const history = await collection('historyItems');
 	const existing = await history.findOne({ id, userId });
-	if (!existing) throw error(404, 'Erinnerung nicht gefunden');
+	if (!existing) throw error(404, 'History-Eintrag nicht gefunden');
 
 	const memory = String(input.memory || '').trim();
 	const rating = Number(input.rating || 0);
-	const favorite = Boolean(input.favorite);
+	const favorite = input.favorite === undefined ? Boolean(existing.favorite) : Boolean(input.favorite);
 	const fieldErrors = {};
 
-	if (memory.length > 400) fieldError(fieldErrors, 'memory', 'Die Erinnerung darf maximal 400 Zeichen lang sein.');
+	if (memory.length > 400) fieldError(fieldErrors, 'memory', 'Die Rückblicksnotiz darf maximal 400 Zeichen lang sein.');
 	if (!Number.isFinite(rating) || rating < 0 || rating > 5) fieldError(fieldErrors, 'rating', 'Waehle eine Bewertung zwischen 0 und 5 Sternen.');
 
 	assertFieldErrors(fieldErrors);

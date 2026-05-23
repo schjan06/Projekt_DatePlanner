@@ -9,7 +9,7 @@ export async function PATCH({ params, request, locals }) {
 	} catch (error) {
 		return json(
 			{
-				error: error.message || 'Erinnerung konnte nicht gespeichert werden.',
+				error: error.message || 'History-Eintrag konnte nicht gespeichert werden.',
 				fieldErrors: error.fieldErrors || {}
 			},
 			{ status: error.status || 500 }
