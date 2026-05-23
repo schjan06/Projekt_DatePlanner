@@ -723,7 +723,7 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
 
 ### 6.1 KI-Tools
 - **Eingesetzte Tools**: ChatGPT und Codex wurden im Projekt unterstützend eingesetzt. Weitere KI-Tools sind für diese Dokumentation nicht belegt.
-- **Zweck & Umfang**: KI wurde eingesetzt für Ideenstrukturierung, Formulierung von Prompts, Dokumentationsentwürfe, Codevorschläge, technische Analyse des bestehenden Projekts, mögliche Verbesserungen und Textüberarbeitung. Diese README wurde mit KI-Unterstützung überarbeitet und anschliessend fachlich mit Code, Tests und Projektentscheidungen abgeglichen.
+- **Zweck & Umfang**: KI wurde bzw. kann eingesetzt werden für Ideenstrukturierung, Formulierung von Prompts, Dokumentationsentwürfe, Codevorschläge, technische Analyse des bestehenden Projekts, mögliche Verbesserungen und Textüberarbeitung. Diese README wurde mit KI-Unterstützung überarbeitet und muss fachlich geprüft werden.
 - **Eigene Leistung (Abgrenzung):** Projektidee, Entscheidungen, Bewertung der Vorschläge, Auswahl der finalen Inhalte, Validierung, Tests, Designentscheidungen und Abgabeprüfung bleiben Eigenleistung. KI-Ausgaben werden nicht ungeprüft übernommen.
 
 ### 6.2 Prompt-Vorgehen
@@ -733,10 +733,10 @@ Beim Prompting wurden Kontext, Ziel, gewünschte Kapitelstruktur, Projektfunktio
 KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und technische Zusammenhänge aus dem Repository schneller zusammenzufassen. Grenzen bestehen bei fachlicher Korrektheit, Aktualität und Interpretation von noch nicht abgeschlossenen Projektteilen. Qualitätssicherung erfolgt durch manuelle Prüfung, Abgleich mit Code und Unterlagen, Tests des Prototyps sowie kritische Überarbeitung der Texte. Risiken sind falsche Annahmen, zu allgemeine Aussagen oder unklare Quellenlage; deshalb werden nicht belegte Punkte als Abgrenzung, Prüfpunkt oder offener Release-Schritt gekennzeichnet.
 
 ## 7. Anhang [Optional]
-- **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien, Konkurrenzanalyse-Referenzen aus Kapitel 1 und verwendete Demo-/Bildquellen. Externe Bildquellen sind in den Seed-Daten referenziert; für eine produktive Veröffentlichung wäre eine separate Lizenzprüfung notwendig.
+- **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. Externe Bildquellen sind in den Seed-Daten referenziert und vor produktiver Nutzung lizenzrechtlich final zu prüfen.
 - **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1; verwendeter Pfad: `docs/architecture.drawio.svg`.
 - **Testskript & Materialien:** `docs/validate-test-plan.md` und `docs/manual-flow-checklist.md`.
-- **Rohdaten/Auswertung:** Die finale Zusammenfassung der moderierten Kurztests steht in Kapitel 3.5. `docs/validate-test-plan.md` dokumentiert Testskript, Aufgaben und Auswertungsvorlage; `docs/usability-observation-sheet.html` dient als Beobachtungsbogen.
+- **Rohdaten/Auswertung:** Beobachtungen aus Kurztests werden in `docs/validate-test-plan.md` ergänzt; die Flow-Checkliste referenziert die finalen Screenshot-Pfade.
 
 **Artefaktübersicht:**
 
@@ -744,8 +744,8 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 |---|---|---|---|---|
 | Gesamtdokumentation | `README.md` | zentrale fachliche, technische und organisatorische Dokumentation | Abgabe, Nachvollziehbarkeit, Requirements | vorhanden |
 | Crazy-8-Skizze | `docs/Crazy 8.jpg` | frühe Ideenskizzen und Variantenfindung | Sketch-Phase | vorhanden |
-| Architekturdiagramm | `docs/architecture.drawio.svg` | technischer Überblick über Systembestandteile | Prototype / Technik | vorhanden und eingebunden |
-| ER-Modell | `docs/er-model.drawio.svg` | Datenmodell und Collection-Beziehungen | Datenbank, APIs, User Journeys | vorhanden und eingebunden |
+| Architekturdiagramm | `docs/architecture.drawio.svg` | technischer Überblick über Systembestandteile | Prototype / Technik | vorhanden, fachlich noch prüfbar |
+| ER-Modell | `docs/er-model.drawio.svg` | Datenmodell und Collection-Beziehungen | Datenbank, APIs, User Journeys | ergänzt |
 | Paar-Flow | `docs/journey-paar-flow.drawio.svg` | Prozessdiagramm für Quality-Time-Journey | Lea / Paar-Flow | vorhanden |
 | First-Date-Flow | `docs/journey-first-date-flow.drawio.svg` | Prozessdiagramm für sichere Date-Idee | Nico / First-Date-Flow | vorhanden |
 | Gruppen-Flow | `docs/journey-gruppen-flow.drawio.svg` | Prozessdiagramm für Gruppenorganisation | Sara / Gruppen-Flow | vorhanden |
@@ -756,24 +756,23 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 | UI-Komponenten | `src/lib/components/**` | wiederverwendbare UI-Bausteine | Designsystem und Journeys | vorhanden |
 | Serverlogik | `src/lib/server/**` | Auth, DB und Repository-Funktionen | Backend/API | vorhanden |
 | Figma-Mockup | Figma-Link in Kapitel 3.3 und `docs/artifacts-and-screenshots.md` | frühe Mockup-Referenz | Decide/Prototype | vorhanden |
-| GitHub Issues | Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1)-[#15](https://github.com/schjan06/Projekt_DatePlanner/issues/15), [#30](https://github.com/schjan06/Projekt_DatePlanner/issues/30)-[#43](https://github.com/schjan06/Projekt_DatePlanner/issues/43) | Planung und Nachvollziehbarkeit einzelner Features | Projektorganisation, Validate | referenziert |
-| Validate-Testplan | `docs/validate-test-plan.md` | Testskript, Stichprobe und Auswertungsvorlage | Validate | aktualisiert |
-| Beobachtungsbogen | `docs/usability-observation-sheet.html` | Vier-Felder-Matrix für Testnotizen | Validate | vorhanden |
-| Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare manuelle Abgabeprüfung | QA / Validate | vorhanden |
-| Screenshot-Plan | `docs/artifacts-and-screenshots.md` | Artefakt- und Screenshotübersicht | Anhang / Abgabe | vorhanden |
+| GitHub Issues | Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1)-[#15](https://github.com/schjan06/Projekt_DatePlanner/issues/15) | Planung und Nachvollziehbarkeit einzelner Features | Projektorganisation | referenziert |
+| Validate-Testplan | `docs/validate-test-plan.md` | Testskript, Stichprobe und Beobachtungsbogen | Validate | angelegt |
+| Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare manuelle Abgabeprüfung | QA / Validate | angelegt |
+| Screenshot-Plan | `docs/artifacts-and-screenshots.md` | Artefakt- und Screenshotübersicht | Anhang / Abgabe | angelegt |
 | Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien | Qualitätssicherung | angelegt |
 | Präsentationsunterlagen | separat ausserhalb des Repositorys | Abgabepräsentation oder Video-Walkthrough | Abschluss | nicht Teil dieser Codeabgabe |
 
 **Manuelle Abschlussprüfungen:**
 
-| Thema | Status | Ergebnis |
+| Thema | Status | Nächster Schritt |
 |---|---|---|
-| Konkurrenzanalyse | final dokumentiert | Referenzen, Beobachtungen und Abgrenzung sind in Kapitel 1 enthalten |
-| Rollen | final geklärt | Das Projekt ist als studentisches Einzelprojekt dokumentiert |
-| GitHub Issues | konsolidiert | Issue-Gruppen #1-#15 und #30-#43 sind in Projektorganisation und Validate referenziert |
-| Validierung | durchgeführt | Moderierte Tests und abgeleitete Verbesserungen sind in Kapitel 3.5 zusammengefasst |
-| Deployment | final eingeordnet | Keine externe URL eingereicht; lokale Build-Version ist die geprüfte Abgabeversion |
-| Bild- und Asset-Lizenzen | prototypisch eingeordnet | Quellen sind in Seed-Daten nachvollziehbar; produktive Lizenzprüfung bleibt ausserhalb des MVP |
+| konkrete Konkurrenzprodukte | fachlich eingeordnet | bei Bedarf Namen, Links und Datum der Analyse ergänzen |
+| Teamrollen | als studentischer Prototyp beschrieben | Teammitglieder oder Einzelprojekt vor Abgabe explizit bestätigen |
+| GitHub Issues | Issues #1-#15 referenziert | nach Review im Repository schliessen |
+| Validierung | Testskript und Beobachtungsbogen angelegt | Kurztests durchführen und Resultate eintragen |
+| Deployment | lokal und per Netlify-Konfiguration vorbereitet | finale URL nach Veröffentlichung ergänzen |
+| Bild- und Asset-Lizenzen | Quellen in Seed-Daten nachvollziehbar | vor produktiver Nutzung final prüfen |
 
 **Dokumentations-Checkliste:**
 
@@ -783,7 +782,7 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 - ER-Modell und Architekturdiagramm sind eingebunden.
 - Erweiterungen sind nach Must/Should/Could priorisiert.
 - Projektorganisation, Tools und Arbeitsweise sind nachvollziehbar.
-- Abgrenzungen sind transparent markiert und nicht als bereits produktiv umgesetzte Funktionen dargestellt.
+- Abgrenzungen und noch reale Abschlussprüfungen sind transparent markiert und nicht als bereits extern validiert dargestellt.
 
 - **Journey-Testcheckliste für Walkthrough und Validierung:**
   - **Lea / Paar-Flow:** Einloggen, Home öffnen, Schnellfilter nutzen, Detailseite vergleichen, Aktivität speichern, aus Wishlist planen, Termin im Kalender prüfen, als erledigt markieren und in History bewerten.
