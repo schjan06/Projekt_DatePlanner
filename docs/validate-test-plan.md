@@ -1,9 +1,9 @@
 # Validate-Testplan VibeMatch
 
 ## Ziel der Testingphase
-Am 20. Mai 2026 wird VibeMatch mit anderen Studierenden in kurzen moderierten Usability-Tests geprueft. Validiert wird, ob Testpersonen ohne lange Erklaerung von Inspiration zu einer passenden Aktivitaet, Entscheidung und Planung kommen.
+Am 20. Mai 2026 wurde VibeMatch in kurzen moderierten Usability-Tests geprueft. Validiert wurde, ob Testpersonen ohne lange Erklaerung von Inspiration zu einer passenden Aktivitaet, Entscheidung und Planung kommen.
 
-Die Testingphase ist Teil der Projektdokumentation. Vorarbeit, Testaufbau, Beobachtungen, Erkenntnisse und daraus abgeleitete Verbesserungen werden in diesem Dokument gesammelt und in der README unter `3.5 Validate` zusammengefasst.
+Die Testingphase ist Teil der Projektdokumentation. Dieses Dokument haelt Testaufbau, Aufgaben, Beobachtungsschwerpunkte und Auswertungsvorlage fest. Die finale Zusammenfassung der Resultate steht in der README unter `3.5 Validate`.
 
 ## Fragestellungen
 | Frage | Woran wird es erkannt? |
@@ -19,29 +19,28 @@ Die Testingphase ist Teil der Projektdokumentation. Vorarbeit, Testaufbau, Beoba
 ## Testaufbau
 | Aspekt | Festlegung |
 |---|---|
-| Testform | kurzer moderierter Usability-Test mit lautem Denken |
-| Dauer | 8-12 Minuten pro Testperson |
-| Stichprobe | 3-5 Studierende, anonymisiert als T1 bis T5 |
-| Geraete | mindestens ein Desktop-Test und, falls moeglich, ein Mobile-Test |
+| Testform | moderierter Usability-Test mit lautem Denken |
+| Dauer | ca. 8-15 Minuten pro Testperson |
+| Stichprobe | 4 Testpersonen: Renato Russo, Seraina Zeller, Reto Schefer und Elias Eccher |
+| Geraete | Desktop/Notebook; einzelne Ansichten wurden zusaetzlich mobil geprueft |
 | Testversion | lokale App mit Seed-Daten, Build-Version nach `npm run build` |
 | Login | Demo-Account `demo` / `demo123` |
-| Dokumentation | Beobachtungsbogen unten, Screenshots unter `docs/screenshots/` |
+| Dokumentation | Beobachtungsbogen `docs/usability-observation-sheet.html`, Zusammenfassung in README `3.5 Validate` |
 
 ## Rollen
 | Rolle | Aufgabe |
 |---|---|
 | Moderator | Begruesst, erklaert lautes Denken, stellt Aufgaben, hilft nur bei Blockaden. |
-| Beobachter | Notiert Klickpfad, Huerden, Zitate, Zeit, Verbesserungsideen und Screenshots. |
+| Beobachter | Notiert Klickpfad, Huerden, Zitate, Zeit und Verbesserungsideen. |
 | Testperson | Nutzt die App moeglichst selbststaendig und kommentiert Gedanken laut. |
 
 ## Stichprobe
 | Testperson | Zielgruppenbezug | Geraet | Status | Notiz |
 |---|---|---|---|---|
-| T1 | Paar / Date-Planung | Mobile | geplant | nach Test ergaenzen |
-| T2 | Freundesgruppe | Desktop | geplant | nach Test ergaenzen |
-| T3 | wenig Zeit / schnelle Entscheidung | Mobile oder Desktop | geplant | nach Test ergaenzen |
-| T4 | Gruppenorganisation | Desktop | optional | nach Test ergaenzen |
-| T5 | eigene Aktivitaetsidee erfassen | Desktop | optional | nach Test ergaenzen |
+| Renato Russo | Mitstudent, UX-/App-Verstaendnis | Desktop | durchgefuehrt | Fokus auf Navigation, Detailseite, Kalender und Map |
+| Seraina Zeller | Freundin, alltagsnaher Nutzungsblick | Desktop | durchgefuehrt | Fokus auf Wishlist, Planung und Formularverstaendlichkeit |
+| Reto Schefer | Vater, weniger stark prototypgewoehnt | Desktop | durchgefuehrt | Fokus auf Begriffe, History und sichtbare Rueckmeldungen |
+| Elias Eccher | Freund, pragmatischer App-Nutzer | Desktop | durchgefuehrt | Fokus auf Karte, Teilen und schnelle Orientierung |
 
 ## Ablauf Pro Test
 1. Kurz erklaeren: Es wird der Prototyp getestet, nicht die Person.
@@ -93,13 +92,14 @@ Diese Kurzfassung kann waehrend des Tests auf Papier, einem separaten Laptop ode
 - Was wuerdest du vor der Abgabe am ehesten verbessern?
 
 ## Beobachtungsbogen
+Die Rohnotizen wurden waehrend der Tests in der separaten Vorlage `docs/usability-observation-sheet.html` erfasst. Die folgende Tabelle fasst die fuer die Dokumentation relevanten Beobachtungen zusammen.
+
 | Testperson | Erfolgreiche Szenarien | Huerden / Zitate | Verbesserungsidee | Ergebnis |
 |---|---:|---|---|---|
-| T1 | offen | offen | offen | nach Durchfuehrung eintragen |
-| T2 | offen | offen | offen | nach Durchfuehrung eintragen |
-| T3 | offen | offen | offen | nach Durchfuehrung eintragen |
-| T4 | optional | optional | optional | nach Durchfuehrung eintragen |
-| T5 | optional | optional | optional | nach Durchfuehrung eintragen |
+| Renato Russo | 5/6 | Aktivitaetskarten und Detailnavigation mussten sichtbarer werden. | Ganze Cards klickbar machen, Ruecknavigation auf Detailseite ergaenzen. | Issues #31-#33 abgeleitet und umgesetzt. |
+| Seraina Zeller | 5/6 | Formularfehler und Bildpflicht waren zuerst zu wenig klar. | Fehlermeldungen deutlicher machen, Bildupload fachlich als Pflichtfeld definieren. | Issues #35 und #36 abgeleitet und umgesetzt. |
+| Reto Schefer | 4/6 | History wurde zuerst als Reminder-/Benachrichtigungsbereich interpretiert. | Begriffe auf vergangene Aktivitaeten und Rueckblicksnotiz schaerfen. | Issues #41 und #42 abgeleitet und umgesetzt. |
+| Elias Eccher | 5/6 | Map-Preview und Teilen-Flow brauchten mehr Kontrolle und Klarheit. | Preview schliessbar machen, Teilen auf Link/WhatsApp/native Funktion fokussieren. | Issues #37-#40 abgeleitet und umgesetzt bzw. abgegrenzt. |
 
 ## Auswertungsvorlage
 | Erkenntnis | Beobachtung aus Test | Auswirkung | Entscheidung |
@@ -107,7 +107,7 @@ Diese Kurzfassung kann waehrend des Tests auf Papier, einem separaten Laptop ode
 | Aktivitaetskarten wirken nicht vollstaendig klickbar. | T1 erkannte nicht sofort, dass Bild/Titel zur Detailseite fuehren. | Einstieg zur Detailseite kann stocken. | GitHub-Issue: Card-Klickbarkeit und Hover/Fokus verbessern. |
 | Wishlist, Planung, Kalender und Map wurden grundsaetzlich verstanden. | T1 fand diese Flows schnell und konnte Drag & Drop sowie Map-Ortssuche nutzen. | Kernflows sind validierbar und koennen dokumentiert werden. | In README als positive Beobachtung festhalten. |
 | Einzelne UI-Hinweise sind zu schwach. | Kalender braucht klareres Symbol; Formularfehler sollten sichtbarer sein; Map-Preview braucht Close-Aktion. | Bedienbarkeit leidet trotz funktionalem Flow. | Hoch/mittel priorisierte Usability-Issues erstellen. |
-| Reminder und Freunde-Einladung sind nicht aktueller MVP. | Excel-Feedback nennt Erinnerungen nicht umsetzen und Freunde zu Events einladen als Idee. | Abgrenzung muss dokumentiert werden. | Reminder als bewusst ausgeschlossen dokumentieren; Freunde einladen als MVP-2-Issue. |
+| Reminder und Freunde-Einladung sind nicht aktueller MVP. | Excel-Feedback nennt Erinnerungen nicht umsetzen und Freunde zu Events einladen als Idee. | Abgrenzung ist fuer die Produktlogik wichtig. | Reminder sind bewusst ausgeschlossen dokumentiert; Freunde einladen bleibt MVP-2-Issue. |
 
-## Erwartete Auswertung
-Nach den Tests werden die wichtigsten Erkenntnisse in der README unter `3.5 Validate` zusammengefasst. Dokumentiert werden tatsaechliche Stichprobe, getestete Geraete, zentrale Huerden, positive Beobachtungen, abgeleitete Aenderungen und bewusst nicht umgesetzte Punkte.
+## Auswertung
+Die wichtigsten Erkenntnisse sind in der README unter `3.5 Validate` zusammengefasst. Dokumentiert sind Stichprobe, getestete Funktionen, zentrale Huerden, positive Beobachtungen, abgeleitete Aenderungen und bewusst nicht umgesetzte MVP-2-Punkte.

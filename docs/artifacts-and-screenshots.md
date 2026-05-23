@@ -20,7 +20,7 @@
 | Studierenden-Usability-Test | `docs/validate-test-plan.md` und README Kapitel 3.5 | Vorarbeit, Testaufbau, Beobachtungen und Erkenntnisse |
 
 ## Screenshot-Liste
-Screenshots werden fuer die finale Abgabe unter `docs/screenshots/` abgelegt und in der Flow-Checkliste referenziert.
+Die folgende Liste beschreibt die vorgesehenen Screenshot-Nachweise fuer Walkthrough, Praesentation oder eine spaetere Abgabeversion. In der README werden nur Artefakte als vorhanden markiert, die im Repository tatsaechlich versioniert sind.
 
 | Screenshot | Empfohlener Inhalt |
 |---|---|
@@ -36,6 +36,4 @@ Screenshots werden fuer die finale Abgabe unter `docs/screenshots/` abgelegt und
 | `accessibility.png` | sichtbarer Tastaturfokus in einem Modal |
 
 ## Hinweis fuer die Abgabe
-Die vorhandenen Diagramme sind bereits versioniert. Screenshots sollten erst nach dem finalen Build aufgenommen werden, damit sie exakt zur eingereichten Version passen.
-Nach der Testingphase werden zentrale Beobachtungen und daraus abgeleitete Verbesserungen in README Kapitel 3.5 nachgetragen.
-Der Usability-Beobachtungsbogen ist eine HTML-Vorlage, die direkt im Browser geoeffnet und gedruckt werden kann. In VS Code eignet sich optional die Extension `Live Preview`; eine Markdown-Preview-Extension ist dafuer nicht noetig.
+Die vorhandenen Diagramme sind versioniert und in der README referenziert. Die Ergebnisse der Testingphase sind in README Kapitel 3.5 zusammengefasst; dieses Dokument dient als Artefakt- und Screenshotuebersicht. Der Usability-Beobachtungsbogen ist eine HTML-Vorlage, die direkt im Browser geoeffnet und gedruckt werden kann. In VS Code eignet sich optional die Extension `Live Preview`; eine Markdown-Preview-Extension ist dafuer nicht noetig.
