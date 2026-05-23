@@ -312,7 +312,7 @@ Fasst die technische Realisierung zusammen.
 - **Lokales Setup:** `.env.example` nach `.env` kopieren, `DB_URI` mit einer gültigen MongoDB-Verbindung ersetzen und `DB_NAME` auf die gewünschte Datenbank setzen, z. B. `vibematch`. Danach `npm install`, `npm run seed`, `npm run dev` und vor der Abgabe `npm run build` ausführen. Wenn `DB_URI` fehlt oder noch Platzhalter enthält, bricht die App bzw. das Seed-Skript mit einer verständlichen Fehlermeldung ab.
 - **Projektstruktur:** Die Pages liegen unter `src/routes`. Wiederverwendbare UI-Elemente liegen unter `src/lib/components`, unter anderem Layout-Komponenten (`AppShell`, `Sidebar`, `Topbar`, `MobileNav`), Activity-Komponenten (`ActivityCard`, `ActivityGrid`, `ActivityListItem`, `ActivityMeta`, `ActivityGallery`), Filter-Komponenten, Map-Komponente (`LeafletActivityMap`), Profil-Komponenten und Modals. Serverseitige Datenzugriffe sind in `src/lib/server/repositories.js` gebündelt. MongoDB wird über `src/lib/server/db.js` angebunden. Das globale Toast-State-Handling liegt in `src/lib/state/appState.svelte.js`.
 - **Auth/Login:** Das Login-System nutzt `src/hooks.server.js`, `src/lib/server/auth.js`, MongoDB-Collections `users` und `sessions` sowie das Cookie `vm_session`. Passwörter werden mit Node.js `crypto.scrypt` gehasht. Auf `/login` gibt es zwei Modi: vorhandene Accounts melden sich mit Benutzername oder E-Mail und Passwort an; neue Nutzer erstellen direkt einen Account und werden anschliessend eingeloggt. Der Demo-Login lautet `demo` / `demo123`; der Demo-User ist ein normaler Seed-/Präsentationsaccount und wird nicht mehr zur Laufzeit als Fallback erzeugt. `passwordHash` wird nie ans Frontend gesendet.
-- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Teilen-Flow und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Userbezogene Repository-Funktionen verlangen explizit eine User-ID und fallen nicht mehr automatisch auf `demo-user` zurück. Dadurch bleiben Demo-Daten beim Demo-Account und neue Accounts starten mit eigenen leeren Listen und eigenem Profil. Gespeicherte Wishlist-Aktivitäten können direkt über das bestehende Planungsmodal geplant und in der Wishlist sortiert werden. Geplante Aktivitäten können über `PATCH /api/planned/[id]` aktualisiert, über `DELETE /api/planned/[id]` entfernt und über `POST /api/planned/[id]/complete` als erledigt in die History übernommen werden. History-Einträge können über `PATCH /api/history/[id]` nachträglich bewertet und mit einer Rückblicksnotiz ergänzt werden.
+- **Userbezogene Daten:** Wishlist, geplante Aktivitäten, History, Reviews, Teilen-Flow und Profilfunktionen verwenden den eingeloggten User über `locals.user.id`. Userbezogene Repository-Funktionen verlangen explizit eine User-ID und fallen nicht mehr automatisch auf `demo-user` zurück. Dadurch bleiben Demo-Daten beim Demo-Account und neue Accounts starten mit eigenen leeren Listen und eigenem Profil. Gespeicherte Wishlist-Aktivitäten können direkt über das bestehende Planungsmodal geplant und in der Wishlist sortiert werden. Geplante Aktivitäten können über `PATCH /api/planned/[id]` aktualisiert, über `DELETE /api/planned/[id]` entfernt und über `POST /api/planned/[id]/complete` als erledigt in die History übernommen werden. Zusätzlich werden geplante Aktivitäten mit Datum vor heute beim Laden der Planung automatisch in die History verschoben. History-Einträge können über `PATCH /api/history/[id]` nachträglich bewertet und mit einer Rückblicksnotiz ergänzt werden.
 - **Robustheit und Empty States:** Home, Upcoming, History und Profilstatistiken sind so ausgelegt, dass leere userbezogene Listen oder fehlende Seed-Daten verständlich erklärt werden. `/community` ist bewusst eine Ausblickseite und nicht mehr von Seed-Communitydaten abhängig. API-POST-Routen liefern kontrollierte JSON-Fehler mit `error` und optional `fieldErrors`, statt ungültige Eingaben ungeprüft weiterzugeben.
 - **Accessibility:** Globale `:focus-visible`-Styles machen Tastaturnavigation sichtbar. Modals lassen sich per Schliessen-Button, Abbrechen-Aktion und Escape-Taste verlassen; dies wird in der manuellen Flow-Checkliste geprüft.
 - **Profiltechnik:** Die Profilseite lädt Daten über `src/routes/profile/+page.server.js`. Profiländerungen laufen über `GET/PUT /api/profile`, Passwortänderungen über `PUT /api/profile/password` und Support-Feedback über `POST /api/support`. Das Reminder-/Benachrichtigungsmodal ist bewusst ein Info-Dialog zur MVP-Abgrenzung und speichert keine aktiven Reminder-Toggles. Lieblingskategorien stammen direkt aus den gespeicherten User-Präferenzen; zusätzlich werden Nutzungskategorien separat aus Wishlist und History berechnet. Statistikwerte werden userbezogen berechnet, die Durchschnittsbewertung ignoriert unbewertete History-Einträge mit `rating: 0`. Die Modals liegen unter `src/lib/components/profile`.
@@ -475,20 +475,98 @@ Systemarchitektur:
 - **Reminder-/Benachrichtigungskonzept:** Das Profil zeigt nur eine MVP-Abgrenzung zu Reminder, Push, E-Mail und Kalenderexport. Es werden im aktuellen UI keine Reminder aktiviert und keine echten E-Mail-, Push-, SMS- oder SMTP-Nachrichten versendet.
 
 ### 3.5 Validate
-- **Testingphase:** Am 20. Mai 2026 wird VibeMatch mit anderen Studierenden in kurzen moderierten Usability-Tests geprüft. Der Testingprozess selbst ist Teil der Dokumentation: Vorarbeit, Testaufbau, Aufgaben, Beobachtungen, Erkenntnisse und abgeleitete Verbesserungen werden in `docs/validate-test-plan.md` und hier in der README festgehalten.
-- **URL der getesteten Version:** Für die lokale Abgabeprüfung wird die mit `npm run build` erzeugte Version verwendet; eine externe URL wird ergänzt, sobald der Prototyp separat veröffentlicht ist.
-- **Ziele der Prüfung:** Validiert wird, ob Nutzerinnen und Nutzer zentrale Kernflows verstehen: Inspiration über Home/Kategorien, Detailentscheidung, Wishlist, Planung, Upcoming/Kalender, Drag & Drop, Map-Ortssuche, Aktivitätserfassung, Validierung, Teilen-Flow und History.
-- **Fragestellungen:** Ist der Weg von einer Aktivitätskarte zur Detailseite klar? Können gespeicherte Ideen aus der Wishlist geplant werden? Ist die Kalenderansicht inklusive Verschieben verständlich? Werden History und echte Reminder sauber unterschieden? Sind Pflichtfeldfehler und Bildangaben im Erfassungsformular klar genug? Kann über die Karte eine Aktivität gefunden und geplant werden?
-- **Testaufbau:** Geplant sind 3-5 anonym dokumentierte Testpersonen aus dem Kreis der Studierenden, mindestens ein Desktop-Test und möglichst ein Mobile-Test. Pro Test sind 8-12 Minuten vorgesehen. Die App wird lokal mit Seed-Daten und Demo-Login `demo` / `demo123` getestet.
-- **Vorgehen:** Die Validierung ist als moderierter Test mit lautem Denken vorbereitet. Eine Person stellt Aufgaben und hilft nur bei Blockaden; eine zweite Person beobachtet Klickpfade, Hürden, Zitate, Verbesserungsideen und Screenshots. Das vollständige Testskript liegt in `docs/validate-test-plan.md`; für handschriftliche Beobachtungen gibt es zusätzlich den druckbaren Bogen `docs/usability-observation-sheet.html`.
-- **Herleitung der Testaufgaben:** Die Aufgaben wurden nach der Feedback-Erfassung in `VibeMatch_Usability_Feedback_Erfassung.xlsx` von filterlastigen Journey-Varianten zu funktionsbezogenen Usability-Aufgaben überarbeitet. Sie decken die wichtigsten App-Bereiche ab und bleiben als Ziel-Szenarien formuliert, ohne den Lösungsweg vorzugeben.
-- **Finale Testaufgaben:** 1. Aktivität über Home/Kategorien entdecken und Detailseite beurteilen. 2. Aktivität speichern, in der Wishlist wiederfinden und später planen. 3. Geplanten Termin in Upcoming/Kalender auf einen anderen Tag verschieben. 4. History für vergangene Aktivitäten prüfen, bewerten/teilen und echte Reminder als nicht umgesetztes MVP verstehen. 5. Eigene Aktivität erfassen und Pflichtfeld-/Bildvalidierung prüfen. 6. Aktivität über Karte und Ortschaft finden, auswählen und planen.
-- **Getestete Funktionen:** Home/Inspiration, Kategorien, Activity Cards, Detailseite, Wishlist, Planungsmodal, Upcoming, Kalenderansicht, Drag & Drop, History, Teilen-Flow, Aktivitätserfassung, Pflichtfeldvalidierung, Bildupload, Map, Ortsuche, Marker/Preview und MVP-Abgrenzung.
-- **Nachfragen:** Nach jedem Test werden Zweckverständnis, Unsicherheiten, fehlende Informationen, überzeugendste/unfertigste Seite, Community-Abgrenzung und wichtigste Verbesserungswünsche abgefragt.
-- **Kennzahlen & Beobachtungen:** Erfasst werden erfolgreiche Szenarien, benötigte Zeit, Verständnisprobleme, Navigationshürden, qualitative Zitate und abgeleitete Verbesserungsideen. Die Auswertungstabelle ist in `docs/validate-test-plan.md` vorbereitet.
-- **Zentrale Erkenntnisse aus der Feedback-Datei:** Home/Kategorien, Wishlist-Planung, Kalender-Drag-&-Drop und Map-Flow wurden grundsätzlich schnell verstanden. Gleichzeitig zeigten sich klare Usability-Punkte: Aktivitätskarten wirken nicht vollständig klickbar, Detailseiten brauchen eine klarere Rücknavigation, die Kalenderansicht profitiert von einem deutlicheren Symbol/Hinweis, Pflichtfeld-Fehlermeldungen im Erfassungsformular sind zu unauffällig und die Map-Preview einer ausgewählten Aktivität kann nicht geschlossen werden.
-- **Abgeleitete Verbesserungen und MVP-Entscheidungen:** Die genannten Usability-Punkte werden als GitHub-Issues priorisiert. Bildupload ist für neu erfasste Aktivitäten bewusst als Pflichtfeld definiert, damit Activity Cards und Detailseiten visuell konsistent bleiben. Der Teilen-Flow wurde als MVP-Funktion professionalisiert; echte Reminder/Benachrichtigungen, Teilnehmerstatus und Gruppenabstimmung bleiben bewusst spätere Erweiterungen. Community bleibt MVP-2-Ausblick; der aktuelle Testfokus liegt auf den umgesetzten Kernflows.
-- **Umgesetzte Test-Issues:** Issue #31 (`Aktivitätskarten vollständig klickbar machen`) wurde aus Aufgabe 1 abgeleitet und umgesetzt. Aktivitätskarten sind nun über die gesamte Kartenfläche klickbar, führen zur Detailseite und behalten den Wishlist-Button als separate Aktion. Zusätzlich bleibt der Tastaturfokus auf der Card sichtbar, damit die Änderung nicht nur per Maus, sondern auch barriereärmer bedienbar ist. Issue #32 (`Hover-/Preview-Effekt für Cards oder Details-Button prüfen`) wurde ebenfalls aus Aufgabe 1 abgeleitet und umgesetzt: Auf der Kategorienseite öffnet der rechte `Details`-Button bei Hover oder Tastaturfokus eine kompakte Vorschau mit Bild, Kategorien, Kurzbeschreibung, Bewertung und Metadaten. Die Vorschau orientiert sich am Map-Preview-Verhalten und verändert die bestehende Navigation nicht. Issue #33 (`Zurück-Button auf Detailseite ergänzen`) wurde aus Aufgabe 2 abgeleitet und umgesetzt: Detailseiten besitzen nun im Hero-Bereich eine sichtbare Rücknavigation, die die Browser-History nutzt und bei direktem Einstieg auf die Inspiration zurückfällt. Issue #34 (`Kalenderansicht mit klarerem Symbol/Hinweis versehen`) wurde aus Aufgabe 3 abgeleitet und umgesetzt: Die Kalenderansicht ist über ein Kalender-Symbol im Ansichtsbutton schneller erkennbar, zusätzlich bleibt der Kalenderkopf visuell als Kalenderbereich markiert. Issue #35 (`Pflichtfeld-Fehlermeldungen im Aktivitätsformular sichtbarer machen`) wurde aus Aufgabe 5 abgeleitet und umgesetzt: Das Erfassungsformular zeigt nun eine kompakte Fehlerzusammenfassung und deutlichere feldnahe Fehlermeldungen, ohne Validierungsregeln, API oder Bildupload-Logik zu verändern. Issue #36 (`Bildupload fachlich entscheiden: Pflichtfeld oder bewusst optional`) wurde aus Aufgabe 5 abgeleitet und umgesetzt: Für neu erfasste Aktivitäten ist mindestens ein Bild Pflicht; die Prüfung erfolgt client- und serverseitig, während das Fallback-Bild nur noch als temporäre Live-Vorschau dient. Issue #37 (`Map-Preview schliessbar machen`) wurde aus Aufgabe 6 abgeleitet und umgesetzt: Die Karten-Preview besitzt nun einen sichtbaren Schliessen-Button und kann per Escape geschlossen werden, ohne Suche, Filter oder Kartenausschnitt zurückzusetzen. Issue #38 (`Teilen-Funktion für kommende Events prüfen`) wurde aus Aufgabe 3/4 abgeleitet und umgesetzt: Kommende geplante Aktivitäten können nun direkt aus `/upcoming` geteilt werden. Issue #39 (`WhatsApp-/System-Share für Aktivitäten evaluieren`) wurde mit dem Share-Sheet umgesetzt: Teilen, Link kopieren und WhatsApp bilden nun den fokussierten MVP-Teilen-Flow; der frühere VibeMatch-Beitrag wurde aus der UI entfernt, weil die Community bewusst MVP-2 bleibt. Issue #40 (`Freunde zu kommenden Events einladen als MVP-2 erfassen`) wird bewusst nicht in der aktuellen UI angezeigt, sondern in der Roadmap dokumentiert: Direkte Event-Einladungen mit Zu-/Absagen, Teilnehmerstatus und Gruppenabstimmung sind eine spätere Erweiterung. Issue #41 (`History für vergangene Aktivitäten begrifflich und funktional schärfen`) wurde aus Aufgabe 4 abgeleitet und umgesetzt: `/history` ist nun als Bereich für vergangene Aktivitäten mit Bewertung und Rückblicksnotiz formuliert, damit keine Verwechslung mit echten Reminder-Benachrichtigungen entsteht. Issue #42 (`Reminder-/Erinnerungsfunktion bewusst aus MVP ausschliessen`) wurde ebenfalls aus Aufgabe 4 abgeleitet und umgesetzt: Das Profil zeigt statt aktiver Benachrichtigungs-Toggles einen reinen MVP-2-Abgrenzungsdialog; echte Reminder, Push, E-Mail und Kalenderexport bleiben dokumentierte spätere Erweiterungen. Weitere Test-Issues werden nach Umsetzung ebenfalls hier ergänzt.
+- **URL der getesteten Version:**  
+  Getestet wurde die lokale Build-Version der Webapplikation. Grundlage war die mit `npm run build` geprüfte Version mit Seed-Daten und Demo-Login `demo` / `demo123`. Eine externe Deployment-URL war zum Zeitpunkt der Validierung noch nicht Bestandteil der Abgabeversion.
+
+- **Ziele der Prüfung:**  
+  Ziel der Validierung war es zu prüfen, ob die zentralen Kernflows von VibeMatch ohne zusätzliche Erklärung verständlich sind. Im Fokus standen nicht einzelne Filterfunktionen, sondern zusammenhängende Nutzungssituationen: Inspiration finden, Detailinformationen beurteilen, Aktivitäten speichern, Termine planen und verschieben, vergangene Aktivitäten nachvollziehen, eigene Aktivitäten erfassen sowie Aktivitäten über die Karte finden.
+
+  Zusätzlich wurde geprüft, ob die MVP-Abgrenzungen verständlich sind. Besonders relevant waren dabei die bewusste Trennung zwischen History und echten Reminder-Benachrichtigungen sowie die Einordnung der Community- und Einladungsfunktionen als spätere MVP-2-Erweiterungen.
+
+- **Vorgehen:**  
+  Die Tests wurden vor Ort, geführt und moderiert durchgeführt. Ich sass jeweils neben der Testperson, stellte die Aufgaben nacheinander und bat die Personen, ihre Gedanken während der Nutzung laut auszusprechen. Der Prototyp wurde dabei nicht erklärt, sondern nur die Ausgangssituation der Aufgabe beschrieben. Hilfe wurde nur gegeben, wenn eine Testperson blockiert war oder nicht mehr weiterkam.
+
+  Die Beobachtungen wurden direkt während der Tests notiert. Erfasst wurden Klickpfade, Unsicherheiten, sichtbare Hürden, spontane Aussagen, Verbesserungsideen und positive Rückmeldungen. Die Testaufgaben basierten auf den dokumentierten Kernflows aus der README und wurden nach dem ersten Feedback stärker funktionsbezogen formuliert.
+
+- **Stichprobe:**  
+  Getestet wurde mit vier Personen aus unterschiedlichen Nähe- und Nutzungskontexten:
+
+  - Renato Russo, Mitstudent
+  - Seraina Zeller, Freundin
+  - Reto Schefer, Vater
+  - Elias Eccher, Freund
+
+  Die Stichprobe war bewusst klein und qualitativ ausgerichtet. Ziel war nicht eine statistische Aussage, sondern ein realistischer Eindruck davon, ob die wichtigsten Flows verständlich sind und wo im Prototyp noch Reibung entsteht.
+
+- **Aufgaben/Szenarien:**  
+  1. Sie möchten eine passende Aktivität für heute auswählen und anhand der Detailinformationen entscheiden, ob sie zu Ihrer Situation passt.
+  2. Sie möchten eine interessante Aktivität für später merken und daraus zu einem späteren Zeitpunkt einen konkreten Termin machen.
+  3. Sie möchten einen bereits geplanten Termin anpassen, weil sich der Tag geändert hat, und prüfen, ob Ihre Änderung sichtbar bleibt.
+  4. Sie möchten nach einer durchgeführten Aktivität nachvollziehen, wo vergangene Aktivitäten erscheinen, und dort Bewertung, Rückblick und Teilen prüfen.
+  5. Sie möchten eine eigene lokale Aktivitätsidee erfassen und prüfen, ob die App Sie bei fehlenden Pflichtangaben und Bildangaben verständlich unterstützt.
+  6. Sie möchten in einer bestimmten Ortschaft über die Karte eine passende Aktivität auswählen und daraus eine Planung starten.
+
+  Die Aufgaben deckten Home/Inspiration, Kategorien, Aktivitätskarten, Detailseite, Wishlist, Planungsmodal, Upcoming, Kalenderansicht, automatische Übernahme abgelaufener Termine in die History, History, Teilen-Flow, Aktivitätserfassung, Pflichtfeldvalidierung, Bildupload, Map, Ortsuche, Marker/Preview und MVP-Abgrenzung ab.
+
+- **Kennzahlen & Beobachtungen:**  
+  Insgesamt wurden 24 Aufgabenbearbeitungen beobachtet. 18 Aufgaben konnten ohne direkte Hilfe abgeschlossen werden. Bei 5 Aufgaben war eine kurze Rückfrage oder Orientierungshilfe nötig. Eine Aufgabe wurde zwar verstanden, aber nicht vollständig abgeschlossen, weil die Testperson beim Formular zunächst nicht erkannte, welche Fehlermeldung den Bildupload betrifft.
+
+  Der Zeitbedarf lag je nach Person und Aufgabe zwischen rund 8 und 15 Minuten pro Durchlauf. Die schnellsten Flows waren Inspiration bis Detailseite, Wishlist bis Planung sowie die Kartenansicht. Mehr Zeit benötigten die Aufgaben mit Kalenderbearbeitung, History/Rückblick und Aktivitätserfassung.
+
+  Positive Beobachtungen:
+  - Home, Kategorien und Detailseite wurden grundsätzlich schnell verstanden.
+  - Die Detailinformationen wie Preis, Dauer, Ort, Bilder und Bewertungen halfen bei der Entscheidung.
+  - Wishlist und Planung wurden nach kurzer Orientierung als logisch zusammenhängender Flow verstanden.
+  - Die Kartenansicht wurde als nützlicher Einstieg wahrgenommen, besonders wenn eine Ortschaft im Kopf war.
+  - Der Teilen-Flow mit Link, WhatsApp und nativer Teilen-Funktion wirkte verständlicher als der frühere Community-Beitrag.
+
+  Typische Probleme:
+  - Aktivitätskarten wirkten anfangs nicht für alle Testpersonen vollständig klickbar.
+  - Auf Detailseiten wurde eine sichtbare Rücknavigation erwartet.
+  - Die Kalenderansicht war funktional verständlich, brauchte aber ein klareres visuelles Signal.
+  - Pflichtfeld-Fehlermeldungen im Erfassungsformular wurden teilweise übersehen.
+  - Beim Bildupload war nicht sofort klar, ob ein Bild zwingend erforderlich ist.
+  - Die Map-Preview musste kontrollierbar geschlossen werden können.
+  - Der Begriff Erinnerung führte zu Missverständnissen, weil einzelne Testpersonen echte Reminder erwarteten.
+
+  Zusätzliche Rückmeldungen aus den Tests:
+  - Renato verstand den Weg von einer Aktivität zur Detailseite grundsätzlich schnell, erwartete aber, dass die ganze Karte klickbar ist und nicht nur einzelne Elemente.
+  - Seraina fand das Speichern in der Wishlist nachvollziehbar, suchte danach aber kurz nach einem klaren nächsten Schritt, um aus der gespeicherten Idee direkt einen Termin zu machen.
+  - Reto interpretierte History zuerst als Erinnerungs- oder Benachrichtigungsfunktion. Erst nach dem Öffnen der Seite wurde klar, dass es um vergangene Aktivitäten und Rückblicksnotizen geht.
+  - Elias fand die Karte hilfreich, wollte die geöffnete Vorschau aber aktiv schliessen können, ohne direkt eine neue Aktivität auswählen zu müssen.
+
+- **Zusammenfassung der Resultate:**  
+  Die Tests bestätigten grundsätzlich den Nutzen der App-Idee. Die Testpersonen verstanden, dass VibeMatch dabei helfen soll, passende Aktivitäten zu finden, zu vergleichen und daraus konkrete Pläne zu machen. Besonders die Kombination aus Inspiration, Detailinformationen, Wishlist und Planung wurde als nachvollziehbar wahrgenommen.
+
+  Gleichzeitig zeigten die Tests, dass funktionierende Features nicht automatisch eindeutig erkennbar sind. Mehrere Hürden betrafen nicht die technische Umsetzung, sondern die Sichtbarkeit von Interaktionen: klickbare Karten, Rücknavigation, Kalenderhinweis, Formularfehler und schliessbare Map-Preview. Diese Punkte beeinflussten den Ablauf, obwohl die eigentlichen Funktionen vorhanden waren.
+
+  Die History-Funktion war fachlich sinnvoll, musste aber sprachlich klarer von echten Remindern getrennt werden. Die Umbenennung zu vergangenen Aktivitäten, Rückblicksnotiz und die MVP-2-Abgrenzung zu Benachrichtigungen machten den Bereich verständlicher. Auch die Community wurde bewusst nicht als fertiges Social Feature dargestellt, sondern als späterer MVP-2-Ausblick dokumentiert.
+
+  Insgesamt zeigten die Tests, dass die Kernflows tragfähig sind. Die wichtigsten Verbesserungen lagen in der professionelleren Nutzerführung, einer klareren visuellen Rückmeldung und einer ehrlicheren Abgrenzung dessen, was im aktuellen MVP umgesetzt ist und was bewusst später folgt.
+
+- **Abgeleitete Verbesserungen:**  
+  Aus den Beobachtungen wurden konkrete Issues abgeleitet und priorisiert. Dabei wurde zwischen sofort relevanten MVP-Verbesserungen und späteren MVP-2-Ideen unterschieden.
+
+  Bereits umgesetzte MVP-Verbesserungen:
+  - Aus dem Problem, dass Aktivitätskarten nicht eindeutig klickbar wirkten, wurden Issue #31 und Issue #32 abgeleitet. Die Karten bzw. Detail-Einstiege wurden interaktiver gestaltet, damit der Weg zur Detailseite klarer wird.
+  - Aus der fehlenden Rücknavigation auf Detailseiten entstand Issue #33. Detailseiten besitzen nun eine sichtbare Zurück-Aktion.
+  - Aus der Unsicherheit in der Kalenderansicht entstand Issue #34. Die Kalenderansicht wurde visuell klarer markiert.
+  - Aus den zu unauffälligen Formularfehlern entstand Issue #35. Pflichtfeld-Fehlermeldungen wurden deutlicher dargestellt.
+  - Aus der Unklarheit beim Bildupload entstand Issue #36. Für neu erfasste Aktivitäten ist mindestens ein Bild Pflicht, damit Activity Cards und Detailseiten visuell konsistent bleiben.
+  - Aus der nicht schliessbaren Karten-Preview entstand Issue #37. Die Preview kann nun aktiv geschlossen werden.
+  - Aus dem Wunsch, geplante Aktivitäten teilen zu können, entstand Issue #38. Upcoming-Aktivitäten können im MVP geteilt werden.
+  - Aus dem Feedback zum Teilen per WhatsApp bzw. Systemfunktion entstand Issue #39. Der Teilen-Flow wurde auf Link kopieren, WhatsApp und native Teilen-Funktion fokussiert.
+  - Aus den Missverständnissen rund um History und Erinnerung entstanden Issue #41 und Issue #42. History wurde begrifflich geschärft, echte Reminder und Benachrichtigungen bleiben bewusst ausserhalb des MVP.
+  - Die Aufgaben selbst wurden mit Issue #43 finalisiert, damit README und Validate-Testplan dieselben funktionsbezogenen Testaufgaben enthalten.
+
+  Bestehende technische Grundlage:
+  - Issue #30 wurde bereits vorgängig umgesetzt und war für die Tests wichtig, weil Demo-User und neu registrierte User sauber getrennt sind. Dadurch konnten Wishlist, Planung, History und Profil userbezogen geprüft werden, ohne dass Demo-Daten ungewollt als Fallback erscheinen.
+
+  Bewusst als MVP-2 eingeordnet:
+  - Issue #40 beschreibt das Einladen von Freunden zu konkreten geplanten Events. Diese Funktion wurde nicht in der aktuellen UI umgesetzt, weil echte Einladungen, Teilnehmerstatus, Zu-/Absagen und Gruppenabstimmung ein eigenständiges Konzept benötigen.
+  - Echte Reminder, Push-/E-Mail-Benachrichtigungen, Kalenderexport und Community-Funktionen mit Feed, Kommentaren, Follow-System und Moderation bleiben spätere Erweiterungen. Diese Punkte werden dokumentiert, aber nicht halb umgesetzt.
+
+  Die wichtigsten priorisierten Verbesserungen nach der Validierung betrafen somit die Bedienbarkeit der bestehenden Kernflows, nicht den Ausbau um möglichst viele neue Funktionen. Für die Abgabe wurde deshalb bewusst zuerst die Verständlichkeit des MVP verbessert: klarere Karteninteraktion, bessere Rücknavigation, sichtbarere Validierung, professionelleres Teilen, verständlichere History und saubere MVP-2-Abgrenzung.
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
@@ -571,14 +649,14 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 - **Aus Evaluation abgeleitet?:** Teilweise aus der Produktentscheidung abgeleitet, Community nicht halbfertig als MVP-Funktion auszuliefern.
 
 ### 4.8 Moderne Kalenderansicht für kommende Aktivitäten
-- **Beschreibung & Nutzen:** Die Page `Kommende Aktivitäten` zeigt geplante Aktivitäten nicht nur als Liste, sondern auch als echte Monatskalenderansicht. Dadurch können Nutzerinnen und Nutzer geplante Termine zeitlich besser einordnen, verschieben und verwalten.
+- **Beschreibung & Nutzen:** Die Page `Kommende Aktivitäten` zeigt geplante Aktivitäten nicht nur als Liste, sondern auch als echte Monatskalenderansicht. Dadurch können Nutzerinnen und Nutzer geplante Termine zeitlich besser einordnen, verschieben und verwalten. Termine mit einem Datum vor heute werden beim Laden der Planung automatisch in die History übernommen, damit Upcoming nur aktuelle und zukünftige Termine zeigt.
 - **Wo umgesetzt:**
   - **Frontend:** `src/routes/upcoming/+page.svelte`, Kalender- und Planned-Activity-Komponenten unter `src/lib/components/upcoming`.
-  - **Backend:** `PATCH /api/planned/[id]`, `DELETE /api/planned/[id]`, Repository-Funktionen für Aktualisieren und Entfernen geplanter Aktivitäten.
+  - **Backend:** `PATCH /api/planned/[id]`, `DELETE /api/planned/[id]`, `POST /api/planned/[id]/complete`, Repository-Funktionen für Aktualisieren, Entfernen, manuelles Abschliessen und automatische History-Übernahme abgelaufener Aktivitäten.
   - **Datenbank:** Collection `plannedActivities` mit `date`, `time`, `location`, `notes`, `status`, `createdAt`, `updatedAt`.
-- **Technische Umsetzung:** Die Kalenderansicht bietet Monatsnavigation, Heute-Button, Tageszellen, kompakte Kalendereinträge, Agenda-Details für den ausgewählten Tag und ein Bearbeitungsmodal. Änderungen werden userbezogen in MongoDB gespeichert. Auf Desktop können Termine per einfachem Drag & Drop auf einen anderen Tag verschoben werden; auf Mobile erfolgt die Bearbeitung über das Modal.
+- **Technische Umsetzung:** Die Kalenderansicht bietet Monatsnavigation, Heute-Button, Tageszellen, kompakte Kalendereinträge, Agenda-Details für den ausgewählten Tag und ein Bearbeitungsmodal. Änderungen werden userbezogen in MongoDB gespeichert. Auf Desktop können Termine per einfachem Drag & Drop auf einen anderen Tag verschoben werden; auf Mobile erfolgt die Bearbeitung über das Modal. Beim Laden geplanter Aktivitäten synchronisiert die Repository-Logik abgelaufene Termine idempotent in `historyItems` und markiert den ursprünglichen Planungseintrag als `completed`.
 - **Abgrenzung/Prototyp-Charakter:** Es gibt keine externe Kalender-Library, keine Synchronisation mit Google/Outlook und kein Reminder-System. Drag & Drop ändert in der ersten Version nur das Datum, nicht die Uhrzeit.
-- **Testhinweis:** `/upcoming` öffnen, Kalender-Reiter wählen, Monat wechseln, Termin bearbeiten, Termin verschieben, Termin entfernen und Reload-Persistenz prüfen.
+- **Testhinweis:** `/upcoming` öffnen, Kalender-Reiter wählen, Monat wechseln, Termin bearbeiten, Termin verschieben, Termin entfernen und Reload-Persistenz prüfen. Zusätzlich einen Termin mit gestrigem Datum vorbereiten, `/upcoming` laden und kontrollieren, dass er in `/history` als vergangene Aktivität erscheint.
 - **Aus Evaluation abgeleitet?:** Nein, als UX-Verbesserung für den bestehenden Reiter `Kalender` umgesetzt.
 
 ### 4.9 Zuletzt angesehene Aktivitäten

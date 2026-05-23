@@ -516,8 +516,71 @@ export async function addUserReview({ activityId, rating, comment, visitWith, vi
 	});
 }
 
+function todayDateString() {
+	return new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Zurich' });
+}
+
+async function createHistoryFromPlannedItem(item, history, now, memory) {
+	const existingHistory = await history.findOne({ userId: item.userId, plannedActivityId: item.id });
+	if (existingHistory) return stripMongoId(existingHistory);
+
+	const historyItem = {
+		id: `history-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+		userId: item.userId,
+		plannedActivityId: item.id,
+		activityId: item.activityId,
+		date: item.date,
+		rating: 0,
+		favorite: false,
+		memory,
+		createdAt: now,
+		updatedAt: now
+	};
+	await history.insertOne(historyItem);
+	return stripMongoId(historyItem);
+}
+
+async function completePlannedItem(item, planned, history, now, memory) {
+	const historyItem = await createHistoryFromPlannedItem(item, history, now, memory);
+	await planned.updateOne(
+		{ id: item.id, userId: item.userId },
+		{
+			$set: {
+				status: 'completed',
+				completedAt: now,
+				updatedAt: now
+			}
+		}
+	);
+	return historyItem;
+}
+
+export async function syncExpiredPlannedActivitiesToHistory(userId) {
+	userId = requireUserId(userId);
+	const planned = await collection('plannedActivities');
+	const history = await collection('historyItems');
+	const now = new Date().toISOString();
+	const expiredItems = stripMany(
+		await planned
+			.find({
+				userId,
+				date: { $lt: todayDateString() },
+				$or: [{ status: 'planned' }, { status: { $exists: false } }]
+			})
+			.sort({ date: 1, time: 1 })
+			.toArray()
+	);
+
+	for (const item of expiredItems) {
+		await completePlannedItem(item, planned, history, now, item.notes || 'Automatisch nach dem geplanten Datum in die History übernommen.');
+	}
+
+	return expiredItems.length;
+}
+
 export async function getPlannedActivities(userId) {
 	userId = requireUserId(userId);
+	await syncExpiredPlannedActivitiesToHistory(userId);
 	const planned = await collection('plannedActivities');
 	const items = stripMany(
 		await planned
@@ -615,31 +678,7 @@ export async function completePlannedActivity(id, userId) {
 	if (!existing) throw error(404, 'Geplante Aktivität nicht gefunden');
 
 	const now = new Date().toISOString();
-	const historyItem = {
-		id: `history-${Date.now()}`,
-		userId,
-		activityId: existing.activityId,
-		date: existing.date,
-		rating: 0,
-		favorite: false,
-		memory: existing.notes || 'Aus der Planung abgeschlossen.',
-		createdAt: now,
-		updatedAt: now
-	};
-
-	await history.insertOne(historyItem);
-	await planned.updateOne(
-		{ id, userId },
-		{
-			$set: {
-				status: 'completed',
-				completedAt: now,
-				updatedAt: now
-			}
-		}
-	);
-
-	return stripMongoId(historyItem);
+	return completePlannedItem(existing, planned, history, now, existing.notes || 'Aus der Planung abgeschlossen.');
 }
 
 export async function getHistoryItems(userId) {
