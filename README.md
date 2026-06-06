@@ -10,12 +10,19 @@
     3. [Decide](#33-decide)
     4. [Prototype](#34-prototype)
     5. [Validate](#35-validate)
-4. [Erweiterungen [Optional]](#4-erweiterungen-optional)
-5. [Projektorganisation [Optional]](#5-projektorganisation-optional)
+4. [Erweiterungen](#4-erweiterungen-optional)
+5. [Projektorganisation](#5-projektorganisation-optional)
 6. [KI-Deklaration](#6-ki-deklaration)
-7. [Anhang [Optional]](#7-anhang-optional)
+7. [Anhang](#7-anhang-optional)
 
-> **Hinweis:** Massgeblich sind die im **Unterricht** und auf **Moodle** kommunizierten Anforderungen.
+> **Deployment-Link:** [https://schjandateplanner.netlify.app/](https://schjandateplanner.netlify.app/)
+>
+> **Hinweis: Für den Test kann folgender Demo-Zugang verwendet werden:**
+>
+> | Feld | Wert |
+> |---|---|
+> | Benutzername | `demo` |
+> | Passwort | `demo123` |
 
 <!-- WICHTIG: DIE KAPITELSTRUKTUR DARF NICHT VERÄNDERT WERDEN! -->
 
@@ -29,16 +36,6 @@ VibeMatch adressiert das alltägliche Problem, dass gemeinsame Aktivitäten oft 
 - **Ziele:** Ziel des Projekts ist ein klickbarer Web-App-Prototyp, der gemeinsame Aktivitäten übersichtlich vorschlägt, filterbar macht, Detailinformationen zeigt und zentrale Folgehandlungen wie Speichern, Planen, Bewerten, Teilen, Kartenansicht und eigene Aktivitätserfassung unterstützt.
 - **Primäre Zielgruppe:** Paare, Freundesgruppen und kleine Gruppen, die gemeinsame Freizeitaktivitäten in der Schweiz schneller entdecken und planen möchten.
 - **Weitere Stakeholder [Optional]:** Sekundär profitieren Personen mit wenig Zeit, Singles oder First-Date-Situationen sowie mögliche lokale Anbieter von Aktivitäten. Im aktuellen Prototyp werden lokale Anbieter jedoch nicht als eigene Nutzerrolle umgesetzt.
-
-**Konkurrenzanalyse vor Projektstart:** Vor der Umsetzung wurden ähnliche Produktkategorien betrachtet, um wiederkehrende Muster und sinnvolle Abgrenzungen für VibeMatch abzuleiten. Die Analyse wurde am 23. Mai 2026 für die Abgabedokumentation final geprüft. Die folgende Tabelle dokumentiert die fachliche Einordnung und die daraus übernommenen Produktentscheidungen.
-
-| Referenz / Produktkategorie | Beobachtete Funktionen | Erkenntnis für VibeMatch | Bewusste Abgrenzung |
-|---|---|---|---|
-| Event- und Freizeitplattformen, z. B. [Eventbrite](https://www.eventbrite.com/) oder lokale Eventkalender | Suche, Kategorien, Datum, Ort, Ticket-/Event-Fokus | Aktivitäten müssen schnell scannbar, filterbar und lokal verständlich sein | VibeMatch verkauft keine Tickets und bildet keine Anbieterprozesse ab |
-| Karten- und Ausflugsplattformen, z. B. [Google Maps](https://maps.google.com/maps/about/?hl=de) oder [Schweiz Tourismus](https://www.myswitzerland.com/de-ch/erlebnisse/) | Kartenmarker, Ortsbezug, Bewertungen, Öffnungszeiten und Erlebnislisten | Karte und Detailvorschau helfen bei der Entscheidung vor Ort | Keine Routenplanung, kein Live-Standort und kein produktives Geocoding |
-| Inspirations- und Social-Plattformen, z. B. [Pinterest](https://help.pinterest.com/de/article/save-pins-on-pinterest), Instagram oder lokale Blogs | Visuelle Karten, gespeicherte Ideen, Community-Impulse | Bilder, Wishlist und geteilte Rückblicke machen Aktivitäten emotional greifbarer | Kein vollwertiges Social Network und keine Follower-/Kommentarlogik als MVP |
-| Dating- und Matching-Apps, z. B. Bumble Date Ideas oder Tinder-ähnliche Swipe-Muster | schnelle Entscheidung, spielerischer Vergleich, niedrige Einstiegshürde | Eine spätere Swipe-/Matching-Idee kann Entscheidungsmüdigkeit reduzieren | Fokus liegt auf Aktivitäten, nicht auf Personenmatching |
-| Planungs- und Kalender-Tools | Terminübersicht, Status, Erinnerungen | Aus Inspiration muss ein geplanter Termin werden | Kein Kalenderexport und kein Reminder-System im aktuellen Prototyp |
 
 ## 2. Lösungsidee
 VibeMatch ist eine Web-App für Inspiration, Auswahl und Planung gemeinsamer Aktivitäten. Die App fokussiert nicht auf Dating-Matching zwischen Personen, sondern auf passende Aktivitätsideen für Paare, Freundinnen und Freunde sowie Gruppen.
@@ -55,6 +52,16 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 
 ### 3.1 Understand & Define
 - **Zielgruppenverständnis:** Ausgangspunkt war die Beobachtung, dass gemeinsame Aktivitätswahl im Alltag oft unklar, langwierig oder frustrierend ist. Als primäre Proto-Personas wurden Paare und kleine Gruppen angenommen, die schnell passende Ideen in ihrer Nähe suchen. Ergänzend wurden Personen mit wenig Zeit und First-Date-Situationen als sekundäre Zielgruppen betrachtet.
+- **Research / Konkurrenzanalyse:** Vor der Umsetzung wurden ähnliche Produktkategorien betrachtet, um wiederkehrende Muster und sinnvolle Abgrenzungen für VibeMatch abzuleiten. Die folgende Tabelle dokumentiert die fachliche Einordnung und die daraus übernommenen Produktentscheidungen.
+
+| Referenz / Produktkategorie | Beobachtete Funktionen | Erkenntnis für VibeMatch | Bewusste Abgrenzung |
+|---|---|---|---|
+| Event- und Freizeitplattformen, z. B. [Eventbrite](https://www.eventbrite.com/) oder lokale Eventkalender | Suche, Kategorien, Datum, Ort, Ticket-/Event-Fokus | Aktivitäten müssen schnell scannbar, filterbar und lokal verständlich sein | VibeMatch verkauft keine Tickets und bildet keine Anbieterprozesse ab |
+| Karten- und Ausflugsplattformen, z. B. [Google Maps](https://maps.google.com/maps/about/?hl=de) oder [Schweiz Tourismus](https://www.myswitzerland.com/de-ch/erlebnisse/) | Kartenmarker, Ortsbezug, Bewertungen, Öffnungszeiten und Erlebnislisten | Karte und Detailvorschau helfen bei der Entscheidung vor Ort | Keine Routenplanung, kein Live-Standort und kein produktives Geocoding |
+| Inspirations- und Social-Plattformen, z. B. [Pinterest](https://help.pinterest.com/de/article/save-pins-on-pinterest), Instagram oder lokale Blogs | Visuelle Karten, gespeicherte Ideen, Community-Impulse | Bilder, Wishlist und geteilte Rückblicke machen Aktivitäten emotional greifbarer | Kein vollwertiges Social Network und keine Follower-/Kommentarlogik als MVP |
+| Dating- und Matching-Apps, z. B. Bumble Date Ideas oder Tinder-ähnliche Swipe-Muster | schnelle Entscheidung, spielerischer Vergleich, niedrige Einstiegshürde | Eine spätere Swipe-/Matching-Idee kann Entscheidungsmüdigkeit reduzieren | Fokus liegt auf Aktivitäten, nicht auf Personenmatching |
+| Planungs- und Kalender-Tools | Terminübersicht, Status, Erinnerungen | Aus Inspiration muss ein geplanter Termin werden | Kein Kalenderexport und kein Reminder-System im aktuellen Prototyp |
+
 - **Wesentliche Erkenntnisse:** Entscheidungsmüdigkeit ist ein zentrales Problem. Lokale Vorschläge, einfache Filter, visuelle Cards, Bewertungen und eine Wishlist können helfen, Optionen schneller einzugrenzen. Aus der Reflexion des Entscheidungsprozesses ging hervor, dass die Idee wegen Alltagsrelevanz, visueller Umsetzbarkeit und Nutzen für mehrere Zielgruppen gewählt wurde.
 - **Artefakte:** Reflexion des Entscheidungsprozesses, Übung 10 zum Prototyping-Workflow, Methodik-Unterlagen Woche 9, Proto-Personas, User Stories und User Journey Flows. Die folgenden Personas und Journeys sind direkt auf den aktuellen Prototyp rückführbar und dienen als Grundlage für Requirements Engineering, Validierung und spätere Erweiterungen.
 
@@ -110,6 +117,22 @@ Das Projekt orientiert sich am nutzerzentrierten Vorgehen aus dem Unterricht: `U
 - **Crazy-8-Artefakt:** Die folgende Skizze dokumentiert den frühen Ideenraum und zeigt, welche Screens und Interaktionen vor der Umsetzung geprüft wurden.
 
 ![Crazy-8-Skizzen](docs/Crazy%208.jpg)
+
+**Feedback zu den Crazy-8-Skizzen:**
+
+Die Crazy-8-Skizzen zeigen bereits eine gute Grundstruktur der Webapplikation. Besonders positiv ist, dass verschiedene zentrale Funktionen berücksichtigt wurden, wie die Detailansicht einer Date-Idee, Filtermöglichkeiten, das Hinzufügen neuer Ideen, geplante Aktivitäten, Bewertungen, eine Kartenansicht sowie eine History. Dadurch wird ersichtlich, dass die wichtigsten User-Flows der Anwendung bereits mitgedacht wurden.
+
+Die Detailansicht ist sinnvoll aufgebaut, da sie eine kurze Beschreibung, Bilder und zusätzliche Informationen wie Preis, Dauer und Region enthält. Auch die Idee, direkt von dort aus eine Bewertung oder weitere Aktionen aufzurufen, passt gut zum Nutzungskontext.
+
+Die Filterfunktion ist ebenfalls ein wichtiger Bestandteil der Anwendung. Die Kombination aus Basisfiltern und erweiterten Filtern wirkt sinnvoll, da Nutzer so schnell passende Date-Ideen finden können. Hier könnte später noch darauf geachtet werden, dass die Filter übersichtlich bleiben und nicht zu viele Optionen auf einmal angezeigt werden.
+
+Der Bereich „Add new Date-Idee“ ist klar verständlich und enthält die wichtigsten Eingabefelder wie Name, Preis, Zeit, Location und Bild. Das ist eine gute Grundlage, um neue Aktivitäten einfach erfassen zu können.
+
+Auch die Upcoming Events/Wishlist und die History sind gute Ergänzungen, weil sie den Nutzern helfen, geplante und bereits erlebte Aktivitäten zu verwalten. Besonders die History mit Links zu vergangenen Dates ist sinnvoll, da man dadurch später nochmals auf Details oder Bewertungen zugreifen kann.
+
+Die Map-Ansicht ist eine sehr passende Idee für diese Webapplikation, da Aktivitäten oft stark vom Standort abhängig sind. Die Marker auf der Karte machen die Suche nach Date-Ideen intuitiver und visueller.
+
+Insgesamt wirken die Skizzen durchdacht und decken die wichtigsten Funktionen der Webapplikation gut ab. Für die nächste Ausarbeitung wäre es sinnvoll, die einzelnen Screens noch etwas klarer voneinander zu trennen und eine einheitliche Navigation zu definieren. So wird für den Nutzer noch verständlicher, wie er sich durch die Anwendung bewegt.
 
 - **Übertrag in den Prototyp:** Mehrere Skizzenideen sind inzwischen umgesetzt, unter anderem Detailseite, Hero-Galerie, Planen-/Teilen-/Bewerten-Modals, Map-Page, Upcoming, History, Wishlist und eine Community-Ausblickseite.
 
@@ -253,12 +276,6 @@ Routenübersicht der Pages:
 | `/profile` | Userdaten, Vorlieben und Einstellungen | Profil-Header, Statistiken, Kategorien, Modals | `users`, `profiles`, userbezogene Zählwerte | Profil- und Multi-User-Validierung |
 | `/activities/new` | eigene Aktivität erfassen | Formular-Cards, Bild-Upload, Galerie, Vorschau, Speichern | `activities`, `users.createdBy` | Creator-Flow |
 
-Architekturdiagramm:
-
-![Architecture](docs/architecture.drawio.svg)
-
-Das Architekturdiagramm liegt als Draw.io-SVG im Ordner `docs`. Es dient als technischer Überblick und wird durch die textliche Systembeschreibung in Kapitel 3.4.2 ergänzt.
-
 Navigation der Webseite:
 
 ```mermaid
@@ -324,7 +341,7 @@ Fasst die technische Realisierung zusammen.
 - **Map:** Die Karte nutzt Leaflet/OpenStreetMap. Aktivitäten mit Koordinaten werden als Marker dargestellt. Kategorie-, Preis- und Dauerfilter nutzen die bestehenden Aktivitätsdaten sowie die Preisgruppierung aus der Filterlogik. Die Listen- und Kartendarstellung sind responsiv abgestimmt.
 - **Reviews:** Reviews werden pro Aktivität über `GET /api/reviews` geladen und über `POST /api/reviews` gespeichert. Die Detailseite berechnet daraus Durchschnitt, Anzahl Bewertungen und eine einfache 5-bis-1-Sterne-Verteilung ohne zusätzliche API. Die Demo-/Seed-Daten enthalten pro Aktivität 1-12 realistische und bewusst unterschiedlich gute Reviews; `reviewCount` und `rating` der Aktivitäten sind darauf abgestimmt.
 - **Technische Rückführbarkeit der Journeys:** Die Kernjourneys sind auf konkrete Routen, Komponenten und MongoDB-Collections abbildbar. Inspiration und Filter nutzen `activities` sowie Filterkomponenten; Wishlist nutzt `wishlistItems`; Planung nutzt `plannedActivities`; History nutzt `historyItems`; Bewertungen nutzen `reviews`; Teilen nutzt clientseitige Share-Aktionen mit Aktivitätslinks; `communityPosts` bleibt als technische Vorstufe für spätere Community-Funktionen erhalten; `/community` dokumentiert den MVP-2-Ausblick; Profil und Auth nutzen `users` und `sessions`.
-- **Deployment:** Das Projekt enthält mit `netlify.toml` eine Netlify-Konfiguration. Für die aktuelle Abgabe wurde keine externe Deployment-URL eingereicht; massgeblich ist die lokal geprüfte Version nach `npm run build` und optional `npm run preview`.
+- **Deployment:** Das Projekt wird über Netlify bereitgestellt und ist unter [https://schjandateplanner.netlify.app/](https://schjandateplanner.netlify.app/) erreichbar. Die Netlify-Konfiguration liegt in `netlify.toml`; vor der Bereitstellung wird die Anwendung mit `npm run build` geprüft.
 - **Besondere Entscheidungen:** Im Gegensatz zur ursprünglichen React-Idee wurde die Umsetzung mit SvelteKit realisiert. Leaflet/OpenStreetMap wurde gewählt, um eine kostenlose Kartenlösung für den Prototyp zu nutzen. Bilduploads werden prototypisch als Data-URLs gespeichert; echte Reminder, Push- und E-Mail-Benachrichtigungen sind bewusst nicht Teil des aktuellen MVP.
 
 Journey-to-Technology-Mapping:
@@ -475,9 +492,17 @@ Systemarchitektur:
 - **Externe Dienste:** Leaflet mit OpenStreetMap-Tiles für die Karte; externe kuratierte Bild-URLs für Seed-Aktivitäten.
 - **Reminder-/Benachrichtigungskonzept:** Das Profil zeigt nur eine MVP-Abgrenzung zu Reminder, Push, E-Mail und Kalenderexport. Es werden im aktuellen UI keine Reminder aktiviert und keine echten E-Mail-, Push-, SMS- oder SMTP-Nachrichten versendet.
 
+#### Systemarchitektur als Übersicht
+
+![Systemarchitektur VibeMatch](docs/architecture.drawio.svg)
+
+*Systemarchitektur von VibeMatch: Browser und Svelte-Komponenten, geschützte SvelteKit-Routen, Auth-Guard, Serverlogik, MongoDB-Anbindung sowie externe Bild- und OpenStreetMap-Dienste.*
+
 ### 3.5 Validate
 - **URL der getesteten Version:**  
-  Getestet wurde die lokale Build-Version der Webapplikation. Grundlage war die mit `npm run build` geprüfte Version mit Seed-Daten und Demo-Login `demo` / `demo123`. Eine externe Deployment-URL war zum Zeitpunkt der Validierung noch nicht Bestandteil der Abgabeversion.
+  **Deployment-Link:** [https://schjandateplanner.netlify.app/](https://schjandateplanner.netlify.app/)
+
+  Die moderierten Usability-Tests wurden mit der lokal bereitgestellten Build-Version der Webapplikation durchgeführt. Grundlage war die mit `npm run build` geprüfte Version mit Seed-Daten und Demo-Login `demo` / `demo123`. Die aktuelle Abgabeversion ist zusätzlich über den oben verlinkten Netlify-Deployment erreichbar.
 
 - **Ziele der Prüfung:**  
   Ziel der Validierung war es zu prüfen, ob die zentralen Kernflows von VibeMatch ohne zusätzliche Erklärung verständlich sind. Im Fokus standen nicht einzelne Filterfunktionen, sondern zusammenhängende Nutzungssituationen: Inspiration finden, Detailinformationen beurteilen, Aktivitäten speichern, Termine planen und verschieben, vergangene Aktivitäten nachvollziehen, eigene Aktivitäten erfassen sowie Aktivitäten über die Karte finden.
@@ -549,22 +574,22 @@ Systemarchitektur:
   Aus den Beobachtungen wurden konkrete Issues abgeleitet und priorisiert. Dabei wurde zwischen sofort relevanten MVP-Verbesserungen und späteren MVP-2-Ideen unterschieden.
 
   Bereits umgesetzte MVP-Verbesserungen:
-  - Aus dem Problem, dass Aktivitätskarten nicht eindeutig klickbar wirkten, wurden Issue #31 und Issue #32 abgeleitet. Die Karten bzw. Detail-Einstiege wurden interaktiver gestaltet, damit der Weg zur Detailseite klarer wird.
-  - Aus der fehlenden Rücknavigation auf Detailseiten entstand Issue #33. Detailseiten besitzen nun eine sichtbare Zurück-Aktion.
-  - Aus der Unsicherheit in der Kalenderansicht entstand Issue #34. Die Kalenderansicht wurde visuell klarer markiert.
-  - Aus den zu unauffälligen Formularfehlern entstand Issue #35. Pflichtfeld-Fehlermeldungen wurden deutlicher dargestellt.
-  - Aus der Unklarheit beim Bildupload entstand Issue #36. Für neu erfasste Aktivitäten ist mindestens ein Bild Pflicht, damit Activity Cards und Detailseiten visuell konsistent bleiben.
-  - Aus der nicht schliessbaren Karten-Preview entstand Issue #37. Die Preview kann nun aktiv geschlossen werden.
-  - Aus dem Wunsch, geplante Aktivitäten teilen zu können, entstand Issue #38. Upcoming-Aktivitäten können im MVP geteilt werden.
-  - Aus dem Feedback zum Teilen per WhatsApp bzw. Systemfunktion entstand Issue #39. Der Teilen-Flow wurde auf Link kopieren, WhatsApp und native Teilen-Funktion fokussiert.
-  - Aus den Missverständnissen rund um History und Erinnerung entstanden Issue #41 und Issue #42. History wurde begrifflich geschärft, echte Reminder und Benachrichtigungen bleiben bewusst ausserhalb des MVP.
-  - Die Aufgaben selbst wurden mit Issue #43 finalisiert, damit README und Validate-Testplan dieselben funktionsbezogenen Testaufgaben enthalten.
+  - Aus dem Problem, dass Aktivitätskarten nicht eindeutig klickbar wirkten, wurden [Issue #31: Aktivitätskarten vollständig klickbar machen](https://github.com/schjan06/Projekt_DatePlanner/issues/31) und [Issue #32: Hover-/Preview-Effekt für Cards oder Details-Button prüfen](https://github.com/schjan06/Projekt_DatePlanner/issues/32) abgeleitet. Die Karten bzw. Detail-Einstiege wurden interaktiver gestaltet, damit der Weg zur Detailseite klarer wird.
+  - Aus der fehlenden Rücknavigation auf Detailseiten entstand [Issue #33: Zurück-Button auf Detailseite ergänzen](https://github.com/schjan06/Projekt_DatePlanner/issues/33). Detailseiten besitzen nun eine sichtbare Zurück-Aktion.
+  - Aus der Unsicherheit in der Kalenderansicht entstand [Issue #34: Kalenderansicht mit klarerem Symbol/Hinweis versehen](https://github.com/schjan06/Projekt_DatePlanner/issues/34). Die Kalenderansicht wurde visuell klarer markiert.
+  - Aus den zu unauffälligen Formularfehlern entstand [Issue #35: Pflichtfeld-Fehlermeldungen im Aktivitätsformular sichtbarer machen](https://github.com/schjan06/Projekt_DatePlanner/issues/35). Pflichtfeld-Fehlermeldungen wurden deutlicher dargestellt.
+  - Aus der Unklarheit beim Bildupload entstand [Issue #36: Bildupload fachlich entscheiden](https://github.com/schjan06/Projekt_DatePlanner/issues/36). Für neu erfasste Aktivitäten ist mindestens ein Bild Pflicht, damit Activity Cards und Detailseiten visuell konsistent bleiben.
+  - Aus der nicht schliessbaren Karten-Preview entstand [Issue #37: Map-Preview schliessbar machen](https://github.com/schjan06/Projekt_DatePlanner/issues/37). Die Preview kann nun aktiv geschlossen werden.
+  - Aus dem Wunsch, geplante Aktivitäten teilen zu können, entstand [Issue #38: Teilen-Funktion für kommende Events prüfen](https://github.com/schjan06/Projekt_DatePlanner/issues/38). Upcoming-Aktivitäten können im MVP geteilt werden.
+  - Aus dem Feedback zum Teilen per WhatsApp bzw. Systemfunktion entstand [Issue #39: WhatsApp-/System-Share für Aktivitäten evaluieren](https://github.com/schjan06/Projekt_DatePlanner/issues/39). Der Teilen-Flow wurde auf Link kopieren, WhatsApp und native Teilen-Funktion fokussiert.
+  - Aus den Missverständnissen rund um History und Erinnerung entstanden [Issue #41: History für vergangene Aktivitäten begrifflich und funktional schärfen](https://github.com/schjan06/Projekt_DatePlanner/issues/41) und [Issue #42: Reminder-/Erinnerungsfunktion bewusst aus MVP ausschliessen](https://github.com/schjan06/Projekt_DatePlanner/issues/42). History wurde begrifflich geschärft, echte Reminder und Benachrichtigungen bleiben bewusst ausserhalb des MVP.
+  - Die Aufgaben selbst wurden mit [Issue #43: Testaufgaben in README und Validate-Doku funktionsbezogen finalisieren](https://github.com/schjan06/Projekt_DatePlanner/issues/43) finalisiert, damit README und Validate-Testplan dieselben funktionsbezogenen Testaufgaben enthalten.
 
   Bestehende technische Grundlage:
-  - Issue #30 wurde bereits vorgängig umgesetzt und war für die Tests wichtig, weil Demo-User und neu registrierte User sauber getrennt sind. Dadurch konnten Wishlist, Planung, History und Profil userbezogen geprüft werden, ohne dass Demo-Daten ungewollt als Fallback erscheinen.
+  - [Issue #30: Demo-User-Hardcoding entfernen und Multi-User-Logik sauber trennen](https://github.com/schjan06/Projekt_DatePlanner/issues/30) wurde bereits vorgängig umgesetzt und war für die Tests wichtig, weil Demo-User und neu registrierte User sauber getrennt sind. Dadurch konnten Wishlist, Planung, History und Profil userbezogen geprüft werden, ohne dass Demo-Daten ungewollt als Fallback erscheinen.
 
   Bewusst als MVP-2 eingeordnet:
-  - Issue #40 beschreibt das Einladen von Freunden zu konkreten geplanten Events. Diese Funktion wurde nicht in der aktuellen UI umgesetzt, weil echte Einladungen, Teilnehmerstatus, Zu-/Absagen und Gruppenabstimmung ein eigenständiges Konzept benötigen.
+  - [Issue #40: Freunde zu kommenden Events einladen als MVP-2 erfassen](https://github.com/schjan06/Projekt_DatePlanner/issues/40) beschreibt das Einladen von Freunden zu konkreten geplanten Events. Diese Funktion wurde nicht in der aktuellen UI umgesetzt, weil echte Einladungen, Teilnehmerstatus, Zu-/Absagen und Gruppenabstimmung ein eigenständiges Konzept benötigen.
   - Echte Reminder, Push-/E-Mail-Benachrichtigungen, Kalenderexport und Community-Funktionen mit Feed, Kommentaren, Follow-System und Moderation bleiben spätere Erweiterungen. Diese Punkte werden dokumentiert, aber nicht halb umgesetzt.
 
   Die wichtigsten priorisierten Verbesserungen nach der Validierung betrafen somit die Bedienbarkeit der bestehenden Kernflows, nicht den Ausbau um möglichst viele neue Funktionen. Für die Abgabe wurde deshalb bewusst zuerst die Verständlichkeit des MVP verbessert: klarere Karteninteraktion, bessere Rücknavigation, sichtbarere Validierung, professionelleres Teilen, verständlichere History und saubere MVP-2-Abgrenzung.
@@ -708,35 +733,92 @@ Dokumentiert Erweiterungen über den Mindestumfang hinaus.
 | Personalisierte Empfehlungen | Offen | Could | weniger Suchaufwand und relevantere Startvorschläge | Time-Saver-Flow | Profilpräferenzen, Wishlist-/History-Auswertung |
 
 ## 5. Projektorganisation [Optional]
-- **Repository & Struktur:** Dieses Repository enthält den SvelteKit-Prototyp für VibeMatch. Wichtige Bereiche sind `src/routes` für Pages und API-Routen, `src/lib/components` für UI-Komponenten, `src/lib/data` für Demo-/Seed-Daten, `src/lib/server` für MongoDB-Zugriffe und `docs` für Dokumentationsartefakte.
-- **Issue-Management:** Anforderungen wurden in einzelne Feature-, Qualitäts- und Dokumentations-Issues aufgeteilt. Die erste Abgaberunde ([#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1) bis [#15](https://github.com/schjan06/Projekt_DatePlanner/issues/15)) deckte README, Setup/Seeding, Empty States, API-Validierung, Mobile Navigation, Accessibility, Validate und Artefakte ab. Die spätere Validate- und Usability-Runde ([#30](https://github.com/schjan06/Projekt_DatePlanner/issues/30) bis [#43](https://github.com/schjan06/Projekt_DatePlanner/issues/43)) dokumentiert Multi-User-Trennung, Testfeedback, UI-Verbesserungen, Sharing, History/Reminder-Abgrenzung und die finale Testaufgaben-Überarbeitung.
-- **Commit-Praxis:** Änderungen werden pro Feature- oder Dokumentationsschritt nachvollziehbar gehalten. Die bisherige Historie zeigt u. a. Commits zu ER-Modell, Workflows, Profilanpassungen und Navigation; die Abschlussrunde bündelt bewusst zusammenhängende Abgabe-Fixes.
-- **Dokumentationsregel:** Bei jeder neuen Funktion wird die README oder ein passendes Dokument unter `docs/` im gleichen Arbeitsschritt aktualisiert. Die Kapitelstruktur bleibt unverändert. Neue Features werden in Kapitel 4 beschrieben; Designauswirkungen werden in 3.4.1 ergänzt; technische Details, Routen, APIs und Datenmodelländerungen werden in 3.4.2 ergänzt. Bewusste Einschränkungen werden als MVP- oder MVP-2-Abgrenzung dokumentiert.
-- **Qualitätssicherung:** Vor Abschluss eines Features wird geprüft, ob Routing, API, UI, Datenmodell, Fehlermeldungen, Mobile-Darstellung, README und manuelle Testhinweise konsistent sind.
-- **Rollen & Aufgabenverteilung:** Das Projekt wurde als studentisches Einzelprojekt umgesetzt. Konzeption, UX, Frontend, Backend, Datenmodell, Testing und Dokumentation lagen beim Projektverfasser. Feedback zur Validierung kam von Renato Russo, Seraina Zeller, Reto Schefer und Elias Eccher. KI wurde unterstützend für Analyse, Planung, Textentwürfe, Review und Codeunterstützung eingesetzt.
-- **Arbeitsweise:** Die Umsetzung erfolgte iterativ entlang konkreter Issues und Workflows. Typischer Ablauf: fachliches Ziel klären, Codebasis analysieren, Plan erstellen, Funktion umsetzen, Build prüfen, manuell testen und README aktualisieren.
-- **Verwendete Tools:** SvelteKit, Svelte 5, JavaScript, MongoDB, Node/npm, Draw.io, Figma, Git/GitHub, VS Code sowie KI-Assistenz für Planung, Analyse und Dokumentationsarbeit.
-- **Planung & Testing:** Features werden anhand von User Journeys priorisiert. Für technische Prüfung wird `npm.cmd run build` genutzt; für fachliche Prüfung dienen manuelle Testchecklisten im Anhang.
+
+- **Repository & GitHub:**
+  - **GitHub-Repository:** [https://github.com/schjan06/Projekt_DatePlanner](https://github.com/schjan06/Projekt_DatePlanner)
+  - Die Struktur folgt den SvelteKit-Konventionen: `src/routes/` enthält Pages, Server Loads und API-Routen; `src/lib/components/` enthält wiederverwendbare UI-Komponenten; `src/lib/server/` bündelt Authentifizierung, Businesslogik und MongoDB-Zugriffe; `src/lib/data/` enthält Seed- und Demo-Daten; `docs/` enthält Diagramme, Testunterlagen und weitere Abgabeartefakte.
+  - Das Projekt wurde als studentisches Einzelprojekt umgesetzt. Konzeption, UX, Frontend, Backend, Datenmodell, Testing und Dokumentation lagen beim Projektverfasser. Rückmeldungen aus den moderierten Usability-Tests wurden als Anforderungen und Issues in die weitere Entwicklung übernommen.
+
+- **Commit-Praxis:**
+  - Änderungen wurden überwiegend funktions- oder dokumentationsbezogen festgehalten, damit die Entwicklungsschritte über die Historie nachvollziehbar bleiben.
+  - Viele Commit-Messages referenzieren direkt das zugehörige GitHub Issue. Dadurch ist erkennbar, welche Anforderung oder Beobachtung mit einer Änderung bearbeitet wurde.
+  - Die Historie verwendet keine vollständig einheitliche Präfix-Konvention. Für spätere Weiterentwicklung wären konsistente Präfixe wie `feat:`, `fix:`, `docs:` und `chore:` sinnvoll.
+
+  Beispiele aus der Commit-Historie:
+
+  ```text
+  Map Preview schlissbar machen #37 completed
+  Bildupload als Pflicht definiert #36
+  Pflichtfeld-Fehlermeldungen sichtbarer machen #35
+  History für vergangene Aktivitäten #41 completed
+  docs: Validierung und Abgabeartefakte ergänzen (#1, #10, #11, #15)
+  chore: Ungenutzte Filterkomponenten entfernen (#13)
+  ```
+
+- **Artefakt-Ablage:**
+  - `docs/architecture.drawio.svg` — editierbare Systemarchitektur mit Browser, SvelteKit, Auth, MongoDB und externen Diensten.
+  - `docs/er-model.drawio.svg` — ER-Modell der MongoDB-Collections und ihrer Beziehungen.
+  - `docs/journey-*.drawio.svg` — Prozessdiagramme für Paar-, First-Date-, Gruppen-, Time-Saver- und Creator-Flow.
+  - `docs/Crazy 8.jpg` — frühe Ideenskizzen aus der Sketch-Phase.
+  - `docs/validate-test-plan.md` und `docs/manual-flow-checklist.md` — moderierte Usability-Tests und reproduzierbare manuelle Abschlussprüfung.
+  - `docs/Issues-Management.png` — Screenshot der beschrifteten und abgeschlossenen GitHub Issues.
+
+- **Issue-Management mit GitHub:**
+  - Anforderungen, Erweiterungen, Bugs, Usability-Beobachtungen und Dokumentationsaufgaben wurden als GitHub Issues erfasst und schrittweise abgearbeitet.
+  - Labels wie `documentation`, `bug`, `feature`, `usability`, `validation`, `planning` und `mvp-2` trennen Dokumentationsarbeit, Fehlerbehebungen, neue Funktionen, Testerkenntnisse und spätere Ausbaustufen voneinander.
+  - Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1) bis [#15](https://github.com/schjan06/Projekt_DatePlanner/issues/15) behandeln insbesondere Dokumentation, Setup und Qualität. Issues [#16](https://github.com/schjan06/Projekt_DatePlanner/issues/16) bis [#29](https://github.com/schjan06/Projekt_DatePlanner/issues/29) dokumentieren den Funktionsausbau und priorisierte Verbesserungen. Issues [#30](https://github.com/schjan06/Projekt_DatePlanner/issues/30) bis [#43](https://github.com/schjan06/Projekt_DatePlanner/issues/43) umfassen Multi-User-Trennung, Usability-Tests und daraus abgeleitete Optimierungen.
+  - Beispiele für direkt aus Tests oder Reviews abgeleitete Arbeiten sind die vollständig klickbaren Aktivitätskarten ([#31](https://github.com/schjan06/Projekt_DatePlanner/issues/31)), die sichtbare Rücknavigation ([#33](https://github.com/schjan06/Projekt_DatePlanner/issues/33)), deutlichere Formularfehler ([#35](https://github.com/schjan06/Projekt_DatePlanner/issues/35)), die schliessbare Map-Preview ([#37](https://github.com/schjan06/Projekt_DatePlanner/issues/37)) sowie die begriffliche Trennung von History und echten Remindern ([#41](https://github.com/schjan06/Projekt_DatePlanner/issues/41), [#42](https://github.com/schjan06/Projekt_DatePlanner/issues/42)).
+  - Der Screenshot zeigt den dokumentierten Stand nach der Bearbeitung: Alle 43 erfassten Issues sind geschlossen und mit fachlich passenden Labels versehen. Spätere MVP-2-Ideen bleiben innerhalb der abgeschlossenen Issues bewusst als Abgrenzung und mögliche Weiterentwicklung dokumentiert.
+
+![GitHub Issue-Management von VibeMatch](docs/Issues-Management.png)
+*GitHub-Issue-Übersicht von VibeMatch mit abgeschlossenen Issues und Labels für Dokumentation, Usability, Validierung, Planung, MVP-2 und Fehlerbehebungen.*
+
+- **Arbeitsweise und Qualitätssicherung:**
+  - Die Umsetzung erfolgte iterativ entlang konkreter Issues und User Journeys: fachliches Ziel klären, Codebasis analysieren, Änderung umsetzen, Build prüfen, Kernflow manuell testen und Dokumentation aktualisieren.
+  - Die technische Prüfung erfolgt mit `npm run build`. Für die fachliche Prüfung dienen die moderierten Usability-Tests aus Kapitel 3.5 sowie die manuelle Flow-Checkliste im Anhang.
+  - Automatisierte Unit- oder Integrationstests sind nicht Bestandteil der aktuellen Projektdokumentation. Diese Einschränkung wird transparent ausgewiesen.
+  - Bewusste Einschränkungen wie echte Reminder, Gruppenabstimmung oder vollständige Community-Funktionen werden als MVP-2-Abgrenzung dokumentiert und nicht als bereits umgesetzt dargestellt.
 
 ## 6. KI-Deklaration
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
 
-### 6.1 KI-Tools
-- **Eingesetzte Tools**: ChatGPT und Codex wurden im Projekt unterstützend eingesetzt. Weitere KI-Tools sind für diese Dokumentation nicht belegt.
-- **Zweck & Umfang**: KI wurde bzw. kann eingesetzt werden für Ideenstrukturierung, Formulierung von Prompts, Dokumentationsentwürfe, Codevorschläge, technische Analyse des bestehenden Projekts, mögliche Verbesserungen und Textüberarbeitung. Diese README wurde mit KI-Unterstützung überarbeitet und muss fachlich geprüft werden.
-- **Eigene Leistung (Abgrenzung):** Projektidee, Entscheidungen, Bewertung der Vorschläge, Auswahl der finalen Inhalte, Validierung, Tests, Designentscheidungen und Abgabeprüfung bleiben Eigenleistung. KI-Ausgaben werden nicht ungeprüft übernommen.
+### 6.1 Eingesetzte KI-Tools
+Im Projekt VibeMatch wurden ChatGPT und Codex als unterstützende Werkzeuge eingesetzt. ChatGPT diente hauptsächlich als Sparring-Partner für Ideenstrukturierung, Prompt-Entwürfe, Dokumentationsaufbau und sprachliche Überarbeitung. Codex wurde für die Analyse der bestehenden Codebasis, die Planung und Umsetzung abgegrenzter Aufgaben, Debugging, Refactoring sowie die Überprüfung und Ergänzung der Projektdokumentation verwendet.
 
-### 6.2 Prompt-Vorgehen
-Beim Prompting wurden Kontext, Ziel, gewünschte Kapitelstruktur, Projektfunktionen und Qualitätsanforderungen möglichst konkret angegeben. Wichtig war die Vorgabe, keine Inhalte zu erfinden und unsichere Punkte transparent als Abgrenzung oder Prüfpunkt zu markieren. Für technische Dokumentation wurde der vorhandene Code analysiert und nicht nur eine allgemeine Beschreibung generiert.
+Die KI-Tools wurden nicht als eigenständige Projektverantwortliche eingesetzt. Vorschläge wurden geprüft, an die bestehende SvelteKit- und MongoDB-Struktur angepasst und nur übernommen, wenn sie fachlich und technisch zu VibeMatch passten.
 
-### 6.3 Reflexion
-KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und technische Zusammenhänge aus dem Repository schneller zusammenzufassen. Grenzen bestehen bei fachlicher Korrektheit, Aktualität und Interpretation von noch nicht abgeschlossenen Projektteilen. Qualitätssicherung erfolgt durch manuelle Prüfung, Abgleich mit Code und Unterlagen, Tests des Prototyps sowie kritische Überarbeitung der Texte. Risiken sind falsche Annahmen, zu allgemeine Aussagen oder unklare Quellenlage; deshalb werden nicht belegte Punkte als Abgrenzung, Prüfpunkt oder offener Release-Schritt gekennzeichnet.
+### 6.2 Zweck, Umfang und Eigenleistung
+KI-Unterstützung wurde insbesondere für die Strukturierung von Anforderungen, die Formulierung konkreter Entwicklungsaufträge, Codevorschläge, Fehleranalyse, UI-/UX-Verbesserungen, Refactoring und Dokumentationsentwürfe verwendet. Dazu gehörten beispielsweise Überlegungen zur Login- und Profilfunktion, zur Kartenansicht, zu Reviews, zur Validierung sowie zur Struktur der README.
+
+Eigenleistung waren insbesondere die Projektidee und Problemdefinition, die Auswahl und Priorisierung der Funktionen, fachliche und gestalterische Entscheidungen, die Bewertung und Anpassung der KI-Vorschläge, die Durchführung der Usability-Tests sowie die finale Kontrolle der Anwendung und Dokumentation. Die Verantwortung für den Funktionsumfang, die Qualität und das Endergebnis lag beim Projektverfasser.
+
+### 6.3 Prompt-Vorgehen
+Die Arbeit mit KI erfolgte iterativ. Zuerst wurden Projektkontext, bestehende Architektur und gewünschtes Ergebnis beschrieben. Danach wurde die Aufgabe mit Anforderungen und Abgrenzungen konkretisiert. Bei umfangreicheren Änderungen wurde Codex zuerst um eine Analyse oder einen Umsetzungsplan gebeten. Anschliessend wurden die vorgeschlagenen Änderungen geprüft, Fehler korrigiert, die betroffenen Flows manuell getestet und die Dokumentation aktualisiert.
+
+**Typischer Ablauf:** Kontext geben → Anforderungen formulieren → Umsetzung planen → Vorschlag prüfen → Fehler korrigieren → Build und Kernflows testen → README und Issues aktualisieren.
+
+Die folgenden Prompts sind repräsentative Beispiele für die verwendete Arbeitsweise. Sie dokumentieren typische Aufgabenstellungen, ohne zu behaupten, dass jeder Prompt wortwörtlich in dieser Form verwendet wurde:
+
+1. „Analysiere die bestehende VibeMatch-README und ergänze fehlende Inhalte, ohne die vorgegebene Kapitelstruktur zu verändern oder nicht belegte Funktionen zu erfinden.“
+2. „Prüfe die Login- und Profilfunktionen darauf, ob Daten unterschiedlicher Nutzer sauber getrennt bleiben. Erstelle zuerst einen Plan und berücksichtige die bestehende SvelteKit- und MongoDB-Struktur.“
+3. „Analysiere die Kartenansicht von VibeMatch. Prüfe Filter, Marker, Detailvorschau und Navigation auf Usability-Probleme und schlage klar abgegrenzte Verbesserungen vor.“
+4. „Reviewe die aktuelle Umsetzung und suche nach fachlichen Fehlern, ungenutztem Code und Abweichungen von der bestehenden Architektur. Verändere keine nicht betroffenen Bereiche.“
+5. „Erstelle aus den vorhandenen User Journeys und Usability-Beobachtungen professionelle Testaufgaben für die Validate-Phase und dokumentiere Erfolgskriterien sowie abgeleitete Verbesserungen.“
+
+### 6.4 Reflexion, Risiken und Qualitätssicherung
+KI war besonders hilfreich, um umfangreiche Anforderungen zu strukturieren, Zusammenhänge in der bestehenden Codebasis schneller zu erfassen und alternative Lösungsansätze zu vergleichen. Durch klar abgegrenzte Aufgaben konnten Funktionen und Dokumentation schrittweise verbessert werden.
+
+Gleichzeitig waren KI-Vorschläge nicht automatisch korrekt. Risiken bestanden insbesondere darin, dass bestehende Projektstrukturen falsch interpretiert, plausible aber fachlich falsche Lösungen vorgeschlagen oder Funktionen ausserhalb des vorgesehenen MVP empfohlen wurden. Allgemeine Prompts führten zudem häufiger zu unpassenden oder zu umfangreichen Vorschlägen.
+
+KI-generierter oder KI-überarbeiteter Code wurde deshalb nicht ungeprüft übernommen. Die Qualitätssicherung erfolgte durch den Abgleich mit der bestehenden Architektur, `npm run build`, manuelle Prüfung der zentralen User Flows, Tests mit unterschiedlichen Nutzerkonten, kontrollierte Prüfung von Fehlermeldungen und mobilen Ansichten sowie moderierte Usability-Tests. Beobachtete Probleme wurden als GitHub Issues dokumentiert und priorisiert.
+
+Die finale Entscheidung über Umsetzung, Anpassung oder Ablehnung eines Vorschlags sowie die Verantwortung für das Endergebnis lagen jederzeit beim Projektverfasser.
 
 ## 7. Anhang [Optional]
 - **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. Externe Bildquellen sind in den Seed-Daten referenziert und vor produktiver Nutzung lizenzrechtlich final zu prüfen.
-- **Architekturartefakte:** Architekturdiagramm-Verweis siehe Kapitel 3.4.1; verwendeter Pfad: `docs/architecture.drawio.svg`.
+- **Architekturartefakte:** Die Systemarchitektur ist am Ende von Kapitel 3.4 eingebunden; verwendeter Pfad: `docs/architecture.drawio.svg`.
 - **Testskript & Materialien:** `docs/validate-test-plan.md` und `docs/manual-flow-checklist.md`.
-- **Rohdaten/Auswertung:** Beobachtungen aus Kurztests werden in `docs/validate-test-plan.md` ergänzt; die Flow-Checkliste referenziert die finalen Screenshot-Pfade.
+- **Rohdaten/Auswertung:** Beobachtungen und Erkenntnisse aus den moderierten Kurztests sind in `docs/validate-test-plan.md` und Kapitel 3.5 zusammengefasst; die Flow-Checkliste referenziert die geplanten Screenshot-Pfade.
 
 **Artefaktübersicht:**
 
@@ -744,8 +826,8 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 |---|---|---|---|---|
 | Gesamtdokumentation | `README.md` | zentrale fachliche, technische und organisatorische Dokumentation | Abgabe, Nachvollziehbarkeit, Requirements | vorhanden |
 | Crazy-8-Skizze | `docs/Crazy 8.jpg` | frühe Ideenskizzen und Variantenfindung | Sketch-Phase | vorhanden |
-| Architekturdiagramm | `docs/architecture.drawio.svg` | technischer Überblick über Systembestandteile | Prototype / Technik | vorhanden, fachlich noch prüfbar |
-| ER-Modell | `docs/er-model.drawio.svg` | Datenmodell und Collection-Beziehungen | Datenbank, APIs, User Journeys | ergänzt |
+| Architekturdiagramm | `docs/architecture.drawio.svg` | technischer Überblick über Systembestandteile | Prototype / Technik | vorhanden |
+| ER-Modell | `docs/er-model.drawio.svg` | Datenmodell und Collection-Beziehungen | Datenbank, APIs, User Journeys | vorhanden |
 | Paar-Flow | `docs/journey-paar-flow.drawio.svg` | Prozessdiagramm für Quality-Time-Journey | Lea / Paar-Flow | vorhanden |
 | First-Date-Flow | `docs/journey-first-date-flow.drawio.svg` | Prozessdiagramm für sichere Date-Idee | Nico / First-Date-Flow | vorhanden |
 | Gruppen-Flow | `docs/journey-gruppen-flow.drawio.svg` | Prozessdiagramm für Gruppenorganisation | Sara / Gruppen-Flow | vorhanden |
@@ -756,10 +838,11 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 | UI-Komponenten | `src/lib/components/**` | wiederverwendbare UI-Bausteine | Designsystem und Journeys | vorhanden |
 | Serverlogik | `src/lib/server/**` | Auth, DB und Repository-Funktionen | Backend/API | vorhanden |
 | Figma-Mockup | Figma-Link in Kapitel 3.3 und `docs/artifacts-and-screenshots.md` | frühe Mockup-Referenz | Decide/Prototype | vorhanden |
-| GitHub Issues | Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1)-[#15](https://github.com/schjan06/Projekt_DatePlanner/issues/15) | Planung und Nachvollziehbarkeit einzelner Features | Projektorganisation | referenziert |
-| Validate-Testplan | `docs/validate-test-plan.md` | Testskript, Stichprobe und Beobachtungsbogen | Validate | angelegt |
-| Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare manuelle Abgabeprüfung | QA / Validate | angelegt |
-| Screenshot-Plan | `docs/artifacts-and-screenshots.md` | Artefakt- und Screenshotübersicht | Anhang / Abgabe | angelegt |
+| GitHub Issues | Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1)-[#43](https://github.com/schjan06/Projekt_DatePlanner/issues/43) | Planung und Nachvollziehbarkeit von Dokumentation, Features, Fehlern und Usability-Verbesserungen | Projektorganisation | referenziert und beschriftet |
+| Validate-Testplan | `docs/validate-test-plan.md` | Testskript, Stichprobe und Beobachtungsbogen | Validate | vorhanden und ausgewertet |
+| Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare manuelle Abgabeprüfung | QA / Validate | vorhanden |
+| Screenshot-Plan | `docs/artifacts-and-screenshots.md` | Übersicht geplanter App-Screenshot-Nachweise | Anhang / Abgabe | angelegt; App-Screenshots noch nicht versioniert |
+| Issue-Management-Screenshot | `docs/Issues-Management.png` | GitHub-Issues mit Status und fachlichen Labels dokumentieren | Projektorganisation | vorhanden und eingebunden |
 | Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien | Qualitätssicherung | angelegt |
 | Präsentationsunterlagen | separat ausserhalb des Repositorys | Abgabepräsentation oder Video-Walkthrough | Abschluss | nicht Teil dieser Codeabgabe |
 
@@ -767,11 +850,11 @@ KI ist nützlich, um Gedanken zu strukturieren, Formulierungen vorzuschlagen und
 
 | Thema | Status | Nächster Schritt |
 |---|---|---|
-| konkrete Konkurrenzprodukte | fachlich eingeordnet | bei Bedarf Namen, Links und Datum der Analyse ergänzen |
-| Teamrollen | als studentischer Prototyp beschrieben | Teammitglieder oder Einzelprojekt vor Abgabe explizit bestätigen |
-| GitHub Issues | Issues #1-#15 referenziert | nach Review im Repository schliessen |
-| Validierung | Testskript und Beobachtungsbogen angelegt | Kurztests durchführen und Resultate eintragen |
-| Deployment | lokal und per Netlify-Konfiguration vorbereitet | finale URL nach Veröffentlichung ergänzen |
+| konkrete Konkurrenzprodukte | mit Beispielen und Abgrenzungen fachlich eingeordnet | Quellen und Abgrenzungen vor der finalen Abgabe nochmals prüfen |
+| Teamrollen | als studentisches Einzelprojekt dokumentiert | keine offene Rollenklärung |
+| GitHub Issues | Issues #1-#43 referenziert und mit fachlichen Labels versehen | offene Punkte und spätere MVP-2-Ideen weiterhin über Issues pflegen |
+| Validierung | moderierte Usability-Tests und Resultate dokumentiert | manuelle Abschlussprüfung mit der finalen Build-Version durchführen |
+| Deployment | über Netlify veröffentlicht | [https://schjandateplanner.netlify.app/](https://schjandateplanner.netlify.app/) vor der finalen Abgabe prüfen |
 | Bild- und Asset-Lizenzen | Quellen in Seed-Daten nachvollziehbar | vor produktiver Nutzung final prüfen |
 
 **Dokumentations-Checkliste:**

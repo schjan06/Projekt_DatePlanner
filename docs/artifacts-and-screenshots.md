@@ -18,6 +18,7 @@
 | Manuelle Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare Abgabepruefung |
 | Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien |
 | Studierenden-Usability-Test | `docs/validate-test-plan.md` und README Kapitel 3.5 | Vorarbeit, Testaufbau, Beobachtungen und Erkenntnisse |
+| Issue-Management-Screenshot | `docs/Issues-Management.png` | abgeschlossene und fachlich beschriftete GitHub Issues |
 
 ## Screenshot-Liste
 Die folgende Liste beschreibt die vorgesehenen Screenshot-Nachweise fuer Walkthrough, Praesentation oder eine spaetere Abgabeversion. In der README werden nur Artefakte als vorhanden markiert, die im Repository tatsaechlich versioniert sind.
