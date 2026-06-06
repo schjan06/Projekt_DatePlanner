@@ -322,6 +322,65 @@ flowchart TD
     Profile --> ProfileModals
 ```
 
+#### Screenshots der fertigen Applikation
+
+Die folgenden Screenshots dokumentieren die umgesetzten VibeMatch-Kernflows und zeigen den Stand der fertigen Applikation.
+
+**Einstieg und Inspiration**
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/AnmeldeScreen_VibeMatch.png" alt="Anmeldeseite von VibeMatch"><br><em>Anmeldung und Account-Einstieg</em></td>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Titelseite_VibeMatch.png" alt="Titelseite von VibeMatch mit Inspirationen"><br><em>Titelseite mit Inspirationen und Aktivitätskarten</em></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Aktivit%C3%A4ten%20Filter%20nach%20Kategorie%20(inkl.%20erweitertem%20Filter).png" alt="Kategorien- und Filteransicht von VibeMatch"><br><em>Kategorien mit Basis- und erweiterten Filtern</em></td>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Detailansicht%20Aktivit%C3%A4t.png" alt="Detailansicht einer VibeMatch-Aktivität"><br><em>Detailansicht mit Informationen und Aktionen</em></td>
+  </tr>
+</table>
+
+**Speichern und Planen**
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Aktivit%C3%A4ten%20in%20der%20Wishlist%20(Herz-Symbol).png" alt="Wishlist mit gespeicherten VibeMatch-Aktivitäten"><br><em>Gespeicherte Aktivitäten in der Wishlist</em></td>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Kommende%20Events%20-%20Kalenderansicht.png" alt="Kalenderansicht kommender VibeMatch-Aktivitäten"><br><em>Kalenderansicht für geplante Aktivitäten</em></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/Screenshots%20fertige%20App/Kommende%20Events%20-%20Listenansicht.png" alt="Listenansicht kommender VibeMatch-Aktivitäten"><br>
+  <em>Listenansicht der kommenden Aktivitäten</em>
+</p>
+
+**Entdecken und Erfassen**
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Dynamische%20Kartenansicht%20wenn%20reingezoomt%20wird.png" alt="Dynamische Kartenansicht von VibeMatch"><br><em>Dynamische Kartenansicht mit Markern und Vorschau</em></td>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Neue%20Aktivit%C3%A4t%20erfassen%20inkl%20Vorschau.png" alt="Formular zum Erfassen einer neuen VibeMatch-Aktivität"><br><em>Neue Aktivität erfassen inklusive Live-Vorschau</em></td>
+  </tr>
+</table>
+
+**Bewerten und Teilen**
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Rezensions%C3%BCbersicht%20%26%20eigene%20Bewertung%20schreiben.png" alt="Rezensionsübersicht und Bewertungsformular von VibeMatch"><br><em>Rezensionsübersicht und eigene Bewertung</em></td>
+    <td width="50%"><img src="docs/Screenshots%20fertige%20App/Teilen%20von%20Aktivit%C3%A4ten.png" alt="Teilen-Dialog für VibeMatch-Aktivitäten"><br><em>Aktivitäten über Link, WhatsApp oder Systemfunktion teilen</em></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="docs/Screenshots%20fertige%20App/Vergangene%20Aktivit%C3%A4ten.png" alt="Übersicht vergangener VibeMatch-Aktivitäten"><br><em>Vergangene Aktivitäten mit Rückblick und Bewertung</em></td>
+  </tr>
+</table>
+
+**Profil**
+
+<p align="center">
+  <img src="docs/Screenshots%20fertige%20App/Profil%C3%BCbersicht.png" alt="Profilübersicht von VibeMatch"><br>
+  <em>Profilübersicht mit persönlichen Angaben, Vorlieben und Einstellungen</em>
+</p>
+
 #### 3.4.2. Umsetzung (Technik)
 Fasst die technische Realisierung zusammen.
 
@@ -818,7 +877,7 @@ Die finale Entscheidung über Umsetzung, Anpassung oder Ablehnung eines Vorschla
 - **Quellen:** Unterrichtsunterlagen zu Prototyping-Methodik/Woche 9, Übung 10 zum Prototyping-Workflow, Reflexion des Entscheidungsprozesses, Figma-Mockup, Repository-Dateien und verwendete Demo-/Bildquellen. Externe Bildquellen sind in den Seed-Daten referenziert und vor produktiver Nutzung lizenzrechtlich final zu prüfen.
 - **Architekturartefakte:** Die Systemarchitektur ist am Ende von Kapitel 3.4 eingebunden; verwendeter Pfad: `docs/architecture.drawio.svg`.
 - **Testskript & Materialien:** `docs/validate-test-plan.md` und `docs/manual-flow-checklist.md`.
-- **Rohdaten/Auswertung:** Beobachtungen und Erkenntnisse aus den moderierten Kurztests sind in `docs/validate-test-plan.md` und Kapitel 3.5 zusammengefasst; die Flow-Checkliste referenziert die geplanten Screenshot-Pfade.
+- **Rohdaten/Auswertung:** Beobachtungen und Erkenntnisse aus den moderierten Kurztests sind in `docs/validate-test-plan.md` und Kapitel 3.5 zusammengefasst; die vorhandenen Screenshots der fertigen Applikation sind in Kapitel 3.4.1 eingebunden und in `docs/artifacts-and-screenshots.md` dokumentiert.
 
 **Artefaktübersicht:**
 
@@ -841,7 +900,7 @@ Die finale Entscheidung über Umsetzung, Anpassung oder Ablehnung eines Vorschla
 | GitHub Issues | Issues [#1](https://github.com/schjan06/Projekt_DatePlanner/issues/1)-[#43](https://github.com/schjan06/Projekt_DatePlanner/issues/43) | Planung und Nachvollziehbarkeit von Dokumentation, Features, Fehlern und Usability-Verbesserungen | Projektorganisation | referenziert und beschriftet |
 | Validate-Testplan | `docs/validate-test-plan.md` | Testskript, Stichprobe und Beobachtungsbogen | Validate | vorhanden und ausgewertet |
 | Flow-Checkliste | `docs/manual-flow-checklist.md` | reproduzierbare manuelle Abgabeprüfung | QA / Validate | vorhanden |
-| Screenshot-Plan | `docs/artifacts-and-screenshots.md` | Übersicht geplanter App-Screenshot-Nachweise | Anhang / Abgabe | angelegt; App-Screenshots noch nicht versioniert |
+| Screenshot-Übersicht | `docs/artifacts-and-screenshots.md` | Übersicht der vorhandenen App-Screenshot-Nachweise | Prototype / Anhang / Abgabe | vorhanden und in Kapitel 3.4.1 eingebunden |
 | Issue-Management-Screenshot | `docs/Issues-Management.png` | GitHub-Issues mit Status und fachlichen Labels dokumentieren | Projektorganisation | vorhanden und eingebunden |
 | Cleanup-Audit | `docs/technical-debt-audit.md` | Entscheidung zu ungenutzten Dateien | Qualitätssicherung | angelegt |
 | Präsentationsunterlagen | separat ausserhalb des Repositorys | Abgabepräsentation oder Video-Walkthrough | Abschluss | nicht Teil dieser Codeabgabe |
